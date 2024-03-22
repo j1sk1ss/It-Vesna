@@ -1,0 +1,35 @@
+version: '3.3'
+
+
+services:
+  server:
+    build: .
+    ports:
+      - 5000:5000
+
+  # Data base
+  db:
+    image: postgres
+    restart: always
+
+    # set shared memory limit when using docker-compose
+    shm_size: 128mb
+    # or set shared memory limit when deploy via swarm stack
+    # volumes:
+    #   - type: tmpfs
+    #     target: /dev/shm
+    #     tmpfs:
+    #       size: 134217728 # 128*2^20 bytes = 128Mb
+
+    # Db
+    environment:
+      POSTGRES_PASSWORD: 28072003
+      POSTGRES_USER: root
+      POSTGRES_DB: it-vesna-db
+
+  # Data base GUI in web
+  adminer:
+    image: adminer
+    restart: always
+    ports:
+      - 8080:8080
