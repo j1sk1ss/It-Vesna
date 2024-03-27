@@ -1,31 +1,21 @@
+// App.js
 import React from 'react';
-import './App.css'; // Импортируем файл стилей
+import { Routes, Route } from 'react-router-dom';
 
-function App() {
+import LoginPage from './LoginPage';
+import ForgotPasswordPage from './ForgotPasswordPage';
+import RegisterPage from './RegisterPage';
+
+const App = () => {
   return (
-    <div className="container">
-      <div className="logo">
-        <img src="logo.png" alt="Логотип" />
-      </div>
-      <h1>IT Весна</h1>
-      <form action="/login" method="post">
-        <div className="form-group">
-          <input type="email" id="email" name="email" required placeholder="Email" />
-        </div>
-        <div className="form-group">
-          <input type="password" id="password" name="password" required placeholder="Пароль" />
-        </div>
-        <button type="submit">Войти</button>
-      </form>
-      <div className="register-forgot-password">
-        <a href="/register">Регистрация</a>
-        <a href="/forgot-password">Восстановить пароль</a>
-      </div>
-      <div className="osu">
-        <img src="osu.png" alt="Логотип" />
-      </div>
+    <div>
+      <Routes>
+        <Route path="/" element={<LoginPage />} />
+        <Route path="/forgot-password" element={<ForgotPasswordPage />} />
+        <Route path="/register" element={<RegisterPage />} />
+      </Routes>
     </div>
   );
-}
+};
 
 export default App;
