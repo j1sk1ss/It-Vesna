@@ -1,7 +1,7 @@
 import datetime
 
 
-AUDIT_PATH = "server/audit/"
+AUDIT_PATH = "" # TODO: Path
 
 
 # Add log line with simple message and link

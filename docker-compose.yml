@@ -1,34 +1,37 @@
 version: '3.3'
 
-
 services:
   # Front container (node + npm)
   front:
-    build: front/.
+    image: ghcr.io/j1sk1ss/vesna-front-env:0.1v
     ports:
       - 80:80
-    command: npm start
     depends_on:
       - server
+    volumes:
+      - type: bind
+        source: ./front
+        target: /var/www/it-vesna/body
+    command: npm start --prefix body/site-body
 
   # Back container (Python + libs)
   server:
-    build: server/.
+    image: ghcr.io/j1sk1ss/vesna-back-env:0.1v
     ports:
       - 5000:5000
-    command: python ./server/server.py
+    command: python server.py
     depends_on:
       - db
+    volumes:
+      - type: bind
+        source: ./server
+        target: /var/www/it-vesna/server
 
   # Data base
   db:
     image: postgres
     restart: always
-
-    # set shared memory limit when using docker-compose
     shm_size: 128mb
-
-    # Db
     environment:
       POSTGRES_PASSWORD: 28072003
       POSTGRES_USER: root
@@ -42,3 +45,6 @@ services:
       - 8080:8080
     depends_on:
       - db
+
+volumes:
+  db:
