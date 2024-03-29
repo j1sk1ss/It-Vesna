@@ -7,7 +7,7 @@ services:
     ports:
       - 80:3000
     depends_on:
-      - back-server
+      - pages-server
       - db-server
     volumes:
       - type: bind
@@ -22,7 +22,6 @@ services:
       - 5000:5000
     command: python main.py
     depends_on:
-      - db
       - api-server
     volumes:
       - type: bind
