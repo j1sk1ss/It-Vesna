@@ -7,7 +7,8 @@ services:
     ports:
       - 80:3000
     depends_on:
-      - server
+      - back-server
+      - db-server
     volumes:
       - type: bind
         source: ./front
@@ -15,27 +16,44 @@ services:
     command: npm start --prefix body/site-body
 
   # Back container (Python + libs)
-  server:
-    image: ghcr.io/j1sk1ss/vesna-back-env:0.1v
+  back-server:
+    image: ghcr.io/j1sk1ss/vesna-back-env:0.2v
     ports:
-      - 5000:5000
+      - 5000:5000 # Main server
     command: python server.py
     depends_on:
       - db
     volumes:
       - type: bind
-        source: ./server
+        source: ./back-server
+        target: /var/www/it-vesna/server
+
+  # DB server container (Python + Libs)
+  db-server:
+    image: ghcr.io/j1sk1ss/vesna-back-env:0.2v
+    ports:
+      - 5100:5100 # Main server
+    command: python db.py
+    depends_on:
+      - db
+    volumes:
+      - type: bind
+        source: ./db-server
         target: /var/www/it-vesna/server
 
   # Data base
   db:
     image: postgres
+    ports:
+      - 5432:5432
     restart: always
     shm_size: 128mb
     environment:
       POSTGRES_PASSWORD: 28072003
       POSTGRES_USER: root
       POSTGRES_DB: it-vesna-db
+    volumes:
+      - ./db-server/init.sql:/docker-entrypoint-initdb.d/init.sql
 
   # Data base GUI in web
   adminer:
@@ -48,3 +66,7 @@ services:
 
 volumes:
   db:
+
+networks:
+  default:
+    name: it-vesna-network

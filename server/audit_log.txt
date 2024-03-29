@@ -1,8 +1,0 @@
-Time 2024-03-28 05:47:03: Alive API call
-Where: main_page.ru
-Time 2024-03-28 06:29:16: Alive API call
-Where: main_page.ru
-Time 2024-03-28 12:04:38: Alive API call
-Where: main_page.ru
-Time 2024-03-28 12:04:38: Alive API call
-Where: main_page.ru
