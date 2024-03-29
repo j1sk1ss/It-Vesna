@@ -19,38 +19,52 @@ services:
   back-server:
     image: ghcr.io/j1sk1ss/vesna-back-env:0.2v
     ports:
-      - 5000:5000 # Main server
+      - 5000:5000
     command: python server.py
     depends_on:
       - db
     volumes:
       - type: bind
-        source: ./back-server
+        source: ./back/back-server
         target: /var/www/it-vesna/server
 
+  # Mail container
   mail-server:
     image: ghcr.io/j1sk1ss/vesna-back-env:0.2v
     ports:
-      - 5200:5200 # Main server
+      - 5200:5200
     command: python mailing.py
     depends_on:
       - db
     volumes:
       - type: bind
-        source: ./mail-server
+        source: ./back/mail-server
         target: /var/www/it-vesna/mail-server
+
+  # Crypto container
+  crypto-server:
+    image: ghcr.io/j1sk1ss/vesna-back-env:0.2v
+    ports:
+      - 5300:5300
+    command: python crypto.py
+    depends_on:
+      - db
+    volumes:
+      - type: bind
+        source: ./back/crypto-server
+        target: /var/www/it-vesna/crypto-server
 
   # DB server container (Python + Libs)
   db-server:
     image: ghcr.io/j1sk1ss/vesna-back-env:0.2v
     ports:
-      - 5100:5100 # Main server
+      - 5100:5100
     command: python db.py
     depends_on:
       - db
     volumes:
       - type: bind
-        source: ./db-server
+        source: ./back/db-server
         target: /var/www/it-vesna/server
 
   # Data base

@@ -27,3 +27,9 @@ CREATE TABLE Nominations (
     UID SERIAL PRIMARY KEY,
     Name VARCHAR(255)
 );
+
+CREATE TABLE Notificated (
+    User_UID INT,
+    NotificationType INT,
+    FOREIGN KEY (User_UID) REFERENCES Users (UID)
+);

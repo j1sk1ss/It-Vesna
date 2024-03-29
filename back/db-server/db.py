@@ -1,4 +1,4 @@
-# ==================
+# =============================================================
 # Importing packages
 # flask - main web server
 # sqlalchemy - package for working with pgAdmin
@@ -8,7 +8,7 @@ from flask_cors import CORS
 from flask_sqlalchemy import SQLAlchemy
 
 
-# ==================
+# =============================================================
 # Configuring server on starting
 
 DB_NAME = "it-vesna-db" # TODO: Move to local data. Don't store it here
@@ -26,7 +26,7 @@ app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 db = SQLAlchemy(app)
 
 
-# ==================
+# =============================================================
 # Setup SQL models
 
 class Users(db.Model):
@@ -51,8 +51,12 @@ class Nominations(db.Model):
     UID = db.Column(db.Integer, primary_key=True)
     Name = db.Column(db.String(255))
 
+class Notificated(db.Model):
+    User_UID = db.Column(db.Integer, db.ForeignKey('users.UID'), primary_key=True)
+    NotificationType = db.Column(db.Integer)
 
-# ==================
+
+# =============================================================
 # Functions for working with bd
 # Functions:
 # Add user, delete user, get user by (name, mail)
@@ -65,9 +69,13 @@ def alive_asnwer():
     return jsonify({'response': "I'm alive!"})
 
 
+# =============================================================
+#   API for getting data from DB
+# =============================================================
+
 # ============================
 # This function return all users from db
-# GET /users
+# GET http://it-vesna-db-1:5432/users
 # No JSON request required for GET request
 @app.route('/users', methods=['GET'])
 def get_users():
@@ -81,13 +89,82 @@ def get_users():
             'FathersName': user.FathersName,
             'Mail': user.Mail
         }
+        
         result.append(user_data)
+        
     return jsonify(result)
 
 
 # ============================
+# This function return user by ID from bd
+# GET http://it-vesna-db-1:5432/users/<int:user_id>
+# No JSON request required for GET request
+@app.route('/users/<int:user_id>', methods=['GET'])
+def get_user(user_id):
+    user = Users.query.filter_by(UID=user_id).first()
+    if user:
+        user_data = {
+            'UID': user.UID,
+            'Surname': user.Surname,
+            'Name': user.Name,
+            'FathersName': user.FathersName,
+            'Mail': user.Mail
+        }
+        
+        return jsonify(user_data)
+    else:
+        return 'user not found'
+
+
+# ============================
+# This function return all notificated users from db
+# GET http://it-vesna-db-1:5432/notifications
+# No JSON request required for GET request
+# RETURN: list of [ID - TYPE]
+@app.route('/notifications', methods=['GET'])
+def get_notificated():
+    users = Notificated.query.all()
+    result = []
+    for user in users:
+        user_data = {
+            'UID': user.User_UID,
+            'Type': user.NotificationType
+        }
+        
+        result.append(user_data)
+        
+    return jsonify(result)
+
+
+# ============================
+# This function return all notificated users from db
+# GET http://it-vesna-db-1:5432/notifications/<int:user_id>
+# No JSON request required for GET request
+# RETURN: notification
+@app.route('/notifications/<int:user_id>', methods=['GET'])
+def get_notificated_user(user_id):
+    notifications = Notificated.query.filter_by(User_UID=user_id).all()
+    if notifications:
+        result = []
+        for notification in notifications:
+            notification_data = {
+                'UID': notification.User_UID,
+                'Type': notification.NotificationType
+            }
+            
+            result.append(notification_data)
+        return jsonify(result)
+    else:
+        return 'not notify'
+
+
+# =============================================================
+#   API for working with users data in DB
+# =============================================================
+
+# ============================
 # This function add user to db
-# POST /users
+# POST http://it-vesna-db-1:5432/users
 # JSON request: {
 #     "Surname": "Surname",
 #     "Name": "Name",
@@ -107,12 +184,12 @@ def add_user():
     db.session.add(new_password)
     db.session.commit()
 
-    return 'success'
+    return new_user.UID
 
 
 # ============================
 # Update users data
-# PUT /users/<int:user_id>
+# PUT http://it-vesna-db-1:5432/users/<int:user_id>
 # JSON request: {
 #     "Surname": "NewSurname",
 #     "Name": "NewName",
@@ -133,7 +210,7 @@ def update_user(user_id):
 
 # ============================
 # Delete user
-# DELETE /users/<int:user_id>
+# DELETE http://it-vesna-db-1:5432/users/<int:user_id>
 # No JSON request required for DELETE request
 @app.route('/users/<int:user_id>', methods=['DELETE'])
 def delete_user(user_id):
@@ -147,9 +224,13 @@ def delete_user(user_id):
     return 'success'
 
 
+# =============================================================
+#   API for working with passwords data in DB
+# =============================================================
+
 # ============================
-# Change password
-# PUT /passwords/<int:user_id>
+# Change password (Work only if user has previous password)
+# PUT http://it-vesna-db-1:5432/passwords/<int:user_id>
 # JSON request: {
 #     "PasswordHash": "new_password_hash",
 #     "PasswordSalt": "new_password_salt"
@@ -167,9 +248,13 @@ def change_password(user_id):
         return 'not success'
 
 
+# =============================================================
+#   API for working with moderators data in DB
+# =============================================================
+
 # ============================
 # Add moderator
-# POST /moderators
+# POST http://it-vesna-db-1:5432/moderators
 # JSON request: {
 #     "User_UID": user_id
 # }
@@ -184,7 +269,7 @@ def add_moderator():
 
 # ============================
 # Delete moderator
-# DELETE /moderators/<int:user_id>
+# DELETE http://it-vesna-db-1:5432/moderators/<int:user_id>
 # No JSON request required for DELETE request
 @app.route('/moderators/<int:user_id>', methods=['DELETE'])
 def delete_moderator(user_id):
@@ -197,9 +282,13 @@ def delete_moderator(user_id):
         return 'not success', 404
 
 
+# =============================================================
+#   API for working with nominations data in DB
+# =============================================================
+
 # ============================
 # Add nomination
-# POST /nominations
+# POST http://it-vesna-db-1:5432/nominations
 # JSON request: {
 #     "Name": "NominationName"
 # }
@@ -214,7 +303,7 @@ def add_nomination():
 
 # ============================
 # Delete nomination
-# DELETE /nominations/<int:nomination_id>
+# DELETE http://it-vesna-db-1:5432/nominations/<int:nomination_id>
 # No JSON request required for DELETE request
 @app.route('/nominations/<int:nomination_id>', methods=['DELETE'])
 def delete_nomination(nomination_id):
@@ -227,6 +316,41 @@ def delete_nomination(nomination_id):
         return 'not success', 404
 
 
-# ==================
+# =============================================================
+#   API for working with notifications data in DB
+# =============================================================
+
+# ============================
+# Add nomination
+# POST http://it-vesna-db-1:5432/nominations
+# JSON request: {
+#     "ID": "user_ID",
+#     "type": "notification_type"
+# }
+@app.route('/notifications', methods=['POST'])
+def add_notification():
+    data = request.json
+    notification = Notificated(User_UID=data["ID"], NotificationType=int(data["type"]))
+    db.session.add(notification)
+    db.session.commit()
+    return 'success'
+
+
+# ============================
+# Delete nomination
+# DELETE http://it-vesna-db-1:5432/notifications/<int:user_id>
+# No JSON request required for DELETE request
+@app.route('/notifications/<int:user_id>', methods=['DELETE'])
+def delete_notification(user_id):
+    notification = Notificated.query.get(user_id)
+    if notification:
+        db.session.delete(notification)
+        db.session.commit()
+        return 'success'
+    else:
+        return 'not success', 404
+
+
+# =============================================================
 # Start server with static ip
 app.run(host='0.0.0.0', port='5100')

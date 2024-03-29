@@ -1,14 +1,13 @@
 # ==================
 # Importing packages
-# flask - main web server
-# sqlalchemy - package for working with pgAdmin
 
-from flask import Flask, request, jsonify
+from flask import Flask, request
 from flask_cors import CORS
 import smtplib
 
 from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
+from email.mime.image import MIMEImage
 
 
 SERVER_MAIL = "cordell.confirm@gmail.com" # TODO: Move constants to files
@@ -30,6 +29,7 @@ CORS(app)
 #     "destination": "destination_mail",
 #     "header": "mail_header",
 #     "text": "mail_text"
+#     "type": "message_type" (0 - default, 1 - ...)
 # }
 @app.route('/send_mail', methods=['POST'])
 def send_mail():
@@ -41,7 +41,28 @@ def send_mail():
     message["To"] = data["destination"]
     message["Subject"] = data["header"]
     
-    message.attach(MIMEText(data["text"], "plain"))
+    html = f"""
+    <html>
+      <body>
+        <table width="100%" height="100%" cellpadding="0" cellspacing="0" border="0">
+          <tr>
+            <td valign="middle" align="center" background="cid:image1">
+              <div style="text-align: center; color: white;">
+                <p>{data["text"]}</p>
+              </div>
+            </td>
+          </tr>
+        </table>
+      </body>
+    </html>
+    """
+    
+    message.attach(MIMEText(html, "html"))
+    
+    with open("path/to/your/image.jpg", "rb") as image_file:
+        image = MIMEImage(image_file.read())
+        image.add_header('Content-ID', '<image1>')
+        message.attach(image)
     
     with smtplib.SMTP(SMTP_SERVER, 587) as server:
         server.starttls()
