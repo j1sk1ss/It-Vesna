@@ -2,9 +2,9 @@
 import React from 'react';
 import { Routes, Route } from 'react-router-dom';
 
-import LoginPage from './LoginPage';
-import ForgotPasswordPage from './ForgotPasswordPage';
-import RegisterPage from './RegisterPage';
+import LoginPage from './login_page/LoginPage';
+import ForgotPasswordPage from './login_page/ForgotPasswordPage';
+import RegisterPage from './login_page/RegisterPage';
 
 const App = () => {
   return (
