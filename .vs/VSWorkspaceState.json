@@ -1,0 +1,12 @@
+{
+  "ExpandedNodes": [
+    "",
+    "\\front",
+    "\\front\\my-app",
+    "\\front\\my-app\\src",
+    "\\front\\my-app\\src\\main_page",
+    "\\server"
+  ],
+  "SelectedNode": "\\docker-compose.yml",
+  "PreviewInSolutionExplorer": false
+}

@@ -1,0 +1,311 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Landing page 2</title>
+    <style>
+        /* Ваши стили здесь */
+
+        /* Segmented control */
+        .segmented-control {
+            display: flex;
+            flex-direction: row;
+            align-items: flex-start;
+            padding: 4px;
+            position: absolute;
+            width: 1402px;
+            height: 66px;
+            left: 62px;
+            top: 141px;
+            background: #F7F7F7;
+            border-radius: 8px;
+        }
+
+            /* Item 1 */
+            .segmented-control .item {
+                display: flex;
+                flex-direction: row;
+                align-items: center;
+                padding: 0px 12px;
+                gap: 8px;
+                width: 135px;
+                height: 57px;
+                background: #FFFFFF;
+                box-shadow: 1px 1px 1.9px rgba(0, 0, 0, 0.45);
+                border-radius: 4px;
+                flex: none;
+                order: 0;
+                flex-grow: 0;
+            }
+
+                .segmented-control .item .text {
+                    width: 98px;
+                    height: 36px;
+                    font-family: 'Jura';
+                    font-style: normal;
+                    font-weight: 500;
+                    font-size: 24px;
+                    line-height: 150%;
+                    display: flex;
+                    align-items: center;
+                    color: #000000;
+                    flex: none;
+                    order: 0;
+                    flex-grow: 0;
+                }
+    </style>
+</head>
+
+<!-- Other content -->
+<style>
+    /* Landing page 2 */
+    body {
+        margin: 0;
+        padding: 0;
+        font-family: 'Inter', sans-serif;
+    }
+
+    .landing-page {
+        position: relative;
+        width: 1920px;
+        height: 1459px;
+        background: #FFFFFF;
+    }
+
+    .ellipse-3 {
+        position: absolute;
+        width: 942px;
+        height: 985px;
+        left: -452px;
+        top: 1193px;
+        background: rgba(91, 179, 216, 0.5);
+        opacity: 0.5;
+        filter: blur(50px);
+        backdrop-filter: blur(2px);
+        /* Note: backdrop-filter has minimal browser support */
+        transform: matrix(1, 0, 0, -1, 0, 0);
+    }
+
+    .navigation {
+        position: absolute;
+        height: 240px;
+        left: 0px;
+        right: 0px;
+        top: 0px;
+        background: #FFFFFF;
+    }
+
+        .navigation .it-vesna {
+            position: absolute;
+            width: 263px;
+            height: 96px;
+            left: 78px;
+            top: 24px;
+            font-family: 'Jura';
+            font-style: normal;
+            font-weight: 500;
+            font-size: 64px;
+            line-height: 150%;
+            color: #000000;
+            display: flex;
+            align-items: center;
+        }
+
+        .navigation .tab-list {
+            display: flex;
+            flex-direction: row;
+            align-items: flex-start;
+            padding: 0px;
+            position: absolute;
+            width: 909px;
+            height: 61px;
+            left: 62px;
+            top: 141px;
+        }
+
+        /* Продолжите добавлять стили для других элементов */
+
+        .navigation .button {
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+            align-items: center;
+            padding: 14px 24px;
+            gap: 8px;
+            position: absolute;
+            width: 258px;
+            height: 82px;
+            left: 1588px;
+            top: 38px;
+            background: #000000;
+            box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.05);
+            border-radius: 8px;
+        }
+
+            .navigation .button .submit-application {
+                width: 201px;
+                height: 38px;
+                font-family: 'Inter';
+                font-style: normal;
+                font-weight: 500;
+                font-size: 24px;
+                line-height: 161%;
+                display: flex;
+                align-items: center;
+                text-align: center;
+                color: #FFFFFF;
+            }
+
+    .group-1 {
+        position: absolute;
+        width: 1790px;
+        height: 1123px;
+        left: 56px;
+        top: 266px;
+        filter: drop-shadow(1px 4px 4px rgba(0, 0, 0, 0.25));
+    }
+
+        .group-1 .rectangle-1 {
+            position: absolute;
+            width: 1751.37px;
+            height: 1123px;
+            left: 94.63px;
+            top: 266px;
+            background: rgba(234, 234, 234, 0.55);
+            border-radius: 31px;
+        }
+
+        /* Продолжите добавлять стили для других элементов */
+
+        .group-1 .admin {
+            position: absolute;
+            width: 412.09px;
+            height: 57px;
+            left: 56px;
+            top: 281px;
+            font-family: 'Jura';
+            font-style: normal;
+            font-weight: 700;
+            font-size: 48px;
+            line-height: 57px;
+            text-align: center;
+            letter-spacing: -0.02em;
+            color: #000000;
+        }
+
+        /* Продолжите добавлять стили для других элементов */
+
+        .group-1 .content {
+            position: absolute;
+            width: 1638.69px;
+            height: 916px;
+            left: 144.53px;
+            top: 473px;
+            font-family: 'Inter';
+            font-style: normal;
+            font-weight: 400;
+            font-size: 24px;
+            line-height: 150%;
+            color: #000000;
+            display: flex;
+            align-items: center;
+            text-align: left;
+        }
+    /* Уважаемые конкурсанты */
+    .contestants-heading {
+        position: absolute;
+        width: 943px;
+        height: 76px;
+        left: 124px;
+        top: 385px;
+        font-family: 'Jura';
+        font-style: normal;
+        font-weight: 700;
+        font-size: 64px;
+        line-height: 76px;
+        text-align: center;
+        letter-spacing: -0.02em;
+        color: #000000;
+    }
+
+    /* Дата */
+    .date {
+        position: absolute;
+        width: 358.97px;
+        height: 28px;
+        left: 67.27px;
+        top: 338px;
+        font-family: 'Jura';
+        font-style: normal;
+        font-weight: 700;
+        font-size: 24px;
+        line-height: 28px;
+        text-align: center;
+        letter-spacing: -0.02em;
+        color: #000000;
+    }
+</style>
+	</head>
+
+<body>
+    <div class="landing-page">
+        <div class="ellipse-3"></div>
+        <div class="navigation">
+            <div class="it-vesna">IT Весна</div>
+            <div class="tab-list">
+                <!-- Segmented Control -->
+                <div class="segmented-control">
+                    <div class="item">
+                        <div class="text">Главная</div>
+                    </div>
+                    <div class="item">
+                        <div class="text">Участие</div>
+                    </div>
+                    <div class="item">
+                        <div class="text">План мироприятий</div>
+                    </div>
+                    <div class="item">
+                        <div class="text">Положение конкурса</div>
+                    </div>
+                    <div class="item">
+                        <div class="text">Состав жюри</div>
+                    </div>
+                    <div class="item">
+                        <div class="text">Технические требования</div>
+                    </div>
+                </div>
+                <div class="button">
+                    <div class="submit-application">Подать заявку</div>
+                </div>
+            </div>
+            <div class="group-1">
+                <div class="rectangle-1"></div>
+                <div class="admin">Админ</div>
+                <!-- Уважаемые конкурсанты -->
+                <div class="contestants-heading">Уважаемые конкурсанты</div>
+
+                <!-- Дата -->
+                <div class="date">16.03.2024</div>
+                <div class="content">
+                    <p>
+                        Добрый день! С 1 марта по 28 апреля пройдет Евразийский конкурс творческих компьютерных работ «Университетская
+                        IT-весна» среди обучающихся, осваивающих основные профессиональные образовательные программы высшего образования
+                        (бакалавриат, специалитет), среднего профессионального образования, и учащихся общеобразовательных организаций
+                        (6–11-е классы). Для участия в отборочном этапе конкурса необходимо зарегистрироваться и выслать почтовым
+                        отправлением оригиналы согласий на обработку персональных данных и на распространение персональных данных
+                        (бланки согласий) на адрес: 460018, г. Оренбург, пр. Победы, 13, ауд. 20521. Либо можно отправить скан-копии
+                        согласий на адрес mois@mail.osu.ru, обязательно указав темой письма Конкурс IT-Весна. Регистрация участников
+                        конкурса проводится с 1 по 15 марта 2024 г. на сайте it-vesna.osu.ru. Первый этап (заочный) является отборочным
+                        и проводится с 16 по 23 марта на основе представленных работ. Правила публикации работ смотрите в разделе
+                        Участие. Второй (очный) этап конкурса состоится 27 апреля в 20-м корпусе ОГУ (ауд. 20505). Регламент очного
+                        этапа 19:30–10:00 — регистрация участников 10:00–10:20 — открытие 10:30–11:30 — работа секций 12:00 —
+                        награждение победителей Информационное письмо IT-весна 2024 Приказ о проведении конкурса IT-весна 2024
+                    </p>
+                </div>
+            </div>
+        </div>
+</body>
+
+</html>
