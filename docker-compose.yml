@@ -28,6 +28,18 @@ services:
         source: ./back-server
         target: /var/www/it-vesna/server
 
+  mail-server:
+    image: ghcr.io/j1sk1ss/vesna-back-env:0.2v
+    ports:
+      - 5200:5200 # Main server
+    command: python mailing.py
+    depends_on:
+      - db
+    volumes:
+      - type: bind
+        source: ./mail-server
+        target: /var/www/it-vesna/mail-server
+
   # DB server container (Python + Libs)
   db-server:
     image: ghcr.io/j1sk1ss/vesna-back-env:0.2v

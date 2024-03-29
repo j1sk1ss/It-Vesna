@@ -103,7 +103,6 @@ def add_user():
     db.session.add(new_user)
     db.session.commit()
 
-    # Создание записи в таблице Passwords для хранения пароля пользователя
     new_password = Passwords(User_UID=new_user.UID, PasswordHash=data['PasswordHash'], PasswordSalt=data['PasswordSalt'])
     db.session.add(new_password)
     db.session.commit()
