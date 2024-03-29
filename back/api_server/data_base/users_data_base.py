@@ -31,3 +31,6 @@ def db_update_user(surname, name, fname, mail, user_id):
 
 def db_get_user(user_id):
     return requests.get(f'{DB_SERVER}/users/{user_id}')
+
+def db_get_user_by_mail(request):
+    return requests.get(f'{DB_SERVER}/user_by_mail', data=request)

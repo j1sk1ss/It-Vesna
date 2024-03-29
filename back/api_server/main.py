@@ -5,11 +5,9 @@
 # limiter - limits support (like 1 access per minute)
 # jwtmanager - access token support
 
-from datetime import timedelta
-
 from audit.log import log
 from data_base.users_data_base import db_add_user, db_delete_user, db_get_user, db_update_user
-from data_base.pass_data_base import db_change_password
+from data_base.pass_data_base import db_change_password, db_get_password
 from mail.mail import ml_send_mail
 from crypto.crypto import crypto_str2hash
 
@@ -57,7 +55,7 @@ def alive_answer():
 
 # ============================
 # Add new user
-# POST  http://it-vesna-back-server-1/api/add_user
+# POST  http://it-vesna-api-server-1/api/add_user
 # JSON request: {
 #     "surname": "surname",
 #     "name": "name",
@@ -78,7 +76,7 @@ def add_user():
 
 # ============================
 # Delete user
-# POST  http://it-vesna-back-server-1/api/delete_user
+# POST  http://it-vesna-api-server-1/api/delete_user
 # JSON request: {
 #     "ID": "user_id"
 # }
@@ -92,7 +90,7 @@ def delete_user():
 
 # ============================
 # Update users data
-# PUT http://it-vesna-back-server-1/api/update_user
+# PUT http://it-vesna-api-server-1/api/update_user
 # JSON request: {
 #     "ID": "user_id"
 #     "surname": "NewSurname",
@@ -109,16 +107,43 @@ def update_user():
 
 
 # ============================
-# Update users data
-# GET http://it-vesna-back-server-1/api/user
+# Get user data by ID
+# GET http://it-vesna-api-server-1/api/user_by_id
 # JSON request: {
 #     "ID": "user_id"
 # }
-# RETURN: user
-@app.route('/api/user', methods=['GET'])
-def get_user():
+# RETURN:
+# JSON response: {
+#     'UID': 'UID',
+#     'Surname': 'Surname',
+#     'Name': 'Name',
+#     'FathersName': 'FathersName',
+#     'Mail': 'Mail'
+# }
+@app.route('/api/user_by_id', methods=['POST'])
+def get_user_by_id():
     data = request.json
     return db_get_user(data['ID'])
+
+
+# ============================
+# Get user data by mail
+# GET http://it-vesna-api-server-1/api/user_by_mail
+# JSON request: {
+#     "mail": "mail"
+# }
+# RETURN:
+# JSON response: {
+#     'UID': 'UID',
+#     'Surname': 'Surname',
+#     'Name': 'Name',
+#     'FathersName': 'FathersName',
+#     'Mail': 'Mail'
+# }
+@app.route('/api/user_by_mail', methods=['POST'])
+def get_user_by_mail():
+    data = request.json
+    return db_get_user(data['mail'])
 
 
 # =============================================================
@@ -127,10 +152,10 @@ def get_user():
 
 # ============================
 # Change password
-# POST  http://it-vesna-back-server-1/api/change_pass
+# POST http://it-vesna-api-server-1/api/change_pass
 # JSON request: {
-#     "ID": "user_id"
-#     "password": "new_pass",
+#     "ID": "user_id",
+#     "password": "new_pass"
 # }
 # RETURN: success
 @app.route('/api/change_pass', methods=['POST'])
@@ -142,21 +167,66 @@ def change_password():
     return db_change_password(pass_hash, pass_salt, data['ID'])
 
 
+# ============================
+# Get password
+# POST http://it-vesna-api-server-1/api/get_pass
+# JSON request: {
+#     "ID": "user_id"
+# }
+# RETURN:
+# JSON response: {
+#     "hash": "hash",
+#     "salt": "salt"
+# }
+@app.route('/api/get_pass', methods=['POST'])
+def get_password():
+    log("Get password API call", "/api/get_pass")
+    data = request.json
+    return db_get_password(data['ID'])
+
+
+# ============================
+# Hash string value
+# POST http://it-vesna-api-server-1/api/str2hash
+# JSON request: {
+#     "data": "data"
+#     "salt": "salt" 
+# }
+# RETURN:
+# JSON response: {
+#     "hash": "hash",
+#     "salt": "salt"
+# }
+@app.route('/api/str2hash', methods=['POST'])
+def str2hash():
+    data = request.json
+    pass_hash, pass_salt = crypto_str2hash(data['data'], data['salt'])
+
+    ret_data = {
+        "hash": pass_hash,
+        "salt": pass_salt
+    }
+
+    return ret_data
+
+
 # =============================================================
 #   Mailing API
 # =============================================================
 
 # ============================
 # Send mail
-# POST  http://it-vesna-back-server-1/api/send_mail
+# POST  http://it-vesna-api-server-1/api/send2mail
 # JSON request: {
-#     "ID": "user_id"
-#     "password": "new_pass",
+#     "destination": "destination",
+#     "header": "header",
+#     "text": "text",
+#     "type": "type"
 # }
 # RETURN: success
-@app.route('/api/send_mail', methods=['POST'])
+@app.route('/api/send2mail', methods=['POST'])
 def send_mail():
-    log("Update password API call", "/api/send_mail")
+    log("Update password API call", "/api/send2mail")
     data = request.json
     return ml_send_mail(data['destination'], data['header'], data['text'], data['type'])
 

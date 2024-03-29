@@ -117,6 +117,28 @@ def get_user(user_id):
 
 
 # ============================
+# This function return user by ID from bd
+# GET http://it-vesna-db-1:5432/user_by_mail
+# No JSON request required for GET request
+@app.route('/user_by_mail', methods=['GET'])
+def get_user_by_mail():
+    data = request.json
+    user = Users.query.filter_by(Mail=data['mail']).first()
+    if user:
+        user_data = {
+            'UID': user.UID,
+            'Surname': user.Surname,
+            'Name': user.Name,
+            'FathersName': user.FathersName,
+            'Mail': user.Mail
+        }
+        
+        return jsonify(user_data)
+    else:
+        return 'user not found'
+
+
+# ============================
 # This function return all notificated users from db
 # GET http://it-vesna-db-1:5432/notifications
 # No JSON request required for GET request
@@ -174,7 +196,7 @@ def get_notificated_user(user_id):
 #     "PasswordSalt": "salt_value"
 # }
 @app.route('/users', methods=['POST'])
-def add_user():
+def add_user(): # TODO: Don`t add user if in bd existed same mail address
     data = request.json
     new_user = Users(Surname=data['Surname'], Name=data['Name'], FathersName=data['FathersName'], Mail=data['Mail'])
     db.session.add(new_user)
@@ -244,6 +266,31 @@ def change_password(user_id):
         user_password.PasswordSalt = data.get('PasswordSalt')
         db.session.commit()
         return 'success'
+    else:
+        return 'not success'
+
+
+# ============================
+# Get password by user_id
+# PUT http://it-vesna-db-1:5432/passwords/<int:user_id>
+# JSON response: {
+#     "hash": "hash",
+#     "salt": "salt"
+# }
+@app.route('/passwords/<int:user_id>', methods=['GET'])
+def get_password(user_id):
+    data = request.json
+    user_password = Passwords.query.filter_by(User_UID=user_id).first()
+    if user_password:
+        user_password.PasswordHash = data.get('PasswordHash')
+        user_password.PasswordSalt = data.get('PasswordSalt')
+
+        ret_data = {
+            "hash": user_password.PasswordHash,
+            "salt": user_password.PasswordSalt
+        }
+
+        return ret_data
     else:
         return 'not success'
 

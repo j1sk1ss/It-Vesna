@@ -11,3 +11,6 @@ def db_change_password(pass_hash, pass_salt, user_id):
     }    
     
     return requests.put(f'{DB_SERVER}/passwords/{user_id}', json=send_data)
+
+def db_get_password(user_id):
+    return requests.get(f'{DB_SERVER}/passwords/{user_id}')

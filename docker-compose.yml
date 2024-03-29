@@ -16,17 +16,34 @@ services:
     command: npm start --prefix body/site-body
 
   # Back container (Python + libs)
-  back-server:
+  pages-server:
     image: ghcr.io/j1sk1ss/vesna-back-env:0.2v
     ports:
       - 5000:5000
-    command: python server.py
+    command: python main.py
     depends_on:
       - db
+      - api-server
     volumes:
       - type: bind
-        source: ./back/back-server
-        target: /var/www/it-vesna/server
+        source: ./back/pages_server
+        target: /var/www/it-vesna/pages_server
+
+  # API container (Python + libs)
+  api-server:
+    image: ghcr.io/j1sk1ss/vesna-back-env:0.2v
+    ports:
+      - 5000:5000
+    command: python main.py
+    depends_on:
+      - db
+      - mail-server
+      - crypto-server
+      - db-server
+    volumes:
+      - type: bind
+        source: ./back/api_server
+        target: /var/www/it-vesna/api_server
 
   # Mail container
   mail-server:
@@ -38,8 +55,8 @@ services:
       - db
     volumes:
       - type: bind
-        source: ./back/mail-server
-        target: /var/www/it-vesna/mail-server
+        source: ./back/mail_server
+        target: /var/www/it-vesna/mail_server
 
   # Crypto container
   crypto-server:
@@ -51,8 +68,8 @@ services:
       - db
     volumes:
       - type: bind
-        source: ./back/crypto-server
-        target: /var/www/it-vesna/crypto-server
+        source: ./back/crypto_server
+        target: /var/www/it-vesna/crypto_server
 
   # DB server container (Python + Libs)
   db-server:
@@ -64,7 +81,7 @@ services:
       - db
     volumes:
       - type: bind
-        source: ./back/db-server
+        source: ./back/db_server
         target: /var/www/it-vesna/server
 
   # Data base
