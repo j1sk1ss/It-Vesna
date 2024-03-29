@@ -19,14 +19,14 @@ services:
   pages-server:
     image: ghcr.io/j1sk1ss/vesna-back-env:0.2v
     ports:
-      - 5000:5000
+      - 5400:5400
     command: python main.py
     depends_on:
       - api-server
     volumes:
       - type: bind
         source: ./back/pages_server
-        target: /var/www/it-vesna/pages_server
+        target: /var/www/it-vesna/server
 
   # API container (Python + libs)
   api-server:
@@ -42,7 +42,7 @@ services:
     volumes:
       - type: bind
         source: ./back/api_server
-        target: /var/www/it-vesna/api_server
+        target: /var/www/it-vesna/server
 
   # Mail container
   mail-server:
@@ -55,7 +55,7 @@ services:
     volumes:
       - type: bind
         source: ./back/mail_server
-        target: /var/www/it-vesna/mail_server
+        target: /var/www/it-vesna/server
 
   # Crypto container
   crypto-server:
@@ -68,7 +68,7 @@ services:
     volumes:
       - type: bind
         source: ./back/crypto_server
-        target: /var/www/it-vesna/crypto_server
+        target: /var/www/it-vesna/server
 
   # DB server container (Python + Libs)
   db-server:
