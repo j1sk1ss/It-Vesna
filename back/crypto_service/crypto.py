@@ -8,11 +8,13 @@ import string
 import bcrypt
 
 
+
 # ==================
 # Configuring server on starting
 
 app = Flask(__name__)
 CORS(app)
+
 
 
 # ==================
@@ -48,6 +50,7 @@ def string2hash():
     }
     
     return return_data
+
 
 
 # ==================

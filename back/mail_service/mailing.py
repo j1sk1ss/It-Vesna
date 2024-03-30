@@ -41,11 +41,13 @@ def send_mail():
     message["To"] = data["destination"]
     message["Subject"] = data["header"]
     
+  # TODO Test this function. Add diff images by type
+
     html = f"""
     <html>
       <body>
         <table width="100%" height="100%" cellpadding="0" cellspacing="0" border="0">
-          <tr>
+          <tr>  
             <td valign="middle" align="center" background="cid:image1">
               <div style="text-align: center; color: white;">
                 <p>{data["text"]}</p>

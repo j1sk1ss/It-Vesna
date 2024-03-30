@@ -20,42 +20,57 @@ def register(name, surname, father_name, mail, password):
         "password": password
     }
 
-    return requests.post(f"{API_URL}/add_user", data=data)
+    return requests.post(f"{API_URL}/user", data=data)
 
 
 def login(mail, password):
+
+    # ========================
+    # Get user from bd by mail
+
     data = {
-        "mail": mail
+        "ID": "none",
+        "Mail": mail
     }
 
-    user_response = requests.get(f"{API_URL}/user_by_mail", data=data)
+    user_response = requests.get(f"{API_URL}/user", data=data)
     user_id = user_response['UID']
 
-    data = {
-        "ID": user_id
-    }
+    # ========================
+    # Get user pass hash and pass salt
 
-    pass_response = requests.get(f"{API_URL}/get_pass", data=data)
+    pass_response = requests.get(f"{API_URL}/password/{user_id}")
     pass_hash, pass_salt = pass_response['hash'], pass_response['salt']
+
+    # ========================
+    # Hash entered pass and check
 
     data = {
         "data": password,
         "salt": pass_salt
     }
 
-    save_pass_response = requests.get(f"{API_URL}/str2hash", data=data)
+    save_pass_response = requests.post(f"{API_URL}/str2hash", data=data)
     save_pass_hash, _ = save_pass_response['hash'], save_pass_response['salt']
 
     return save_pass_hash == pass_hash
 
 
 def restore_pass(mail):
+
+    # ========================
+    # Get user from bd by mail
+
     data = {
-        "mail": mail
+        "ID": "none",
+        "Mail": mail
     }
 
-    user_response = requests.get(f"{API_URL}/user_by_mail", data=data)
+    user_response = requests.get(f"{API_URL}/user", data=data)
     user_id = user_response['UID']
+
+    # ========================
+    # Generate new password and change old password
 
     new_pass = get_random_string(15)
     data = {
@@ -63,7 +78,10 @@ def restore_pass(mail):
         "password": new_pass
     }
 
-    requests.post(f"{API_URL}/change_pass", data=data)
+    requests.put(f"{API_URL}/password", data=data)
+
+    # ========================
+    # Send new password to user's mail
 
     data = {
         "destination": mail,
@@ -72,12 +90,12 @@ def restore_pass(mail):
         "type": "2"
     }
 
-    requests.post(f"{API_URL}/send2mail", data=data)
+    requests.post(f"{API_URL}/send_mail", data=data)
 
     return 0
 
 
-codes = []
+codes = [] # TODO: Delete codes after death (check every minute?)
 
 def send_verify_code(mail):
     code = get_random_string(10)
@@ -92,7 +110,7 @@ def send_verify_code(mail):
     now = datetime.now() + timedelta(minutes = 1)
     current_time = now.strftime("%H:%M:%S")
 
-    requests.post(f"{API_URL}/send2mail", data=data)
+    requests.post(f"{API_URL}/send_mail", data=data)
     codes.append( {
             "mail": mail,
             "code": code, # TODO: Maybe str2hash?

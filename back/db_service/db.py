@@ -1,3 +1,4 @@
+# TODO: Save bd to disk
 # =============================================================
 # Importing packages
 # flask - main web server
@@ -6,6 +7,7 @@
 from flask import Flask, request, jsonify
 from flask_cors import CORS
 from flask_sqlalchemy import SQLAlchemy
+
 
 
 # =============================================================
@@ -24,6 +26,7 @@ app.config['SQLALCHEMY_DATABASE_URI'] = f'postgresql://{USER_NAME}:{DB_PASS}@{DB
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
 db = SQLAlchemy(app)
+
 
 
 # =============================================================
@@ -56,21 +59,9 @@ class Notificated(db.Model):
     NotificationType = db.Column(db.Integer)
 
 
-# =============================================================
-# Functions for working with bd
-# Functions:
-# Add user, delete user, get user by (name, mail)
-# Add moderator, delete moderator
-# Add nomination, delete nomination
-
-
-@app.route('/api/alive', methods=['GET'])   # API link that listens by this handler
-def alive_asnwer():
-    return jsonify({'response': "I'm alive!"})
-
 
 # =============================================================
-#   API for getting data from DB
+#   API for working with data about users from DB
 # =============================================================
 
 # ============================
@@ -83,29 +74,11 @@ def get_users():
     result = []
     for user in users:
         user_data = {
-            'UID': user.UID,
-            'Surname': user.Surname,
-            'Name': user.Name,
+            'UID':         user.UID,
+            'Surname':     user.Surname,
+            'Name':        user.Name,
             'FathersName': user.FathersName,
-            'Mail': user.Mail
-        }
-        
-        result.append(user_data)
-        
-    return jsonify(result)
-
-
-# ============================
-# This function return all moderators from db
-# GET http://it-vesna-db-1:5100/moderators
-# No JSON request required for GET request
-@app.route('/moderators', methods=['GET'])
-def get_moderators():
-    moderators = Moderators.query.all()
-    result = []
-    for moderator in moderators:
-        user_data = {
-            'UID': moderator.User_UID
+            'Mail':        user.Mail
         }
         
         result.append(user_data)
@@ -118,38 +91,21 @@ def get_moderators():
 # GET http://it-vesna-db-1:5100/users/<int:user_id>
 # No JSON request required for GET request
 @app.route('/users/<int:user_id>', methods=['GET'])
-def get_user(user_id):
+def get_user_by_id(user_id):
     user = Users.query.filter_by(UID=user_id).first()
     if user:
         user_data = {
-            'UID': user.UID,
-            'Surname': user.Surname,
-            'Name': user.Name,
+            'UID':         user.UID,
+            'Surname':     user.Surname,
+            'Name':        user.Name,
             'FathersName': user.FathersName,
-            'Mail': user.Mail
+            'Mail':        user.Mail
         }
         
         return jsonify(user_data)
     else:
         return 'user not found'
-
-
-# ============================
-# This function return moderator by ID from bd
-# GET http://it-vesna-db-1:5100/moderators/<int:user_id>
-# No JSON request required for GET request
-@app.route('/moderators/<int:user_id>', methods=['GET'])
-def get_moderator(user_id):
-    moderator = Moderators.query.filter_by(UID=user_id).first()
-    if moderator:
-        user_data = {
-            'UID': moderator.User_UID
-        }
-        
-        return jsonify(user_data)
-    else:
-        return 'moderator not found'
-
+    
 
 # ============================
 # This function return user by ID from bd
@@ -161,63 +117,17 @@ def get_user_by_mail():
     user = Users.query.filter_by(Mail=data['mail']).first()
     if user:
         user_data = {
-            'UID': user.UID,
-            'Surname': user.Surname,
-            'Name': user.Name,
+            'UID':         user.UID,
+            'Surname':     user.Surname,
+            'Name':        user.Name,
             'FathersName': user.FathersName,
-            'Mail': user.Mail
+            'Mail':        user.Mail
         }
         
         return jsonify(user_data)
     else:
         return 'user not found'
-
-
-# ============================
-# This function return all notificated users from db
-# GET http://it-vesna-db-1:5100/notifications
-# No JSON request required for GET request
-# RETURN: list of [ID - TYPE]
-@app.route('/notifications', methods=['GET'])
-def get_notificated():
-    users = Notificated.query.all()
-    result = []
-    for user in users:
-        user_data = {
-            'UID': user.User_UID,
-            'Type': user.NotificationType
-        }
-        
-        result.append(user_data)
-        
-    return jsonify(result)
-
-
-# ============================
-# This function return all notificated users from db
-# GET http://it-vesna-db-1:5100/notifications/<int:user_id>
-# No JSON request required for GET request
-# RETURN: notification
-@app.route('/notifications/<int:user_id>', methods=['GET'])
-def get_notificated_user(user_id):
-    notifications = Notificated.query.filter_by(User_UID=user_id).all()
-    if notifications:
-        result = []
-        for notification in notifications:
-            notification_data = {
-                'UID': notification.User_UID,
-                'Type': notification.NotificationType
-            }
-            
-            result.append(notification_data)
-        return jsonify(result)
-    else:
-        return 'not notify'
-
-
-# =============================================================
-#   API for working with users data in DB
-# =============================================================
+    
 
 # ============================
 # This function add user to db
@@ -257,10 +167,12 @@ def add_user(): # TODO: Don`t add user if in bd existed same mail address
 def update_user(user_id):
     user = Users.query.get_or_404(user_id)
     data = request.json
-    user.Surname = data['Surname']
-    user.Name = data['Name']
+
+    user.Surname     = data['Surname']
+    user.Name        = data['Name']
     user.FathersName = data['FathersName']
-    user.Mail = data['Mail']
+    user.Mail        = data['Mail']
+
     db.session.commit()
     return 'success'
 
@@ -279,6 +191,160 @@ def delete_user(user_id):
     db.session.delete(user)
     db.session.commit()
     return 'success'
+
+
+
+# =============================================================
+#   API for working with data about moderators from DB
+# =============================================================
+
+# ============================
+# This function return all moderators from db
+# GET http://it-vesna-db-1:5100/moderators
+# No JSON request required for GET request
+@app.route('/moderators', methods=['GET'])
+def get_moderators():
+    moderators = Moderators.query.all()
+    result = []
+    for moderator in moderators:
+        user_data = {
+            'UID': moderator.User_UID
+        }
+        
+        result.append(user_data)
+        
+    return jsonify(result)
+
+
+# ============================
+# This function return moderator by ID from bd
+# GET http://it-vesna-db-1:5100/moderators/<int:user_id>
+# No JSON request required for GET request
+@app.route('/moderators/<int:user_id>', methods=['GET'])
+def get_moderator(user_id):
+    moderator = Moderators.query.filter_by(UID=user_id).first()
+    if moderator:
+        user_data = {
+            'UID': moderator.User_UID
+        }
+        
+        return jsonify(user_data)
+    else:
+        return 'moderator not found'
+
+
+# ============================
+# Add moderator
+# POST http://it-vesna-db-1:5100/moderators
+# JSON request: {
+#     "User_UID": user_id
+# }
+@app.route('/moderators', methods=['POST'])
+def add_moderator():
+    data = request.json
+    moderator = Moderators(User_UID=data['User_UID'])
+    
+    db.session.add(moderator)
+    db.session.commit()
+    return 'success'
+
+
+# ============================
+# Delete moderator
+# DELETE http://it-vesna-db-1:5100/moderators/<int:user_id>
+# No JSON request required for DELETE request
+@app.route('/moderators/<int:user_id>', methods=['DELETE'])
+def delete_moderator(user_id):
+    moderator = Moderators.query.filter_by(User_UID=user_id).first()
+    if moderator:
+        db.session.delete(moderator)
+        db.session.commit()
+        return 'success'
+    else:
+        return 'not success', 404
+
+
+
+# =============================================================
+#   API for getting data about notifications from DB
+# =============================================================
+
+# ============================
+# This function return all notificated users from db
+# GET http://it-vesna-db-1:5100/notifications
+# No JSON request required for GET request
+# RETURN: list of [ID - TYPE]
+@app.route('/notifications', methods=['GET'])
+def get_notificated():
+    users = Notificated.query.all()
+    result = []
+    for user in users:
+        user_data = {
+            'UID': user.User_UID,
+            'Type': user.NotificationType
+        }
+        
+        result.append(user_data)
+        
+    return jsonify(result)
+
+
+# ============================
+# This function return all notificated users from db
+# GET http://it-vesna-db-1:5100/notifications/<int:user_id>
+# No JSON request required for GET request
+# RETURN: notification
+# {
+#   'UID': 'User_UID',
+#   'Type': 'NotificationType'
+# }
+@app.route('/notifications/<int:user_id>', methods=['GET'])
+def get_notificated_user(user_id):
+    notifications = Notificated.query.filter_by(User_UID=user_id).all()
+    if notifications:
+        for notification in notifications:
+            notification_data = {
+                'UID': notification.User_UID,
+                'Type': notification.NotificationType
+            }
+            
+            return notification_data
+        
+        return 0
+    else:
+        return 'not notify'
+
+
+# ============================
+# Add nomination
+# POST http://it-vesna-db-1:5100/nominations
+# JSON request: {
+#     "ID": "user_ID",
+#     "type": "notification_type"
+# }
+@app.route('/notifications', methods=['POST'])
+def add_notification():
+    data = request.json
+    notification = Notificated(User_UID=data["ID"], NotificationType=int(data["type"]))
+    db.session.add(notification)
+    db.session.commit()
+    return 'success'
+
+
+# ============================
+# Delete nomination
+# DELETE http://it-vesna-db-1:5100/notifications/<int:user_id>
+# No JSON request required for DELETE request
+@app.route('/notifications/<int:user_id>', methods=['DELETE'])
+def delete_notification(user_id):
+    notification = Notificated.query.get(user_id)
+    if notification:
+        db.session.delete(notification)
+        db.session.commit()
+        return 'success'
+    else:
+        return 'not success', 404
+
 
 
 # =============================================================
@@ -330,39 +396,6 @@ def get_password(user_id):
         return 'not success'
 
 
-# =============================================================
-#   API for working with moderators data in DB
-# =============================================================
-
-# ============================
-# Add moderator
-# POST http://it-vesna-db-1:5100/moderators
-# JSON request: {
-#     "User_UID": user_id
-# }
-@app.route('/moderators', methods=['POST'])
-def add_moderator():
-    data = request.json
-    moderator = Moderators(User_UID=data['User_UID'])
-    db.session.add(moderator)
-    db.session.commit()
-    return 'success'
-
-
-# ============================
-# Delete moderator
-# DELETE http://it-vesna-db-1:5100/moderators/<int:user_id>
-# No JSON request required for DELETE request
-@app.route('/moderators/<int:user_id>', methods=['DELETE'])
-def delete_moderator(user_id):
-    moderator = Moderators.query.filter_by(User_UID=user_id).first()
-    if moderator:
-        db.session.delete(moderator)
-        db.session.commit()
-        return 'success'
-    else:
-        return 'not success', 404
-
 
 # =============================================================
 #   API for working with nominations data in DB
@@ -397,40 +430,6 @@ def delete_nomination(nomination_id):
     else:
         return 'not success', 404
 
-
-# =============================================================
-#   API for working with notifications data in DB
-# =============================================================
-
-# ============================
-# Add nomination
-# POST http://it-vesna-db-1:5100/nominations
-# JSON request: {
-#     "ID": "user_ID",
-#     "type": "notification_type"
-# }
-@app.route('/notifications', methods=['POST'])
-def add_notification():
-    data = request.json
-    notification = Notificated(User_UID=data["ID"], NotificationType=int(data["type"]))
-    db.session.add(notification)
-    db.session.commit()
-    return 'success'
-
-
-# ============================
-# Delete nomination
-# DELETE http://it-vesna-db-1:5100/notifications/<int:user_id>
-# No JSON request required for DELETE request
-@app.route('/notifications/<int:user_id>', methods=['DELETE'])
-def delete_notification(user_id):
-    notification = Notificated.query.get(user_id)
-    if notification:
-        db.session.delete(notification)
-        db.session.commit()
-        return 'success'
-    else:
-        return 'not success', 404
 
 
 # =============================================================

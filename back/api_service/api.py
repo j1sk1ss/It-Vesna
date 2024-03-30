@@ -20,6 +20,7 @@ from flask_limiter.util import get_remote_address
 from flask_jwt_extended import JWTManager, create_access_token, jwt_required, get_jwt_identity
 
 
+
 # =============================================================
 # Configuring server on starting
 # 1) Set ajax support
@@ -38,17 +39,6 @@ limiter = Limiter(
 )
 
 
-# =============================================================
-#   Info API
-# =============================================================
-
-# ============================
-# Check server status
-@app.route('/api/alive', methods=['GET'])   # API link that listens by this handler
-@limiter.limit("10 per minute")             # Limiter for triggers
-def alive_answer():
-    return jsonify({'response': "I'm alive!"})
-
 
 # =============================================================
 #   Users DB API
@@ -56,7 +46,7 @@ def alive_answer():
 
 # ============================
 # Add new user
-# POST  http://it-vesna-api-service-1/api/add_user
+# POST  http://it-vesna-api-service-1/api/user
 # JSON request: {
 #     "surname": "surname",
 #     "name": "name",
@@ -65,7 +55,7 @@ def alive_answer():
 #     "password": "password"
 # }
 # RETURN: user ID
-@app.route('/api/add_user', methods=['POST'])
+@app.route('/api/user', methods=['POST'])
 def add_user():
     data = request.json
     pass_hash, pass_salt = crypto_str2hash(data['password'])
@@ -74,20 +64,16 @@ def add_user():
 
 # ============================
 # Delete user
-# DELETE  http://it-vesna-api-service-1/api/delete_user
-# JSON request: {
-#     "ID": "user_id"
-# }
+# DELETE  http://it-vesna-api-service-1/api/user/<int:user_id>
 # RETURN: success
-@app.route('/api/delete_user', methods=['DELETE'])
-def delete_user():
-    data = request.json
-    return db_delete_user(data["ID"])
+@app.route('/api/user/<int:user_id>', methods=['DELETE'])
+def delete_user(user_id):
+    return db_delete_user(user_id)
 
 
 # ============================
 # Update users data
-# PUT http://it-vesna-api-service-1/api/update_user
+# PUT http://it-vesna-api-service-1/api/user
 # JSON request: {
 #     "ID": "user_id"
 #     "surname": "NewSurname",
@@ -96,17 +82,18 @@ def delete_user():
 #     "mail": "new_email@example.com"
 # }
 # RETURN: success
-@app.route('/api/update_user', methods=['POST'])
+@app.route('/api/user', methods=['PUT'])
 def update_user():
     data = request.json
     return db_update_user(data['surname'], data['name'], data['father_name'], data['mail'], data['ID'])
 
 
 # ============================
-# Get user data by ID
-# GET http://it-vesna-api-service-1/api/user_by_id
+# Get user data by ID or by Mail
+# GET http://it-vesna-api-service-1/api/user
 # JSON request: {
-#     "ID": "user_id"
+#     "ID": "user_id" / "none",
+#     "Mail": "mail" / "none"
 # }
 # RETURN:
 # JSON response: {
@@ -116,30 +103,14 @@ def update_user():
 #     'FathersName': 'FathersName',
 #     'Mail': 'Mail'
 # }
-@app.route('/api/user_by_id', methods=['GET'])
-def get_user_by_id():
+@app.route('/api/user', methods=['GET'])
+def get_user():
     data = request.json
-    return db_get_user_by_id(data['ID'])
+    if data['ID'] != "none":
+        return db_get_user_by_id(data['ID'])
+    else:
+        return db_get_user_by_mail(data['Mail'])
 
-
-# ============================
-# Get user data by mail
-# GET http://it-vesna-api-service-1/api/user_by_mail
-# JSON request: {
-#     "mail": "mail"
-# }
-# RETURN:
-# JSON response: {
-#     'UID': 'UID',
-#     'Surname': 'Surname',
-#     'Name': 'Name',
-#     'FathersName': 'FathersName',
-#     'Mail': 'Mail'
-# }
-@app.route('/api/user_by_mail', methods=['GET'])
-def get_user_by_mail():
-    data = request.json
-    return db_get_user_by_mail(data['mail'])
 
 
 # =============================================================
@@ -148,13 +119,13 @@ def get_user_by_mail():
 
 # ============================
 # Change password
-# POST http://it-vesna-api-service-1/api/change_pass
+# PUT http://it-vesna-api-service-1/api/password
 # JSON request: {
 #     "ID": "user_id",
 #     "password": "new_pass"
 # }
 # RETURN: success
-@app.route('/api/change_pass', methods=['POST'])
+@app.route('/api/password', methods=['PUT'])
 def change_password():
     data = request.json
     pass_hash, pass_salt = crypto_str2hash(data['password'])
@@ -163,19 +134,15 @@ def change_password():
 
 # ============================
 # Get password by id
-# POST http://it-vesna-api-service-1/api/get_pass
-# JSON request: {
-#     "ID": "user_id"
-# }
+# GET http://it-vesna-api-service-1/api/password/<int:user_id>
 # RETURN:
 # JSON response: {
 #     "hash": "hash",
 #     "salt": "salt"
 # }
-@app.route('/api/get_pass', methods=['GET'])
-def get_password():
-    data = request.json
-    return db_get_password(data['ID'])
+@app.route('/api/password/<int:user_id>', methods=['GET'])
+def get_password(user_id):
+    return db_get_password(user_id)
 
 
 # ============================
@@ -190,7 +157,7 @@ def get_password():
 #     "hash": "hash",
 #     "salt": "salt"
 # }
-@app.route('/api/str2hash', methods=['GET'])
+@app.route('/api/str2hash', methods=['POST'])
 def str2hash():
     data = request.json
     pass_hash, pass_salt = crypto_str2hash(data['data'], data['salt'])
@@ -201,6 +168,7 @@ def str2hash():
     }
 
     return ret_data
+
 
 
 # =============================================================
@@ -223,15 +191,12 @@ def add_notificated():
 
 # ============================
 # Disable notification for user
-# DELETE  http://it-vesna-api-service-1/api/notificated
-# JSON request: {
-#     "user_id": "user_id"
-# }
+# DELETE  http://it-vesna-api-service-1/api/notificated/<int:user_id>
 # RETURN: success
-@app.route('/api/notificated', methods=['DELETE'])
-def delete_notificated():
-    data = request.json
-    return db_delete_notify(data['user_id'])
+@app.route('/api/notificated/<int:user_id>', methods=['DELETE'])
+def delete_notificated(user_id):
+    return db_delete_notify(user_id)
+
 
 
 # =============================================================
@@ -272,14 +237,11 @@ def add_moderator():
 # ============================
 # Add moderator by ID (User should be exists)
 # DELETE  http://it-vesna-api-service-1/api/moderator
-# JSON request: {
-#     "user_id": "user_id"
-# }
 # RETURN: success
-@app.route('/api/moderator', methods=['DELETE'])
-def delete_moderator():
-    data = request.json
-    return db_delete_moderator(data['user_id'])
+@app.route('/api/moderator/<int:user_id>', methods=['DELETE'])
+def delete_moderator(user_id):
+    return db_delete_moderator(user_id)
+
 
 
 # =============================================================
@@ -288,7 +250,7 @@ def delete_moderator():
 
 # ============================
 # Send mail
-# POST  http://it-vesna-api-service-1/api/send2mail
+# POST  http://it-vesna-api-service-1/api/send_mail
 # JSON request: {
 #     "destination": "destination",
 #     "header": "header",
@@ -296,10 +258,11 @@ def delete_moderator():
 #     "type": "type"
 # }
 # RETURN: success
-@app.route('/api/send2mail', methods=['POST'])
+@app.route('/api/send_mail', methods=['POST'])
 def send_mail():
     data = request.json
     return ml_send_mail(data['destination'], data['header'], data['text'], data['type'])
+
 
 
 # =============================================================
