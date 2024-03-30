@@ -100,7 +100,7 @@ def get_users():
 # GET http://it-vesna-db-1:5100/moderators
 # No JSON request required for GET request
 @app.route('/moderators', methods=['GET'])
-def get_users():
+def get_moderators():
     moderators = Moderators.query.all()
     result = []
     for moderator in moderators:
@@ -139,7 +139,7 @@ def get_user(user_id):
 # GET http://it-vesna-db-1:5100/moderators/<int:user_id>
 # No JSON request required for GET request
 @app.route('/moderators/<int:user_id>', methods=['GET'])
-def get_user(user_id):
+def get_moderator(user_id):
     moderator = Moderators.query.filter_by(UID=user_id).first()
     if moderator:
         user_data = {
