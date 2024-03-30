@@ -1,92 +1,77 @@
 /* AdminPanelPage.css */
 
+/* Общие стили для страницы административной панели */
 .admin-panel-page {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    height: 100vh;
-  }
-  
-  .ellipse-2 {
-    /* стили для Ellipse 2 */
-  }
-  
-  .ellipse-3 {
-    /* стили для Ellipse 3 */
-  }
-  
-  .navigation {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    margin-bottom: 20px;
-  }
-  
-  .it-vesna {
-    font-size: 32px;
-    font-weight: bold;
-  }
-  
-  .tab-list {
-    width: 100%;
-    height: 40px;
-    background-color: #ffffff;
-    border-radius: 8px;
-    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-    margin-bottom: 20px;
-  }
-  
-  .segmented-control {
-    display: flex;
-    justify-content: space-between;
-    width: 100%;
-  }
-  
-  .item {
-    flex-grow: 1;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
-  
-  .text {
-    font-size: 18px;
-  }
-  
-  .request {
-    width: 80%;
-    background-color: #ffffff;
-    border-radius: 20px;
-    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-    padding: 20px;
-    margin-bottom: 20px;
-  }
-  
-  .rectangle-1 {
-    height: 200px;
-    background-color: #f2f2f2;
-    border-radius: 10px;
-  }
-  
-  .button {
-    display: inline-block;
-    padding: 10px 20px;
-    background-color: #4caf50;
-    color: #ffffff;
-    text-align: center;
-    text-decoration: none;
-    font-size: 16px;
-    border-radius: 5px;
-    cursor: pointer;
-  }
-  
-  .otmena {
-    background-color: #f44336;
-    margin-right: 10px;
-  }
-  
-  .save {
-    background-color: #2196f3;
-  }
-  
+    position: relative; /* Относительное позиционирование для корректного размещения дочерних элементов */
+}
+
+/* Прозрачная полоса с надписью "IT Весна" */
+.transparent-bar {
+    background-color: rgba(255, 255, 255, 0.5); /* Прозрачный белый цвет */
+    padding: 10px; /* Внутренний отступ */
+    position: absolute; /* Абсолютное позиционирование для расположения над другими элементами */
+    top: 0; /* Расположение сверху */
+    left: 0; /* Расположение слева */
+    right: 0; /* Расположение справа */
+    z-index: 1; /* Слой над другими элементами */
+}
+
+/* Стили для надписи "IT Весна" */
+.it-vesna {
+    font-size: 24px; /* Размер шрифта */
+    font-weight: bold; /* Жирное начертание */
+}
+
+/* Контейнеры для вкладок */
+.tab-container {
+    display: flex; /* Гибкое расположение элементов в строку */
+    justify-content: space-between; /* Выравнивание по горизонтали с равным расстоянием между элементами */
+    margin-top: 40px; /* Внешний отступ сверху */
+}
+
+/* Группы вкладок */
+.tab-group {
+    display: flex; /* Гибкое расположение элементов в строку */
+}
+
+/* Стили для отдельной вкладки */
+.tab {
+    margin-right: 20px; /* Внешний отступ справа */
+    cursor: pointer; /* Курсор указывает на возможность взаимодействия */
+}
+
+/* Контейнер с содержанием заявки */
+.request-container {
+    margin-top: 20px; /* Внешний отступ сверху */
+}
+
+/* Стили для содержания заявки */
+.request {
+    background-color: #fefefe; /* Цвет фона */
+    border-radius: 8px; /* Закругление углов */
+    padding: 20px; /* Внутренний отступ */
+    margin-bottom: 20px; /* Внешний отступ снизу */
+}
+
+/* Контейнер для кнопок */
+.button-container {
+    display: flex; /* Гибкое расположение элементов в строку */
+}
+
+/* Стили для кнопок */
+.button {
+    background-color: #6b62caff; /* Цвет фона кнопки */
+    color: white; /* Цвет текста */
+    padding: 10px 20px; /* Внутренний отступ */
+    border-radius: 8px; /* Закругление углов */
+    margin-right: 10px; /* Внешний отступ справа */
+    cursor: pointer; /* Курсор указывает на возможность взаимодействия */
+}
+
+/* Стили для изображений в кнопках */
+.otmena img,
+.save img {
+    width: 20px; /* Ширина изображения */
+    height: 20px; /* Высота изображения */
+    margin-right: 5px; /* Внешний отступ справа */
+}

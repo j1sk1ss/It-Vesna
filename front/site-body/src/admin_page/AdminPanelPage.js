@@ -6,7 +6,7 @@ import './AdminPanelPage.css'; // Импорт файлов стилей
 const AdminPanelPage = () => {
   return (
     <div className="admin-panel-page">
-      {/* Прозрачная полоса */}
+      {/* Прозрачная полоса с надписью IT Весна */}
       <div className="transparent-bar">
         <div className="it-vesna">IT Весна</div>
       </div>
