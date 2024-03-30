@@ -1,3 +1,6 @@
+/* Подключение шрифта Jura с Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Jura&display=swap');
+
 /* Общие стили для body и html */
 body, html {
   margin: 0;
@@ -10,29 +13,29 @@ body, html {
   background-image: url("background.png");
   background-size: cover;
   background-position: center;
-  font-family: Arial, sans-serif;
+  font-family: 'Jura', Arial, sans-serif; /* Изменен шрифт на Jura */
 }
 
 /* Стили для логотипа */
 .logo img {
   width: 150px;
-  margin-bottom: -30px;
+  margin-bottom: -50px; /* Смещение логотипа вверх */
 }
 
 /* Стили для заголовка */
 h1 {
   color: #000;
   font-size: 60px;
-  margin-bottom: 30px;
+  margin-bottom: 30px; /* Отступ снизу */
 }
 
 /* Стили для формы и ее элементов */
 .form-group {
-  margin-bottom: 20px;
+  margin-bottom: 20px; /* Отступ снизу */
 }
 
 .form-group input {
-  width: 350px;
+  width: calc(100% - 200px); /* Динамическая ширина поля ввода с учетом отступов */
   padding: 15px;
   border: 1px solid #000;
   border-radius: 5px;
@@ -40,7 +43,7 @@ h1 {
 
 /* Стили для кнопок */
 button {
-  width: calc(100% - 70px); /* Учитываем отступы */
+  width: calc(100% - 250px); /* Динамическая ширина кнопки с учетом отступов */
   padding: 15px;
   background-color: #000;
   color: #fff;
@@ -51,39 +54,39 @@ button {
 }
 
 button:hover {
-  background-color: #9abbd4;
+  background-color: #9abbd4; /* Изменение цвета при наведении */
 }
 
 /* Стили для ссылок "Забыли пароль?" и "Регистрация" */
 .register-forgot-password {
-  margin-top: 30px;
+  margin-top: 30px; /* Отступ сверху */
 }
 
 .register-forgot-password a {
   color: #000;
   text-decoration: none;
   margin: 5px;
-  padding: 10px 35px; /* Увеличиваем отступы для кнопок */
+  padding: 10px 20px; /* Увеличение отступов для кнопок */
   border: 1px solid #5bb3d8;
   border-radius: 5px;
   transition: background-color 0.3s ease;
 }
 
 .register-forgot-password a:hover {
-  background-color: #5bb3d8;
-  color: #fff;
+  background-color: #5bb3d8; /* Изменение цвета при наведении */
+  color: #fff; /* Изменение цвета текста при наведении */
 }
 
 /* Стили для изображения */
 .osu {
   position: relative;
-  margin-top: 75px; /* Уменьшаем отступ */
+  margin-top: 75px; /* Уменьшение отступа сверху */
 }
 
 .osu img {
   width: 250px;
   position: absolute;
-  bottom: -20px;
+  bottom: -20px; /* Смещение изображения вниз */
   left: 50%;
   transform: translateX(-50%);
   z-index: 1;
@@ -96,27 +99,38 @@ button:hover {
   background-color: rgba(207, 232, 237, 0.25);
   border-radius: 21px;
   padding: 20px;
-  max-width: 450px;
-  width: 100%;
+  width: 450px; /* Фиксированная ширина контейнера */
   position: relative;
+  margin: auto; /* Центрирование контейнера по горизонтали */
+  display: flex;
+  flex-direction: column; /* Элементы располагаются вертикально */
 }
 
 .container h1 {
-  margin-bottom: 20px;
+  margin-bottom: 20px; /* Отступ снизу */
 }
 
 .container button {
-  margin-top: 0px;
+  margin-top: auto; /* Кнопки располагаются внизу контейнера */
 }
 
 .container .register-forgot-password {
-  margin-top: 20px;
+  margin-top: 20px; /* Отступ сверху */
 }
 
 .container .register-forgot-password a {
-  margin: 0px; /* Увеличиваем отступы между кнопками */
+  margin: 5px; /* Увеличение отступов между кнопками */
 }
 
 .container .osu {
-  margin-top: 75px;
+  margin-top: 75px; /* Уменьшение отступа сверху */
+}
+
+/* Стили для контейнера кнопок регистрации и восстановления пароля на странице входа */
+.register-forgot-container {
+  background-color: #ccc; /* Серый цвет фона */
+  padding: 20px;
+  border-radius: 10px;
+  margin-top: 20px; /* Отступ сверху */
+  font-family: 'Jura', Arial, sans-serif; /* Изменен шрифт на Jura */
 }

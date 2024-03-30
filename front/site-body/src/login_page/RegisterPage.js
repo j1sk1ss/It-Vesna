@@ -1,7 +1,7 @@
 // RegisterPage.js
 import React from 'react';
 import { Link } from 'react-router-dom';
-import './RegisterPage.css'; // Импортируем файл стилей
+import './LoginPage.css'; // Импортируем файл стилей
 
 const RegisterPage = () => {
   return (
