@@ -29,8 +29,9 @@
     background-color: rgba(255, 255, 255, 0);
     padding: 20px;
     z-index: 1;
-    font-family: 'jury', sans-serif;
+    font-family: 'jura', sans-serif;
     font-size: 46px;
+    font-weight: bold; /* Делаем текст жирным */
 }
 
 /* Контейнеры для вкладок */
@@ -38,28 +39,70 @@
     display: flex;
     justify-content: space-between;
     margin-top: 10px;
-    width: 100%;
+    width: 1780px;
     max-width: 1920px;
     padding: 0 20px;
     box-sizing: border-box;
+    font-size: 20px;
+    font-weight: bold; /* Делаем текст жирным */
 }
 
-/* Стили для отдельной вкладки */
+.tab-container {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 10px;
+  }
+
+/* Стили для контейнера группы вкладок слева */
+.left-tab-container,
+.right-tab-container {
+    display: flex;
+    border: 1px solid #ffffff00; /* Граница вокруг группы вкладок слева */
+    border-radius: 8px; /* Закругление углов */
+    margin-right: 5px; /* Внешний отступ между группами вкладок */
+}
+
+.left-tab-container .tab,
+.right-tab-container .tab {
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+.tab.active {
+    background-color: #6b62caff;
+    color: white;
+  }
+
+/* Стили для вкладок */
 .tab {
-    cursor: pointer;
+    margin-right: 10px; /* Внешний отступ между вкладками */
+}
+
+/* Убираем отступ у последней вкладки, чтобы не было лишнего пространства */
+.tab:last-child {
+    margin-right: 30px;
+}
+
+.tab:first-child {
+    margin-left: 20px;
 }
 
 /* Стили для содержания заявки и кнопок */
 .request-container {
-    width: 100%; /* Занимать всю ширину */
+    width: 1740px ; /* Занимать всю ширину */
+    margin-left: 20px;
 }
 
 .request {
-    background-color: #fefefe;
+    background-color: #fefefe00;
     border-radius: 8px;
     padding: 20px;
     margin-bottom: 20px;
-    width: 100%; /* Занимать всю ширину */
+    margin-top: 20px;
+    margin-right: 200 px;
+    width: 100% ; /* Занимать всю ширину */
     display: flex;
     justify-content: space-between; /* Распределение пространства между элементами */
     align-items: center; /* Выравнивание по центру по вертикали */
@@ -73,37 +116,106 @@
 
 /* Стили для кнопок */
 .button {
-    background-color: #6b62caff;
+    background-color: rgb(147, 91, 219);
     color: white;
     padding: 10px 20px;
     border-radius: 8px;
     margin-right: 10px;
+    margin-left:10px;
     cursor: pointer;
 }
 
+/* Стили для контейнера кнопок */
 .button-container {
     display: flex;
-    align-items: center; /* Выравнивание по центру по вертикали */
+    margin-right:50px;
+    justify-content: flex-end; /* Размещаем кнопки в правой части */
+    align-items: center; /* Выравниваем кнопки по центру по вертикали */
 }
 
 
-.otmena img,
-.save img {
-    width: 20px;
-    height: 20px;
-    margin-right: 5px;
-}
-
-.request .button-container .button {
-    margin-left: 10px; /* Добавление расстояния между кнопками */
-}
 
 /* Стили для прямоугольника */
 .rectangle-1 {
     width: 100%;
     max-width: 500px;
-    height: 240px;
-    background-color: #ccc;
-    border-radius: 8px;
-    margin-bottom: 20px;
+    height: 140px;
+    background-color: #ffffff7a;
+    border-radius: 20px;
+    margin-bottom: 10px;
+    margin-left: 20px;
+    margin-top: 20px;
 }
+
+/* Стили для содержимого прямоугольника */
+.request {
+    background-color: #fefefe;
+    border-radius: 8px;
+    padding: 0px; /* Добавляем отступы внутри прямоугольника */
+    margin-bottom: 20px;
+    width: 100%; /* Занимать всю ширину */
+    display: flex;
+    justify-content: space-between; /* Распределение пространства между элементами */
+    align-items: center; /* Выравнивание по центру по вертикали */
+}
+
+/* Дополнительные стили для текста внутри прямоугольника */
+.request .text {
+    padding-right: 20px; /* Добавляем отступ справа для сдвига текста */
+    font-weight: bold; /* Делаем текст жирным */
+    font-size: 30px;
+}
+
+.request .text-name {
+    padding-right: 20px; /* Добавляем отступ справа для сдвига текста */
+    font-size: 40px;
+}
+
+
+/* Стили для изображений в кнопках */
+.otmena img,
+.ok img,
+.arh img {
+    width: 20px;
+    height: 20px;
+    margin-right: 5px;
+}
+
+
+
+/* Стили для полей ввода и кнопки на вкладке Модераторы */
+.input-container {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    margin-top: -135px;
+    margin-left: 1450px;
+  }
+
+.input-container input {
+    margin-bottom: 0px;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    font-size: 16px;
+  }
+  
+  .input-container button {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    background-color: #6b62caff;
+    color: white;
+    font-size: 16px;
+    cursor: pointer;
+    margin: auto;
+    height: 40px;
+    width: 100px;
+  }
+  
+  .input-container button:hover {
+    background-color: #564dbd;
+  }
+
+  
+
