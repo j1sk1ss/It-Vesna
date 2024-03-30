@@ -75,7 +75,7 @@ def alive_asnwer():
 
 # ============================
 # This function return all users from db
-# GET http://it-vesna-db-1:5432/users
+# GET http://it-vesna-db-1:5100/users
 # No JSON request required for GET request
 @app.route('/users', methods=['GET'])
 def get_users():
@@ -96,8 +96,26 @@ def get_users():
 
 
 # ============================
+# This function return all moderators from db
+# GET http://it-vesna-db-1:5100/moderators
+# No JSON request required for GET request
+@app.route('/moderators', methods=['GET'])
+def get_users():
+    moderators = Moderators.query.all()
+    result = []
+    for moderator in moderators:
+        user_data = {
+            'UID': moderator.User_UID
+        }
+        
+        result.append(user_data)
+        
+    return jsonify(result)
+
+
+# ============================
 # This function return user by ID from bd
-# GET http://it-vesna-db-1:5432/users/<int:user_id>
+# GET http://it-vesna-db-1:5100/users/<int:user_id>
 # No JSON request required for GET request
 @app.route('/users/<int:user_id>', methods=['GET'])
 def get_user(user_id):
@@ -117,8 +135,25 @@ def get_user(user_id):
 
 
 # ============================
+# This function return moderator by ID from bd
+# GET http://it-vesna-db-1:5100/moderators/<int:user_id>
+# No JSON request required for GET request
+@app.route('/moderators/<int:user_id>', methods=['GET'])
+def get_user(user_id):
+    moderator = Moderators.query.filter_by(UID=user_id).first()
+    if moderator:
+        user_data = {
+            'UID': moderator.User_UID
+        }
+        
+        return jsonify(user_data)
+    else:
+        return 'moderator not found'
+
+
+# ============================
 # This function return user by ID from bd
-# GET http://it-vesna-db-1:5432/user_by_mail
+# GET http://it-vesna-db-1:5100/user_by_mail
 # No JSON request required for GET request
 @app.route('/user_by_mail', methods=['GET'])
 def get_user_by_mail():
@@ -140,7 +175,7 @@ def get_user_by_mail():
 
 # ============================
 # This function return all notificated users from db
-# GET http://it-vesna-db-1:5432/notifications
+# GET http://it-vesna-db-1:5100/notifications
 # No JSON request required for GET request
 # RETURN: list of [ID - TYPE]
 @app.route('/notifications', methods=['GET'])
@@ -160,7 +195,7 @@ def get_notificated():
 
 # ============================
 # This function return all notificated users from db
-# GET http://it-vesna-db-1:5432/notifications/<int:user_id>
+# GET http://it-vesna-db-1:5100/notifications/<int:user_id>
 # No JSON request required for GET request
 # RETURN: notification
 @app.route('/notifications/<int:user_id>', methods=['GET'])
@@ -186,7 +221,7 @@ def get_notificated_user(user_id):
 
 # ============================
 # This function add user to db
-# POST http://it-vesna-db-1:5432/users
+# POST http://it-vesna-db-1:5100/users
 # JSON request: {
 #     "Surname": "Surname",
 #     "Name": "Name",
@@ -211,7 +246,7 @@ def add_user(): # TODO: Don`t add user if in bd existed same mail address
 
 # ============================
 # Update users data
-# PUT http://it-vesna-db-1:5432/users/<int:user_id>
+# PUT http://it-vesna-db-1:5100/users/<int:user_id>
 # JSON request: {
 #     "Surname": "NewSurname",
 #     "Name": "NewName",
@@ -232,7 +267,7 @@ def update_user(user_id):
 
 # ============================
 # Delete user
-# DELETE http://it-vesna-db-1:5432/users/<int:user_id>
+# DELETE http://it-vesna-db-1:5100/users/<int:user_id>
 # No JSON request required for DELETE request
 @app.route('/users/<int:user_id>', methods=['DELETE'])
 def delete_user(user_id):
@@ -252,7 +287,7 @@ def delete_user(user_id):
 
 # ============================
 # Change password (Work only if user has previous password)
-# PUT http://it-vesna-db-1:5432/passwords/<int:user_id>
+# PUT http://it-vesna-db-1:5100/passwords/<int:user_id>
 # JSON request: {
 #     "PasswordHash": "new_password_hash",
 #     "PasswordSalt": "new_password_salt"
@@ -272,7 +307,7 @@ def change_password(user_id):
 
 # ============================
 # Get password by user_id
-# PUT http://it-vesna-db-1:5432/passwords/<int:user_id>
+# PUT http://it-vesna-db-1:5100/passwords/<int:user_id>
 # JSON response: {
 #     "hash": "hash",
 #     "salt": "salt"
@@ -301,7 +336,7 @@ def get_password(user_id):
 
 # ============================
 # Add moderator
-# POST http://it-vesna-db-1:5432/moderators
+# POST http://it-vesna-db-1:5100/moderators
 # JSON request: {
 #     "User_UID": user_id
 # }
@@ -316,7 +351,7 @@ def add_moderator():
 
 # ============================
 # Delete moderator
-# DELETE http://it-vesna-db-1:5432/moderators/<int:user_id>
+# DELETE http://it-vesna-db-1:5100/moderators/<int:user_id>
 # No JSON request required for DELETE request
 @app.route('/moderators/<int:user_id>', methods=['DELETE'])
 def delete_moderator(user_id):
@@ -335,7 +370,7 @@ def delete_moderator(user_id):
 
 # ============================
 # Add nomination
-# POST http://it-vesna-db-1:5432/nominations
+# POST http://it-vesna-db-1:5100/nominations
 # JSON request: {
 #     "Name": "NominationName"
 # }
@@ -350,7 +385,7 @@ def add_nomination():
 
 # ============================
 # Delete nomination
-# DELETE http://it-vesna-db-1:5432/nominations/<int:nomination_id>
+# DELETE http://it-vesna-db-1:5100/nominations/<int:nomination_id>
 # No JSON request required for DELETE request
 @app.route('/nominations/<int:nomination_id>', methods=['DELETE'])
 def delete_nomination(nomination_id):
@@ -369,7 +404,7 @@ def delete_nomination(nomination_id):
 
 # ============================
 # Add nomination
-# POST http://it-vesna-db-1:5432/nominations
+# POST http://it-vesna-db-1:5100/nominations
 # JSON request: {
 #     "ID": "user_ID",
 #     "type": "notification_type"
@@ -385,7 +420,7 @@ def add_notification():
 
 # ============================
 # Delete nomination
-# DELETE http://it-vesna-db-1:5432/notifications/<int:user_id>
+# DELETE http://it-vesna-db-1:5100/notifications/<int:user_id>
 # No JSON request required for DELETE request
 @app.route('/notifications/<int:user_id>', methods=['DELETE'])
 def delete_notification(user_id):

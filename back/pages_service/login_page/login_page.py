@@ -5,7 +5,7 @@ import random
 import string
 
 
-API_URL = "http://it-vesna-api-server-1/api"
+API_URL = "http://it-vesna-api-service-1/api"
 
 
 def register(name, surname, father_name, mail, password):
@@ -28,14 +28,14 @@ def login(mail, password):
         "mail": mail
     }
 
-    user_response = requests.post(f"{API_URL}/user_by_mail", data=data)
+    user_response = requests.get(f"{API_URL}/user_by_mail", data=data)
     user_id = user_response['UID']
 
     data = {
         "ID": user_id
     }
 
-    pass_response = requests.post(f"{API_URL}/get_pass", data=data)
+    pass_response = requests.get(f"{API_URL}/get_pass", data=data)
     pass_hash, pass_salt = pass_response['hash'], pass_response['salt']
 
     data = {
@@ -43,7 +43,7 @@ def login(mail, password):
         "salt": pass_salt
     }
 
-    save_pass_response = requests.post(f"{API_URL}/str2hash", data=data)
+    save_pass_response = requests.get(f"{API_URL}/str2hash", data=data)
     save_pass_hash, _ = save_pass_response['hash'], save_pass_response['salt']
 
     return save_pass_hash == pass_hash
@@ -54,7 +54,7 @@ def restore_pass(mail):
         "mail": mail
     }
 
-    user_response = requests.post(f"{API_URL}/user_by_mail", data=data)
+    user_response = requests.get(f"{API_URL}/user_by_mail", data=data)
     user_id = user_response['UID']
 
     new_pass = get_random_string(15)

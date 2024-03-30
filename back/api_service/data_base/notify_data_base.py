@@ -1,7 +1,7 @@
 import requests
 
 
-DB_SERVER = 'http://it-vesna-db-server-1:5100'
+DB_SERVER = 'http://it-vesna-db-service-1:5100'
 
 
 def db_add_notify(user_id, type):

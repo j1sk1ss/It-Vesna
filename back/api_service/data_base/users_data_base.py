@@ -1,7 +1,7 @@
 import requests
 
 
-DB_SERVER = 'http://it-vesna-db-server-1:5100'
+DB_SERVER = 'http://it-vesna-db-service-1:5100'
 
 
 def db_add_user(surname, name, fname, mail, pass_hash, pass_salt):
@@ -29,8 +29,12 @@ def db_update_user(surname, name, fname, mail, user_id):
     
     return requests.put(f'{DB_SERVER}/users/{user_id}', json=send_data)
 
-def db_get_user(user_id):
+def db_get_user_by_id(user_id):
     return requests.get(f'{DB_SERVER}/users/{user_id}')
 
-def db_get_user_by_mail(request):
-    return requests.get(f'{DB_SERVER}/user_by_mail', data=request)
+def db_get_user_by_mail(mail):
+    data = {
+        "mail": mail
+    }
+    
+    return requests.get(f'{DB_SERVER}/user_by_mail', data=data)

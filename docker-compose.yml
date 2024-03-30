@@ -7,8 +7,8 @@ services:
     ports:
       - 80:3000
     depends_on:
-      - pages-server
-      - db-server
+      - pages-service
+      - db-service
     volumes:
       - type: bind
         source: ./front
@@ -16,36 +16,36 @@ services:
     command: npm start --prefix body/site-body
 
   # Back container (Python + libs)
-  pages-server:
+  pages-service:
     image: ghcr.io/j1sk1ss/vesna-back-env:0.2v
     ports:
       - 5400:5400
     command: python main.py
     depends_on:
-      - api-server
+      - api-service
     volumes:
       - type: bind
-        source: ./back/pages_server
+        source: ./back/pages_service
         target: /var/www/it-vesna/server
 
   # API container (Python + libs)
-  api-server:
+  api-service:
     image: ghcr.io/j1sk1ss/vesna-back-env:0.2v
     ports:
       - 5000:5000
-    command: python main.py
+    command: python api.py
     depends_on:
       - db
-      - mail-server
-      - crypto-server
-      - db-server
+      - mail-service
+      - crypto-service
+      - db-service
     volumes:
       - type: bind
-        source: ./back/api_server
+        source: ./back/api_service
         target: /var/www/it-vesna/server
 
   # Mail container
-  mail-server:
+  mail-service:
     image: ghcr.io/j1sk1ss/vesna-back-env:0.2v
     ports:
       - 5200:5200
@@ -54,11 +54,11 @@ services:
       - db
     volumes:
       - type: bind
-        source: ./back/mail_server
+        source: ./back/mail_service
         target: /var/www/it-vesna/server
 
   # Crypto container
-  crypto-server:
+  crypto-service:
     image: ghcr.io/j1sk1ss/vesna-back-env:0.2v
     ports:
       - 5300:5300
@@ -67,11 +67,11 @@ services:
       - db
     volumes:
       - type: bind
-        source: ./back/crypto_server
+        source: ./back/crypto_service
         target: /var/www/it-vesna/server
 
   # DB server container (Python + Libs)
-  db-server:
+  db-service:
     image: ghcr.io/j1sk1ss/vesna-back-env:0.2v
     ports:
       - 5100:5100
@@ -80,7 +80,7 @@ services:
       - db
     volumes:
       - type: bind
-        source: ./back/db_server
+        source: ./back/db_service
         target: /var/www/it-vesna/server
 
   # Data base
@@ -95,7 +95,7 @@ services:
       POSTGRES_USER: root
       POSTGRES_DB: it-vesna-db
     volumes:
-      - ./db-server/init.sql:/docker-entrypoint-initdb.d/init.sql
+      - ./db_service/init.sql:/docker-entrypoint-initdb.d/init.sql
 
   # Data base GUI in web
   adminer:
