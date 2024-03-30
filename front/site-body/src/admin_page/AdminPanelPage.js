@@ -50,11 +50,10 @@ const AdminPanelPage = () => {
           )}
           {selectedTab === 'Модераторы' && (
             <div className="input-container">
-            <input type="text" placeholder="Почта" value={moderatorEmail} onChange={(e) => setModeratorEmail(e.target.value)} />
-            <input type="text" placeholder="Имя" value={moderatorName} onChange={(e) => setModeratorName(e.target.value)} />
-            <button className="button-create" onClick={handleCreateModerator}>Создать</button>
-          </div>
-          
+              <input type="text" placeholder="Почта" value={moderatorEmail} onChange={(e) => setModeratorEmail(e.target.value)} />
+              <input type="text" placeholder="Имя" value={moderatorName} onChange={(e) => setModeratorName(e.target.value)} /> 
+              <button className="button-create" onClick={handleCreateModerator}>Создать</button>
+            </div>
           )}
           {selectedTab === 'Номинации' && <div>Содержимое вкладки "Номинации"</div>}
         </div>
