@@ -1,77 +1,109 @@
 /* AdminPanelPage.css */
 
+/* Подключение шрифта Jura с Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Jura&display=swap');
+
 /* Общие стили для страницы административной панели */
 .admin-panel-page {
-    position: relative; /* Относительное позиционирование для корректного размещения дочерних элементов */
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    width: 100%;
+    max-width: 100vw;
+}
+
+.admin-panel-page-container {
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-start;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    padding: 20px;
 }
 
 /* Прозрачная полоса с надписью "IT Весна" */
 .transparent-bar {
-    background-color: rgba(255, 255, 255, 0.5); /* Прозрачный белый цвет */
-    padding: 10px; /* Внутренний отступ */
-    position: absolute; /* Абсолютное позиционирование для расположения над другими элементами */
-    top: 0; /* Расположение сверху */
-    left: 0; /* Расположение слева */
-    right: 0; /* Расположение справа */
-    z-index: 1; /* Слой над другими элементами */
-}
-
-/* Стили для надписи "IT Весна" */
-.it-vesna {
-    font-size: 24px; /* Размер шрифта */
-    font-weight: bold; /* Жирное начертание */
+    background-color: rgba(255, 255, 255, 0);
+    padding: 20px;
+    z-index: 1;
+    font-family: 'jury', sans-serif;
+    font-size: 46px;
 }
 
 /* Контейнеры для вкладок */
 .tab-container {
-    display: flex; /* Гибкое расположение элементов в строку */
-    justify-content: space-between; /* Выравнивание по горизонтали с равным расстоянием между элементами */
-    margin-top: 40px; /* Внешний отступ сверху */
-}
-
-/* Группы вкладок */
-.tab-group {
-    display: flex; /* Гибкое расположение элементов в строку */
+    display: flex;
+    justify-content: space-between;
+    margin-top: 10px;
+    width: 100%;
+    max-width: 1920px;
+    padding: 0 20px;
+    box-sizing: border-box;
 }
 
 /* Стили для отдельной вкладки */
 .tab {
-    margin-right: 20px; /* Внешний отступ справа */
-    cursor: pointer; /* Курсор указывает на возможность взаимодействия */
+    cursor: pointer;
 }
 
-/* Контейнер с содержанием заявки */
+/* Стили для содержания заявки и кнопок */
 .request-container {
-    margin-top: 20px; /* Внешний отступ сверху */
+    width: 100%; /* Занимать всю ширину */
 }
 
-/* Стили для содержания заявки */
 .request {
-    background-color: #fefefe; /* Цвет фона */
-    border-radius: 8px; /* Закругление углов */
-    padding: 20px; /* Внутренний отступ */
-    margin-bottom: 20px; /* Внешний отступ снизу */
+    background-color: #fefefe;
+    border-radius: 8px;
+    padding: 20px;
+    margin-bottom: 20px;
+    width: 100%; /* Занимать всю ширину */
+    display: flex;
+    justify-content: space-between; /* Распределение пространства между элементами */
+    align-items: center; /* Выравнивание по центру по вертикали */
 }
 
-/* Контейнер для кнопок */
-.button-container {
-    display: flex; /* Гибкое расположение элементов в строку */
+.request .button-container {
+    display: flex;
+    justify-content: flex-end; /* Расположение кнопок в крайней правой части */
+    align-items: center; /* Выравнивание кнопок по центру по вертикали */
 }
 
 /* Стили для кнопок */
 .button {
-    background-color: #6b62caff; /* Цвет фона кнопки */
-    color: white; /* Цвет текста */
-    padding: 10px 20px; /* Внутренний отступ */
-    border-radius: 8px; /* Закругление углов */
-    margin-right: 10px; /* Внешний отступ справа */
-    cursor: pointer; /* Курсор указывает на возможность взаимодействия */
+    background-color: #6b62caff;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 8px;
+    margin-right: 10px;
+    cursor: pointer;
 }
 
-/* Стили для изображений в кнопках */
+.button-container {
+    display: flex;
+    align-items: center; /* Выравнивание по центру по вертикали */
+}
+
+
 .otmena img,
 .save img {
-    width: 20px; /* Ширина изображения */
-    height: 20px; /* Высота изображения */
-    margin-right: 5px; /* Внешний отступ справа */
+    width: 20px;
+    height: 20px;
+    margin-right: 5px;
+}
+
+.request .button-container .button {
+    margin-left: 10px; /* Добавление расстояния между кнопками */
+}
+
+/* Стили для прямоугольника */
+.rectangle-1 {
+    width: 100%;
+    max-width: 500px;
+    height: 240px;
+    background-color: #ccc;
+    border-radius: 8px;
+    margin-bottom: 20px;
 }
