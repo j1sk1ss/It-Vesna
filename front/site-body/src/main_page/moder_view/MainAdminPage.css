@@ -1,0 +1,80 @@
+/* styles.css */
+.container {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.title {
+  font-size: 2rem;
+  font-weight: bold;
+}
+
+.navigation {
+  list-style-type: none;
+  padding: 0;
+}
+
+.navigation li {
+  display: inline;
+  margin-right: 10px;
+}
+
+.content {
+  margin-top: 20px;
+}
+
+.submit-button {
+  background-color: #000;
+  color: #fff;
+  border: none;
+  padding: 10px 30px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+/* MainAdminPage.css */
+.admin-panel-page-container {
+  position: relative;
+}
+
+.post-input-container {
+  position: fixed;
+  top: 200px; /* Отступ сверху для поля ввода */
+  width: 100%;
+  padding: 10px;
+  background-color: #ffffff00;
+  z-index: 1;
+}
+
+.post-input textarea {
+  width: calc(100% - 20px); /* Вычисляем ширину поля ввода с учетом отступов */
+  min-height: 100px; /* Фиксированная высота поля ввода */
+  max-height: 200px; /* Максимальная высота поля ввода */
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 16px;
+  resize: vertical; /* Разрешаем вертикальное изменение размера */
+  overflow-y: auto; /* Добавляем вертикальную прокрутку при необходимости */
+  position: sticky; /* Поле ввода будет оставаться на месте */
+  bottom: 60px; /* Расстояние от нижнего края до поля ввода */
+}
+
+
+.button-container {
+  margin-right: 100px;
+  width: 100px;
+}
+
+.post {
+  margin-top: 50px;
+}
+
+.publish-container {
+  margin-right: 120px;
+}
+
+.publish-button {
+width: 120px;
+}

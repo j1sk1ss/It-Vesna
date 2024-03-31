@@ -1,0 +1,84 @@
+/* MainAdminPage.css */
+
+/* Подключение шрифта Jura с Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Jura&display=swap');
+
+/* Общие стили для страницы административной панели */
+.admin-panel-page {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    width: 100%;
+    max-width: 100vw;
+}
+
+.admin-panel-page-container {
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-start;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    padding: 20px;
+}
+
+/* Прозрачная полоса с надписью "IT Весна" */
+.transparent-bar {
+    background-color: rgba(255, 255, 255, 0);
+    padding: 20px;
+    z-index: 1;
+    font-family: 'jura', sans-serif;
+    font-size: 46px;
+    font-weight: bold; /* Делаем текст жирным */
+}
+
+/* Контейнеры для вкладок */
+.tab-container {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 10px;
+    width: 1780px;
+    max-width: 1920px;
+    padding: 0 20px;
+    box-sizing: border-box;
+    font-size: 20px;
+    font-weight: bold; /* Делаем текст жирным */
+}
+
+/* Стили для контейнера группы вкладок слева */
+.left-tab-container,
+.right-tab-container {
+    display: flex;
+    border: 1px solid #ffffff00; /* Граница вокруг группы вкладок слева */
+    border-radius: 8px; /* Закругление углов */
+    margin-right: 5px; /* Внешний отступ между группами вкладок */
+}
+
+.left-tab-container .tab,
+.right-tab-container .tab {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+.tab.active {
+    background-color: #6b62caff;
+    color: white;
+}
+
+/* Стили для вкладок */
+.tab {
+    margin-right: 10px; /* Внешний отступ между вкладками */
+}
+
+/* Убираем отступ у последней вкладки, чтобы не было лишнего пространства */
+.tab:last-child {
+    margin-right: 30px;
+}
+
+.tab:first-child {
+    margin-left: 20px;
+}
