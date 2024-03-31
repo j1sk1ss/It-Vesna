@@ -6,14 +6,26 @@ const AdminPanelPage = () => {
   const [moderatorEmail, setModeratorEmail] = useState('');
   const [moderatorName, setModeratorName] = useState('');
   const [subTab, setSubTab] = useState('На рассмотрении');
+  const [moderators, setModerators] = useState([]);
+  const [isModeratorsTabSelected, setIsModeratorsTabSelected] = useState(false);
 
   const handleTabClick = (tabName) => {
     setSelectedTab(tabName);
-    setSubTab('На рассмотрении'); // Сброс подвкладки при переключении вкладки
+    setSubTab('На рассмотрении');
+    setIsModeratorsTabSelected(tabName === 'Модераторы');
   };
 
   const handleCreateModerator = () => {
-    console.log('Создание модератора:', moderatorEmail, moderatorName);
+    const newModerator = { email: moderatorEmail, name: moderatorName };
+    setModerators([...moderators, newModerator]);
+    setModeratorEmail('');
+    setModeratorName('');
+  };
+
+  const handleDeleteModerator = (index) => {
+    const updatedModerators = [...moderators];
+    updatedModerators.splice(index, 1);
+    setModerators(updatedModerators);
   };
 
   return (
@@ -49,10 +61,25 @@ const AdminPanelPage = () => {
             </div>
           )}
           {selectedTab === 'Модераторы' && (
-            <div className="input-container">
-              <input type="text" placeholder="Почта" value={moderatorEmail} onChange={(e) => setModeratorEmail(e.target.value)} />
-              <input type="text" placeholder="Имя" value={moderatorName} onChange={(e) => setModeratorName(e.target.value)} /> 
-              <button className="button-create" onClick={handleCreateModerator}>Создать</button>
+            <div>
+              {isModeratorsTabSelected && (
+                <div className="input-container">
+                  <input type="text" placeholder="Почта" value={moderatorEmail} onChange={(e) => setModeratorEmail(e.target.value)} />
+                  <input type="text" placeholder="Имя" value={moderatorName} onChange={(e) => setModeratorName(e.target.value)} /> 
+                  <button className="button-create" onClick={handleCreateModerator}>Создать</button>
+                </div>
+              )}
+              <div>
+                {moderators.map((moderator, index) => (
+                  <div key={index}>
+                    <div className="moderator-container">
+                      <div>{moderator.name}</div>
+                      <div>{moderator.email}</div>
+                      <button className="button-delete" onClick={() => handleDeleteModerator(index)}>Удалить</button>
+                    </div>
+                  </div>
+                ))}
+              </div>
             </div>
           )}
           {selectedTab === 'Номинации' && <div>Содержимое вкладки "Номинации"</div>}
