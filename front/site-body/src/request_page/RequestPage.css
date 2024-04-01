@@ -9,7 +9,7 @@ body {
     background-repeat: no-repeat;
 }
 
-.app {
+.RequestPage {
     width: 100%;
     height: 100%;
     display: flex;
@@ -43,24 +43,24 @@ aside {
     width: 40%;
     display: flex;
     flex-direction: column;
-    justify-content: space-between; 
+    justify-content: space-between; /* ��������� ������������ ����� ���������� */
     align-items: flex-end;
-    padding-right: 20px; 
+    padding-right: 20px; /* ��������� ������ ������ */
 }
 .red-box {
     width: 20px;
     height: 20px;
     background-color: red;
-    margin-right: 10px; 
-    display: inline-block; 
+    margin-right: 10px; /* ������ ����� ��������� � ������� */
+    display: inline-block; /* ���������� � ������ */
 }
 
 .green-box {
     width: 20px;
     height: 20px;
     background-color: green;
-    margin-right: 10px; 
-    display: inline-block; 
+    margin-right: 10px; /* ������ ����� ��������� � ������� */
+    display: inline-block; /* ���������� � ������ */
 }
 .file-label {
     cursor: pointer;
@@ -68,14 +68,14 @@ aside {
     padding: 5px 10px;
     border-radius: 5px;
     background-color: #f0f0f0;
-    width: calc(100% - 20px);
-    margin-bottom: 10px; 
+    width: calc(100% - 20px); /* ������ ����� ����������� �� 20px ��� ����� �������� */
+    margin-bottom: 10px; /* ��������� ������ ����� ������� */
     display: flex;
     align-items: center;
 }
     .file-label .green-box,
     .file-label .red-box {
-        margin-left: 10px; 
+        margin-left: 10px; /* ���������� ����� ������� � ����������� */
     }
 .file-input {
     position: absolute;
@@ -83,28 +83,28 @@ aside {
     opacity: 0;
 }
 .file-input-container {
-       margin-top: 10px; 
+       margin-top: 10px; /* ������ ����� ����� �������� */
     display: flex;
     align-items: center;
-    justify-content: space-between; 
+    justify-content: space-between; /* ����������� ������������� ��������� */
 }
 
 textarea {
-    width: 80%; 
-    height: 300px; 
-    margin-bottom: 20px;
+    width: 80%; /* ����������� ������ ���� ����� �������� */
+    height: 300px; /* ����������� ������ ���� ����� �������� */
+    margin-bottom: 20px; /* ��������� ������ ����� ��� ���� ����� �������� */
 }
 
 button[type="submit"] {
-    width: 120px; 
-    height: 40px; 
-    font-size: 16px; 
+    width: 120px; /* ��������� ������ ������ */
+    height: 40px; /* ��������� ������ ������ */
+    font-size: 16px; /* ��������� ������ ������ ������ */
 }
 .link {
-    color: inherit;
-    text-decoration: none; 
-    margin-top: 5px; 
-    display: block; 
+    color: inherit; /* ���������� ���� ������ */
+    text-decoration: none; /* ������� ������������� */
+    margin-top: 5px; /* ������ �� ���� � ������ */
+    display: block; /* ���������� ������ �� ����� ������ */
 }
 
 input[type="file"],
@@ -112,38 +112,15 @@ input[type="text"],
 select {
     margin-bottom: 10px;
 }
-.container {
-    width: 100%;
-    max-width: 1200px;
-    margin: 0 auto;
+.links-container {
+    display: flex;
+    flex-direction: column;
 }
 
-.title {
-    font-size: 2rem;
-    font-weight: bold;
+.link-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px; /* ������ ����� �������� */
 }
-
-.navigation {
-    list-style-type: none;
-    padding: 0;
-}
-
-    .navigation li {
-        display: inline;
-        margin-right: 10px;
-    }
-
-.content {
-    margin-top: 20px;
-}
-
-.submit-button {
-    background-color: #000;
-    color: #fff;
-    border: none;
-    padding: 10px 30px;
-    border-radius: 5px;
-    cursor: pointer;
-}
-
 

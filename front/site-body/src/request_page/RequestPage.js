@@ -1,15 +1,15 @@
 import React, { useState } from 'react';
-import './RequestPage.css'; 
+import './RequestPage.css'; // ���������� ���� ������
 
 const RequestPage = () => {
-  
+
     const [fileNames, setFileNames] = useState({
-        soglasie1: '',
-        soglasie2: ''
+        first_agreement: '',
+        second_agreement: ''
     });
 
-    const [link, setLink] = useState('');
-    const [links, setLinks] = useState([]);
+    const [link, setLink] = useState(''); // ��������� ��� �������� ��������� ������
+    const [links, setLinks] = useState([]); // ��������� ��� �������� ���� ������
 
     const handleFileChange = (event) => {
         const fieldName = event.target.name;
@@ -21,22 +21,26 @@ const RequestPage = () => {
     };
 
     const handleLinkChange = (event) => {
-        setLink(event.target.value);
+        setLink(event.target.value); // ��������� ��������� ��� ��������� ���� �����
     };
 
     const handleLinkSubmit = () => {
         if (link.trim() !== '') {
-            setLinks((prevLinks) => [...prevLinks, link]);
-            setLink('');
+            setLinks((prevLinks) => [...prevLinks, link]); // ��������� ����� ������ � ������ ���� ������
+            setLink(''); // ������� ���� �����
         }
     };
 
+    const handleLinkDelete = (index) => {
+        setLinks((prevLinks) => prevLinks.filter((_, i) => i !== index));
+    };
+
     return (
-        <div className="app">
+        <div className="RequestPage">
             <header>
-                <h1>Создание заявки</h1>
+                <h1>Заявка</h1>
             </header>
-            <div className="container1">
+            <div className="main_container">
                 <form1>
                     <aside>
                         <div>
@@ -51,28 +55,26 @@ const RequestPage = () => {
                         <div>
                             <label htmlFor="nomination">Номинация:</label>
                             <select id="nomination">
-                                <option value="nominatsiya1">Номинация из БД (1)</option>
-                                <option value="nominatsiya2">Номинация из БД (2)</option>
-                                <option value="nominatsiya3">Номинация из БД (3)</option>
+                                <option value="first_nomination">Номинация из БД (1)</option>
                             </select>
                         </div>
                         <div>
-                            <input type="text" placeholder="Введите уч. учреждение" />
+                            <input type="text" placeholder="Учебное учреждение" />
                         </div>
                         <div className="file-input-container">
-                            <input type="file" id="soglasie1" name="soglasie1" onChange={handleFileChange} className="file-input" />
-                            <label htmlFor="soglasie1" className="file-label">
-                                {fileNames.soglasie1 ? fileNames.soglasie1 : 'Загрузить'}
+                            <input type="file" id="first_agreement" name="first_agreement" onChange={handleFileChange} className="file-input" />
+                            <label htmlFor="first_agreement" className="file-label">
+                                {fileNames.first_agreement ? fileNames.first_agreement : 'Загрузить'}
                             </label>
-                            {fileNames.soglasie1 ? <div className="green-box"></div> : <div className="red-box"></div>}
+                            {fileNames.first_agreement ? <div className="green-box"></div> : <div className="red-box"></div>}
                         </div>
                         <a href="/path/to/soglasie" className="link">Пример согласия</a>
                         <div className="file-input-container">
-                            <input type="file" id="soglasie2" name="soglasie2" onChange={handleFileChange} className="file-input" />
-                            <label htmlFor="soglasie2" className="file-label">
-                                {fileNames.soglasie2 ? fileNames.soglasie2 : 'Загрузить'}
+                            <input type="file" id="second_agreement" name="second_agreement" onChange={handleFileChange} className="file-input" />
+                            <label htmlFor="second_agreement" className="file-label">
+                                {fileNames.second_agreement ? fileNames.second_agreement : 'Загрузить'}
                             </label>
-                            {fileNames.soglasie2 ? <div className="green-box"></div> : <div className="red-box"></div>}
+                            {fileNames.second_agreement ? <div className="green-box"></div> : <div className="red-box"></div>}
                         </div>
                         <a href="/path/to/soglasie" className="link">Пример согласия</a>
                     </aside>
@@ -80,23 +82,26 @@ const RequestPage = () => {
                 <form2>
                     <div className="right-content">
                         <div>
-                            <textarea placeholder="Введите описание проекта"></textarea>
+                            <textarea placeholder="Vvedite opisanie"></textarea>
                         </div>
                         <div>
-                            <input type="text" placeholder="Ссылка на ресурс" value={link} onChange={handleLinkChange} />
-                            <button type="button" onClick={handleLinkSubmit}>Добавить ссылки</button>
+                            <input type="text" placeholder="Ссылка" value={link} onChange={handleLinkChange} />
+                            <button type="button" onClick={handleLinkSubmit}>Новая ссылка</button>
                         </div>
-                        <div>
+                        <div className="links-container">
                             {links.map((link, index) => (
-                                <p key={index}>Ссылка {index + 1}: {link}</p>
+                                <div key={index} className="link-item">
+                                    <p>link {index + 1}: {link}</p>
+                                    <button onClick={() => handleLinkDelete(index)}>Удалить</button>
+                                </div>
                             ))}
                         </div>
                     </div>
-                    </form2>
-                
+                </form2>
+
             </div>
             <footer>
-                <button type="submit">Отправить заявку</button>
+                <button type="submit">Отправить</button>
             </footer>
         </div>
     );
