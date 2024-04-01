@@ -8,6 +8,7 @@ import RegisterPage from './login_page/RegisterPage';
 import AdminPanelPage from './admin_page/AdminPanelPage';
 import MainAdminPage from './main_page/moder_view/MainAdminPage';
 import MainUserPage from './main_page/user_view/MainUserPage';
+import RequestPage from './request_page/RequestPage';
 
 
 const App = () => {
@@ -20,6 +21,7 @@ const App = () => {
         <Route path="/admin-panel" element={<AdminPanelPage />} />
         <Route path="/main-admin-page" element={<MainAdminPage />} />
         <Route path="/main-user-page" element={<MainUserPage />} />
+        <Route path="/request-page" element={ <RequestPage/> } />
       </Routes>
     </div>
   );
