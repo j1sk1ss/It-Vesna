@@ -11,6 +11,7 @@ const RequestPage = () => {
         </div>
         <div className="right-container">
           <ZayavkaRight />
+          <button className="submit-button">Подать заявку</button> {/* Кнопка "Подать заявку" */}
         </div>
       </div>
     </div>
@@ -63,7 +64,6 @@ const ZayavkaLeft = () => {
       </div>
     );
   };
-  
 
   const ZayavkaRight = () => {
     return (
@@ -73,14 +73,8 @@ const ZayavkaLeft = () => {
         <div>
           <input type="text" placeholder="Ссылка" />
         </div>
-        <div className="submit-button">
-          <button>Подать</button>
-        </div>
       </div>
     );
   };
-  
-  
-  
 
-export default RequestPage;
+  export default RequestPage;
