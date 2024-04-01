@@ -1,126 +1,42 @@
-html,
-body {
-    width: 100%;
-    height: 100%;
+body, html {
     margin: 0;
     padding: 0;
-    
-    background-size: cover;
-    background-repeat: no-repeat;
-}
-
-.RequestPage {
-    width: 100%;
     height: 100%;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
-
-.container1 {
-    flex: 1;
     width: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-form1 {
-    justify-content: flex-end;
-    display: flex;
-
+  }
+  
+  .it-vesna {
+    background-color: rgba(255, 255, 255, 0);
+    font-family: 'jura', sans-serif;
+    font-size: 24px;
+    font-weight: bold;
+    padding: 20px;
+    position: fixed;
     width: 100%;
-    height: 100%;
-}
-form2 {
-    display: flex;
+    top: 0;
+    left: 0;
+    z-index: 1000;
+  }
+  
+  .zayavka-container {
+    margin-left: 20px;
+    margin-right: 20px;
+    margin-top: 70px;
+    height: 880px;
+    width: 1810px;
+    margin: 0;
+    padding: 0;
+    display: flex; /* Используем flex-контейнер */
+  }
+  
+  
+  .left-container {
+    background-color: rgba(255, 0, 0, 0.507);
 
-    width: 100%;
-    height: 100%;
-}
+  }
 
-aside {
-    width: 40%;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between; /* ��������� ������������ ����� ���������� */
-    align-items: flex-end;
-    padding-right: 20px; /* ��������� ������ ������ */
-}
-.red-box {
-    width: 20px;
-    height: 20px;
-    background-color: red;
-    margin-right: 10px; /* ������ ����� ��������� � ������� */
-    display: inline-block; /* ���������� � ������ */
-}
+  .right-container {
+    flex-grow: 1; /* Занимает все доступное пространство */
+    background-color: rgba(0, 255, 221, 0.507);
 
-.green-box {
-    width: 20px;
-    height: 20px;
-    background-color: green;
-    margin-right: 10px; /* ������ ����� ��������� � ������� */
-    display: inline-block; /* ���������� � ������ */
-}
-.file-label {
-    cursor: pointer;
-    border: 1px solid #ccc;
-    padding: 5px 10px;
-    border-radius: 5px;
-    background-color: #f0f0f0;
-    width: calc(100% - 20px); /* ������ ����� ����������� �� 20px ��� ����� �������� */
-    margin-bottom: 10px; /* ��������� ������ ����� ������� */
-    display: flex;
-    align-items: center;
-}
-    .file-label .green-box,
-    .file-label .red-box {
-        margin-left: 10px; /* ���������� ����� ������� � ����������� */
-    }
-.file-input {
-    position: absolute;
-    left: -9999px;
-    opacity: 0;
-}
-.file-input-container {
-       margin-top: 10px; /* ������ ����� ����� �������� */
-    display: flex;
-    align-items: center;
-    justify-content: space-between; /* ����������� ������������� ��������� */
-}
-
-textarea {
-    width: 80%; /* ����������� ������ ���� ����� �������� */
-    height: 300px; /* ����������� ������ ���� ����� �������� */
-    margin-bottom: 20px; /* ��������� ������ ����� ��� ���� ����� �������� */
-}
-
-button[type="submit"] {
-    width: 120px; /* ��������� ������ ������ */
-    height: 40px; /* ��������� ������ ������ */
-    font-size: 16px; /* ��������� ������ ������ ������ */
-}
-.link {
-    color: inherit; /* ���������� ���� ������ */
-    text-decoration: none; /* ������� ������������� */
-    margin-top: 5px; /* ������ �� ���� � ������ */
-    display: block; /* ���������� ������ �� ����� ������ */
-}
-
-input[type="file"],
-input[type="text"],
-select {
-    margin-bottom: 10px;
-}
-.links-container {
-    display: flex;
-    flex-direction: column;
-}
-
-.link-item {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 10px; /* ������ ����� �������� */
-}
-
+  }
