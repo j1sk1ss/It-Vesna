@@ -9,6 +9,7 @@ import AdminPanelPage from './admin_page/AdminPanelPage';
 import MainAdminPage from './main_page/moder_view/MainAdminPage';
 import MainUserPage from './main_page/user_view/MainUserPage';
 import RequestPage from './request_page/RequestPage';
+import RequestWindowPage from './request_window_page/RequestWindowPage';
 
 
 const App = () => {
@@ -22,6 +23,7 @@ const App = () => {
         <Route path="/main-admin-page" element={<MainAdminPage />} />
         <Route path="/main-user-page" element={<MainUserPage />} />
         <Route path="/request-page" element={ <RequestPage/> } />
+        <Route path="/request-window-page" element={ <RequestWindowPage/> } />
       </Routes>
     </div>
   );

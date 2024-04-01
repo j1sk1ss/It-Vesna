@@ -1,0 +1,135 @@
+
+body {
+    background-image: url('/public/background.png');
+    font-family: Arial, sans-serif;
+    background-size: cover;
+    background-position: center;
+    margin: 20px;
+    padding: 20px;
+    height: 100vh; 
+}
+
+.request {
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 10px;
+    margin-bottom: 10px;
+}
+
+.request-info h2 {
+    margin-top: 0;
+}
+
+.request-buttons button {
+    margin-right: 5px;
+}
+.form {
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 10px;
+    margin-bottom: 10px;
+}
+
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.modal {
+    background-image: url('/public/background.png');
+    background-size: cover;
+    background-position: center;
+    margin: 20px;
+    padding: 20px;
+    height: 100vh;
+    border-radius: 5px;
+    width: 1920px;
+    height: 1280px;
+    max-width: 90%; 
+    max-height: 80%;
+    overflow-y: auto;
+}
+
+    .modal button {
+        margin-top: 10px;
+    }
+@keyframes slideIn {
+    from {
+        transform: translateY(100%);
+    }
+
+    to {
+        transform: translateY(0);
+    }
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+.modal-slideIn {
+    animation: slideIn 0.5s ease-in-out forwards;
+}
+
+.modal-fadeIn {
+    animation: fadeIn 0.5s ease-in-out forwards;
+}
+.action-buttons-trigger {
+    justify-content: right;
+}
+.action-buttons {
+    position: relative;
+    right: 75px;
+}
+
+.action-buttons-dropdown {
+    position: absolute;
+    right: 0;
+    top: 0;
+    background-color: #f9f9f9;
+    border: 1px solid #ccc;
+    padding: 10px;
+    transition: transform 0.3s ease-in-out;
+    transform: translateX(100%);
+    z-index: 1;
+}
+
+.action-buttons-hovered .action-buttons-dropdown {
+    transform: translateX(0);
+}
+
+
+@keyframes slideIn1 {
+    from {
+        transform: translateX(100%);
+    }
+
+    to {
+        transform: translateX(0);
+    }
+}
+
+.action-buttons-dropdown {
+    animation: slideIn1 0.6s forwards; /* Применяем анимацию */
+}
+
+.action-buttons-trigger1 {
+    cursor: pointer;
+}
+
+.button {
+    margin-top: 5px;
+}
