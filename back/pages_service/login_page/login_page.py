@@ -52,8 +52,28 @@ def login(mail, password):
 
     save_pass_response = requests.post(f"{API_URL}/str2hash", data=data)
     save_pass_hash, _ = save_pass_response['hash'], save_pass_response['salt']
-
-    return save_pass_hash == pass_hash
+    
+    # ========================
+    # Check moderator status
+    
+    if save_pass_hash == pass_hash:
+        moder_response = requests.get(f"{API_URL}/moderator/{user_id}")
+        if moder_response == "moderator not found":
+            return {
+                "status": "logged",
+                "role": "user"
+            }
+        else:
+            return {
+                "status": "logged",
+                "role": "moderator"
+            }
+    
+    return {
+            "status": "error",
+            "role": "none"
+        }
+        
 
 
 def restore_pass(mail):

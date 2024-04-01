@@ -16,7 +16,7 @@ CORS(app)
 
 # ============================
 # Register new user
-# POST  http://it-vesna-pages-service-1/register_user
+# POST  http://it-vesna-pages-service-1/back/register_user
 # JSON request: {
 #     "surname": "surname",
 #     "name": "name",
@@ -25,7 +25,7 @@ CORS(app)
 #     "password": "password"
 # }
 # RETURN: ID of registered user
-@app.route('/register_user', methods=['POST'])
+@app.route('/back/register_user', methods=['POST'])
 def rester_new_user():
     data = request.json
     return register(data['name'], data['surname'], data['father_name'], data['mail'], data['password'])
@@ -33,13 +33,17 @@ def rester_new_user():
 
 # ============================
 # Login user
-# POST  http://it-vesna-pages-service-1/login_user
+# POST  http://it-vesna-pages-service-1/back/login_user
 # JSON request: {
 #     "mail": "mail@example.com",
 #     "password": "password"
 # }
-# RETURN: True or False
-@app.route('/login_user', methods=['POST'])
+# RETURN: 
+# JSON {
+#   "status": "logged" / "error",
+#   "role": "user" / "moderator" / "none"
+# }
+@app.route('/back/login_user', methods=['POST'])
 def login_user():
     data = request.json
     return login(data['mail'], data['password'])    
@@ -47,12 +51,12 @@ def login_user():
 
 # ============================
 # Restore user password (Delete old password, generate random new, change old to generated, send generaed to user's mail)
-# POST  http://it-vesna-pages-service-1/restore_pass
+# POST  http://it-vesna-pages-service-1/back/restore_pass
 # JSON request: {
 #     "mail": "mail@example.com"
 # }
 # RETURN: success
-@app.route('/restore_pass', methods=['POST'])
+@app.route('/back/restore_pass', methods=['POST'])
 def restore_user_pass():
     data = request.json
     return restore_pass(data['mail'])
@@ -60,12 +64,12 @@ def restore_user_pass():
 
 # ============================
 # Send verification code to user's mail
-# POST  http://it-vesna-pages-service-1/mail_verify
+# POST  http://it-vesna-pages-service-1/back/mail_verify
 # JSON request: {
 #     "mail": "mail@example.com"
 # }
 # RETURN: success
-@app.route('/mail_verify', methods=['POST'])
+@app.route('/back/mail_verify', methods=['POST'])
 def start_mail_verify():
     data = request.json
     return send_verify_code(data['mail'])
@@ -73,13 +77,13 @@ def start_mail_verify():
 
 # ============================
 # Check verification code from user's mail
-# POST  http://it-vesna-pages-service-1/code_mail_check
+# POST  http://it-vesna-pages-service-1/back/code_mail_check
 # JSON request: {
 #     "mail": "mail@example.com",
 #     "code": "code"
 # }
 # RETURN: True or False
-@app.route('/code_mail_check', methods=['POST'])
+@app.route('/back/code_mail_check', methods=['POST'])
 def end_mail_verify():
     data = request.json
     return verify_mail(data['mail'], data['code'])

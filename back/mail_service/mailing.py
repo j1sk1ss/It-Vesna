@@ -1,3 +1,6 @@
+# Mail service needs for working with SMPT library
+# On this site it needs for sending codes, notificatons and info to user
+
 # ==================
 # Importing packages
 
@@ -22,6 +25,9 @@ app = Flask(__name__)
 CORS(app)
 
 
+IMAGES = [] # TODO: Load images from disk (Paths to images)
+
+
 # ==================
 # Send data to destination
 # POST /send_mail
@@ -41,7 +47,6 @@ def send_mail():
     message["To"] = data["destination"]
     message["Subject"] = data["header"]
     
-  # TODO Test this function. Add diff images by type
 
     html = f"""
     <html>
@@ -61,7 +66,7 @@ def send_mail():
     
     message.attach(MIMEText(html, "html"))
     
-    with open("path/to/your/image.jpg", "rb") as image_file:
+    with open(IMAGES[int(data['type'])], "rb") as image_file:
         image = MIMEImage(image_file.read())
         image.add_header('Content-ID', '<image1>')
         message.attach(image)
