@@ -11,7 +11,8 @@ const MainUserPage = () => {
     if (tabElement) {
       setTabHeight(tabElement.clientHeight);
     }
-  }, [selectedTab]);
+  }, [selectedTab, setTabHeight]); // Добавляем setTabHeight в массив зависимостей
+  
 
   const handleTabClick = (tabName) => {
     setSelectedTab(tabName);
