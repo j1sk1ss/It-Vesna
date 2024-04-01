@@ -1,8 +1,6 @@
-// LoginPage.js
 import React from 'react';
 import { Link } from 'react-router-dom';
 import './LoginPage.css';
-
 
 const LoginPage = () => {
   return (
@@ -18,7 +16,10 @@ const LoginPage = () => {
         <div className="form-group">
           <input type="password" id="password" name="password" required placeholder="Пароль" />
         </div>
-        <button type="submit">Войти</button>
+        {/* Используем компонент Link для перехода на другую страницу */}
+        <Link to="/main-user-page">
+          <button type="submit">Войти</button>
+        </Link>
       </form>
       <div className="register-forgot-password">
         <Link to="/register">Регистрация</Link>

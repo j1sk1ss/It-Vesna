@@ -15,25 +15,18 @@
 
 .post-input-container {
   position: fixed;
-  top: 200px; /* Отступ сверху для поля ввода */
+  top: 145px; /* Отступ сверху для поля ввода */
   width: 100%;
   padding: 10px;
   background-color: #ffffff00;
   z-index: 1;
 }
 
-.post-input textarea {
-  width: calc(100% - 20px); /* Вычисляем ширину поля ввода с учетом отступов */
-  min-height: 100px; /* Фиксированная высота поля ввода */
-  max-height: 200px; /* Максимальная высота поля ввода */
-  padding: 10px;
+.post-input {
+  width: 1750px; /* Вычисляем ширину поля ввода с учетом отступов */
   border: 1px solid #ccc;
   border-radius: 5px;
   font-size: 16px;
-  resize: vertical; /* Разрешаем вертикальное изменение размера */
-  overflow-y: auto; /* Добавляем вертикальную прокрутку при необходимости */
-  position: sticky; /* Поле ввода будет оставаться на месте */
-  bottom: 60px; /* Расстояние от нижнего края до поля ввода */
 }
 
 
@@ -42,8 +35,12 @@
   width: 100px;
 }
 
+.posts-container {
+  margin-top: 70px;
+}
+
 .post {
-  margin-top: 50px;
+  margin-top: 20px;
 }
 
 .publish-container {

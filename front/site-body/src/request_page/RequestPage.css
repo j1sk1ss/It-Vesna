@@ -19,24 +19,23 @@ body, html {
   }
   
   .zayavka-container {
-    margin-left: 20px;
-    margin-right: 20px;
-    margin-top: 70px;
     height: 880px;
     width: 1810px;
-    margin: 0;
-    padding: 0;
     display: flex; /* Используем flex-контейнер */
   }
+
+  .input-field {
+    width: 1600px; /* Фиксированная ширина */
+    height: 700px; /* Фиксированная высота */
+    vertical-align: top; /* Текст начинается с верхней части */
+  }
   
   
-  .left-container {
-    background-color: rgba(255, 0, 0, 0.507);
-
+  .submit-button {
+    font-size: 18px; /* Размер шрифта */
+    color: #fff; /* Цвет текста кнопки */
+    border: none; /* Убираем границу кнопки */
+    width: 100px;
+    height: 10px;
   }
-
-  .right-container {
-    flex-grow: 1; /* Занимает все доступное пространство */
-    background-color: rgba(0, 255, 221, 0.507);
-
-  }
+  

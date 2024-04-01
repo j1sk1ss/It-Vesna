@@ -18,49 +18,69 @@ const RequestPage = () => {
 };
 
 const ZayavkaLeft = () => {
-  const [fileAttached, setFileAttached] = useState(false);
-  const [fileName, setFileName] = useState('');
-
-  const handleFileUpload = (event) => {
-    const file = event.target.files[0];
-    setFileName(file.name);
-    setFileAttached(true);
+    const [fileAttached, setFileAttached] = useState(false);
+    const [fileName, setFileName] = useState('');
+  
+    const handleFileUpload = (event) => {
+      const file = event.target.files[0];
+      if (file) {
+        setFileAttached(true);
+        setFileName(file.name);
+      } else {
+        setFileAttached(false);
+        setFileName('');
+      }
+    };
+  
+    return (
+      <div className="left-content" style={{ height: '100%' }}>
+        <h2> </h2>
+        <div>
+          <input type="text" placeholder="Авторы" />
+        </div>
+        <div>
+          <input type="text" placeholder="Возраст" />
+        </div>
+        <div>
+          <input type="email" placeholder="Почта" />
+        </div>
+        <div>
+          <label htmlFor="nomination">Номинация:</label>
+          <select id="nomination">
+            <option value="nomination1">Номинация 1</option>
+            <option value="nomination2">Номинация 2</option>
+            <option value="nomination3">Номинация 3</option>
+          </select>
+        </div>
+        <div>
+          <input type="text" placeholder="Учреждение" />
+        </div>
+        <div>
+          <label htmlFor="file-upload" style={{ display: fileAttached ? 'none' : 'block' }}>Прикрепить согласие</label>
+          <input type="file" id="file-upload" style={{ display: 'none' }} onChange={handleFileUpload} />
+          {fileAttached && <div>{fileName}</div>}
+        </div>
+      </div>
+    );
   };
+  
 
-  return (
-    <div className="left-content" style={{ height: '100%' }}>
-      <h2>Левая часть</h2>
-      <div>
-        <input type="text" placeholder="Авторы" />
+  const ZayavkaRight = () => {
+    return (
+        <div>
+        <h2> </h2>
+        <textarea className="input-field" placeholder="Описание заявки"></textarea>
+        <div>
+          <input type="text" placeholder="Ссылка" />
+        </div>
+        <div className="submit-button">
+          <button>Подать</button>
+        </div>
       </div>
-      <div>
-        <input type="text" placeholder="Возраст" />
-      </div>
-      <div>
-        <input type="email" placeholder="Почта" />
-      </div>
-      <div>
-        <label htmlFor="file-upload" style={{ display: fileAttached ? 'none' : 'block' }}>Прикрепить согласие</label>
-        <input type="file" id="file-upload" style={{ display: 'none' }} onChange={handleFileUpload} />
-        {fileAttached && <div>{fileName}</div>}
-      </div>
-    </div>
-  );
-};
-
-const ZayavkaRight = () => {
-  return (
-    <div className="right-content" style={{ height: '100%', width: '300px', overflowY: 'auto' }}>
-      <h2>Правая часть</h2>
-      <textarea style={{ width: '100%', height: '80%' }} />
-      <div>
-        <input type="text" placeholder="Ссылка" style={{ width: '100%' }} />
-      </div>
-      <div style={{ textAlign: 'right' }}>
-        <button>Подать</button>
-      </div>
-    </div>
-  );
-};
+    );
+  };
+  
+  
+  
 
 export default RequestPage;

@@ -59,10 +59,6 @@ const MainAdminPage = () => {
           </div>
         </div>
         
-        <div className="tab-content" style={{ marginTop: `${tabHeight}px` }}>
-          {renderTabContent()}
-        </div>
-
         <div className="post-input-container" style={{ marginTop: '20px' }}>
           <textarea
             className="post-input"
@@ -70,6 +66,10 @@ const MainAdminPage = () => {
             value={postText}
             onChange={(e) => setPostText(e.target.value)}
           />
+        </div>
+
+        <div className="tab-content" style={{ marginTop: `${tabHeight}px` }}>
+          {renderTabContent()}
         </div>
       </div>
     </div>
