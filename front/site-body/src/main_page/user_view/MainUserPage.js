@@ -4,7 +4,7 @@ import './MainUserPage.css';
 
 const MainUserPage = () => {
   const [selectedTab, setSelectedTab] = useState('Главная');
-  const [tabHeight, setTabHeight] = useState(0);
+  const [setTabHeight] = useState(0);
 
   useEffect(() => {
     const tabElement = document.querySelector(`.tab.${selectedTab}`);
@@ -37,7 +37,7 @@ const MainUserPage = () => {
         </div>
 
         {/* Кнопка для перехода в режим администратора */}
-        <Link to="/main-admin-page" className="admin-button">Перейти в режим администратора</Link>
+        <Link to="/main-admin-page" className="admin-button">Перейти в режим модератора</Link>
         
         {/* Ссылка для перехода на страницу подачи заявки */}
         <Link to="/request-page" className="application-button">Подать заявку</Link>

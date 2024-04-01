@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom'; // Импортируем компонент Link
 import './MainAdminPage.css';
 
 const MainAdminPage = () => {
@@ -71,6 +72,9 @@ const MainAdminPage = () => {
         <div className="tab-content" style={{ marginTop: `${tabHeight}px` }}>
           {renderTabContent()}
         </div>
+        
+        {/* Добавляем ссылку для перехода на страницу администратора */}
+        <Link to="/admin-panel" className="admin-panel-button">Перейти на страницу администратора</Link>
       </div>
     </div>
   );
