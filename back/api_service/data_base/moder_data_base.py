@@ -15,7 +15,7 @@ def db_add_moderator(user_id):
         "User_UID": user_id
     }
     
-    return requests.post(f'{DB_SERVER}/moderators', data=data)
+    return requests.post(f'{DB_SERVER}/moderators', json=data, headers={'Content-Type': 'application/json'})
 
 def db_delete_moderator(user_id):
     return requests.delete(f'{DB_SERVER}/moderators/{user_id}')

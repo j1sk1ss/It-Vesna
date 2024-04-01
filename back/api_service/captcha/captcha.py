@@ -14,5 +14,5 @@ def captcha_check(captcha_response):
         'secret':  CAPTCHA_SECRET
     }
     
-    response = requests.post("https://www.google.com/recaptcha/api/siteverify", payload)
+    response = requests.post("https://www.google.com/recaptcha/api/siteverify", json=payload, headers={'Content-Type': 'application/json'})
     return json.loads(response.text)['success']

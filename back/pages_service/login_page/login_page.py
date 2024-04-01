@@ -33,7 +33,7 @@ def login(mail, password):
         "Mail": mail
     }
 
-    user_response = requests.get(f"{API_URL}/user", data=data)
+    user_response = requests.get(f"{API_URL}/user", json=data, headers={'Content-Type': 'application/json'})
     user_id = user_response.json()['UID']
 
     # ========================
@@ -54,7 +54,7 @@ def login(mail, password):
         "salt": pass_salt
     }
 
-    save_pass_response = requests.post(f"{API_URL}/str2hash", data=data)
+    save_pass_response = requests.post(f"{API_URL}/str2hash", json=data, headers={'Content-Type': 'application/json'})
 
     save_pass_hash = 0
     if save_pass_response.status_code == 200:
@@ -94,7 +94,7 @@ def restore_pass(mail):
         "Mail": mail
     }
 
-    user_response = requests.get(f"{API_URL}/user", data=data)
+    user_response = requests.get(f"{API_URL}/user", json=data, headers={'Content-Type': 'application/json'})
     user_id = user_response.json()['UID']
 
     # ========================
@@ -106,7 +106,7 @@ def restore_pass(mail):
         "password": new_pass
     }
 
-    requests.put(f"{API_URL}/password", data=data)
+    requests.put(f"{API_URL}/password", json=data, headers={'Content-Type': 'application/json'})
 
     # ========================
     # Send new password to user's mail
@@ -118,7 +118,7 @@ def restore_pass(mail):
         "type": "2"
     }
 
-    requests.post(f"{API_URL}/send_mail", data=data)
+    requests.post(f"{API_URL}/send_mail", json=data, headers={'Content-Type': 'application/json'})
 
     return 0
 
@@ -138,7 +138,7 @@ def send_verify_code(mail):
     now = datetime.now() + timedelta(minutes = 1)
     current_time = now.strftime("%H:%M:%S")
 
-    requests.post(f"{API_URL}/send_mail", data=data)
+    requests.post(f"{API_URL}/send_mail", json=data, headers={'Content-Type': 'application/json'})
     codes.append( {
             "mail": mail,
             "code": code, # TODO: Maybe str2hash?

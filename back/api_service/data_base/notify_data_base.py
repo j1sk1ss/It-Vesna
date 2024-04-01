@@ -10,7 +10,7 @@ def db_add_notify(user_id, type):
         "type": type
     }
     
-    return requests.post(f'{DB_SERVER}/notifications', data=send_data)
+    return requests.post(f'{DB_SERVER}/notifications', json=send_data, headers={'Content-Type': 'application/json'})
 
 def db_delete_notify(user_id):
     return requests.delete(f'{DB_SERVER}/notifications/{user_id}')
