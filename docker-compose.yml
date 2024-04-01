@@ -82,7 +82,7 @@ services:
       - users-db
     volumes:
       - type: bind
-        source: ./back/db_service
+        source: ./back/users_service
         target: /var/www/it-vesna/server
 
   users-db:
