@@ -95,7 +95,7 @@ services:
       POSTGRES_USER: root
       POSTGRES_DB: it-vesna-db
     volumes:
-      - ./db_service/init.sql:/docker-entrypoint-initdb.d/init.sql
+      - ./back/db_service/init.sql:/docker-entrypoint-initdb.d/init.sql
 
   # Data base GUI in web
   adminer:
@@ -105,9 +105,6 @@ services:
       - 8080:8080
     depends_on:
       - db
-
-volumes:
-  db:
 
 networks:
   default:

@@ -46,7 +46,7 @@ limiter = Limiter(
 
 # ============================
 # Add new user
-# POST  http://it-vesna-api-service-1/api/user
+# POST  http://it-vesna-api-service-1:5000/api/user
 # JSON request: {
 #     "surname": "surname",
 #     "name": "name",
@@ -64,7 +64,7 @@ def add_user():
 
 # ============================
 # Delete user
-# DELETE  http://it-vesna-api-service-1/api/user/<int:user_id>
+# DELETE  http://it-vesna-api-service-1:5000/api/user/<int:user_id>
 # RETURN: success
 @app.route('/api/user/<int:user_id>', methods=['DELETE'])
 def delete_user(user_id):
@@ -73,7 +73,7 @@ def delete_user(user_id):
 
 # ============================
 # Update users data
-# PUT http://it-vesna-api-service-1/api/user
+# PUT http://it-vesna-api-service-1:5000/api/user
 # JSON request: {
 #     "ID": "user_id"
 #     "surname": "NewSurname",
@@ -90,7 +90,7 @@ def update_user():
 
 # ============================
 # Get user data by ID or by Mail
-# GET http://it-vesna-api-service-1/api/user
+# GET http://it-vesna-api-service-1:5000/api/user
 # JSON request: {
 #     "ID": "user_id" / "none",
 #     "Mail": "mail" / "none"
@@ -119,7 +119,7 @@ def get_user():
 
 # ============================
 # Change password
-# PUT http://it-vesna-api-service-1/api/password
+# PUT http://it-vesna-api-service-1:5000/api/password
 # JSON request: {
 #     "ID": "user_id",
 #     "password": "new_pass"
@@ -134,7 +134,7 @@ def change_password():
 
 # ============================
 # Get password by id
-# GET http://it-vesna-api-service-1/api/password/<int:user_id>
+# GET http://it-vesna-api-service-1:5000/api/password/<int:user_id>
 # RETURN:
 # JSON response: {
 #     "hash": "hash",
@@ -147,7 +147,7 @@ def get_password(user_id):
 
 # ============================
 # Hash string value
-# POST http://it-vesna-api-service-1/api/str2hash
+# POST http://it-vesna-api-service-1:5000/api/str2hash
 # JSON request: {
 #     "data": "data"
 #     "salt": "salt" 
@@ -177,7 +177,7 @@ def str2hash():
 
 # ============================
 # Enable notification for user
-# POST  http://it-vesna-api-service-1/api/notificated
+# POST  http://it-vesna-api-service-1:5000/api/notificated
 # JSON request: {
 #     "user_id": "user_id",
 #     "type": "type"
@@ -191,7 +191,7 @@ def add_notificated():
 
 # ============================
 # Disable notification for user
-# DELETE  http://it-vesna-api-service-1/api/notificated/<int:user_id>
+# DELETE  http://it-vesna-api-service-1:5000/api/notificated/<int:user_id>
 # RETURN: success
 @app.route('/api/notificated/<int:user_id>', methods=['DELETE'])
 def delete_notificated(user_id):
@@ -205,7 +205,7 @@ def delete_notificated(user_id):
 
 # ============================
 # Get all moderators
-# GET  http://it-vesna-api-service-1/api/moderator
+# GET  http://it-vesna-api-service-1:5000/api/moderator
 # RETURN: list of moderators (Just user id)
 @app.route('/api/moderator', methods=['GET'])
 def get_moderators():
@@ -214,7 +214,7 @@ def get_moderators():
 
 # ============================
 # Get moderator by id
-# GET  http://it-vesna-api-service-1/api/moderator/<int:user_id>
+# GET  http://it-vesna-api-service-1:5000/api/moderator/<int:user_id>
 # RETURN: moderator (user id) / 'moderator not found'
 @app.route('/api/moderator/<int:user_id>', methods=['GET'])
 def get_moderator(user_id):
@@ -223,7 +223,7 @@ def get_moderator(user_id):
 
 # ============================
 # Add moderator by ID (User should be exists)
-# POST  http://it-vesna-api-service-1/api/moderator
+# POST  http://it-vesna-api-service-1:5000/api/moderator
 # JSON request: {
 #     "user_id": "user_id"
 # }
@@ -236,7 +236,7 @@ def add_moderator():
 
 # ============================
 # Add moderator by ID (User should be exists)
-# DELETE  http://it-vesna-api-service-1/api/moderator
+# DELETE  http://it-vesna-api-service-1:5000/api/moderator
 # RETURN: success
 @app.route('/api/moderator/<int:user_id>', methods=['DELETE'])
 def delete_moderator(user_id):
@@ -250,7 +250,7 @@ def delete_moderator(user_id):
 
 # ============================
 # Send mail
-# POST  http://it-vesna-api-service-1/api/send_mail
+# POST  http://it-vesna-api-service-1:5000/api/send_mail
 # JSON request: {
 #     "destination": "destination",
 #     "header": "header",

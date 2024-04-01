@@ -10,5 +10,9 @@ def crypto_str2hash(message, salt='none'):
         "salt": salt,
     }
     
-    response = requests.post(f'{CRYPTO_SERVER}/str2hash', data=send_data)    
-    return response['hash'], response['salt']
+    response = requests.post(f'{CRYPTO_SERVER}/str2hash', json=send_data, headers={'Content-Type': 'application/json'})    
+    if response.status_code == 200:
+        data = response.json()
+        return data['hash'], data['salt']
+    else:
+        return None, None

@@ -5,7 +5,7 @@ import random
 import string
 
 
-API_URL = "http://it-vesna-api-service-1/api"
+API_URL = "http://it-vesna-api-service-1:5000/api"
 
 
 def register(name, surname, father_name, mail, password):
@@ -20,7 +20,7 @@ def register(name, surname, father_name, mail, password):
         "password": password
     }
 
-    return requests.post(f"{API_URL}/user", data=data)
+    return requests.post(f"{API_URL}/user", json=data, headers={'Content-Type': 'application/json'})
 
 
 def login(mail, password):
@@ -34,13 +34,17 @@ def login(mail, password):
     }
 
     user_response = requests.get(f"{API_URL}/user", data=data)
-    user_id = user_response['UID']
+    user_id = user_response.json()['UID']
 
     # ========================
     # Get user pass hash and pass salt
 
     pass_response = requests.get(f"{API_URL}/password/{user_id}")
-    pass_hash, pass_salt = pass_response['hash'], pass_response['salt']
+
+    pass_hash, pass_salt = 0, 0
+    if pass_response.status_code == 200:
+        response = pass_response.json()
+        pass_hash, pass_salt = response['hash'], response['salt']
 
     # ========================
     # Hash entered pass and check
@@ -51,14 +55,18 @@ def login(mail, password):
     }
 
     save_pass_response = requests.post(f"{API_URL}/str2hash", data=data)
-    save_pass_hash, _ = save_pass_response['hash'], save_pass_response['salt']
+
+    save_pass_hash = 0
+    if save_pass_response.status_code == 200:
+        response = save_pass_response.json()
+        save_pass_hash, _ = response['hash'], response['salt']
     
     # ========================
     # Check moderator status
     
     if save_pass_hash == pass_hash:
         moder_response = requests.get(f"{API_URL}/moderator/{user_id}")
-        if moder_response == "moderator not found":
+        if moder_response.text == "moderator not found":
             return {
                 "status": "logged",
                 "role": "user"
@@ -87,7 +95,7 @@ def restore_pass(mail):
     }
 
     user_response = requests.get(f"{API_URL}/user", data=data)
-    user_id = user_response['UID']
+    user_id = user_response.json()['UID']
 
     # ========================
     # Generate new password and change old password

@@ -1,4 +1,3 @@
-# TODO: Save bd to disk
 # =============================================================
 # Importing packages
 # flask - main web server
@@ -33,30 +32,30 @@ db = SQLAlchemy(app)
 # Setup SQL models
 
 class Users(db.Model):
-    UID = db.Column(db.Integer, primary_key=True)
-    Surname = db.Column(db.String(255))
-    Name = db.Column(db.String(255))
-    FathersName = db.Column(db.String(255))
-    Mail = db.Column(db.String(255))
+    uid = db.Column(db.Integer, primary_key=True)
+    surname = db.Column(db.String(255))
+    name = db.Column(db.String(255))
+    fathersname = db.Column(db.String(255))
+    mail = db.Column(db.String(255))
 
 class Admins(db.Model):
-    User_UID = db.Column(db.Integer, db.ForeignKey('users.UID'), primary_key=True)
+    user_uid = db.Column(db.Integer, db.ForeignKey('users.uid'), primary_key=True)
 
 class Moderators(db.Model):
-    User_UID = db.Column(db.Integer, db.ForeignKey('users.UID'), primary_key=True)
+    user_uid = db.Column(db.Integer, db.ForeignKey('users.uid'), primary_key=True)
 
 class Passwords(db.Model):
-    User_UID = db.Column(db.Integer, db.ForeignKey('users.UID'), primary_key=True)
-    PasswordHash = db.Column(db.String(255))
-    PasswordSalt = db.Column(db.String(255))
+    user_uid = db.Column(db.Integer, db.ForeignKey('users.uid'), primary_key=True)
+    passwordhash = db.Column(db.String(255))
+    passwordsalt = db.Column(db.String(255))
 
 class Nominations(db.Model):
-    UID = db.Column(db.Integer, primary_key=True)
-    Name = db.Column(db.String(255))
+    uid = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String(255))
 
 class Notificated(db.Model):
-    User_UID = db.Column(db.Integer, db.ForeignKey('users.UID'), primary_key=True)
-    NotificationType = db.Column(db.Integer)
+    user_uid = db.Column(db.Integer, db.ForeignKey('users.uid'), primary_key=True)
+    notificationtype = db.Column(db.Integer)
 
 
 
@@ -74,11 +73,11 @@ def get_users():
     result = []
     for user in users:
         user_data = {
-            'UID':         user.UID,
-            'Surname':     user.Surname,
-            'Name':        user.Name,
-            'FathersName': user.FathersName,
-            'Mail':        user.Mail
+            'UID':         user.uid,
+            'Surname':     user.surname,
+            'Name':        user.name,
+            'FathersName': user.fathersname,
+            'Mail':        user.mail
         }
         
         result.append(user_data)
@@ -92,14 +91,14 @@ def get_users():
 # No JSON request required for GET request
 @app.route('/users/<int:user_id>', methods=['GET'])
 def get_user_by_id(user_id):
-    user = Users.query.filter_by(UID=user_id).first()
+    user = Users.query.filter_by(uid=user_id).first()
     if user:
         user_data = {
-            'UID':         user.UID,
-            'Surname':     user.Surname,
-            'Name':        user.Name,
-            'FathersName': user.FathersName,
-            'Mail':        user.Mail
+            'UID':         user.uid,
+            'Surname':     user.surname,
+            'Name':        user.name,
+            'FathersName': user.fathersname,
+            'Mail':        user.mail
         }
         
         return jsonify(user_data)
@@ -114,14 +113,14 @@ def get_user_by_id(user_id):
 @app.route('/user_by_mail', methods=['GET'])
 def get_user_by_mail():
     data = request.json
-    user = Users.query.filter_by(Mail=data['mail']).first()
+    user = Users.query.filter_by(mail=data['mail']).first()
     if user:
         user_data = {
-            'UID':         user.UID,
-            'Surname':     user.Surname,
-            'Name':        user.Name,
-            'FathersName': user.FathersName,
-            'Mail':        user.Mail
+            'UID':         user.uid,
+            'Surname':     user.surname,
+            'Name':        user.name,
+            'FathersName': user.fathersname,
+            'Mail':        user.mail
         }
         
         return jsonify(user_data)
@@ -143,15 +142,15 @@ def get_user_by_mail():
 @app.route('/users', methods=['POST'])
 def add_user(): # TODO: Don`t add user if in bd existed same mail address
     data = request.json
-    new_user = Users(Surname=data['Surname'], Name=data['Name'], FathersName=data['FathersName'], Mail=data['Mail'])
+    new_user = Users(surname=data['Surname'], name=data['Name'], fathersname=data['FathersName'], mail=data['Mail'])
     db.session.add(new_user)
     db.session.commit()
 
-    new_password = Passwords(User_UID=new_user.UID, PasswordHash=data['PasswordHash'], PasswordSalt=data['PasswordSalt'])
+    new_password = Passwords(user_uid=new_user.uid, passwordhash=data['PasswordHash'], passwordsalt=data['PasswordSalt'])
     db.session.add(new_password)
     db.session.commit()
 
-    return new_user.UID
+    return str(new_user.uid)
 
 
 # ============================
@@ -168,10 +167,10 @@ def update_user(user_id):
     user = Users.query.get_or_404(user_id)
     data = request.json
 
-    user.Surname     = data['Surname']
-    user.Name        = data['Name']
-    user.FathersName = data['FathersName']
-    user.Mail        = data['Mail']
+    user.surname     = data['Surname']
+    user.name        = data['Name']
+    user.fathersname = data['FathersName']
+    user.mail        = data['Mail']
 
     db.session.commit()
     return 'success'
@@ -184,7 +183,7 @@ def update_user(user_id):
 @app.route('/users/<int:user_id>', methods=['DELETE'])
 def delete_user(user_id):
     user = Users.query.get_or_404(user_id)
-    password_entry = Passwords.query.filter_by(User_UID=user_id).first()
+    password_entry = Passwords.query.filter_by(user_uid=user_id).first()
     if password_entry:
         db.session.delete(password_entry)
 
@@ -208,7 +207,7 @@ def get_moderators():
     result = []
     for moderator in moderators:
         user_data = {
-            'UID': moderator.User_UID
+            'UID': moderator.user_uid
         }
         
         result.append(user_data)
@@ -222,10 +221,10 @@ def get_moderators():
 # No JSON request required for GET request
 @app.route('/moderators/<int:user_id>', methods=['GET'])
 def get_moderator(user_id):
-    moderator = Moderators.query.filter_by(UID=user_id).first()
+    moderator = Moderators.query.filter_by(uid=user_id).first()
     if moderator:
         user_data = {
-            'UID': moderator.User_UID
+            'UID': moderator.user_uid
         }
         
         return jsonify(user_data)
@@ -242,7 +241,7 @@ def get_moderator(user_id):
 @app.route('/moderators', methods=['POST'])
 def add_moderator():
     data = request.json
-    moderator = Moderators(User_UID=data['User_UID'])
+    moderator = Moderators(user_uid=data['User_UID'])
     
     db.session.add(moderator)
     db.session.commit()
@@ -255,7 +254,7 @@ def add_moderator():
 # No JSON request required for DELETE request
 @app.route('/moderators/<int:user_id>', methods=['DELETE'])
 def delete_moderator(user_id):
-    moderator = Moderators.query.filter_by(User_UID=user_id).first()
+    moderator = Moderators.query.filter_by(user_uid=user_id).first()
     if moderator:
         db.session.delete(moderator)
         db.session.commit()
@@ -280,8 +279,8 @@ def get_notificated():
     result = []
     for user in users:
         user_data = {
-            'UID': user.User_UID,
-            'Type': user.NotificationType
+            'UID': user.user_uid,
+            'Type': user.notificationtype
         }
         
         result.append(user_data)
@@ -300,12 +299,12 @@ def get_notificated():
 # }
 @app.route('/notifications/<int:user_id>', methods=['GET'])
 def get_notificated_user(user_id):
-    notifications = Notificated.query.filter_by(User_UID=user_id).all()
+    notifications = Notificated.query.filter_by(user_uid=user_id).all()
     if notifications:
         for notification in notifications:
             notification_data = {
-                'UID': notification.User_UID,
-                'Type': notification.NotificationType
+                'UID': notification.user_uid,
+                'Type': notification.notificationtype
             }
             
             return notification_data
@@ -325,7 +324,7 @@ def get_notificated_user(user_id):
 @app.route('/notifications', methods=['POST'])
 def add_notification():
     data = request.json
-    notification = Notificated(User_UID=data["ID"], NotificationType=int(data["type"]))
+    notification = Notificated(user_uid=data["ID"], notificationtype=int(data["type"]))
     db.session.add(notification)
     db.session.commit()
     return 'success'
@@ -361,10 +360,10 @@ def delete_notification(user_id):
 @app.route('/passwords/<int:user_id>', methods=['PUT'])
 def change_password(user_id):
     data = request.json
-    user_password = Passwords.query.filter_by(User_UID=user_id).first()
+    user_password = Passwords.query.filter_by(user_uid=user_id).first()
     if user_password:
-        user_password.PasswordHash = data.get('PasswordHash')
-        user_password.PasswordSalt = data.get('PasswordSalt')
+        user_password.passwordhash = data.get('PasswordHash')
+        user_password.passwordsalt = data.get('PasswordSalt')
         db.session.commit()
         return 'success'
     else:
@@ -383,9 +382,6 @@ def get_password(user_id):
     data = request.json
     user_password = Passwords.query.filter_by(User_UID=user_id).first()
     if user_password:
-        user_password.PasswordHash = data.get('PasswordHash')
-        user_password.PasswordSalt = data.get('PasswordSalt')
-
         ret_data = {
             "hash": user_password.PasswordHash,
             "salt": user_password.PasswordSalt
@@ -410,7 +406,7 @@ def get_password(user_id):
 @app.route('/nominations', methods=['POST'])
 def add_nomination():
     data = request.json
-    nomination = Nominations(Name=data['Name'])
+    nomination = Nominations(name=data['Name'])
     db.session.add(nomination)
     db.session.commit()
     return 'success'

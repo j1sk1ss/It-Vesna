@@ -17,7 +17,7 @@ def db_delete_notify(user_id):
 
 def db_is_notify(user_id):
     response = requests.get(f'{DB_SERVER}/notifications/{user_id}')
-    if response == 'not notify':
+    if response.text == 'not notify':
         return {
             "UID": "null",
             "Type": "null"

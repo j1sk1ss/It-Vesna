@@ -45,8 +45,8 @@ def string2hash():
     hash = bcrypt.hashpw(data['message'].encode('utf-8'), salt=salt)
     
     return_data = {
-        "hash": hash,
-        "salt": salt
+        "hash": hash.decode('utf-8'),
+        "salt": salt.decode('utf-8')
     }
     
     return return_data

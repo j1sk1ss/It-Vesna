@@ -30,6 +30,9 @@ def rester_new_user():
     data = request.json
     return register(data['name'], data['surname'], data['father_name'], data['mail'], data['password'])
 
+@app.route('/back/test', methods=['POST', 'GET'])
+def test_db():
+    return register("Nikolay", "Fot", "Sergeevich", "asd.com", "28072003KolayFot$")
 
 # ============================
 # Login user
