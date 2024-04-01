@@ -12,10 +12,10 @@ from flask_sqlalchemy import SQLAlchemy
 # =============================================================
 # Configuring server on starting
 
-DB_NAME = "it-vesna-db" # TODO: Move to local data. Don't store it here
+DB_NAME = "it-vesna-users-db-service" # TODO: Move to local data. Don't store it here
 USER_NAME = "root"
 DB_PASS = "28072003"
-DB_HOST = "it-vesna-db-1:5432"
+DB_HOST = "it-vesna-users-db-service-1:5101"
 
 
 app = Flask(__name__)
@@ -32,11 +32,11 @@ db = SQLAlchemy(app)
 # Setup SQL models
 
 class Users(db.Model):
-    uid = db.Column(db.Integer, primary_key=True)
-    surname = db.Column(db.String(255))
-    name = db.Column(db.String(255))
+    uid         = db.Column(db.Integer, primary_key=True)
+    surname     = db.Column(db.String(255))
+    name        = db.Column(db.String(255))
     fathersname = db.Column(db.String(255))
-    mail = db.Column(db.String(255))
+    mail        = db.Column(db.String(255))
 
 class Admins(db.Model):
     user_uid = db.Column(db.Integer, db.ForeignKey('users.uid'), primary_key=True)
@@ -45,16 +45,16 @@ class Moderators(db.Model):
     user_uid = db.Column(db.Integer, db.ForeignKey('users.uid'), primary_key=True)
 
 class Passwords(db.Model):
-    user_uid = db.Column(db.Integer, db.ForeignKey('users.uid'), primary_key=True)
+    user_uid     = db.Column(db.Integer, db.ForeignKey('users.uid'), primary_key=True)
     passwordhash = db.Column(db.String(255))
     passwordsalt = db.Column(db.String(255))
 
 class Nominations(db.Model):
-    uid = db.Column(db.Integer, primary_key=True)
+    uid  = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(255))
 
 class Notificated(db.Model):
-    user_uid = db.Column(db.Integer, db.ForeignKey('users.uid'), primary_key=True)
+    user_uid         = db.Column(db.Integer, db.ForeignKey('users.uid'), primary_key=True)
     notificationtype = db.Column(db.Integer)
 
 
@@ -65,11 +65,11 @@ class Notificated(db.Model):
 
 # ============================
 # This function return all users from db
-# GET http://it-vesna-db-1:5100/users
+# GET http://it-vesna-users-db-service-1:5100/users
 # No JSON request required for GET request
 @app.route('/users', methods=['GET'])
 def get_users():
-    users = Users.query.all()
+    users  = Users.query.all()
     result = []
     for user in users:
         user_data = {
@@ -87,7 +87,7 @@ def get_users():
 
 # ============================
 # This function return user by ID from bd
-# GET http://it-vesna-db-1:5100/users/<int:user_id>
+# GET http://it-vesna-users-db-service-1:5100/users/<int:user_id>
 # No JSON request required for GET request
 @app.route('/users/<int:user_id>', methods=['GET'])
 def get_user_by_id(user_id):
@@ -108,7 +108,7 @@ def get_user_by_id(user_id):
 
 # ============================
 # This function return user by ID from bd
-# GET http://it-vesna-db-1:5100/user_by_mail
+# GET http://it-vesna-users-db-service-1:5100/user_by_mail
 # No JSON request required for GET request
 @app.route('/user_by_mail', methods=['GET'])
 def get_user_by_mail():
@@ -130,7 +130,7 @@ def get_user_by_mail():
 
 # ============================
 # This function add user to db
-# POST http://it-vesna-db-1:5100/users
+# POST http://it-vesna-users-db-service-1:5100/users
 # JSON request: {
 #     "Surname": "Surname",
 #     "Name": "Name",
@@ -155,7 +155,7 @@ def add_user(): # TODO: Don`t add user if in bd existed same mail address
 
 # ============================
 # Update users data
-# PUT http://it-vesna-db-1:5100/users/<int:user_id>
+# PUT http://it-vesna-users-db-service-1:5100/users/<int:user_id>
 # JSON request: {
 #     "Surname": "NewSurname",
 #     "Name": "NewName",
@@ -178,7 +178,7 @@ def update_user(user_id):
 
 # ============================
 # Delete user
-# DELETE http://it-vesna-db-1:5100/users/<int:user_id>
+# DELETE http://it-vesna-users-db-service-1:5100/users/<int:user_id>
 # No JSON request required for DELETE request
 @app.route('/users/<int:user_id>', methods=['DELETE'])
 def delete_user(user_id):
@@ -199,7 +199,7 @@ def delete_user(user_id):
 
 # ============================
 # This function return all moderators from db
-# GET http://it-vesna-db-1:5100/moderators
+# GET http://it-vesna-users-db-service-1:5100/moderators
 # No JSON request required for GET request
 @app.route('/moderators', methods=['GET'])
 def get_moderators():
@@ -217,7 +217,7 @@ def get_moderators():
 
 # ============================
 # This function return moderator by ID from bd
-# GET http://it-vesna-db-1:5100/moderators/<int:user_id>
+# GET http://it-vesna-users-db-service-1:5100/moderators/<int:user_id>
 # No JSON request required for GET request
 @app.route('/moderators/<int:user_id>', methods=['GET'])
 def get_moderator(user_id):
@@ -234,7 +234,7 @@ def get_moderator(user_id):
 
 # ============================
 # Add moderator
-# POST http://it-vesna-db-1:5100/moderators
+# POST http://it-vesna-users-db-service-1:5100/moderators
 # JSON request: {
 #     "User_UID": user_id
 # }
@@ -250,7 +250,7 @@ def add_moderator():
 
 # ============================
 # Delete moderator
-# DELETE http://it-vesna-db-1:5100/moderators/<int:user_id>
+# DELETE http://it-vesna-users-db-service-1:5100/moderators/<int:user_id>
 # No JSON request required for DELETE request
 @app.route('/moderators/<int:user_id>', methods=['DELETE'])
 def delete_moderator(user_id):
@@ -270,7 +270,7 @@ def delete_moderator(user_id):
 
 # ============================
 # This function return all notificated users from db
-# GET http://it-vesna-db-1:5100/notifications
+# GET http://it-vesna-users-db-service-1:5100/notifications
 # No JSON request required for GET request
 # RETURN: list of [ID - TYPE]
 @app.route('/notifications', methods=['GET'])
@@ -290,7 +290,7 @@ def get_notificated():
 
 # ============================
 # This function return all notificated users from db
-# GET http://it-vesna-db-1:5100/notifications/<int:user_id>
+# GET http://it-vesna-users-db-service-1:5100/notifications/<int:user_id>
 # No JSON request required for GET request
 # RETURN: notification
 # {
@@ -315,8 +315,8 @@ def get_notificated_user(user_id):
 
 
 # ============================
-# Add nomination
-# POST http://it-vesna-db-1:5100/nominations
+# Add notification
+# POST http://it-vesna-users-db-service-1:5100/nominations
 # JSON request: {
 #     "ID": "user_ID",
 #     "type": "notification_type"
@@ -331,8 +331,8 @@ def add_notification():
 
 
 # ============================
-# Delete nomination
-# DELETE http://it-vesna-db-1:5100/notifications/<int:user_id>
+# Delete notification
+# DELETE http://it-vesna-users-db-service-1:5100/notifications/<int:user_id>
 # No JSON request required for DELETE request
 @app.route('/notifications/<int:user_id>', methods=['DELETE'])
 def delete_notification(user_id):
@@ -352,7 +352,7 @@ def delete_notification(user_id):
 
 # ============================
 # Change password (Work only if user has previous password)
-# PUT http://it-vesna-db-1:5100/passwords/<int:user_id>
+# PUT http://it-vesna-users-db-service-1:5100/passwords/<int:user_id>
 # JSON request: {
 #     "PasswordHash": "new_password_hash",
 #     "PasswordSalt": "new_password_salt"
@@ -372,7 +372,7 @@ def change_password(user_id):
 
 # ============================
 # Get password by user_id
-# PUT http://it-vesna-db-1:5100/passwords/<int:user_id>
+# PUT http://it-vesna-users-db-service-1:5100/passwords/<int:user_id>
 # JSON response: {
 #     "hash": "hash",
 #     "salt": "salt"
@@ -396,10 +396,10 @@ def get_password(user_id):
 # =============================================================
 #   API for working with nominations data in DB
 # =============================================================
-
+# TODO Move nominations to another db service
 # ============================
 # Add nomination
-# POST http://it-vesna-db-1:5100/nominations
+# POST http://it-vesna-users-db-service-1:5100/nominations
 # JSON request: {
 #     "Name": "NominationName"
 # }
@@ -414,7 +414,7 @@ def add_nomination():
 
 # ============================
 # Delete nomination
-# DELETE http://it-vesna-db-1:5100/nominations/<int:nomination_id>
+# DELETE http://it-vesna-users-db-service-1:5100/nominations/<int:nomination_id>
 # No JSON request required for DELETE request
 @app.route('/nominations/<int:nomination_id>', methods=['DELETE'])
 def delete_nomination(nomination_id):
@@ -425,7 +425,7 @@ def delete_nomination(nomination_id):
         return 'success'
     else:
         return 'not success', 404
-
+    
 
 
 # =============================================================

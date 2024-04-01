@@ -1,7 +1,7 @@
 import requests
 
 
-DB_SERVER = 'http://it-vesna-db-service-1:5100'
+DB_SERVER = 'http://it-vesna-users-db-service-1:5100'
 
 
 def db_change_password(pass_hash, pass_salt, user_id):

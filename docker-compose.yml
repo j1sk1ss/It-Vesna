@@ -1,5 +1,5 @@
 version: '3.3'
-
+# TODO: Choose another ports. We take to large distance detween services
 services:
   # Front container (node + npm)
   front:
@@ -20,7 +20,7 @@ services:
     image: ghcr.io/j1sk1ss/vesna-back-env:0.2v
     ports:
       - 5400:5400
-    command: python main.py
+    command: python service.py
     depends_on:
       - api-service
     volumes:
@@ -33,12 +33,12 @@ services:
     image: ghcr.io/j1sk1ss/vesna-back-env:0.2v
     ports:
       - 5000:5000
-    command: python api.py
+    command: python service.py
     depends_on:
-      - db
+      - users-db
       - mail-service
       - crypto-service
-      - db-service
+      - users-db-service
     volumes:
       - type: bind
         source: ./back/api_service
@@ -49,9 +49,9 @@ services:
     image: ghcr.io/j1sk1ss/vesna-back-env:0.2v
     ports:
       - 5200:5200
-    command: python mailing.py
+    command: python service.py
     depends_on:
-      - db
+      - users-db
     volumes:
       - type: bind
         source: ./back/mail_service
@@ -62,32 +62,33 @@ services:
     image: ghcr.io/j1sk1ss/vesna-back-env:0.2v
     ports:
       - 5300:5300
-    command: python crypto.py
+    command: python service.py
     depends_on:
-      - db
+      - users-db
     volumes:
       - type: bind
         source: ./back/crypto_service
         target: /var/www/it-vesna/server
 
-  # DB server container (Python + Libs)
-  db-service:
+  # =================
+  # USERS MICROSERVICE
+
+  users-db-service:
     image: ghcr.io/j1sk1ss/vesna-back-env:0.2v
     ports:
       - 5100:5100
-    command: python db.py
+    command: python service.py
     depends_on:
-      - db
+      - users-db
     volumes:
       - type: bind
         source: ./back/db_service
         target: /var/www/it-vesna/server
 
-  # Data base
-  db:
+  users-db:
     image: postgres
     ports:
-      - 5432:5432
+      - 5101:5432
     restart: always
     shm_size: 128mb
     environment:
@@ -95,7 +96,63 @@ services:
       POSTGRES_USER: root
       POSTGRES_DB: it-vesna-db
     volumes:
-      - ./back/db_service/init.sql:/docker-entrypoint-initdb.d/init.sql
+      - ./back/users_service/init.sql:/docker-entrypoint-initdb.d/init.sql
+
+  # =================
+  # POSTS MICROSERVICE
+
+  posts-db-service:
+    image: ghcr.io/j1sk1ss/vesna-back-env:0.2v
+    ports:
+      - 5600:5600
+    command: python service.py
+    depends_on:
+      - users-db
+    volumes:
+      - type: bind
+        source: ./back/posts_service
+        target: /var/www/it-vesna/server
+
+  posts-db:
+    image: postgres
+    ports:
+      - 5601:5432
+    restart: always
+    shm_size: 128mb
+    environment:
+      POSTGRES_PASSWORD: 28072003
+      POSTGRES_USER: root
+      POSTGRES_DB: it-vesna-db
+    volumes:
+      - ./back/posts_service/init.sql:/docker-entrypoint-initdb.d/init.sql
+
+  # =================
+  # REQUESTS MICROSERVICE
+
+  requests-db-service:
+    image: ghcr.io/j1sk1ss/vesna-back-env:0.2v
+    ports:
+      - 5700:5700
+    command: python service.py
+    depends_on:
+      - users-db
+    volumes:
+      - type: bind
+        source: ./back/posts_service
+        target: /var/www/it-vesna/server
+
+  requests-db:
+    image: postgres
+    ports:
+      - 5701:5432
+    restart: always
+    shm_size: 128mb
+    environment:
+      POSTGRES_PASSWORD: 28072003
+      POSTGRES_USER: root
+      POSTGRES_DB: it-vesna-db
+    volumes:
+      - ./back/requests_service/init.sql:/docker-entrypoint-initdb.d/init.sql
 
   # Data base GUI in web
   adminer:
@@ -104,7 +161,7 @@ services:
     ports:
       - 8080:8080
     depends_on:
-      - db
+      - users-db
 
 networks:
   default:

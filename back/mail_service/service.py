@@ -30,7 +30,7 @@ IMAGES = [] # TODO: Load images from disk (Paths to images)
 
 # ==================
 # Send data to destination
-# POST /send_mail
+# POST http://it-vesna-mail-service-1:5200/send_mail
 # JSON request: {
 #     "destination": "destination_mail",
 #     "header": "mail_header",

@@ -1,7 +1,7 @@
 import requests
 
 
-DB_SERVER = 'http://it-vesna-db-service-1:5100'
+DB_SERVER = 'http://it-vesna-users-db-service-1:5100'
 
 
 def db_get_moders():
