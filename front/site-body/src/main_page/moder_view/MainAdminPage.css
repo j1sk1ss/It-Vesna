@@ -1,29 +1,4 @@
 /* styles.css */
-.container {
-  width: 100%;
-  max-width: 1200px;
-  margin: 0 auto;
-}
-
-.title {
-  font-size: 2rem;
-  font-weight: bold;
-}
-
-.navigation {
-  list-style-type: none;
-  padding: 0;
-}
-
-.navigation li {
-  display: inline;
-  margin-right: 10px;
-}
-
-.content {
-  margin-top: 20px;
-}
-
 .submit-button {
   background-color: #000;
   color: #fff;
