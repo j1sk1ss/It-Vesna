@@ -8,6 +8,8 @@ const AdminPanelPage = () => {
   const [subTab, setSubTab] = useState('На рассмотрении');
   const [moderators, setModerators] = useState([]);
   const [isModeratorsTabSelected, setIsModeratorsTabSelected] = useState(false);
+  const [nominationName, setNominationName] = useState('');
+  const [nominations, setNominations] = useState(['Номинация 1', 'Номинация 2', 'Номинация 3']); // Список номинаций
 
   const handleTabClick = (tabName) => {
     setSelectedTab(tabName);
@@ -26,6 +28,19 @@ const AdminPanelPage = () => {
     const updatedModerators = [...moderators];
     updatedModerators.splice(index, 1);
     setModerators(updatedModerators);
+  };
+
+  const handleAddNomination = () => {
+    if (nominationName.trim() !== '') {
+      setNominations([...nominations, nominationName]); // Добавляем новую номинацию в список
+      setNominationName(''); // Сбрасываем значение поля ввода
+    }
+  };
+
+  const handleDeleteNomination = (index) => {
+    const updatedNominations = [...nominations];
+    updatedNominations.splice(index, 1);
+    setNominations(updatedNominations);
   };
 
   return (
@@ -82,7 +97,24 @@ const AdminPanelPage = () => {
               </div>
             </div>
           )}
-          {selectedTab === 'Номинации' && <div>Содержимое вкладки "Номинации"</div>}
+          {selectedTab === 'Номинации' && (
+            <div>
+              <div className="input-container">
+                <input type="text" placeholder="Новая номинация" value={nominationName} onChange={(e) => setNominationName(e.target.value)} />
+                <button className="button-create" onClick={handleAddNomination}>Добавить</button>
+              </div>
+              <div>
+                {nominations.map((nomination, index) => (
+                  <div key={index}>
+                    <div className="nomination-container">
+                      <div>{nomination}</div>
+                      <button className="button-delete" onClick={() => handleDeleteNomination(index)}>Удалить</button>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          )}
         </div>
       </div>
     </div>
