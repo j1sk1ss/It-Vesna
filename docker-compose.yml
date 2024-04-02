@@ -94,7 +94,7 @@ services:
     environment:
       POSTGRES_PASSWORD: 28072003
       POSTGRES_USER: root
-      POSTGRES_DB: it-vesna-db
+      POSTGRES_DB: it-vesna-users-db
     volumes:
       - ./back/users_service/init.sql:/docker-entrypoint-initdb.d/init.sql
 
@@ -107,7 +107,7 @@ services:
       - 5600:5600
     command: python service.py
     depends_on:
-      - users-db
+      - posts-db
     volumes:
       - type: bind
         source: ./back/posts_service
@@ -122,7 +122,7 @@ services:
     environment:
       POSTGRES_PASSWORD: 28072003
       POSTGRES_USER: root
-      POSTGRES_DB: it-vesna-db
+      POSTGRES_DB: it-vesna-posts-db
     volumes:
       - ./back/posts_service/init.sql:/docker-entrypoint-initdb.d/init.sql
 
@@ -135,10 +135,10 @@ services:
       - 5700:5700
     command: python service.py
     depends_on:
-      - users-db
+      - requests-db
     volumes:
       - type: bind
-        source: ./back/posts_service
+        source: ./back/requests_service
         target: /var/www/it-vesna/server
 
   requests-db:
@@ -150,7 +150,7 @@ services:
     environment:
       POSTGRES_PASSWORD: 28072003
       POSTGRES_USER: root
-      POSTGRES_DB: it-vesna-db
+      POSTGRES_DB: it-vesna-requests-db
     volumes:
       - ./back/requests_service/init.sql:/docker-entrypoint-initdb.d/init.sql
 

@@ -1,3 +1,4 @@
+# TODO: Tokenized access
 # ==================
 # Importing packages
 
@@ -16,7 +17,7 @@ CORS(app)
 
 # ============================
 # Register new user
-# POST  http://it-vesna-pages-service-1/back/register_user
+# POST  http://it-vesna-pages-service-1:5400/back/register_user
 # JSON request: {
 #     "surname": "surname",
 #     "name": "name",
@@ -30,13 +31,9 @@ def rester_new_user():
     data = request.json
     return register(data['name'], data['surname'], data['father_name'], data['mail'], data['password'])
 
-@app.route('/back/test', methods=['POST', 'GET'])
-def test_db():
-    return register("Nikolay", "Fot", "Sergeevich", "asd.com", "28072003KolayFot$")
-
 # ============================
 # Login user
-# POST  http://it-vesna-pages-service-1/back/login_user
+# POST  http://it-vesna-pages-service-1:5400/back/login_user
 # JSON request: {
 #     "mail": "mail@example.com",
 #     "password": "password"
@@ -54,7 +51,7 @@ def login_user():
 
 # ============================
 # Restore user password (Delete old password, generate random new, change old to generated, send generaed to user's mail)
-# POST  http://it-vesna-pages-service-1/back/restore_pass
+# POST  http://it-vesna-pages-service-1:5400/back/restore_pass
 # JSON request: {
 #     "mail": "mail@example.com"
 # }
@@ -67,7 +64,7 @@ def restore_user_pass():
 
 # ============================
 # Send verification code to user's mail
-# POST  http://it-vesna-pages-service-1/back/mail_verify
+# POST  http://it-vesna-pages-service-1:5400/back/mail_verify
 # JSON request: {
 #     "mail": "mail@example.com"
 # }
@@ -80,7 +77,7 @@ def start_mail_verify():
 
 # ============================
 # Check verification code from user's mail
-# POST  http://it-vesna-pages-service-1/back/code_mail_check
+# POST  http://it-vesna-pages-service-1:5400/back/code_mail_check
 # JSON request: {
 #     "mail": "mail@example.com",
 #     "code": "code"

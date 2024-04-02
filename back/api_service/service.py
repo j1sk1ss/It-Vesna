@@ -3,7 +3,6 @@
 # flask - flask app body
 # cors - ajax support
 # limiter - limits support (like 1 access per minute)
-# jwtmanager - access token support
 
 from data_base.users_data_base import db_add_user, db_delete_user, db_get_user_by_id, db_update_user, db_get_user_by_mail
 from data_base.pass_data_base import db_change_password, db_get_password
@@ -17,7 +16,6 @@ from flask import Flask, request, jsonify
 from flask_cors import CORS
 from flask_limiter import Limiter
 from flask_limiter.util import get_remote_address
-from flask_jwt_extended import JWTManager, create_access_token, jwt_required, get_jwt_identity
 
 
 
@@ -30,13 +28,21 @@ from flask_jwt_extended import JWTManager, create_access_token, jwt_required, ge
 app = Flask(__name__)
 CORS(app)
 
-jwt = JWTManager(app)
 limiter = Limiter(
     get_remote_address,
     app=app,
     default_limits=["200 per day", "10 per hour"],
     storage_uri="memory://",
 )
+
+ALLOWED_IP = [
+    'it-vesna-pages-service-1'
+]
+
+@app.before_request
+def limit_remote_addr():
+    if request.remote_addr not in ALLOWED_IP:
+        return 'ip not allowed'
 
 
 
