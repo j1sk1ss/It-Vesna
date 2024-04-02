@@ -23,11 +23,6 @@ CREATE TABLE Passwords (
     FOREIGN KEY (User_UID) REFERENCES Users (UID)
 );
 
-CREATE TABLE Nominations (
-    UID SERIAL PRIMARY KEY,
-    Name VARCHAR(255) NOT NULL UNIQUE
-);
-
 CREATE TABLE Notificated (
     User_UID INT,
     NotificationType INT,

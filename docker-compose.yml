@@ -154,12 +154,40 @@ services:
     volumes:
       - ./back/requests_service/init.sql:/docker-entrypoint-initdb.d/init.sql
 
+  # =================
+  # NOMINATIONS MICROSERVICE
+
+  nom-db-service:
+    image: ghcr.io/j1sk1ss/vesna-back-env:0.2v
+    ports:
+      - 5700:5700
+    command: python service.py
+    depends_on:
+      - requests-db
+    volumes:
+      - type: bind
+        source: ./back/nomination_service
+        target: /var/www/it-vesna/server
+
+  nom-db:
+    image: postgres
+    ports:
+      - 5801:5432
+    restart: always
+    shm_size: 128mb
+    environment:
+      POSTGRES_PASSWORD: 28072003
+      POSTGRES_USER: root
+      POSTGRES_DB: it-vesna-nom-db
+    volumes:
+      - ./back/nomination_service/init.sql:/docker-entrypoint-initdb.d/init.sql
+
   # Data base GUI in web
   adminer:
     image: adminer
     restart: always
     ports:
-      - 8090:8080
+      - 81:8080
     depends_on:
       - users-db
 

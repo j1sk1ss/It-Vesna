@@ -19,7 +19,7 @@ ALLOWED_IP = [
 DB_NAME = "it-vesna-users-db" # TODO: Move to local data. Don't store it here
 USER_NAME = "root"
 DB_PASS = "28072003"
-DB_HOST = "it-vesna-users-db-service-1:5101"
+DB_HOST = "it-vesna-users-db-1:5101"
 
 
 app = Flask(__name__)
@@ -58,10 +58,6 @@ class Passwords(db.Model):
     user_uid     = db.Column(db.Integer, db.ForeignKey('users.uid'), primary_key=True)
     passwordhash = db.Column(db.String(255))
     passwordsalt = db.Column(db.String(255))
-
-class Nominations(db.Model):
-    uid  = db.Column(db.Integer, primary_key=True)
-    name = db.Column(db.String(255))
 
 class Notificated(db.Model):
     user_uid         = db.Column(db.Integer, db.ForeignKey('users.uid'), primary_key=True)
@@ -150,7 +146,7 @@ def get_user_by_mail():
 #     "PasswordSalt": "salt_value"
 # }
 @app.route('/users', methods=['POST'])
-def add_user(): # TODO: Don`t add user if in bd existed same mail address
+def add_user():
     data = request.json
     new_user = Users(surname=data['Surname'], name=data['Name'], fathersname=data['FathersName'], mail=data['Mail'])
     db.session.add(new_user)
@@ -400,41 +396,6 @@ def get_password(user_id):
         return ret_data
     else:
         return 'not success'
-
-
-
-# =============================================================
-#   API for working with nominations data in DB
-# =============================================================
-# TODO Move nominations to another db service
-# ============================
-# Add nomination
-# POST http://it-vesna-users-db-service-1:5100/nominations
-# JSON request: {
-#     "Name": "NominationName"
-# }
-@app.route('/nominations', methods=['POST'])
-def add_nomination():
-    data = request.json
-    nomination = Nominations(name=data['Name'])
-    db.session.add(nomination)
-    db.session.commit()
-    return 'success'
-
-
-# ============================
-# Delete nomination
-# DELETE http://it-vesna-users-db-service-1:5100/nominations/<int:nomination_id>
-# No JSON request required for DELETE request
-@app.route('/nominations/<int:nomination_id>', methods=['DELETE'])
-def delete_nomination(nomination_id):
-    nomination = Nominations.query.get(nomination_id)
-    if nomination:
-        db.session.delete(nomination)
-        db.session.commit()
-        return 'success'
-    else:
-        return 'not success', 404
     
 
 

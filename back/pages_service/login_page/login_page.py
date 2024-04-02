@@ -123,7 +123,7 @@ def restore_pass(mail):
     return 0
 
 
-codes = [] # TODO: Delete codes after death (check every minute?)
+codes = []
 
 def send_verify_code(mail):
     code = get_random_string(10)
@@ -141,10 +141,16 @@ def send_verify_code(mail):
     requests.post(f"{API_URL}/send_mail", json=data, headers={'Content-Type': 'application/json'})
     codes.append( {
             "mail": mail,
-            "code": code, # TODO: Maybe str2hash?
+            "code": code,
             "time": current_time
         }
     )
+
+    now = datetime.now()
+    for i in range(len(codes)):
+        code_time = datetime.strptime(codes[i]["time"], "%H:%M:%S")
+        if now < code_time:
+            del codes[i]
 
 
 def verify_mail(mail, code):

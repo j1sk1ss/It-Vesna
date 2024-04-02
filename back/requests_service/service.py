@@ -19,7 +19,7 @@ ALLOWED_IP = [
 DB_NAME = "it-vesna-requests-db" # TODO: Move to local data. Don't store it here
 USER_NAME = "root"
 DB_PASS = "28072003"
-DB_HOST = "it-vesna-requests-db-service-1:5701"
+DB_HOST = "it-vesna-requests-db-1:5701"
 
 
 app = Flask(__name__)

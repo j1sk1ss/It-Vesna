@@ -3,6 +3,7 @@ import json
 
 
 CAPTCHA_SECRET = "" # TODO: Move secret key to files
+# TODO: Maybe another service?
 
 
 # Connect with captcha services and check answer

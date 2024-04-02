@@ -17,7 +17,7 @@ ALLOWED_IP = [
 DB_NAME = "it-vesna-posts-db" # TODO: Move to local data. Don't store it here
 USER_NAME = "root"
 DB_PASS = "28072003"
-DB_HOST = "it-vesna-posts-db-service-1:5601"
+DB_HOST = "it-vesna-posts-db-1:5601"
 
 app = Flask(__name__)
 CORS(app)
