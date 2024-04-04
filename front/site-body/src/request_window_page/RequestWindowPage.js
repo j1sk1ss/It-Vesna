@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import './RequestWindowPage.css'; 
 const RequestWindowPage = () => {
     const [requests, setRequests] = useState([
-        { id: 1, title: "Zayavka 1", author: "Egor", date: "01.04.2024", email: "egor@example.com", nomination: "Best Idea", description: "Description of Zayavka 1", consentLink1: "http://example1.com", consentLink2: "http://example2.com", attachedLinks: ["http://attachedlink1.com", "http://attachedlink2.com"] },
+        { id: 1, title: "Very big big big big big big big big big big big big big big big big big big big big big big theme", author: "Egor", date: "01.04.2024", email: "egor@example.com", nomination: "Best Idea", description: "Very big big big big big big big big big big big big big big big big big big big big big big description", consentLink1: "http://example1.com", consentLink2: "http://example2.com", attachedLinks: ["http://attachedlink1.com", "http://attachedlink2.com"] },
         { id: 2, title: "Zayavka 2", author: "Pasha", date: "02.04.2024", email: "pasha@example.com", nomination: "Best Design", description: "Description of Zayavka 2", consentLink1: "http://example3.com", consentLink2: "http://example4.com", attachedLinks: ["http://attachedlink3.com", "http://attachedlink4.com"] },
         
     ]);
@@ -42,14 +42,14 @@ const RequestWindowPage = () => {
                 {requests.map(request => (
                     <div key={request.id} className="request">
                         <div className="request-info">
-                            <h2>{request.author}</h2>
-                            <p>{request.title}</p>
+                            <div>{request.author}</div>
+                            <div>{request.title}</div>
                         </div>
                         <div className="request-buttons">
-                            <button className="button" onClick={() => openModal(request)}>Podrobnee</button>
-                            <button className="button" onClick={() => handleDeleteRequest(request.id)}>Udalit'</button>
-                            <button className="button">Prinyat'</button>
-                            <button className="button">Dobavit' v arkhiv</button>
+                            <button className="button more-button" onClick={() => openModal(request)}></button>
+                            <button className="button delete-button" onClick={() => handleDeleteRequest(request.id)}></button>
+                            <button className="button accept-button"></button>
+                            <button className="button archive-button"></button>
                         </div>
                     </div>
                 ))}
@@ -57,22 +57,29 @@ const RequestWindowPage = () => {
             {selectedRequest && (
                 <div className={`modal-overlay modal-fadeIn`} onClick={closeModal}>
                     <div className={`modal modal-slideIn`} onClick={(e) => e.stopPropagation()}>
-                    <div className="modal">
-                        <p>FIO {selectedRequest.date}</p>
-                        <p>{selectedRequest.author} <button className="button" onClick={() => copyToClipboard(selectedRequest.author)}>Copy</button></p>
-                        <p>Pochta </p>
-                        <p><form>{selectedRequest.email} <button className="button" onClick={() => copyToClipboard(selectedRequest.email)}>Copy</button></form></p>
-                        <p>nominacia </p>
-                        <p><form>{selectedRequest.nomination}</form></p>
-                        <p>nazvanie</p>
-                        <p><form>{selectedRequest.title}</form></p>
-                        <p>Opisanie</p>
-                        <p><form>{selectedRequest.description}</form></p>
-                        <p><a href={selectedRequest.consentLink1} target="_blank" rel="noopener noreferrer">Soglasie 1</a>  <a href={selectedRequest.consentLink2} target="_blank" rel="noopener noreferrer">Soglasie 2</a></p>
-                        <p>sylki</p>
+                        <div className='basic-stroke'>
+                            <div>FIO</div>
+                            <div>{selectedRequest.date}</div>
+                        </div>
+                        <div className='stroke'>
+                            <div>{selectedRequest.author}</div>
+                            <div className='stroke-button'><button className="button copy-button" onClick={() => copyToClipboard(selectedRequest.author)}></button></div>
+                        </div>
+                        <div className='basic-stroke'>Pochta </div>
+                        <div className='stroke'>{selectedRequest.email} <button className="button copy-button" onClick={() => copyToClipboard(selectedRequest.email)}></button></div>
+                        <div className='basic-stroke'>nominacia </div>
+                        <div className='stroke-nonborder'>{selectedRequest.nomination}</div>
+                        <div className='basic-stroke'>nazvanie</div>
+                        <div className='stroke-nonborder'>{selectedRequest.title}</div>
+                        <div className='basic-stroke'>Opisanie</div>
+                        <div className='stroke-description'>{selectedRequest.description}</div>
+                        <div className='att-ref'>
+                            <div><a href={selectedRequest.consentLink1} target="_blank" rel="noopener noreferrer">Soglasie 1</a> </div>
+                            <div><a href={selectedRequest.consentLink2} target="_blank" rel="noopener noreferrer">Soglasie 2</a> </div>
+                        </div>
                         <ul>
                             {selectedRequest.attachedLinks.map((link, index) => (
-                                <li key={index}><a href={link} target="_blank" rel="noopener noreferrer">{link}</a> <button className="button" onClick={() => copyToClipboard(link)}>Copy</button></li>
+                                 <li key={index}><a href={link} target="_blank" rel="noopener noreferrer">{link}</a> <button className="button copy-button" onClick={() => copyToClipboard(link)}></button></li>
                             ))}
                             </ul>
                             <div
@@ -81,7 +88,7 @@ const RequestWindowPage = () => {
                                 onMouseLeave={() => setIsHovering(false)}
                             >
                                 <div className="action-buttons-trigger1">
-                                    <span>--</span>
+                                    <span></span>
                                 </div>
                                 {isHovering && (
                                     <div className="action-buttons-dropdown">
@@ -91,10 +98,8 @@ const RequestWindowPage = () => {
                                     </div>
                                 )}
                             </div>
-                        <button onClick={closeModal}>Zakryt'</button>
                       </div>
                         </div>
-                </div>
             )}
         </div>
     );

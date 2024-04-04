@@ -1,7 +1,7 @@
 
 body {
-    background-image: url('/public/background.png');
-    font-family: Arial, sans-serif;
+    background-image: url('front/site-body/public/background.png');
+    font-family: Jura;
     background-size: cover;
     background-position: center;
     margin: 20px;
@@ -10,24 +10,38 @@ body {
 }
 
 .request {
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    padding: 10px;
+    border-radius: 31px;
+    padding: 15px;
     margin-bottom: 10px;
+    margin-right: 20px;
+    margin-left: 20px;
+    display: flex;
+    justify-content: space-between;
+    width: calc(100% - 40px);
+    height: 80px;
+    padding-bottom: 20px;
+    box-shadow: 1px 4px 4px rgba(0, 0, 0, 0.25);
+    background-color: rgba(254, 254, 254, 0.4);
+}
+.request-buttons {
+    display: flex;
+    align-items: center;
+  justify-content: center;
+}
+.request-info {
+    display: flex;
+    flex-direction: column;
+    align-self: center;
+    align-items: flex-start;
+    font-family: Jura;
+    font-size: 1.5vw;
+    font-weight: 700;
 }
 
-.request-info h2 {
-    margin-top: 0;
-}
+
 
 .request-buttons button {
     margin-right: 5px;
-}
-.form {
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    padding: 10px;
-    margin-bottom: 10px;
 }
 
 .modal-overlay {
@@ -36,29 +50,100 @@ body {
     left: 0;
     width: 100%;
     height: 100%;
-    background-color: rgba(0, 0, 0, 0.5);
     display: flex;
     justify-content: center;
     align-items: center;
 }
 
 .modal {
-    background-image: url('/public/background.png');
+    background-image: url('front/site-body/public/background.png');
+    background-color: rgba(234, 234, 234, 0.55);
     background-size: cover;
     background-position: center;
+    display: flex;
+    flex-direction: column;
     margin: 20px;
     padding: 20px;
     height: 100vh;
     border-radius: 5px;
     width: 1920px;
     height: 1280px;
-    max-width: 90%; 
+    max-width: 90%;
     max-height: 80%;
     overflow-y: auto;
 }
+.basic-stroke {
+    font-size: 1vw;
+    font-weight: 700;
+    align-items: flex-start;
+    display: flex;
+    flex-direction: row;
+    padding: 15px;
+}
+
+    .basic-stroke > * {
+        margin-right: 40px;
+    }
+.stroke {
+    font-size: 1.5vw;
+    font-weight: 700;
+    padding: 15px;
+    justify-content: space-between;
+    align-items: center;
+    display: flex;
+    flex-direction: row;
+    width: 70%;
+    height: auto;
+    min-height: 2vw;
+    border-radius: 31px;
+    background-color: rgba(17, 17, 17, 0.07);
+}
+.stroke-description {
+    padding: 15px;
+    font-size: 1.5vw;
+    font-weight: 400;
+    justify-content: space-between;
+    align-items: start;
+    display: flex;
+    flex-direction: row;
+    width: 85%;
+    height: auto;
+    min-height: 2vw;
+    border-radius: 31px;
+    background-color: rgba(17, 17, 17, 0.07);
+}
+.stroke-nonborder {
+    font-size: 1.5vw;
+    font-weight: 700;
+    padding: 15px;
+    justify-content: space-between;
+    align-items: center;
+    display: flex;
+    flex-direction: row;
+    width: 70%;
+    height: auto;
+    min-height: 2vw;
+}
+.att-ref {
+    font-size: 1.5vw;
+    font-weight: 700;
+    align-items: flex-start;
+    display: flex;
+    flex-direction: row;
+    padding: 15px;
+}
+
+.att-ref > * {
+    margin-right: 25px;
+}
+a {
+    text-decoration: none; 
+    color: black; 
+}
+
 
     .modal button {
-        margin-top: 10px;
+        margin-top: 20px;
     }
 @keyframes slideIn {
     from {
@@ -91,8 +176,8 @@ body {
     justify-content: right;
 }
 .action-buttons {
-    position: relative;
-    right: 75px;
+    align-items: flex-end;
+    display: flex;
 }
 
 .action-buttons-dropdown {
@@ -110,6 +195,15 @@ body {
 .action-buttons-hovered .action-buttons-dropdown {
     transform: translateX(0);
 }
+.action-buttons-trigger1 {
+    background-image: url('front/site-body/public/ok.png');
+    width: 2vw;
+    height: 2vw;
+    background-size: cover;
+    border: none;
+    cursor: pointer;
+    margin-right: 5px;
+}
 
 
 @keyframes slideIn1 {
@@ -123,7 +217,7 @@ body {
 }
 
 .action-buttons-dropdown {
-    animation: slideIn1 0.6s forwards; /* Применяем анимацию */
+    animation: slideIn1 0.6s forwards; 
 }
 
 .action-buttons-trigger1 {
@@ -131,5 +225,85 @@ body {
 }
 
 .button {
-    margin-top: 5px;
+    width: 6vw;
+    height: 4vw;
+    background-size: cover;
+    border: none;
+    cursor: pointer;
+    margin-right: 5px;
 }
+.copy-button {
+    background-image: url('front/site-body/public/logo.png');
+    width: 2vw;
+    height: 2vw;
+    background-size: cover;
+    border: none;
+    cursor: pointer;
+    margin-right: 5px;
+}
+
+.more-button {
+    background-image: url('front/site-body/public/logo.png');
+    width: 4vw;
+    height: 4vw;
+    background-size: cover;
+    border: none;
+    cursor: pointer;
+    margin-right: 5px;
+}
+
+.delete-button {
+    background-image: url('front/site-body/public/otmena.png');
+    width: 4vw;
+    height: 4vw;
+    background-size: cover;
+    border: none;
+    cursor: pointer;
+    margin-right: 5px;
+}
+
+.accept-button {
+    background-image: url('front/site-body/public/ok.png');
+    width: 4vw;
+    height: 4vw;
+    background-size: cover;
+    border: none;
+    cursor: pointer;
+    margin-right: 5px;
+}
+
+.archive-button {
+    background-image: url('front/site-body/public/arh.png');
+    width: 4vw;
+    height: 4vw;
+    background-size: cover;
+    border: none;
+    cursor: pointer;
+    margin-right: 5px;
+}
+@font-face {
+    font-family: 'Jura';
+    src: url('front/site-body/fonts/Jura.ttf') format('truetype');
+}
+ul {
+    list-style-type: none;
+    display: flex; 
+    flex-direction: column; 
+    gap: 10px; 
+}
+
+    ul li {
+        font-size: 1.5vw;
+        font-weight: 700;
+        width: 70%;
+        height: auto;
+        min-height: 2vw;
+        border-radius: 31px;
+        background-color: rgba(17, 17, 17, 0.07);
+        padding: 15px;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+    }
+
