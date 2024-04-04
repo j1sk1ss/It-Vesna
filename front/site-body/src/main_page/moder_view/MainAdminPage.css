@@ -1,52 +1,84 @@
-/* styles.css */
-.submit-button {
-  background-color: #000;
-  color: #fff;
-  border: none;
-  padding: 10px 30px;
-  border-radius: 5px;
-  cursor: pointer;
-}
-
 /* MainAdminPage.css */
+
+/* Подключение шрифта Jura с Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Jura&display=swap');
+
+/* Общие стили для страницы административной панели */
+.admin-panel-page {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    width: 100%;
+    max-width: 100vw;
+}
+
 .admin-panel-page-container {
-  position: relative;
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-start;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    padding: 20px;
 }
 
-.post-input-container {
-  position: fixed;
-  top: 145px; /* Отступ сверху для поля ввода */
-  width: 100%;
-  padding: 10px;
-  background-color: #ffffff00;
-  z-index: 1;
+/* Прозрачная полоса с надписью "IT Весна" */
+.admin-panel-page .transparent-bar {
+    background-color: rgba(255, 255, 255, 0);
+    padding: 20px;
+    z-index: 1;
+    font-family: 'jura', sans-serif;
+    font-size: 46px;
+    font-weight: bold; /* Делаем текст жирным */
 }
 
-.post-input {
-  width: 1750px; /* Вычисляем ширину поля ввода с учетом отступов */
-  border: 1px solid #ccc;
-  border-radius: 5px;
-  font-size: 16px;
+/* Контейнеры для вкладок */
+.admin-panel-page .tab-container {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 10px;
+    width: 1780px;
+    max-width: 1920px;
+    padding: 0 20px;
+    box-sizing: border-box;
+    font-size: 20px;
+    font-weight: bold; /* Делаем текст жирным */
 }
 
-
-.button-container {
-  margin-right: 100px;
-  width: 100px;
+/* Стили для контейнера группы вкладок слева */
+.admin-panel-page .left-tab-container,
+.admin-panel-page .right-tab-container {
+    display: flex;
+    border: 1px solid #ffffff00; /* Граница вокруг группы вкладок слева */
+    border-radius: 8px; /* Закругление углов */
+    margin-right: 5px; /* Внешний отступ между группами вкладок */
 }
 
-.posts-container {
-  margin-top: 70px;
+.admin-panel-page .left-tab-container .tab,
+.admin-panel-page .right-tab-container .tab {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    cursor: pointer;
 }
 
-.post {
-  margin-top: 20px;
+.admin-panel-page .tab.active {
+    background-color: #6b62caff;
+    color: white;
 }
 
-.publish-container {
-  margin-right: 120px;
+/* Стили для вкладок */
+.admin-panel-page .tab {
+    margin-right: 10px; /* Внешний отступ между вкладками */
 }
 
-.publish-button {
-width: 120px;
+/* Убираем отступ у последней вкладки, чтобы не было лишнего пространства */
+.admin-panel-page .tab:last-child {
+    margin-right: 30px;
+}
+
+.admin-panel-page .tab:first-child {
+    margin-left: 20px;
 }

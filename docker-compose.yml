@@ -132,7 +132,7 @@ services:
   requests-db-service:
     image: ghcr.io/j1sk1ss/vesna-back-env:0.2v
     ports:
-      - 5700:5700
+      - 5710:5700
     command: python service.py
     depends_on:
       - requests-db
@@ -160,7 +160,7 @@ services:
   nom-db-service:
     image: ghcr.io/j1sk1ss/vesna-back-env:0.2v
     ports:
-      - 5700:5700
+      - 5720:5700
     command: python service.py
     depends_on:
       - requests-db

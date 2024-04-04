@@ -1,47 +1,45 @@
 import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom'; // Импортируем компонент Link
-import './MainUserPage.css';
+import { Link } from 'react-router-dom';
+import './MainUserPage.css'; // Переименовали файл стилей
 
 const MainUserPage = () => {
   const [selectedTab, setSelectedTab] = useState('Главная');
-  const [setTabHeight] = useState(0);
+  const [tabHeight, setTabHeight] = useState(0); // Переименовали состояние
 
   useEffect(() => {
-    const tabElement = document.querySelector(`.tab.${selectedTab}`);
+    const tabElement = document.querySelector(`.tab.${selectedTab}`); // Изменили класс для выбора элемента
     if (tabElement) {
       setTabHeight(tabElement.clientHeight);
     }
-  }, [selectedTab, setTabHeight]); // Добавляем setTabHeight в массив зависимостей
-  
+  }, [selectedTab, setTabHeight]);
 
   const handleTabClick = (tabName) => {
     setSelectedTab(tabName);
   };
 
   return (
-    <div className="user-page-container">
-      <div className="user-page">
-        <div className="transparent-bar">
-          <div className="it-vesna">IT Весна</div>
-        </div>
-        
-        <div className="tab-container">
-          <div className="left-tab-container">
-            <div className={`tab ${selectedTab === 'Главная' ? 'active' : ''}`} onClick={() => handleTabClick('Главная')}>Главная</div>
-            <div className={`tab ${selectedTab === 'Участие' ? 'active' : ''}`} onClick={() => handleTabClick('Участие')}>Участие</div>
-            <div className={`tab ${selectedTab === 'Новости' ? 'active' : ''}`} onClick={() => handleTabClick('Новости')}>Новости</div>
+    <div className="main-user-page"> {/* Изменили класс контейнера */}
+      <div className="user-page-container">
+        <div className="user-page">
+          <div className="transparent-bar">
+            <div className="it-vesna">IT Весна</div>
           </div>
-        </div>
-        
-        <div className="tab-content">
-          {/* Ваш контент вкладок */}
-        </div>
+          
+          <div className="tab-container">
+            <div className="left-tab-container">
+              <div className={`tab ${selectedTab === 'Главная' ? 'active' : ''}`} onClick={() => handleTabClick('Главная')}>Главная</div>
+              <div className={`tab ${selectedTab === 'Участие' ? 'active' : ''}`} onClick={() => handleTabClick('Участие')}>Участие</div>
+              <div className={`tab ${selectedTab === 'Новости' ? 'active' : ''}`} onClick={() => handleTabClick('Новости')}>Новости</div>
+            </div>
+          </div>
+          
+          <div className="user-tab-content">
+            {/* Ваш контент вкладок */}
+          </div>
 
-        {/* Кнопка для перехода в режим администратора */}
-        <Link to="/main-admin-page" className="admin-button">Перейти в режим модератора</Link>
-        
-        {/* Ссылка для перехода на страницу подачи заявки */}
-        <Link to="/request-page" className="application-button">Подать заявку</Link>
+          <Link to="/main-admin-page" className="admin-button">Перейти в режим модератора</Link>
+          <Link to="/request-page" className="application-button">Подать заявку</Link>
+        </div>
       </div>
     </div>
   );

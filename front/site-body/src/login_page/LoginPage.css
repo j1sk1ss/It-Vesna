@@ -1,50 +1,35 @@
 /* Подключение шрифта Jura с Google Fonts */
 @import url('https://fonts.googleapis.com/css2?family=Jura&display=swap');
 
-/* Общие стили для body и html */
-body, html {
-  margin: 0;
-  padding: 0;
-  height: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  overflow: hidden;
-  background-image: url("background.png");
-  background-size: cover;
-  background-position: center;
-  font-family: 'Jura', Arial, sans-serif; /* Изменен шрифт на Jura */
-}
-
 /* Стили для логотипа */
 .logo img {
-  width: 150px;
-  margin-bottom: -50px; /* Смещение логотипа вверх */
+  width: 15%; /* Адаптивная ширина логотипа */
+  margin-bottom: -5%; /* Смещение логотипа вверх */
 }
 
 /* Стили для заголовка */
 h1 {
   color: #000;
-  font-size: 60px;
-  margin-bottom: 30px; /* Отступ снизу */
+  font-size: 3.5vw; /* Адаптивный размер заголовка */
+  margin-bottom: 2%; /* Отступ снизу */
 }
 
 /* Стили для формы и ее элементов */
 .form-group {
-  margin-bottom: 20px; /* Отступ снизу */
+  margin-bottom: 1.5%; /* Отступ снизу */
 }
 
 .form-group input {
-  width: calc(100% - 200px); /* Динамическая ширина поля ввода с учетом отступов */
-  padding: 15px;
+  width: 100%; /* Ширина поля ввода занимает всю доступную ширину */
+  padding: 1.5vw; /* Адаптивный внутренний отступ поля ввода */
   border: 1px solid #000;
   border-radius: 5px;
 }
 
 /* Стили для кнопок */
 button {
-  width: calc(100% - 250px); /* Динамическая ширина кнопки с учетом отступов */
-  padding: 15px;
+  width: 80%; /* Адаптивная ширина кнопки */
+  padding: 1.5vw; /* Адаптивный внутренний отступ кнопки */
   background-color: #000;
   color: #fff;
   border: none;
@@ -59,14 +44,14 @@ button:hover {
 
 /* Стили для ссылок "Забыли пароль?" и "Регистрация" */
 .register-forgot-password {
-  margin-top: 30px; /* Отступ сверху */
+  margin-top: 2%; /* Отступ сверху */
 }
 
 .register-forgot-password a {
   color: #000;
   text-decoration: none;
-  margin: 5px;
-  padding: 10px 20px; /* Увеличение отступов для кнопок */
+  margin: 0.5%; /* Увеличение отступов между кнопками */
+  padding: 1.5vw 2.5vw; /* Адаптивные отступы для кнопок */
   border: 1px solid #5bb3d8;
   border-radius: 5px;
   transition: background-color 0.3s ease;
@@ -80,13 +65,13 @@ button:hover {
 /* Стили для изображения */
 .osu {
   position: relative;
-  margin-top: 75px; /* Уменьшение отступа сверху */
+  margin-top: 5%; /* Уменьшение отступа сверху */
 }
 
 .osu img {
-  width: 250px;
+  width: 20%; /* Адаптивная ширина изображения */
   position: absolute;
-  bottom: -20px; /* Смещение изображения вниз */
+  bottom: -2%; /* Смещение изображения вниз */
   left: 50%;
   transform: translateX(-50%);
   z-index: 1;
@@ -95,19 +80,19 @@ button:hover {
 /* Стили для контейнера */
 .container {
   box-sizing: border-box;
+  display: flex;
   text-align: center;
   background-color: rgba(207, 232, 237, 0.25);
-  border-radius: 21px;
-  padding: 20px;
-  width: 450px; /* Фиксированная ширина контейнера */
+  border-radius: 5vw; /* Адаптивный радиус границы */
+  padding: 3vw; /* Адаптивный внутренний отступ контейнера */
+  width: 80%; /* Адаптивная ширина контейнера */
   position: relative;
   margin: auto; /* Центрирование контейнера по горизонтали */
-  display: flex;
   flex-direction: column; /* Элементы располагаются вертикально */
 }
 
 .container h1 {
-  margin-bottom: 20px; /* Отступ снизу */
+  margin-bottom: 2%; /* Отступ снизу */
 }
 
 .container button {
@@ -115,22 +100,13 @@ button:hover {
 }
 
 .container .register-forgot-password {
-  margin-top: 20px; /* Отступ сверху */
+  margin-top: 2%; /* Отступ сверху */
 }
 
 .container .register-forgot-password a {
-  margin: 5px; /* Увеличение отступов между кнопками */
+  margin: 0.5%; /* Увеличение отступов между кнопками */
 }
 
 .container .osu {
-  margin-top: 75px; /* Уменьшение отступа сверху */
-}
-
-/* Стили для контейнера кнопок регистрации и восстановления пароля на странице входа */
-.register-forgot-container {
-  background-color: #ccc; /* Серый цвет фона */
-  padding: 20px;
-  border-radius: 10px;
-  margin-top: 20px; /* Отступ сверху */
-  font-family: 'Jura', Arial, sans-serif; /* Изменен шрифт на Jura */
+  margin-top: 5%; /* Уменьшение отступа сверху */
 }
