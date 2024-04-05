@@ -5,63 +5,57 @@
 
 /* Общие стили для страницы административной панели */
 .admin-panel-page {
-    position: relative;
-    display: flex;
-    flex-direction: column;
     align-items: flex-start;
-    width: 100%;
-    max-width: 100vw;
+    width: 100vw; /* Изменено на 100vw */
+    height: 100vh; /* Изменено на 100vh */
+    font-family: 'Jura', sans-serif; /* Применяем шрифт Jura ко всему контенту */
 }
 
 .admin-panel-page-container {
-    display: flex;
-    justify-content: flex-start;
-    align-items: flex-start;
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    padding: 20px;
+    background-color: rgba(255, 0, 0, 0);
+    padding: 0; /* Удаляем внутренние отступы */
 }
 
-/* Прозрачная полоса с надписью "IT Весна" */
+/* Белая полоса с надписью "IT Весна" */
+.header-container {
+    background-color: rgb(255, 255, 255);
+    width: 100vw;
+    padding: 0; /* Удаляем внутренние отступы */    
+}
+
 .admin-panel-page .transparent-bar {
     background-color: rgba(255, 255, 255, 0);
-    padding: 20px;
-    z-index: 1;
-    font-family: 'jura', sans-serif;
-    font-size: 46px;
+    font-size: 3.5vw; /* Адаптивный размер шрифта */
     font-weight: bold; /* Делаем текст жирным */
+    margin-left: 0vw; /* Добавляем немного внутреннего отступа слева */
 }
 
 /* Контейнеры для вкладок */
 .admin-panel-page .tab-container {
     display: flex;
     justify-content: space-between;
-    margin-top: 10px;
-    width: 1780px;
-    max-width: 1920px;
-    padding: 0 20px;
-    box-sizing: border-box;
-    font-size: 20px;
-    font-weight: bold; /* Делаем текст жирным */
+    width: 100vw; /* Адаптивная ширина контейнера */
+    max-width: 100vw; /* Максимальная ширина контейнера */
+    padding: 0; /* Удаляем внутренние отступы */
+    font-size: 1.5vw; /* Адаптивный размер шрифта */
 }
 
 /* Стили для контейнера группы вкладок слева */
 .admin-panel-page .left-tab-container,
 .admin-panel-page .right-tab-container {
     display: flex;
-    border: 1px solid #ffffff00; /* Граница вокруг группы вкладок слева */
-    border-radius: 8px; /* Закругление углов */
-    margin-right: 5px; /* Внешний отступ между группами вкладок */
+    border: 1px solid transparent; /* Устанавливаем прозрачную границу */
+    border-radius: 1.5vw; /* Адаптивное закругление углов */
+    margin-right: 1vw; /* Внешний отступ между группами вкладок */
 }
 
 .admin-panel-page .left-tab-container .tab,
 .admin-panel-page .right-tab-container .tab {
-    padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 10px;
+    padding: 1vw 2vw; /* Увеличиваем внутренний отступ вкладок */
+    border: 0.2vw solid #ccc; /* Устанавливаем тонкую серую границу */
+    border-radius: 1vw; /* Адаптивное закругление углов */
     cursor: pointer;
+    transition: all 0.3s ease; /* Плавный переход */
 }
 
 .admin-panel-page .tab.active {
@@ -69,16 +63,11 @@
     color: white;
 }
 
-/* Стили для вкладок */
-.admin-panel-page .tab {
-    margin-right: 10px; /* Внешний отступ между вкладками */
-}
-
 /* Убираем отступ у последней вкладки, чтобы не было лишнего пространства */
 .admin-panel-page .tab:last-child {
-    margin-right: 30px;
+    margin-right: 0; /* Удаляем внешний отступ */
 }
 
 .admin-panel-page .tab:first-child {
-    margin-left: 20px;
+    margin-left: 0; /* Удаляем внешний отступ */
 }

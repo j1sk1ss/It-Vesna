@@ -3,8 +3,8 @@
 
 /* Стили для логотипа */
 .logo img {
-  width: 15%; /* Адаптивная ширина логотипа */
-  margin-bottom: -5%; /* Смещение логотипа вверх */
+  width: 45%; /* Адаптивная ширина логотипа */
+  margin-bottom: -10%; /* Смещение логотипа вверх */
 }
 
 /* Стили для заголовка */
@@ -20,20 +20,19 @@ h1 {
 }
 
 .form-group input {
-  width: 100%; /* Ширина поля ввода занимает всю доступную ширину */
-  padding: 1.5vw; /* Адаптивный внутренний отступ поля ввода */
-  border: 1px solid #000;
-  border-radius: 5px;
+  width: 70%; /* Ширина поля ввода занимает всю доступную ширину */
+  padding: 1vw; /* Адаптивный внутренний отступ поля ввода */
+  border: 1px solid #AEF5FF;
+  border-radius: 8px;
 }
 
 /* Стили для кнопок */
 button {
-  width: 80%; /* Адаптивная ширина кнопки */
-  padding: 1.5vw; /* Адаптивный внутренний отступ кнопки */
+  width: 40%; /* Адаптивная ширина кнопки */
+  padding: 1vw; /* Адаптивный внутренний отступ кнопки */
   background-color: #000;
   color: #fff;
-  border: none;
-  border-radius: 5px;
+  border-radius: 8px;
   cursor: pointer;
   transition: background-color 0.3s ease;
 }
@@ -51,7 +50,7 @@ button:hover {
   color: #000;
   text-decoration: none;
   margin: 0.5%; /* Увеличение отступов между кнопками */
-  padding: 1.5vw 2.5vw; /* Адаптивные отступы для кнопок */
+  padding: 0.5vw 1vw; /* Адаптивные отступы для кнопок */
   border: 1px solid #5bb3d8;
   border-radius: 5px;
   transition: background-color 0.3s ease;
@@ -69,30 +68,33 @@ button:hover {
 }
 
 .osu img {
-  width: 20%; /* Адаптивная ширина изображения */
+  width: 70%; /* Адаптивная ширина изображения */
   position: absolute;
-  bottom: -2%; /* Смещение изображения вниз */
+  bottom: 20%; /* Смещение изображения вниз */
   left: 50%;
   transform: translateX(-50%);
   z-index: 1;
+  margin-bottom: -10%; /* Смещение логотипа вверх */
 }
 
 /* Стили для контейнера */
 .container {
-  box-sizing: border-box;
   display: flex;
+  flex-direction: column;
   text-align: center;
   background-color: rgba(207, 232, 237, 0.25);
-  border-radius: 5vw; /* Адаптивный радиус границы */
+  border-radius: 1vw; /* Адаптивный радиус границы */
   padding: 3vw; /* Адаптивный внутренний отступ контейнера */
-  width: 80%; /* Адаптивная ширина контейнера */
-  position: relative;
-  margin: auto; /* Центрирование контейнера по горизонтали */
-  flex-direction: column; /* Элементы располагаются вертикально */
+  width: 20%; /* Адаптивная ширина контейнера */
+  position: absolute;
+  top: 50%; /* Расположение контейнера на 50% высоты экрана */
+  left: 50%; /* Расположение контейнера на 50% ширины экрана */
+  transform: translate(-50%, -50%); /* Сдвиг контейнера на половину его собственной ширины и высоты назад */
 }
 
+
 .container h1 {
-  margin-bottom: 2%; /* Отступ снизу */
+  margin-bottom: 3%; /* Отступ снизу */
 }
 
 .container button {
@@ -100,13 +102,13 @@ button:hover {
 }
 
 .container .register-forgot-password {
-  margin-top: 2%; /* Отступ сверху */
+  margin-top: 5%; /* Отступ сверху */
 }
 
 .container .register-forgot-password a {
-  margin: 0.5%; /* Увеличение отступов между кнопками */
+  margin: 1%; /* Увеличение отступов между кнопками */
 }
 
 .container .osu {
-  margin-top: 5%; /* Уменьшение отступа сверху */
+  margin-top: 15%; /* Уменьшение отступа сверху */
 }

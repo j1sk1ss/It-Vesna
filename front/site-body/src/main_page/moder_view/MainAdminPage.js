@@ -45,22 +45,24 @@ const MainAdminPage = () => {
   return (
     <div className="admin-panel-page-container">
       <div className="admin-panel-page">
-        <div className="transparent-bar">
-          <div className="it-vesna">IT Весна</div>
+        <div className="header-container">
+          <div className="transparent-bar">
+            <div className="it-vesna">IT Весна</div>
+          </div>
+        
+          <div className="tab-container">
+            <div className="left-tab-container">
+              {Object.keys(posts).map(tabName => (
+                <div key={tabName} className={`tab ${selectedTab === tabName ? 'active' : ''}`} onClick={() => handleTabClick(tabName)}>{tabName}</div>
+              ))}
+            </div>
+            <div className="button-container">
+              <button className="publish-button" onClick={handlePublish}>Опубликовать</button>
+            </div>
+          </div>
         </div>
         
-        <div className="tab-container">
-          <div className="left-tab-container">
-            {Object.keys(posts).map(tabName => (
-              <div key={tabName} className={`tab ${selectedTab === tabName ? 'active' : ''}`} onClick={() => handleTabClick(tabName)}>{tabName}</div>
-            ))}
-          </div>
-          <div className="button-container">
-            <button className="publish-button" onClick={handlePublish}>Опубликовать</button>
-          </div>
-        </div>
-        
-        <div className="post-input-container" style={{ marginTop: '20px' }}>
+        <div className="post-input-container">
           <textarea
             className="post-input"
             placeholder="Напишите свой пост..."
