@@ -17,7 +17,7 @@ CORS(app)
 
 # ============================
 # Register new user
-# POST  http://it-vesna-pages-service-1:5400/back/register_user
+# POST  http://it-vesna-pages-service-1:27000/back/register_user
 # JSON request: {
 #     "surname": "surname",
 #     "name": "name",
@@ -33,7 +33,7 @@ def rester_new_user():
 
 # ============================
 # Login user
-# POST  http://it-vesna-pages-service-1:5400/back/login_user
+# POST  http://it-vesna-pages-service-1:27000/back/login_user
 # JSON request: {
 #     "mail": "mail@example.com",
 #     "password": "password"
@@ -51,7 +51,7 @@ def login_user():
 
 # ============================
 # Restore user password (Delete old password, generate random new, change old to generated, send generaed to user's mail)
-# POST  http://it-vesna-pages-service-1:5400/back/restore_pass
+# POST  http://it-vesna-pages-service-1:27000/back/restore_pass
 # JSON request: {
 #     "mail": "mail@example.com"
 # }
@@ -64,7 +64,7 @@ def restore_user_pass():
 
 # ============================
 # Send verification code to user's mail
-# POST  http://it-vesna-pages-service-1:5400/back/mail_verify
+# POST  http://it-vesna-pages-service-1:27000/back/mail_verify
 # JSON request: {
 #     "mail": "mail@example.com"
 # }
@@ -77,7 +77,7 @@ def start_mail_verify():
 
 # ============================
 # Check verification code from user's mail
-# POST  http://it-vesna-pages-service-1:5400/back/code_mail_check
+# POST  http://it-vesna-pages-service-1:27000/back/code_mail_check
 # JSON request: {
 #     "mail": "mail@example.com",
 #     "code": "code"
@@ -91,4 +91,4 @@ def end_mail_verify():
 
 # ==================
 # Start server with static ip
-app.run(host='0.0.0.0', port='5400')
+app.run(host='0.0.0.0', port='5000')

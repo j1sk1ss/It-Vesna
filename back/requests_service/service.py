@@ -19,7 +19,7 @@ ALLOWED_IP = [
 DB_NAME = "it-vesna-requests-db" # TODO: Move to local data. Don't store it here
 USER_NAME = "root"
 DB_PASS = "28072003"
-DB_HOST = "it-vesna-requests-db-1:5701"
+DB_HOST = "it-vesna-requests-db-1:27009"
 
 
 app = Flask(__name__)
@@ -60,7 +60,7 @@ class Approved(db.Model):
 
 # ============================
 # Add request path
-# POST http://it-vesna-requests-db-service-1:5700/requests
+# POST http://it-vesna-requests-db-service-1:27008/requests
 # JSON request: {
 #     "ID": "user_id",
 #     "Name": "request_name"
@@ -78,7 +78,7 @@ def add_request():
 
 # ============================
 # Delete request path
-# DELETE http://it-vesna-requests-db-service-1:5700/requests/<int:user_id>
+# DELETE http://it-vesna-requests-db-service-1:27008/requests/<int:user_id>
 # RETURN: "success"
 @app.route('/requests/<int:user_id>', methods=['DELETE'])
 def delete_request(user_id):
@@ -93,7 +93,7 @@ def delete_request(user_id):
 
 # ============================
 # This function return all requests from users from db
-# GET http://it-vesna-requests-db-service-1:5700/requests
+# GET http://it-vesna-requests-db-service-1:27008/requests
 # No JSON request required for GET request
 # RETURN: requests
 # [{
@@ -118,7 +118,7 @@ def get_requests():
 
 # ============================
 # Get request by user_id
-# GET http://it-vesna-requests-db-service-1:5700/requests/user/<int:user_id>
+# GET http://it-vesna-requests-db-service-1:27008/requests/user/<int:user_id>
 # RETURN: "success"
 @app.route('/requests/user/<int:user_id>', methods=['GET'])
 def get_request_by_user_id(user_id):
@@ -135,7 +135,7 @@ def get_request_by_user_id(user_id):
 
 # ============================
 # Get request by user_id
-# GET http://it-vesna-requests-db-service-1:5700/requests/<int:request_id>
+# GET http://it-vesna-requests-db-service-1:27008/requests/<int:request_id>
 # RETURN: "success"
 @app.route('/requests/<int:request_id>', methods=['GET'])
 def get_request_by_request_id(request_id):
@@ -157,7 +157,7 @@ def get_request_by_request_id(request_id):
 
 # ============================
 # Add request to archive
-# POST http://it-vesna-requests-db-service-1:5700/archive
+# POST http://it-vesna-requests-db-service-1:27008/archive
 # JSON request: {
 #     "ID": "request id"
 # }
@@ -173,7 +173,7 @@ def add_request2archive():
 
 # ============================
 # Delete request from archive
-# DELETE http://it-vesna-requests-db-service-1:5700/archive/<int:request_id>
+# DELETE http://it-vesna-requests-db-service-1:27008/archive/<int:request_id>
 # RETURN: "success"
 @app.route('/archive/<int:request_id>', methods=['DELETE'])
 def delete_request_from_archive(request_id):
@@ -188,7 +188,7 @@ def delete_request_from_archive(request_id):
 
 # ============================
 # This function return all archive from users from db
-# GET http://it-vesna-requests-db-service-1:5700/archive
+# GET http://it-vesna-requests-db-service-1:27008/archive
 # No JSON request required for GET request
 # RETURN: requests
 # [{
@@ -215,7 +215,7 @@ def get_arcives():
 
 # ============================
 # Add request to approved
-# POST http://it-vesna-requests-db-service-1:5700/approved
+# POST http://it-vesna-requests-db-service-1:27008/approved
 # JSON request: {
 #     "ID": "request id"
 # }
@@ -231,7 +231,7 @@ def add_request2approved():
 
 # ============================
 # Delete request from approved
-# DELETE http://it-vesna-requests-db-service-1:5700/approved/<int:request_id>
+# DELETE http://it-vesna-requests-db-service-1:27008/approved/<int:request_id>
 # RETURN: "success" / "not success"
 @app.route('/approved/<int:request_id>', methods=['DELETE'])
 def delete_request_from_approved(request_id):
@@ -246,7 +246,7 @@ def delete_request_from_approved(request_id):
 
 # ============================
 # This function return all approved from users from db
-# GET http://it-vesna-requests-db-service-1:5700/approved
+# GET http://it-vesna-requests-db-service-1:27008/approved
 # No JSON request required for GET request
 # RETURN: requests
 # [{
@@ -269,4 +269,4 @@ def get_approved():
 
 # =============================================================
 # Start server with static ip
-app.run(host='0.0.0.0', port='5700')
+app.run(host='0.0.0.0', port='5000')

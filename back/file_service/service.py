@@ -14,7 +14,7 @@ app = Flask(__name__)
 
 # ==================
 # Save transfered file
-# POST http://it-vesna-file-service-1:5500/file
+# POST http://it-vesna-file-service-1:27013/file
 # JSON request: {
 #     "local_path": "load_path"
 # }
@@ -37,7 +37,7 @@ def upload_file():
  
 # ==================
 # Load file from server
-# GET http://it-vesna-file-service-1:5500/file/<path:filename>
+# GET http://it-vesna-file-service-1:27013/file/<path:filename>
 # RETURN: file
 @app.route('/file/<path:filename>', methods=['GET'])
 def upload_file(filename): 
@@ -46,4 +46,4 @@ def upload_file(filename):
 
 # ==================
 # Start server with static ip
-app.run(host='0.0.0.0', port='5500')
+app.run(host='0.0.0.0', port='5000')

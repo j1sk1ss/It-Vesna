@@ -1,7 +1,7 @@
 import requests
 
 
-CRYPTO_SERVER = 'http://it-vesna-crypto-service-1:5300'
+CRYPTO_SERVER = 'http://it-vesna-crypto-service-1:27003'
 
 
 def crypto_str2hash(message, salt='none'):

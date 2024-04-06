@@ -17,7 +17,7 @@ ALLOWED_IP = [
 DB_NAME = "it-vesna-posts-db" # TODO: Move to local data. Don't store it here
 USER_NAME = "root"
 DB_PASS = "28072003"
-DB_HOST = "it-vesna-posts-db-1:5601"
+DB_HOST = "it-vesna-posts-db-1:27007"
 
 app = Flask(__name__)
 CORS(app)
@@ -32,3 +32,6 @@ db = SQLAlchemy(app)
 def limit_remote_addr():
     if request.remote_addr not in ALLOWED_IP:
         return 'ip not allowed'
+    
+
+# TODO: Work with posts DB

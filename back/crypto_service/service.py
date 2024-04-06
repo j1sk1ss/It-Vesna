@@ -24,7 +24,7 @@ CORS(app)
 # Converts string to hash with salt
 # string - string for converting
 # return: hash, salt
-# POST http://it-vesna-crypto-server-1:5300/str2hash
+# POST http://it-vesna-crypto-server-1:27003/str2hash
 # JSON request: {
 #     "message": "message",
 #     "salt": "salt or none"
@@ -55,4 +55,4 @@ def string2hash():
 
 # ==================
 # Start server with static ip
-app.run(host='0.0.0.0', port='5300')
+app.run(host='0.0.0.0', port='5000')

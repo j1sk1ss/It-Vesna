@@ -30,7 +30,7 @@ IMAGES = [] # TODO: Load images from disk (Paths to images)
 
 # ==================
 # Send data to destination
-# POST http://it-vesna-mail-service-1:5200/send_mail
+# POST http://it-vesna-mail-service-1:27002/send_mail
 # JSON request: {
 #     "destination": "destination_mail",
 #     "header": "mail_header",
@@ -79,4 +79,4 @@ def send_mail():
         
 # ==================
 # Start server with static ip
-app.run(host='0.0.0.0', port='5200')
+app.run(host='0.0.0.0', port='5000')

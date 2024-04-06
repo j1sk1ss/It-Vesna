@@ -19,7 +19,7 @@ ALLOWED_IP = [
 DB_NAME = "it-vesna-nom-db" # TODO: Move to local data. Don't store it here
 USER_NAME = "root"
 DB_PASS = "28072003"
-DB_HOST = "it-vesna-nom-db-1:5801"
+DB_HOST = "it-vesna-nom-db-1:27011"
 
 
 app = Flask(__name__)
@@ -53,7 +53,7 @@ class Nominations(db.Model):
 
 # ============================
 # Add nomination
-# POST http://it-vesna-users-db-service-1:5100/nominations
+# POST http://it-vesna-users-db-service-1:27010/nominations
 # JSON request: {
 #     "Name": "NominationName"
 # }
@@ -68,7 +68,7 @@ def add_nomination():
 
 # ============================
 # Delete nomination
-# DELETE http://it-vesna-users-db-service-1:5100/nominations/<int:nomination_id>
+# DELETE http://it-vesna-users-db-service-1:27010/nominations/<int:nomination_id>
 # No JSON request required for DELETE request
 @app.route('/nominations/<int:nomination_id>', methods=['DELETE'])
 def delete_nomination(nomination_id):
@@ -82,7 +82,7 @@ def delete_nomination(nomination_id):
     
 # ============================
 # This function return all nominations from db
-# GET http://it-vesna-requests-db-service-1:5800/nominations
+# GET http://it-vesna-requests-db-service-1:27010/nominations
 # No JSON request required for GET request
 # RETURN: requests
 # [{
@@ -106,7 +106,7 @@ def get_requests():
 
 # ============================
 # Get nomination by id
-# GET http://it-vesna-requests-db-service-1:5800/nominations/<int:user_id>
+# GET http://it-vesna-requests-db-service-1:27010/nominations/<int:user_id>
 # RETURN: "success"
 @app.route('/nominations/<int:nom_id>', methods=['GET'])
 def get_request_by_user_id(nom_id):
@@ -123,4 +123,4 @@ def get_request_by_user_id(nom_id):
 
 # =============================================================
 # Start server with static ip
-app.run(host='0.0.0.0', port='5800')
+app.run(host='0.0.0.0', port='5000')
