@@ -1,45 +1,57 @@
 import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
-import './MainUserPage.css'; // Переименовали файл стилей
+import { Link } from 'react-router-dom'; // Импортируем компонент Link
+import './MainUserPage.css';
 
 const MainUserPage = () => {
   const [selectedTab, setSelectedTab] = useState('Главная');
-  const [tabHeight, setTabHeight] = useState(0); // Переименовали состояние
+  const [posts] = useState({ 'Главная': [], 'Участие': [], 'План мероприятий': [], 'Положения конкурса': [], 'Состав жюри': [], 'Технические требования': [] });
+  const [tabHeight, setTabHeight] = useState(0);
 
   useEffect(() => {
-    const tabElement = document.querySelector(`.tab.${selectedTab}`); // Изменили класс для выбора элемента
+    const tabElement = document.querySelector(`.tab.${selectedTab}`);
     if (tabElement) {
       setTabHeight(tabElement.clientHeight);
     }
-  }, [selectedTab, setTabHeight]);
+  }, [selectedTab]);
 
   const handleTabClick = (tabName) => {
     setSelectedTab(tabName);
   };
 
-  return (
-    <div className="main-user-page"> {/* Изменили класс контейнера */}
-      <div className="user-page-container">
-        <div className="user-page">
-          <div className="transparent-bar">
-            <div className="it-vesna">IT Весна</div>
+  const renderTabContent = () => {
+    return (
+      <div className="posts-container">
+        {posts[selectedTab].map((post, index) => (
+          <div key={index} className="post">
+            {post}
           </div>
-          
-          <div className="tab-container">
-            <div className="left-tab-container">
-              <div className={`tab ${selectedTab === 'Главная' ? 'active' : ''}`} onClick={() => handleTabClick('Главная')}>Главная</div>
-              <div className={`tab ${selectedTab === 'Участие' ? 'active' : ''}`} onClick={() => handleTabClick('Участие')}>Участие</div>
-              <div className={`tab ${selectedTab === 'Новости' ? 'active' : ''}`} onClick={() => handleTabClick('Новости')}>Новости</div>
-            </div>
-          </div>
-          
-          <div className="user-tab-content">
-            {/* Ваш контент вкладок */}
-          </div>
+        ))}
+      </div>
+    );
+  };
 
-          <Link to="/main-admin-page" className="admin-button">Перейти в режим модератора</Link>
-          <Link to="/request-page" className="application-button">Подать заявку</Link>
+  return (
+    <div className="user-page-container">
+      <div className="user-page">
+        <div className="transparent-bar">
+          <div className="it-vesna">IT Весна</div>
         </div>
+        
+        <div className="tab-container">
+          <div className="left-tab-container">
+            {Object.keys(posts).map(tabName => (
+              <div key={tabName} className={`tab ${selectedTab === tabName ? 'active' : ''}`} onClick={() => handleTabClick(tabName)}>{tabName}</div>
+            ))}
+          </div>
+        </div>
+        
+        <div className="tab-content" style={{ marginTop: `${tabHeight}px` }}>
+          {renderTabContent()}
+        </div>
+        
+        {/* Добавляем ссылку для перехода на страницу администратора */}
+        <Link to="/request-page" className="request-button">Подать заявку</Link>
+        <Link to="/main-admin-page" className="admin-button">Перейти в режим модератора</Link>
       </div>
     </div>
   );
