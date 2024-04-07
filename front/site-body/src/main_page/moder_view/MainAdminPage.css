@@ -3,6 +3,18 @@
 /* Подключение шрифта Jura с Google Fonts */
 @import url('https://fonts.googleapis.com/css2?family=Jura&display=swap');
 
+
+body, html {
+    margin: 0;
+    padding: 0;
+    background-image: url('/public/background.png');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed; /* Зафиксировать фоновое изображение */
+}
+
+
+
 /* Общие стили для страницы административной панели */
 .admin-panel-page {
     align-items: flex-start;
@@ -42,7 +54,7 @@
     margin-left: 0.6vw;
     margin-top: 4vw;
     margin-bottom: 0.5vw;
-    font-size: 20px; /* Адаптивный размер шрифта */   
+    font-size: 18px; /* Адаптивный размер шрифта */   
 }
 
 .admin-panel-page .left-tab-container .tab,
@@ -90,7 +102,7 @@
     cursor: pointer; /* Устанавливаем курсор в виде указателя */
     margin-left: auto; /* Размещаем кнопку справа */
     margin-top: auto; /* Размещаем кнопку снизу */
-    width: 10vw;
+    width: 1000px;
 }
 
 .publish-button:hover {
