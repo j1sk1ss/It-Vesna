@@ -3,116 +3,74 @@
 /* Подключение шрифта Jura с Google Fonts */
 @import url('https://fonts.googleapis.com/css2?family=Jura&display=swap');
 
-/* Общие стили для страницы пользователя */
-.user-page {
-    width: 100%; 
-    height: 100%; 
-    font-family: 'Jura', sans-serif; /* Применяем шрифт Jura ко всему контенту */
-}
-
-/* Белая полоса с надписью "IT Весна" */
-.header-container {
-    background-color: rgb(255, 255, 255);
-    width: 100%;
-}
-
 .user-page .tab-container {
-    background-color: rgba(128, 128, 128, 0);
+    border-radius: 5px; /* Адаптивное закругление углов */
     display: flex;
     justify-content: space-between;
-    padding: 10px; 
-    width: 100%;
-    margin-left: 0.6vw;
+    padding-top: 10px; 
+    padding-bottom: 10px; 
+    padding-left: 0px;
+    margin-left: 0.7vw;
     margin-top: 4vw;
     margin-bottom: 0.5vw;
-    font-size: 18px;
+    font-size: 18px;  
 }
 
 .user-page .left-tab-container .tab,
 .user-page .right-tab-container .tab {
     border-radius: 5px; /* Адаптивное закругление углов */
     border: none; /* Убираем границу */
-    margin-right: 0; /* Уменьшаем отступ справа */
+    margin-right: 0.5vw; /* Уменьшаем отступ справа */
+    margin-left: 0.5vw; /* Уменьшаем отступ справа */
+    width: auto; /* Установим ширину в автоматическую, чтобы текст был в одну строку */
+    white-space: nowrap; /* Запретим перенос текста на новую строку */
 }
 
-.user-page .tab.active {
-    background-color: rgb(0, 0, 0);
-    color: rgb(255, 255, 255);
+.user-page .left-tab-container {
+    background-color: rgba(0, 0, 0, 0.075);
+    width: 80vw;
+    border-radius: 5px; /* Адаптивное закругление углов */
+    padding: 8px;
 }
 
-.post-input-container {
-    display: flex; /* Располагаем элементы внутри контейнера в колонку */
-    flex-direction: column; /* Определяем направление осей: колонка */
-    align-items: center; /* Располагаем элементы по центру горизонтальной оси */
-    margin-top: 1vw;
-    background-color: #1111110a; /* Цвет фона кнопки */
-    width: 90%; /* Растягиваем контейнер на всю доступную ширину */
-    padding: 20px; /* Добавляем внутренние отступы */
-    box-sizing: border-box; /* Учитываем внутренние отступы в общей ширине */
-    border-radius: 15px; /* Закругляем углы поля ввода */
+.user-page .right-tab-container {
     margin-left: 5vw;
 }
 
-.post-input {
-    flex: 1; /* Растягиваем поле ввода на всю доступную ширину */
-    margin-top: -10px;
-    margin-right: 5px; /* Добавляем внешний отступ между полем ввода и кнопкой */
-    border-radius: 15px; /* Закругляем углы поля ввода */
-    border: 1px solid #ccc; /* Добавляем рамку */
-    font-size: 18px; /* Размер шрифта */
-}
 
-/* Стили для кнопки "Опубликовать" */
-.publish-button {
-    padding: 10px 5px; /* Задаем внутренние отступы кнопки */
-    background-color: rgb(0, 0, 0); /* Цвет фона кнопки */
-    color: white; /* Цвет текста кнопки */
-    border: none; /* Убираем границу кнопки */
-    border-radius: 15px; /* Закругляем углы поля ввода */
-    font-size: 18px; /* Размер шрифта */
-    cursor: pointer; /* Устанавливаем курсор в виде указателя */
-    margin-left: auto; /* Размещаем кнопку справа */
-    margin-top: auto; /* Размещаем кнопку снизу */
-    width: 10vw;
+.user-page .tab.active {
+    background-color: rgb(255, 255, 255);
+    color: rgb(0, 0, 0);
 }
 
 .publish-button:hover {
     background-color: rgb(0, 0, 0); /* Изменяем цвет фона при наведении */
 }
 
-.post {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    align-items: flex-start;
-    background-color: #f0f0f07a;
-    border-radius: 15px;
-    padding: 1vh 2vw; /* Адаптивные внутренние отступы */
-    margin-bottom: 2vh; /* Адаптивный отступ снизу */
-    overflow-wrap: break-word; /* Перенос слов */
-    font-size: 1.8vw; /* Уменьшаем размер текста */
-    margin-left: 5vw;
-    margin-top: 1vw;
-    font-weight: normal; /* Убираем жирное начертание */
-    width: 86%; /* Устанавливаем ширину контейнера */
-    word-wrap: break-word; /* Дополнительный перенос слов для кроссбраузерной совместимости */
-    word-break: break-word; /* Дополнительный перенос слов для кроссбраузерной совместимости */
-}
-
+/* Добавляем стили для кнопки "Подать заявку" */
 .request-button {
     padding: 10px 20px; /* Задаем внутренние отступы кнопки */
     background-color: rgb(0, 0, 0); /* Цвет фона кнопки */
     color: white; /* Цвет текста кнопки */
     border: none; /* Убираем границу кнопки */
     border-radius: 5px; /* Закругляем углы кнопки */
-    font-size: 20px; /* Размер шрифта */
+    font-size: px; /* Размер шрифта */
     cursor: pointer; /* Устанавливаем курсор в виде указателя */
-    text-decoration: none; /* Убираем подчеркивание текста */
-    margin-left: 2vw; /* Добавляем внешний отступ справа */
-    margin-bottom: 5px; /* Добавляем внешний отступ справа */
-
-}
+    width: 8vw;
+    text-align: center; /* Выравниваем текст по центру */
+    line-height: 40px; /* Выравниваем по вертикали */
+  }
+  
+  /* Добавляем стили для контейнера кнопки "Подать заявку" */
+  .request-button-container {
+    display: flex; /* Размещаем элементы в строку */
+    align-items: center; /* Выравниваем элементы по вертикали */
+    justify-content: flex-end; /* Выравниваем элементы по правому краю */
+  }
 
 .request-button:hover {
     background-color: rgb(50, 50, 50); /* Изменяем цвет фона при наведении */
 }
+
+
+

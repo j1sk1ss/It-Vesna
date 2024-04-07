@@ -26,9 +26,7 @@ const MainAdminPage = () => {
         ...posts,
         [selectedTab]: [postText, ...posts[selectedTab]]
       });
-      setPostText(''); // Очищаем состояние поля ввода
-      // Очищаем содержимое поля ввода с помощью установки пустого innerHTML
-      document.querySelector('.post-input').innerHTML = '';
+      setPostText('');
     }
   };
 
@@ -41,25 +39,24 @@ const MainAdminPage = () => {
     updatedPosts.splice(index, 1);
     setPosts({ ...posts, [selectedTab]: updatedPosts });
   };
-  
+
   const pinPost = (index) => {
     const updatedPosts = [...posts[selectedTab]];
-    const pinnedPost = updatedPosts.splice(index, 1)[0]; // Удаляем пост из текущей позиции и сохраняем его
-    const pinnedIndex = updatedPosts.findIndex(post => post.pinned); // Ищем индекс закрепленного поста
-    updatedPosts.splice(pinnedIndex !== -1 ? pinnedIndex : 0, 0, pinnedPost); // Вставляем закрепленный пост в начало или на место существующего закрепленного поста
+    const pinnedPost = updatedPosts.splice(index, 1)[0];
+    const pinnedIndex = updatedPosts.findIndex(post => post.pinned);
+    updatedPosts.splice(pinnedIndex !== -1 ? pinnedIndex : 0, 0, pinnedPost);
     setPosts({ ...posts, [selectedTab]: updatedPosts });
   };
-  
+
   const editPost = (index) => {
     const updatedPosts = [...posts[selectedTab]];
-    const editedPost = updatedPosts[index]; // Получаем выбранный пост
-    setPostText(editedPost); // Устанавливаем текст выбранного поста в поле ввода
-    setShowActions(false); // Закрываем окно действий после выбора редактирования
-    // Удаляем отредактированный пост из списка
+    const editedPost = updatedPosts[index];
+    setPostText(editedPost);
+    setShowActions(false);
     updatedPosts.splice(index, 1);
     setPosts({ ...posts, [selectedTab]: updatedPosts });
   };
-  
+
   const renderTabContent = () => {
     return (
       <div className="posts-container">
@@ -79,7 +76,7 @@ const MainAdminPage = () => {
       </div>
     );
   };
-  
+
   return (
     <div className="admin-panel-page-container">
       <div className="admin-panel-page">
@@ -88,7 +85,6 @@ const MainAdminPage = () => {
             <div className="transparent-bar">
               <div className="it-vesna">IT Весна</div>
             </div>
-          
             <div className="tab-container">
               <div className="left-tab-container">
                 {Object.keys(posts).map(tabName => (
@@ -98,22 +94,19 @@ const MainAdminPage = () => {
             </div>
           </div>
         </div>
-        
         <div className="post-input-container">
-          <div
+          <textarea
             className="post-input"
-            contentEditable="true"
             placeholder="Что опубликовать?"
-            onInput={(e) => setPostText(e.target.innerText)}
+            value={postText}
+            onChange={(e) => setPostText(e.target.value)}
             style={{ width: '99%', minHeight: '100px', outline: 'none', border: '1px solid #ccc', padding: '10px', fontSize: '18px', resize: 'none' }}
           />
           <button className="publish-button" onClick={handlePublish}>Опубликовать</button>
         </div>
-        
         <div className="tab-content" style={{ marginTop: `${tabHeight}px` }}>
           {renderTabContent()}
         </div>
-        
         <Link to="/admin-panel" className="admin-panel-button">Перейти на страницу администратора</Link>
       </div>
     </div>

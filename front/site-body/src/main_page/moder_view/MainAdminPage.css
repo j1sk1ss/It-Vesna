@@ -3,18 +3,6 @@
 /* Подключение шрифта Jura с Google Fonts */
 @import url('https://fonts.googleapis.com/css2?family=Jura&display=swap');
 
-
-body, html {
-    margin: 0;
-    padding: 0;
-    background-image: url('/public/background.png');
-    background-size: cover;
-    background-repeat: no-repeat;
-    background-attachment: fixed; /* Зафиксировать фоновое изображение */
-}
-
-
-
 /* Общие стили для страницы административной панели */
 .admin-panel-page {
     align-items: flex-start;
@@ -31,30 +19,30 @@ body, html {
 .header-container {
     background-color: rgb(255, 255, 255);
     width: 100%;
-}
-
-.header-wrapper {
-    position: relative; /* Относительное позиционирование для обертки */
-    width: 100%; /* Ширина равна ширине родительского контейнера */
+    padding: 5px;
 }
 
 .header-container .it-vesna {
     font-size: 64px; /* Увеличиваем размер шрифта до 64 пикселей */
     position: absolute; /* Абсолютное позиционирование */
-    top: 0; /* Прикрепляем к верху */
+    top: 0; /* Прикрепляем к верхнему краю*/
     left: 0; /* Прикрепляем к левому краю */
-    margin-left: 2vw;
+    margin-left: vw;
 }
 
 .admin-panel-page .tab-container {
-    background-color: rgba(128, 128, 128, 0);
+    background-color: rgba(0, 0, 0, 0.075);
+    border-radius: 5px; /* Адаптивное закругление углов */
     display: flex;
     justify-content: space-between;
-    padding: 10px; 
-    margin-left: 0.6vw;
+    padding-top: 10px; 
+    padding-bottom: 10px; 
+    padding-left: 8px;
+    margin-left: 0.7vw;
     margin-top: 4vw;
     margin-bottom: 0.5vw;
-    font-size: 18px; /* Адаптивный размер шрифта */   
+    font-size: 18px;  
+    width: 74vw;
 }
 
 .admin-panel-page .left-tab-container .tab,
@@ -62,11 +50,12 @@ body, html {
     border-radius: 5px; /* Адаптивное закругление углов */
     border: none; /* Убираем границу */
     margin-right: 0px; /* Уменьшаем отступ справа */
+    margin-left: 0px; /* Уменьшаем отступ справа */
 }
 
 .admin-panel-page .tab.active {
-    background-color: rgb(0, 0, 0);
-    color: rgb(255, 255, 255);
+    background-color: rgb(255, 255, 255);
+    color: rgb(0, 0, 0);
 }
 
 .post-input-container {
@@ -76,33 +65,49 @@ body, html {
     margin-top: 1vw;
     background-color: #1111110a; /* Цвет фона кнопки */
     width: 90%; /* Растягиваем контейнер на всю доступную ширину */
-    padding: 20px; /* Добавляем внутренние отступы */
+    padding: 15px; /* Добавляем внутренние отступы */
     box-sizing: border-box; /* Учитываем внутренние отступы в общей ширине */
-    border-radius: 15px; /* Закругляем углы поля ввода */
+    border-radius: 31px; /* Закругляем углы поля ввода */
     margin-left: 5vw;
+    padding-bottom: 0px;
+    overflow: hidden; /* Обрезаем содержимое, выходящее за границы контейнера */
+
 }
 
 .post-input {
     flex: 1; /* Растягиваем поле ввода на всю доступную ширину */
     margin-top: -10px;
     margin-right: 5px; /* Добавляем внешний отступ между полем ввода и кнопкой */
-    border-radius: 15px; /* Закругляем углы поля ввода */
-    border: 1px solid #ccc; /* Добавляем рамку */
+    border-radius: 31px; /* Закругляем углы поля ввода */
+    border: 1px solid rgba(0, 0, 0, 0.034); /* Добавляем рамку */
     font-size: 18px; /* Размер шрифта */
+    color: #333; /* Цвет текста */
+    background-color: rgba(0, 0, 0, 0.068); /* Цвет фона */
 }
+
+.post-input::placeholder {
+    color: #B4B4B4; /* Цвет плейсхолдера */
+  }
 
 /* Стили для кнопки "Опубликовать" */
 .publish-button {
-    padding: 10px 5px; /* Задаем внутренние отступы кнопки */
+    /* Ваши текущие стили */
+    padding: 14px; /* Убираем внутренние отступы кнопки */
     background-color: rgb(0, 0, 0); /* Цвет фона кнопки */
     color: white; /* Цвет текста кнопки */
     border: none; /* Убираем границу кнопки */
-    border-radius: 15px; /* Закругляем углы поля ввода */
+    border-radius: 31px; /* Закругляем углы поля ввода */
     font-size: 18px; /* Размер шрифта */
     cursor: pointer; /* Устанавливаем курсор в виде указателя */
     margin-left: auto; /* Размещаем кнопку справа */
     margin-top: auto; /* Размещаем кнопку снизу */
-    width: 1000px;
+    margin-bottom: -30px; /* Сдвигаем кнопку немного вверх */
+    margin-right: -40px; /* Сдвигаем кнопку немного влево */
+    width: 12vw; /* Ширина кнопки */
+    height: 4vw; /* Высота кнопки */
+    display: flex; /* Располагаем текст внутри кнопки по вертикали */
+    justify-content: center; /* Выравниваем текст по левому краю */
+    align-items: flex-start; /* Выравниваем текст по верхнему краю */
 }
 
 .publish-button:hover {
