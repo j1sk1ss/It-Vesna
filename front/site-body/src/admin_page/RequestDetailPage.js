@@ -14,7 +14,7 @@ const RequestDetailPage = ({ handleDeleteRequest }) => {
     const [isHovered, setIsHovered] = useState(false);
     const handleDelete = () => {
         deleteRequest(selectedRequest.id);
-        navigate('/request-window-page'); 
+        navigate('/admin-panel'); 
       };
     const toggleHover = () => {
         setIsHovered(!isHovered);
