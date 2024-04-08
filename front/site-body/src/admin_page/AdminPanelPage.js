@@ -55,24 +55,27 @@ const AdminPanelPage = () => {
   return (
     <div className="adminp-panel-page-container">
       <div className="adminp-panel-page">
-        <div className="adminp-transparent-bar">
-          <div className="adminp-it-vesna">IT Весна</div>
-        </div>
-        
-        <div className="adminp-tab-container">
-          <div className="adminp-left-tab-container">
-            <div className={`adminp-tab ${selectedTab === 'Заявки' ? 'active' : ''}`} onClick={() => handleTabClick('Заявки')}>Заявки</div>
-            <div className={`adminp-tab ${selectedTab === 'Модераторы' ? 'active' : ''}`} onClick={() => handleTabClick('Модераторы')}>Модераторы</div>
-            <div className={`adminp-tab ${selectedTab === 'Номинации' ? 'active' : ''}`} onClick={() => handleTabClick('Номинации')}>Номинации</div>
-          </div>
-          <div className="adminp-right-tab-container">
-            {selectedTab === 'Заявки' && (
-              <>
-                <div className={`adminp-tab ${subTab === 'На рассмотрении' ? 'active' : ''}`} onClick={() => setSubTab('На рассмотрении')}>На рассмотрении</div>
-                <div className={`adminp-tab ${subTab === 'Принятые' ? 'active' : ''}`} onClick={() => setSubTab('Принятые')}>Принятые</div>
-                <div className={`adminp-tab ${subTab === 'Архив' ? 'active' : ''}`} onClick={() => setSubTab('Архив')}>Архив</div>
-              </>
-            )}
+        <div className="header-container">
+          <div className="header-wrapper">
+            <div className="transparent-bar">
+              <div className="it-vesna">IT Весна</div>
+            </div>
+            <div className="tab-container">
+              <div className="left-tab-container">
+                <div className={`tab ${selectedTab === 'Заявки' ? 'active' : ''}`} onClick={() => handleTabClick('Заявки')}>Заявки</div>
+                <div className={`tab ${selectedTab === 'Модераторы' ? 'active' : ''}`} onClick={() => handleTabClick('Модераторы')}>Модераторы</div>
+                <div className={`tab ${selectedTab === 'Номинации' ? 'active' : ''}`} onClick={() => handleTabClick('Номинации')}>Номинации</div>
+              </div>
+              <div className="right-tab-container">
+                {selectedTab === 'Заявки' && (
+                  <>
+                    <div className={`tab ${subTab === 'На рассмотрении' ? 'active' : ''}`} onClick={() => setSubTab('На рассмотрении')}>На рассмотрении</div>
+                    <div className={`tab ${subTab === 'Принятые' ? 'active' : ''}`} onClick={() => setSubTab('Принятые')}>Принятые</div>
+                    <div className={`tab ${subTab === 'Архив' ? 'active' : ''}`} onClick={() => setSubTab('Архив')}>Архив</div>
+                  </>
+                )}
+              </div>
+            </div>
           </div>
         </div>
         
