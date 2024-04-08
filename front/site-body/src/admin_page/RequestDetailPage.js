@@ -24,20 +24,20 @@ const RequestDetailPage = ({ handleDeleteRequest }) => {
         <div className="RequestDetailsPage">
                 <div className='modal'>
                     <div className='basic-stroke'>
-                        <div>FIO</div>
+                        <div>ФИО</div>
                         <div>{selectedRequest.date}</div>
                     </div>
                     <div className='stroke'>
                         <div>{selectedRequest.author}</div>
                         <div className='stroke-button'><button className="button copy-button" onClick={() => copyToClipboard(selectedRequest.author)}></button></div>
                     </div>
-                    <div className='basic-stroke'>Pochta </div>
+                    <div className='basic-stroke'>Почта </div>
                     <div className='stroke'>{selectedRequest.email} <button className="button copy-button" onClick={() => copyToClipboard(selectedRequest.email)}></button></div>
-                    <div className='basic-stroke'>nominacia </div>
+                    <div className='basic-stroke'>Номинация </div>
                     <div className='stroke-nonborder'>{selectedRequest.nomination}</div>
-                    <div className='basic-stroke'>nazvanie</div>
+                    <div className='basic-stroke'>Название</div>
                     <div className='stroke-nonborder'>{selectedRequest.title}</div>
-                    <div className='basic-stroke'>Opisanie</div>
+                    <div className='basic-stroke'>Описание</div>
                     <div className='stroke-description'>{selectedRequest.description}</div>
                     <div className='att-ref'>
                         <div><a href={selectedRequest.consentLink1} target="_blank" rel="noopener noreferrer">Soglasie 1</a> </div>
