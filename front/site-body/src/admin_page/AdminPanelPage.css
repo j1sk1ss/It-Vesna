@@ -292,19 +292,19 @@
 }
 
 .adminp-more-button {
-    background-image: url('logo.png');
+    background-image: url('more.png');
 }
 
 .adminp-delete-button {
-    background-image: url('otmena.png');
+    background-image: url('delete.png');
 }
 
 .adminp-accept-button {
-    background-image: url('ok.png');
+    background-image: url('accept.png');
 }
 
 .adminp-archive-button {
-    background-image: url('arh.png');
+    background-image: url('archive.png');
 }
 
 @font-face {

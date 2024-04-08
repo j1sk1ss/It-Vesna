@@ -245,10 +245,9 @@ a {
     margin-right: 5px;
 }
 
-<<<<<<< HEAD
-=======
+
 .more-button {
-    background-image: url('logo.png');
+    background-image: url('more.png');
     background-color: #00000000;
     width: 4vw;
     height: 4vw;
@@ -259,7 +258,7 @@ a {
 }
 
 .delete-button {
-    background-image: url('otmena.png');
+    background-image: url('delete.png');
     background-color: #00000000;
     width: 4vw;
     height: 4vw;
@@ -270,7 +269,7 @@ a {
 }
 
 .accept-button {
-    background-image: url('ok.png');
+    background-image: url('accept.png');
     background-color: #00000000;
     width: 4vw;
     height: 4vw;
@@ -281,7 +280,7 @@ a {
 }
 
 .archive-button {
-    background-image: url('arh.png');
+    background-image: url('archive.png');
     background-color: #00000000;
     width: 4vw;
     height: 4vw;
@@ -290,7 +289,7 @@ a {
     cursor: pointer;
     margin-right: 5px;
 }
->>>>>>> 8aa1b29 (fix head mainpage)
+
 @font-face {
     font-family: 'Jura';
     src: url('Jura.ttf') format('truetype');
