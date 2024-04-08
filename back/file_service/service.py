@@ -20,7 +20,7 @@ app = Flask(__name__)
 # }
 # RETURN: "no file" / file path
 @app.route('/file', methods=['POST'])
-def upload_file():
+def put_file():
     if 'file' not in request.files:
         return 'no file'
     
@@ -40,7 +40,7 @@ def upload_file():
 # GET http://it-vesna-file-service-1:27013/file/<path:filename>
 # RETURN: file
 @app.route('/file/<path:filename>', methods=['GET'])
-def upload_file(filename): 
+def get_file(filename): 
     return send_file(filename, as_attachment=True)
 
 
