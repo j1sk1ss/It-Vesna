@@ -35,22 +35,25 @@
     border-radius: 5px; /* Адаптивное закругление углов */
     display: flex;
     justify-content: space-between;
-    padding-top: 10px; 
-    padding-bottom: 10px; 
-    padding-left: 8px;
     margin-left: 0.7vw;
-    margin-top: 4vw;
-    margin-bottom: 0.5vw;
-    font-size: 18px;  
-    width: 74vw;
+    margin-top: 5vw;
+    margin-bottom: 1vw;
+    font-size: 16px; 
+    width: 66vw;
+    border-radius: 5px; /* Адаптивное закругление углов */
+    padding: 8px;
+    align-items: center; /* Выравниваем элементы по вертикали */
 }
 
 .admin-panel-page .left-tab-container .tab,
 .admin-panel-page .right-tab-container .tab {
     border-radius: 5px; /* Адаптивное закругление углов */
     border: none; /* Убираем границу */
-    margin-right: 0px; /* Уменьшаем отступ справа */
-    margin-left: 0px; /* Уменьшаем отступ справа */
+    margin-right: 0.5vw; /* Уменьшаем отступ справа */
+    margin-left: 0.5vw; /* Уменьшаем отступ справа */
+    width: auto; /* Установим ширину в автоматическую, чтобы текст был в одну строку */
+    white-space: nowrap; /* Запретим перенос текста на новую строку */
+    padding: 10px;
 }
 
 .admin-panel-page .tab.active {
@@ -92,7 +95,7 @@
 /* Стили для кнопки "Опубликовать" */
 .publish-button {
     /* Ваши текущие стили */
-    padding: 14px; /* Убираем внутренние отступы кнопки */
+    padding: 1.5vw; /* Убираем внутренние отступы кнопки */
     background-color: rgb(0, 0, 0); /* Цвет фона кнопки */
     color: white; /* Цвет текста кнопки */
     border: none; /* Убираем границу кнопки */
@@ -101,10 +104,10 @@
     cursor: pointer; /* Устанавливаем курсор в виде указателя */
     margin-left: auto; /* Размещаем кнопку справа */
     margin-top: auto; /* Размещаем кнопку снизу */
-    margin-bottom: -30px; /* Сдвигаем кнопку немного вверх */
-    margin-right: -40px; /* Сдвигаем кнопку немного влево */
-    width: 12vw; /* Ширина кнопки */
-    height: 4vw; /* Высота кнопки */
+    margin-bottom: -2vw; /* Сдвигаем кнопку немного вверх */
+    margin-right: -2.6vw; /* Сдвигаем кнопку немного влево */
+    width: 13vw; /* Ширина кнопки */
+    height: 6vw; /* Высота кнопки */
     display: flex; /* Располагаем текст внутри кнопки по вертикали */
     justify-content: center; /* Выравниваем текст по левому краю */
     align-items: flex-start; /* Выравниваем текст по верхнему краю */

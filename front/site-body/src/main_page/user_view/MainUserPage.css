@@ -13,7 +13,7 @@
     margin-left: 0.7vw;
     margin-top: 4vw;
     margin-bottom: 0.5vw;
-    font-size: 18px;  
+    font-size: 16px;  
 }
 
 .user-page .left-tab-container .tab,
@@ -24,19 +24,17 @@
     margin-left: 0.5vw; /* Уменьшаем отступ справа */
     width: auto; /* Установим ширину в автоматическую, чтобы текст был в одну строку */
     white-space: nowrap; /* Запретим перенос текста на новую строку */
+    padding: 10px;
 }
 
 .user-page .left-tab-container {
     background-color: rgba(0, 0, 0, 0.075);
-    width: 80vw;
+    width: 66vw;
     border-radius: 5px; /* Адаптивное закругление углов */
     padding: 8px;
-}
+    align-items: center; /* Выравниваем элементы по вертикали */
 
-.user-page .right-tab-container {
-    margin-left: 5vw;
 }
-
 
 .user-page .tab.active {
     background-color: rgb(255, 255, 255);
