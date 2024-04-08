@@ -246,3 +246,77 @@
 .moderator-container:hover {
     background-color: #e0e0e080;
 }
+.request1 {
+    border-radius: 31px;
+    padding: 15px;
+    margin-bottom: 10px;
+    margin-right: 20px;
+    margin-left: 20px;
+    display: flex;
+    justify-content: space-between;
+    width: calc(100% - 40px);
+    height: 80px;
+    padding-bottom: 20px;
+    box-shadow: 1px 4px 4px rgba(0, 0, 0, 0.25);
+    background-color: rgba(254, 254, 254, 0.4);
+}
+.request-buttons {
+    display: flex;
+    align-items: center;
+  justify-content: center;
+}
+.request-info {
+    display: flex;
+    flex-direction: column;
+    align-self: center;
+    align-items: flex-start;
+    font-family: Jura;
+    font-size: 1.5vw;
+    font-weight: 700;
+}
+.request-buttons button {
+    margin-right: 5px;
+}
+.more-button {
+    background-image: url('logo.png');
+    width: 4vw;
+    height: 4vw;
+    background-size: cover;
+    border: none;
+    cursor: pointer;
+    margin-right: 5px;
+}
+
+.delete-button {
+    background-image: url('otmena.png');
+    width: 4vw;
+    height: 4vw;
+    background-size: cover;
+    border: none;
+    cursor: pointer;
+    margin-right: 5px;
+}
+
+.accept-button {
+    background-image: url('ok.png');
+    width: 4vw;
+    height: 4vw;
+    background-size: cover;
+    border: none;
+    cursor: pointer;
+    margin-right: 5px;
+}
+
+.archive-button {
+    background-image: url('arh.png');
+    width: 4vw;
+    height: 4vw;
+    background-size: cover;
+    border: none;
+    cursor: pointer;
+    margin-right: 5px;
+}
+@font-face {
+    font-family: 'Jura';
+    src: url('Jura.ttf') format('truetype');
+}

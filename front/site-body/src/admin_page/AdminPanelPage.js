@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 import './AdminPanelPage.css';
+import { useRequestContext } from './RequestContext';
+import { Link } from 'react-router-dom';
 
 const AdminPanelPage = () => {
   const [selectedTab, setSelectedTab] = useState('Заявки');
@@ -9,7 +11,14 @@ const AdminPanelPage = () => {
   const [moderators, setModerators] = useState([]);
   const [isModeratorsTabSelected, setIsModeratorsTabSelected] = useState(false);
   const [nominationName, setNominationName] = useState('');
-  const [nominations, setNominations] = useState(['Номинация 1', 'Номинация 2', 'Номинация 3']); // Список номинаций
+  const [nominations, setNominations] = useState(['Номинация 1', 'Номинация 2', 'Номинация 3']);
+  const { requests} = useRequestContext();
+  const { setRequests } = useRequestContext();
+
+  const handleDeleteRequest = (id) => {
+      const updatedRequests = requests.filter(request => request.id !== id);
+      setRequests(updatedRequests);
+  };
 
   const handleTabClick = (tabName) => {
     setSelectedTab(tabName);
@@ -70,7 +79,27 @@ const AdminPanelPage = () => {
         <div className="tab-content">
           {selectedTab === 'Заявки' && (
             <div>
-              {subTab === 'На рассмотрении' && <div>Содержимое подвкладки "На рассмотрении"</div>}
+              {subTab === 'На рассмотрении' && 
+              <div>
+              <div className="RequestWindowPage">
+            <div className="requests1">
+                {requests.map(request => (
+                    <div key={request.id} className="request1">
+                        <div className="request-info">
+                            <div>{request.author}</div>
+                            <div>{request.title}</div>
+                        </div>
+                        <div className="request-buttons">
+                            <Link to={`/request/${request.id}`} className="button more-button"></Link> 
+                            <button className="button delete-button" onClick={() => handleDeleteRequest(request.id)}></button>
+                            <button className="button accept-button"></button>
+                            <button className="button archive-button"></button>
+                        </div>
+                    </div>
+                ))}
+            </div>
+        </div>
+                </div>}
               {subTab === 'Принятые' && <div>Содержимое подвкладки "Принятые"</div>}
               {subTab === 'Архив' && <div>Содержимое подвкладки "Архив"</div>}
             </div>
