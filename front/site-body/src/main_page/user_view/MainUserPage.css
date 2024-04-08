@@ -14,6 +14,7 @@
     margin-top: 4vw;
     margin-bottom: 0.5vw;
     font-size: 16px;  
+    font-weight: bold;
 }
 
 .user-page .left-tab-container .tab,
@@ -29,7 +30,6 @@
 
 .user-page .left-tab-container {
     background-color: rgba(0, 0, 0, 0.075);
-    width: 66vw;
     border-radius: 5px; /* Адаптивное закругление углов */
     padding: 8px;
     align-items: center; /* Выравниваем элементы по вертикали */
