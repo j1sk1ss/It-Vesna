@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom'; // Импортируем компонент Link
+import { Link } from 'react-router-dom';
 import './MainUserPage.css';
 
 const MainUserPage = () => {
@@ -18,7 +18,6 @@ const MainUserPage = () => {
     setSelectedTab(tabName);
   };
 
-
   return (
     <div className="user-page-container">
       <div className="user-page">
@@ -33,9 +32,12 @@ const MainUserPage = () => {
                 {Object.keys(posts).map(tabName => (
                   <div key={tabName} className={`tab ${selectedTab === tabName ? 'active' : ''}`} onClick={() => handleTabClick(tabName)}>{tabName}</div>
                 ))}
-                <Link to="/request-page" className="request-button">Подать заявку</Link>
-              </div>
-            </div>
+             </div>
+            <div className="right-tab-container">
+        <Link to="/request-page" className="request-button">Подать заявку</Link>
+    </div>
+</div>
+
           </div>
         </div>
         
