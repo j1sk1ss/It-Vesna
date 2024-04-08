@@ -26,7 +26,9 @@ const MainAdminPage = () => {
         ...posts,
         [selectedTab]: [postText, ...posts[selectedTab]]
       });
-      setPostText('');
+      setPostText(''); // Очищаем состояние поля ввода
+      // Очищаем содержимое поля ввода с помощью установки пустого innerHTML
+      document.querySelector('.post-input').innerHTML = '';
     }
   };
 
@@ -95,15 +97,23 @@ const MainAdminPage = () => {
           </div>
         </div>
         <div className="post-input-container">
-          <textarea
-            className="post-input"
-            placeholder="Что опубликовать?"
-            value={postText}
-            onChange={(e) => setPostText(e.target.value)}
-            style={{ width: '99%', minHeight: '100px', outline: 'none', border: '1px solid #ccc', padding: '10px', fontSize: '18px', resize: 'none' }}
-          />
-          <button className="publish-button" onClick={handlePublish}>Опубликовать</button>
-        </div>
+  <div
+    className={`post-input ${postText ? 'active' : ''}`}
+    contentEditable="true"
+    onInput={(e) => setPostText(e.target.innerText)}
+    style={{
+      width: '99%',
+      outline: 'none',
+      border: '1px solid #ccc',
+      padding: '10px',
+      fontSize: '18px',
+      resize: 'none',
+    }}
+  >
+    {!postText && <div className="placeholder">Что опубликовать?</div>}
+  </div>
+  <button className="publish-button" onClick={handlePublish}>Опубликовать</button>
+</div>
         <div className="tab-content" style={{ marginTop: `${tabHeight}px` }}>
           {renderTabContent()}
         </div>

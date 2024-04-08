@@ -16,7 +16,7 @@ body {
     margin-left: 20px;
     display: flex;
     justify-content: space-between;
-    width: calc(100% - 40px);
+    width: 95vw;
     height: 80px;
     padding-bottom: 20px;
     box-shadow: 1px 4px 4px rgba(0, 0, 0, 0.25);

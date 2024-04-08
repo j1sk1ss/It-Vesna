@@ -74,7 +74,6 @@
     margin-left: 5vw;
     padding-bottom: 0px;
     overflow: hidden; /* Обрезаем содержимое, выходящее за границы контейнера */
-
 }
 
 .post-input {
@@ -90,6 +89,7 @@
 
 .post-input::placeholder {
     color: #B4B4B4; /* Цвет плейсхолдера */
+    pointer-events: none; /* Чтобы плейсхолдер не мешал вводу текста */
   }
 
 /* Стили для кнопки "Опубликовать" */
