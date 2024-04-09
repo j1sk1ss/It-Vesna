@@ -12,9 +12,17 @@
     flex-direction: column;
 }
 
+
 .adminp-panel-page-container {
     padding: 0px; /* Удаляем внутренние отступы */
 }
+
+/* Белая полоса с надписью "IT Весна" */
+.header-container {
+    background-color: rgb(255, 255, 255);
+    width: 100%;
+}
+
 
 /* Прозрачная полоса с надписью "IT Весна" */
 .adminp-transparent-bar {
@@ -27,7 +35,7 @@
 }
 
 /* Контейнеры для вкладок */
-.adminp-tab-container {
+.adminp-panel-page .tab-container {
     background-color: rgba(0, 0, 0, 0.075);
     border-radius: 5px; /* Адаптивное закругление углов */
     margin-left: 0.7vw;
@@ -37,16 +45,53 @@
     padding: 8px;
     font-weight: bold;
     width: 66vw;
+    display: flex; /* Размещаем дочерние элементы в одной строке */
 }
 
+/* Стили для контейнера группы вкладок слева */
 .adminp-left-tab-container {
-    align-self: flex-start;
-    margin-right: auto; /* Помещаем слева */
+    display: flex;
+    border: 1px solid #ffffff00;
+    border-radius: 2vw; /* Адаптивный радиус границы */
+    margin-right: 1vw; /* Адаптивный внешний отступ */
+    display: flex;
+    justify-content: flex-start; /* Выравнивание элементов в начале контейнера (слева) */
+    flex-grow: 1; /* Занимает всё доступное пространство по горизонтали */
 }
 
 .adminp-right-tab-container {
-    align-self: flex-end;
-    margin-left: auto; /* Помещаем справа */
+    display: flex;
+    border: 1px solid #ffffff00;
+    border-radius: 2vw; /* Адаптивный радиус границы */
+    margin-right: 1vw; /* Адаптивный внешний отступ */
+    display: flex;
+    justify-content: flex-end; /* Выравнивание элементов в начале контейнера (слева) */
+    flex-grow: 1; /* Занимает всё доступное пространство по горизонтали */
+}
+.admip-panel-page .left-tab-container .tab,
+.admip-panel-page .right-tab-container .tab {
+    border-radius: 5px; /* Адаптивное закругление углов */
+    border: none; /* Убираем границу */
+    margin-right: 0.5vw; /* Уменьшаем отступ справа */
+    margin-left: 0.5vw; /* Уменьшаем отступ справа */
+    white-space: nowrap; /* Запретим перенос текста на новую строку */
+    padding: 10px;
+}
+
+/* Стили для активной вкладки */
+.adminp-tab.active {
+    background-color: white; /* Выделяем активную вкладку белым цветом */
+    color: black; /* Цвет текста на активной вкладке */
+}
+
+.adminp-panel-page .tab.active {
+    background-color: rgb(255, 255, 255);
+    color: rgb(0, 0, 0);
+}
+
+/* Правый контейнер должен быть у правого края экрана */
+.adminp-right-tab-container {
+    margin-left: auto; /* Помещаем контейнер у правого края экрана */
 }
 
 .adminp-left-tab-container .adminp-tab,
@@ -59,10 +104,6 @@
     padding: 10px;
 }
 
-.adminp-tab.active {
-    background-color: rgb(255, 255, 255);
-    color: rgb(0, 0, 0);
-}
 
 /* Стили для вкладок */
 .adminp-tab {

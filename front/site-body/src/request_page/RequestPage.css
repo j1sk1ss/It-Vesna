@@ -1,4 +1,5 @@
-
+/* Подключение шрифта Jura с Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Jura&display=swap');
   
   .it-vesna {
     background-color: rgba(255, 255, 255, 0);
@@ -6,31 +7,27 @@
     font-size: 24px;
     font-weight: bold;
     padding: 20px;
-    position: fixed;
     width: 100%;
-    top: 0;
-    left: 0;
-    z-index: 1000;
   }
   
   .zayavka-container {
-    height: 880px;
-    width: 1810px;
     display: flex; /* Используем flex-контейнер */
   }
 
   .input-field {
-    width: 1600px; /* Фиксированная ширина */
-    height: 700px; /* Фиксированная высота */
+    width: 70vw; 
+    height: 35vw; 
     vertical-align: top; /* Текст начинается с верхней части */
+    padding: 10px;
+    border-radius: 15px;
   }
   
   
   .submit-button {
-    position: fixed;
+    position: absolute;
     bottom: 20px;
     right: 20px;
-    background-color: #007bff;
+    background-color: black;
     color: #fff;
     border: none;
     border-radius: 5px;
@@ -40,5 +37,25 @@
   }
   
   .submit-button:hover {
-    background-color: #0056b3;
+    background-color: gray;
   }
+
+  .input-text {
+    width: 80%;
+    padding: 10px;
+    margin-bottom: 10px;
+    margin-left: 10px;
+    border: 1px solid #ccc;
+    border-radius: 15px;
+    font-size: 16px;
+    font-weight: 600;
+    line-height: 1.5;
+    color: black;
+    background-color: rgb(121, 121, 121, 0.05);
+    outline: none;
+  }
+
+
+  
+  
+  
