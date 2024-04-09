@@ -61,12 +61,12 @@ const AdminPanelPage = () => {
               <div className="it-vesna">IT Весна</div>
             </div>
             <div className="tab-container">
-              <div className="left-tab-container">
+              <div className="adminp-left-tab-container">
                 <div className={`tab ${selectedTab === 'Заявки' ? 'active' : ''}`} onClick={() => handleTabClick('Заявки')}>Заявки</div>
                 <div className={`tab ${selectedTab === 'Модераторы' ? 'active' : ''}`} onClick={() => handleTabClick('Модераторы')}>Модераторы</div>
                 <div className={`tab ${selectedTab === 'Номинации' ? 'active' : ''}`} onClick={() => handleTabClick('Номинации')}>Номинации</div>
               </div>
-              <div className="right-tab-container">
+              <div className="adminp-right-tab-container">
                 {selectedTab === 'Заявки' && (
                   <>
                     <div className={`tab ${subTab === 'На рассмотрении' ? 'active' : ''}`} onClick={() => setSubTab('На рассмотрении')}>На рассмотрении</div>
