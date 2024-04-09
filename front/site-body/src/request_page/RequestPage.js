@@ -12,8 +12,8 @@ const RequestPage = () => {
         </div>
         <div className="right-container">
           <ZayavkaRight />
-          <button className="submit-button">Подать заявку</button> {/* Кнопка "Подать заявку" */}
         </div>
+        <button className="submit-button">Подать заявку</button> {/* Кнопка "Подать заявку" */}
       </div>
     </div>
   );
@@ -44,24 +44,23 @@ const ZayavkaLeft = () => {
         <input type="text" className="input-text" placeholder="Возраст" />
       </div>
       <div>
-        <input type="email" className="input-email" placeholder="Почта" />
+        <input type="email" className="input-text" placeholder="Почта" />
       </div>
       <div>
-        <label htmlFor="nomination">Номинация:</label>
-        <select id="nomination">
+        <input type="text" className="input-text" placeholder="Учреждение" />
+      </div>
+      <div>
+        <select id="nomination" className="input-text" style={{ width: '90%', height: '3.55vw'}}>
           <option value="nomination1">Номинация 1</option>
           <option value="nomination2">Номинация 2</option>
           <option value="nomination3">Номинация 3</option>
         </select>
       </div>
       <div>
-        <input type="text" className="input-text" placeholder="Учреждение" />
-      </div>
-      <div>
-        <label htmlFor="file-upload" style={{ display: fileAttached ? 'none' : 'block' }}>
+        <label htmlFor="file-upload" className="input-text" style={{ display: fileAttached ? 'none' : 'block'}}>
           Прикрепить согласие
         </label>
-        <input type="file" id="file-upload" style={{ display: 'none' }} onChange={handleFileUpload} />
+        <input  type="file" id="file-upload" style={{ display: 'none' }} onChange={handleFileUpload} />
         {fileAttached && <div>{fileName}</div>}
       </div>
     </div>
@@ -72,9 +71,9 @@ const ZayavkaLeft = () => {
     return (
         <div>
         <h2> </h2>
-        <textarea className="input-field" placeholder="Описание заявки"></textarea>
+        <textarea className="input-text" placeholder="Описание заявки" style={{ width: '75vw', height: '19vw'}}></textarea>
         <div>
-          <input type="text" placeholder="Ссылка" />
+          <input className="input-text" type="text" placeholder="Ссылка" style={{ width: '20vw', height: '2vw'}}/>
         </div>
       </div>
     );
