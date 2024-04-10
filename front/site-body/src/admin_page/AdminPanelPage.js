@@ -60,7 +60,7 @@ const AdminPanelPage = () => {
             <div className="transparent-bar">
               <div className="it-vesna">IT Весна</div>
             </div>
-            <div className="tab-container">
+            <div className="tabp-container">
               <div className="adminp-left-tab-container">
                 <div className={`tab ${selectedTab === 'Заявки' ? 'active' : ''}`} onClick={() => handleTabClick('Заявки')}>Заявки</div>
                 <div className={`tab ${selectedTab === 'Модераторы' ? 'active' : ''}`} onClick={() => handleTabClick('Модераторы')}>Модераторы</div>
@@ -104,6 +104,7 @@ const AdminPanelPage = () => {
                 </div>
               </div>}
               {subTab === 'Принятые' && <div>Содержимое подвкладки "Принятые"</div>}
+              
               {subTab === 'Архив' && <div>Содержимое подвкладки "Архив"</div>}
             </div>
           )}

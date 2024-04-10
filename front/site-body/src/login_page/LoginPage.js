@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import './LoginPage.css';
+import './LoginPage.css'; // Импортируем стили из файла LoginPage.css
 
 const LoginPage = () => {
   return (
@@ -18,7 +18,8 @@ const LoginPage = () => {
         </div>
         {/* Используем компонент Link для перехода на другую страницу */}
         <Link to="/main-user-page">
-          <button type="submit">Войти</button>
+          {/* Добавляем класс login-button к кнопке */}
+          <button type="submit" className="login-button">Войти</button>
         </Link>
       </form>
       <div className="register-forgot-password">

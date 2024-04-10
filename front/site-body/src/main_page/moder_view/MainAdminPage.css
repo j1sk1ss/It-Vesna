@@ -42,7 +42,6 @@
     background-color: rgba(0, 0, 0, 0.075);
     border-radius: 5px; /* Адаптивное закругление углов */
     margin-left: 0.7vw;
-    margin-top: 5vw;
     margin-bottom: 1vw;
     font-size: 16px;
     padding: 8px;
@@ -66,11 +65,13 @@
     margin-left: 0.5vw; /* Уменьшаем отступ справа */
     white-space: nowrap; /* Запретим перенос текста на новую строку */
     padding: 10px;
+    user-select: none; /* Запрещаем выделение текста */
 }
 
 .admin-panel-page .tab.active {
     background-color: rgb(255, 255, 255);
     color: rgb(0, 0, 0);
+    box-shadow: 1px 4px 4px rgba(0, 0, 0, 0.25);
 }
 
 .post-input-container {
@@ -86,6 +87,8 @@
     margin-left: 5vw;
     padding-bottom: 0px;
     overflow: hidden; /* Обрезаем содержимое, выходящее за границы контейнера */
+    box-shadow: 1px 4px 4px rgba(0, 0, 0, 0.25);
+
 }
 
 .post-input {
@@ -127,17 +130,78 @@
 
 .post {
     display: flex;
+    flex-direction: column;
     align-items: flex-start;
     background-color: #f0f0f07a;
     border-radius: 15px;
-    padding: 1vh 2vw; /* Адаптивные внутренние отступы */
-    margin-bottom: 2vh; /* Адаптивный отступ снизу */
-    overflow-wrap: break-word; /* Перенос слов */
-    font-size: 1.8vw; /* Уменьшаем размер текста */
+    padding: 1vh 2vw;
+    margin-bottom: 2vh;
+    overflow-wrap: break-word;
+    font-size: 1.8vw;
     margin-left: 5vw;
     margin-top: 1vw;
-    font-weight: normal; /* Убираем жирное начертание */
-    width: 86%; /* Устанавливаем ширину контейнера */
-    word-wrap: break-word; /* Дополнительный перенос слов для кроссбраузерной совместимости */
-    word-break: break-word; /* Дополнительный перенос слов для кроссбраузерной совместимости */
+    font-weight: normal;
+    width: 86%;
+    word-wrap: break-word;
+    word-break: break-word;
+    box-shadow: 1px 4px 4px rgba(0, 0, 0, 0.25);
+  }
+  
+  .post-info {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+  }
+  
+  .post-meta {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .author {
+    font-weight: bold;
+  }
+  
+  .date {
+    color: #666;
+  }
+  
+  .pinned-label {
+    color: #666;
+  }
+  
+  .post.pinned .pinned-label {
+    margin-right: 10px;
+  }
+
+
+.post-info {
+    display: flex; /* Отображаем элементы в строку */
+    justify-content: space-between; /* Распределяем пространство между элементами */
+    width: 100%; /* Ширина контейнера */
+}
+
+
+/* Стили для списка действий */
+.actions-popup {
+    position: absolute; /* Позиционируем список абсолютно */
+    background-color: white; /* Цвет фона */
+    border: 1px solid #ccc; /* Граница */
+    border-radius: 5px; /* Закругляем углы */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Тень */
+    padding: 5px; /* Внутренние отступы */
+    z-index: 10; /* Порядок слоев */
+    display: flex; /* Отображаем элементы в строку */
+    flex-direction: column; /* Располагаем элементы в столбец */
+}
+
+.actions-popup button {
+    background-color: transparent; /* Прозрачный фон кнопки */
+    border: none; /* Убираем границу */
+    padding: 5px 10px; /* Внутренние отступы */
+    cursor: pointer; /* Устанавливаем курсор в виде указателя */
+}
+
+.actions-popup button:hover {
+    background-color: #f0f0f0; /* Изменяем цвет фона при наведении */
 }
