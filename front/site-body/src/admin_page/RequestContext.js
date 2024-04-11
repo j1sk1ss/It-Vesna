@@ -11,9 +11,32 @@ export const RequestProvider = ({ children }) => {
   const deleteRequest = (id) => {
     setRequests(requests.filter(request => request.id !== id));
   };
+  const [archRequests, setArch]=useState([]);
+  const [approveRequests, setApprove]=useState([]);
+  const archive = (id) => {
+    const selectedRequest = requests.find(request => request.id === id);
+    setArch(prevArchRequests => [...prevArchRequests, selectedRequest]);
+    setApprove(prevApproveRequests => [...prevApproveRequests, selectedRequest])
+    setRequests(prevRequests => prevRequests.filter(request => request.id !== id));
+};
+const archiveNoApprove = (id) => {
+  const selectedRequest = archRequests.find(request => request.id === id);
+  setArch(prevArchRequests => [...prevArchRequests, selectedRequest]);
+};
+const deleteArchRequest = (id) => {
+  setArch(archRequests.filter(request => request.id !== id));
+};
+const deleteApproveRequest = (id) => {
+  setApprove(approveRequests.filter(request => request.id !== id));
+}
 
+  const approve = (id) => {
+    const selectedRequest = requests.find(request => request.id === id);
+    setApprove(prevApproveRequests => [...prevApproveRequests, selectedRequest])
+    setRequests(prevRequests => prevRequests.filter(request => request.id !== id));
+};
   return (
-    <RequestContext.Provider value={{ requests, setRequests, deleteRequest }}>
+    <RequestContext.Provider value={{ requests, setRequests, deleteRequest, archRequests, setArch, archive, deleteArchRequest, approveRequests, setApprove, approve, deleteApproveRequest, archiveNoApprove }}>
       {children}
     </RequestContext.Provider>
   );

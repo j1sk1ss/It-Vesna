@@ -5,23 +5,15 @@ import { useRequestContext } from './RequestContext';
 
 const RequestDetailPage = ({ handleDeleteRequest }) => {
     const { id } = useParams(); 
-    const { requests, deleteRequest, archive, approve } = useRequestContext();
+    const { archRequests, deleteArchRequest } = useRequestContext();
     const navigate = useNavigate();
-    const selectedRequest = requests.find(request => request.id === parseInt(id)); 
+    const selectedRequest = archRequests.find(request => request.id === parseInt(id)); 
     const copyToClipboard = (data) => {
         navigator.clipboard.writeText(data);
     };
     const [isHovered, setIsHovered] = useState(false);
     const handleDelete = () => {
-        deleteRequest(selectedRequest.id);
-        navigate('/admin-panel'); 
-      };
-      const handleApprove = () => {
-        approve(selectedRequest.id);
-        navigate('/admin-panel'); 
-      };
-      const handleArchive = () => {
-        archive(selectedRequest.id);
+        deleteArchRequest(selectedRequest.id);
         navigate('/admin-panel'); 
       };
     const toggleHover = () => {
@@ -69,25 +61,25 @@ const RequestDetailPage = ({ handleDeleteRequest }) => {
                     onMouseEnter={() => setIsHovered(true)}
                     onMouseLeave={() => setIsHovered(false)}
                     >
-                    <div className='hovering-buttons'
-                        style={{ transform: isHovered ? 'translateX(15%)' : 'translateX(100%)' }}            >
-                        <button
-                            className="hovering-button"
-                         >
-                         ⬅
-                        </button>
+                <div className='hovering-buttons1'
+
+                    style={{ transform: isHovered ? 'translateX(15%)' : 'translateX(100%)' }}            >
+                    <button
+                        className="hovering-button"
+
+                    >
+                        ⬅
+                    </button>
                     <div
                         className="additional-buttons"
                         style={{ transform: isHovered ? 'translateX(0)' : 'translateX(100%)' }}
-                        >
-                            <button onClick={handleApprove} className="additional-button1"></button>
-                            <button onClick={handleDelete} className="additional-button2"></button>
-                            <button onClick={handleArchive} className="additional-button3"></button>
-                            </div>
-                            </div>
-                            </div>
-                        </div>
-                        </div>
+                    >
+                        <button onClick={handleDelete} className="additional-button2"></button>
+                    </div>
+                </div>
+                </div>
+        </div>
+        </div>
     );
 }
 

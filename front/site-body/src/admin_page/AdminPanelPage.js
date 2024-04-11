@@ -14,10 +14,19 @@ const AdminPanelPage = () => {
   const [nominations, setNominations] = useState(['Номинация 1', 'Номинация 2', 'Номинация 3']);
   const { requests } = useRequestContext();
   const { setRequests } = useRequestContext();
+  const { archRequests, setArch, archive, approve, setApprove, approveRequests, archiveNoApprove} = useRequestContext();
 
   const handleDeleteRequest = (id) => {
     const updatedRequests = requests.filter(request => request.id !== id);
     setRequests(updatedRequests);
+  };
+  const handleDeleteArchRequest = (id) => {
+    const updatedRequests = archRequests.filter(request => request.id !== id);
+    setArch(updatedRequests);
+  };
+  const handleDeleteApproveRequest = (id) => {
+    const updatedRequests = approveRequests.filter(request => request.id !== id);
+    setApprove(updatedRequests);
   };
 
   const handleTabClick = (tabName) => {
@@ -95,17 +104,51 @@ const AdminPanelPage = () => {
                               <div className="request-buttons">
                                   <Link to={`/request/${request.id}`} className="more-button"></Link> 
                                   <button className="delete-button" onClick={() => handleDeleteRequest(request.id)}></button>
-                                  <button className="accept-button"></button>
-                                  <button className="archive-button"></button>
+                                  <button className="accept-button" onClick={() => approve(request.id)}></button>
+                                  <button className="archive-button" onClick={() => archive(request.id)}></button>
                               </div>
                           </div>
                       ))}
                   </div>
                 </div>
               </div>}
-              {subTab === 'Принятые' && <div>Содержимое подвкладки "Принятые"</div>}
-              
-              {subTab === 'Архив' && <div>Содержимое подвкладки "Архив"</div>}
+              {subTab === 'Принятые' && <div>
+              <div className="RequestWindowPage">
+                  <div className="requests1">
+                      {approveRequests.map(request => (
+                          <div key={request.id} className="request1">
+                              <div className="request-info">
+                                  <div>{request.author}</div>
+                                  <div>{request.title}</div>
+                              </div>
+                              <div className="request-buttons">
+                                  <Link to={`/approve-request/${request.id}`} className="more-button"></Link> 
+                                  <button className="delete-button" onClick={() => handleDeleteApproveRequest(request.id)}></button>
+                                 
+                              </div>
+                          </div>
+                      ))}
+                  </div>
+                </div>
+              </div>}
+              {subTab === 'Архив' && <div>
+              <div className="RequestWindowPage">
+                  <div className="requests1">
+                      {archRequests.map(request => (
+                          <div key={request.id} className="request1">
+                              <div className="request-info">
+                                  <div>{request.author}</div>
+                                  <div>{request.title}</div>
+                              </div>
+                              <div className="request-buttons">
+                                  <Link to={`/archive-request/${request.id}`} className="more-button"></Link> 
+                                  <button className="delete-button" onClick={() => handleDeleteArchRequest(request.id)}></button>                             
+                              </div>
+                          </div>
+                      ))}
+                  </div>
+                </div>
+                </div>}
             </div>
           )}
           {selectedTab === 'Модераторы' && (

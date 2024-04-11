@@ -3,27 +3,22 @@ import { useParams, useNavigate } from 'react-router-dom';
 import './RequestWindowPage.css'; 
 import { useRequestContext } from './RequestContext';
 
-const RequestDetailPage = ({ handleDeleteRequest }) => {
+const ApproveRequestsPage = ({ handleDeleteRequest }) => {
     const { id } = useParams(); 
-    const { requests, deleteRequest, archive, approve } = useRequestContext();
+    const { approveRequests, deleteApproveRequest, setArch, archiveNoApprove } = useRequestContext();
     const navigate = useNavigate();
-    const selectedRequest = requests.find(request => request.id === parseInt(id)); 
+    const selectedRequest = approveRequests.find(request => request.id === parseInt(id)); 
     const copyToClipboard = (data) => {
         navigator.clipboard.writeText(data);
     };
     const [isHovered, setIsHovered] = useState(false);
     const handleDelete = () => {
-        deleteRequest(selectedRequest.id);
+        deleteApproveRequest(selectedRequest.id);
         navigate('/admin-panel'); 
       };
-      const handleApprove = () => {
-        approve(selectedRequest.id);
-        navigate('/admin-panel'); 
-      };
-      const handleArchive = () => {
-        archive(selectedRequest.id);
-        navigate('/admin-panel'); 
-      };
+      const archive =()=> {
+        archiveNoApprove(selectedRequest.id);
+    };
     const toggleHover = () => {
         setIsHovered(!isHovered);
     };
@@ -69,26 +64,25 @@ const RequestDetailPage = ({ handleDeleteRequest }) => {
                     onMouseEnter={() => setIsHovered(true)}
                     onMouseLeave={() => setIsHovered(false)}
                     >
-                    <div className='hovering-buttons'
-                        style={{ transform: isHovered ? 'translateX(15%)' : 'translateX(100%)' }}            >
-                        <button
-                            className="hovering-button"
-                         >
-                         ⬅
-                        </button>
+                <div className='hovering-buttons2'
+                    style={{ transform: isHovered ? 'translateX(15%)' : 'translateX(100%)' }}            >
+                    <button
+                        className="hovering-button"
+
+                    >
+                        ⬅
+                    </button>
                     <div
                         className="additional-buttons"
                         style={{ transform: isHovered ? 'translateX(0)' : 'translateX(100%)' }}
-                        >
-                            <button onClick={handleApprove} className="additional-button1"></button>
-                            <button onClick={handleDelete} className="additional-button2"></button>
-                            <button onClick={handleArchive} className="additional-button3"></button>
-                            </div>
-                            </div>
-                            </div>
-                        </div>
-                        </div>
+                    >
+                        <button onClick={handleDelete} className="additional-button2"></button>
+                    </div>
+                </div>
+        </div>
+        </div>
+        </div>
     );
 }
 
-export default RequestDetailPage;
+export default ApproveRequestsPage;

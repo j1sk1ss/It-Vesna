@@ -10,6 +10,8 @@ import MainAdminPage from './main_page/moder_view/MainAdminPage';
 import MainUserPage from './main_page/user_view/MainUserPage';
 import RequestPage from './request_page/RequestPage';
 import RequestDetailPage from './admin_page/RequestDetailPage';
+import ApproveRequestsPage from './admin_page/ApproveRequestsPage';
+import ArhiveReuestsPage from './admin_page/ArhiveReuestsPage';
 import { RequestProvider } from './admin_page/RequestContext';
 
 
@@ -27,6 +29,8 @@ const App = () => {
         <Route path="/main-user-page" element={<MainUserPage />} />
         <Route path="/request-page" element={ <RequestPage/> } />
         <Route path="/request/:id" element={ <RequestDetailPage/> } />
+        <Route path="/archive-request/:id" element={ <ArhiveReuestsPage/> } />
+        <Route path="/approve-request/:id" element={ <ApproveRequestsPage/> } />
       </Routes>
     </RequestProvider> 
       
