@@ -35,3 +35,7 @@ def limit_remote_addr():
     
 
 # TODO: Work with posts DB
+
+# =============================================================
+# Start server with static ip
+app.run(host='0.0.0.0', port='5000')

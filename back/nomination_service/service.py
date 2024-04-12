@@ -53,7 +53,7 @@ class Nominations(db.Model):
 
 # ============================
 # Add nomination
-# POST http://it-vesna-users-db-service-1:27010/nominations
+# POST http://it-vesna-nom-db-service-1:27010/nominations
 # JSON request: {
 #     "Name": "NominationName"
 # }
@@ -68,7 +68,7 @@ def add_nomination():
 
 # ============================
 # Delete nomination
-# DELETE http://it-vesna-users-db-service-1:27010/nominations/<int:nomination_id>
+# DELETE http://it-vesna-nom-db-service-1:27010/nominations/<int:nomination_id>
 # No JSON request required for DELETE request
 @app.route('/nominations/<int:nomination_id>', methods=['DELETE'])
 def delete_nomination(nomination_id):
@@ -82,15 +82,15 @@ def delete_nomination(nomination_id):
     
 # ============================
 # This function return all nominations from db
-# GET http://it-vesna-requests-db-service-1:27010/nominations
+# GET http://it-vesna-nom-db-service-1:27010/nominations
 # No JSON request required for GET request
-# RETURN: requests
+# RETURN: nom
 # [{
 #   'UID': 'nomination_id',
 #   'Path': 'nomination_name'
 # }, ... ]
 @app.route('/nominations', methods=['GET'])
-def get_requests():
+def get_nominations():
     nomination = Nominations.query.all()
     result = []
     for nomination_body in nomination:
@@ -106,10 +106,10 @@ def get_requests():
 
 # ============================
 # Get nomination by id
-# GET http://it-vesna-requests-db-service-1:27010/nominations/<int:user_id>
+# GET http://it-vesna-nom-db-service-1:27010/nominations/<int:user_id>
 # RETURN: "success"
 @app.route('/nominations/<int:nom_id>', methods=['GET'])
-def get_request_by_user_id(nom_id):
+def get_nomination(nom_id):
     nomination = Nominations.query.get(nom_id)
     if nomination:
         return {
