@@ -199,3 +199,40 @@
     padding: 10px;
     user-select: none; /* Запрещаем выделение текста */
 }
+.moder-create-container {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+}
+button.adminp-button-create {
+    min-height: 3.2vw;
+    border-radius: 0 15px 15px 0;
+    background-color: rgba(0, 0, 0, 1);
+    color: #fff;
+    transition: background-color 0.3s ease;
+    cursor: pointer;
+}
+button.adminp-button-create:hover {
+    background-color: #9abbd4;
+}
+.email-holder {
+    margin-left: 3px;
+    min-height: 3.2vw;
+    height: auto;
+    background-color: rgba(0, 0, 0, 0.0);
+    border-left: none;
+    border-top: none;
+    border-bottom: none;
+}
+.name-holder {
+    margin-left: 3px;
+    min-height: 3.2vw;
+    height: auto;
+    background-color: rgba(0, 0, 0, 0.0);
+    border:none;
+}
+.adminp-input-container {
+    background-color: rgba(215, 215, 215, 1);
+    border-radius: 12px;
+}

@@ -1,32 +1,82 @@
 // RegisterPage.js
-import React from 'react';
-import { Link } from 'react-router-dom';
+import React, { useState } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
 import './LoginPage.css'; // Импортируем файл стилей
 
 const RegisterPage = () => {
+  const navigate = useNavigate();
+  const [formData, setFormData] = useState({
+    surname: '',
+    name: '',
+    fathersName: '',
+    email: '',
+    password: '',
+  });
+
+  const handleInputChange = (event) => {
+    const { name, value } = event.target;
+    setFormData({ ...formData, [name]: value });
+  };
+
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+
+    const requestBody = {
+      surname: formData.surname,
+      name: formData.name,
+      father_name: formData.fathersName,
+      mail: formData.email,
+      password: formData.password
+    };
+
+    try {
+      const response = await fetch('http://it-vesna-pages-service-1/back/register_user', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(requestBody)
+      });
+
+      if (response.ok) {
+        const userData = await response.json(); 
+        const userId = userData.id; 
+        console.log('ID пользователя:', userId);
+        navigate('/admin-panel'); 
+      } else {
+        navigate('/')
+        console.error('ОШибка:', response.statusText);
+      }
+    } catch (error) {
+      console.error('ошбк:', error);
+    }
+  };
   return (
     <div className="container">
       <div className="logo">
         <img src="logo.png" alt="Логотип" />
       </div>
-      <h1>IT Весна</h1> {/* Измененный заголовок */}
-      <form>
+      <h1>IT Весна</h1>
+      <form onSubmit={handleSubmit}>
         <div className="form-group">
-          <input type="text" placeholder="ФИО" />
+          <input type="text" name="surname" placeholder="Фамилия" onChange={handleInputChange} />
         </div>
         <div className="form-group">
-          <input type="email" placeholder="Email" />
+          <input type="text" name="name" placeholder="Имя" onChange={handleInputChange} />
         </div>
         <div className="form-group">
-          <input type="password" placeholder="Пароль" />
+          <input type="text" name="fathersName" placeholder="Отчество" onChange={handleInputChange} />
         </div>
         <div className="form-group">
-          <input type="password" placeholder="Подтвердите пароль" />
+          <input type="email" name="email" placeholder="Email" onChange={handleInputChange} />
         </div>
-        <button type="submit">Зарегистрироваться</button>
+        <div className="form-group">
+          <input type="password" name="password" placeholder="Пароль" onChange={handleInputChange} />
+        </div>
+        <button className='submit' type="submit">Зарегистрироваться</button>
       </form>
       <div className="register-forgot-password">
-        <Link to="/">Войти</Link> {/* Измененный текст ссылки */}
+        <Link to="/">Войти</Link>
         <Link to="/forgot-password">Забыли пароль?</Link>
       </div>
       <div className="osu">

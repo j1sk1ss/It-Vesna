@@ -36,9 +36,20 @@ h1 {
   cursor: pointer;
   transition: background-color 0.3s ease;
 }
-
-.login-button:hover {
+.submit {
+  width: 40%; /* Адаптивная ширина кнопки */
+  padding: 1vw; /* Адаптивный внутренний отступ кнопки */
+  background-color: #000;
+  color: #fff;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+.login-button :hover {
   background-color: #9abbd4; /* Изменение цвета при наведении */
+}
+.submit:hover {
+  background-color: #9abbd4;
 }
 
 /* Стили для ссылок "Забыли пароль?" и "Регистрация" */

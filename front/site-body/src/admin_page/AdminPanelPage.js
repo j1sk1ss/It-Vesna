@@ -83,6 +83,19 @@ const AdminPanelPage = () => {
                     <div className={`tab ${subTab === 'Архив' ? 'active' : ''}`} onClick={() => setSubTab('Архив')}>Архив</div>
                   </>
                 )}
+                
+              </div>
+              <div className="moder-create-container">
+                {selectedTab === 'Модераторы' && (
+                  <>
+                     <div className="adminp-input-container">
+                  <input className='email-holder' type="text" placeholder="Почта" value={moderatorEmail} onChange={(e) => setModeratorEmail(e.target.value)} />
+                  <input className='name-holder' type="text" placeholder="Имя" value={moderatorName} onChange={(e) => setModeratorName(e.target.value)} /> 
+                  <button className="adminp-button-create" onClick={handleCreateModerator}>Создать</button>
+                </div>
+                  </>
+                )}
+                
               </div>
             </div>
           </div>
@@ -153,24 +166,21 @@ const AdminPanelPage = () => {
           )}
           {selectedTab === 'Модераторы' && (
             <div>
-              {isModeratorsTabSelected && (
-                <div className="adminp-input-container">
-                  <input type="text" placeholder="Почта" value={moderatorEmail} onChange={(e) => setModeratorEmail(e.target.value)} />
-                  <input type="text" placeholder="Имя" value={moderatorName} onChange={(e) => setModeratorName(e.target.value)} /> 
-                  <button className="adminp-button-create" onClick={handleCreateModerator}>Создать</button>
-                </div>
-              )}
-              <div>
-                {moderators.map((moderator, index) => (
-                  <div key={index}>
-                    <div className="adminp-moderator-container">
-                      <div>{moderator.name}</div>
-                      <div>{moderator.email}</div>
-                      <button className="adminp-button-delete" onClick={() => handleDeleteModerator(index)}>Удалить</button>
-                    </div>
+            <div className="RequestWindowPage">
+                  <div className="requests1">
+                      {moderators.map((moderator,index) => (
+                          <div key={index} className="request1">
+                              <div className="request-info">
+                                  <div>{moderator.name}</div>
+                                  <div>{moderator.email}</div>
+                              </div>
+                              <div className="request-buttons"> 
+                                  <button className="delete-button" onClick={() => handleDeleteModerator(index)}></button>                             
+                              </div>
+                          </div>
+                      ))}
                   </div>
-                ))}
-              </div>
+                </div>
             </div>
           )}
           {selectedTab === 'Номинации' && (
