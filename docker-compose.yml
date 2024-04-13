@@ -9,7 +9,6 @@ services:
       - 80:3000
     depends_on:
       - pages-service
-      - users-db-service
     volumes:
       - type: bind
         source: ./front
@@ -41,10 +40,7 @@ services:
       - 27001:5000
     command: python body/service.py
     depends_on:
-      - users-db
-      - mail-service
-      - crypto-service
-      - users-db-service
+      - adminer
     volumes:
       - type: bind
         source: ./back/api_service
@@ -60,11 +56,6 @@ services:
     ports:
       - 27013:5000
     command: python body/service.py
-    depends_on:
-      - users-db
-      - mail-service
-      - crypto-service
-      - users-db-service
     volumes:
       - type: bind
         source: ./back/file_service
@@ -80,8 +71,6 @@ services:
     ports:
       - 27002:5000
     command: python service.py
-    depends_on:
-      - users-db
     volumes:
       - type: bind
         source: ./back/mail_service
@@ -94,8 +83,6 @@ services:
     ports:
       - 27003:5000
     command: python service.py
-    depends_on:
-      - users-db
     volumes:
       - type: bind
         source: ./back/crypto_service
@@ -165,19 +152,19 @@ services:
   # =================
   # REQUESTS MICROSERVICE
 
-  requests-db-service:
+  application-db-service:
     image: ghcr.io/j1sk1ss/vesna-back-env:0.2v
     ports:
       - 27008:5000
     command: python service.py
     depends_on:
-      - requests-db
+      - application-db
     volumes:
       - type: bind
-        source: ./back/requests_service
+        source: ./back/application_service
         target: /var/www/it-vesna/server
 
-  requests-db:
+  application-db:
     image: postgres
     ports:
       - 27009:5432
@@ -186,10 +173,10 @@ services:
     environment:
       POSTGRES_PASSWORD: it_vesna_bd_pass
       POSTGRES_USER: root
-      POSTGRES_DB: it-vesna-requests-db
+      POSTGRES_DB: it-vesna-application-db
     volumes:
-      - ./back/requests_service/init.sql:/docker-entrypoint-initdb.d/init.sql
-      - ./back/data/db_backups/req_db:/var/lib/postgresql/data
+      - ./back/application_service/init.sql:/docker-entrypoint-initdb.d/init.sql
+      - ./back/data/db_backups/apl_db:/var/lib/postgresql/data
 
 
   # =================
@@ -201,7 +188,7 @@ services:
       - 27010:5000
     command: python service.py
     depends_on:
-      - requests-db
+      - nom-db
     volumes:
       - type: bind
         source: ./back/nomination_service
@@ -230,6 +217,9 @@ services:
       - 27012:8080
     depends_on:
       - users-db
+      - nom-db
+      - application-db
+      - posts-db
 
 
 networks:

@@ -16,10 +16,10 @@ ALLOWED_IP = [
     'it-vesna-api-service-1'
 ]  
 
-DB_NAME = "it-vesna-requests-db" # TODO: Move to local data. Don't store it here
+DB_NAME = "it-vesna-application-db" # TODO: Move to local data. Don't store it here
 USER_NAME = "root"
 DB_PASS = "28072003"
-DB_HOST = "it-vesna-requests-db-1:27009"
+DB_HOST = "it-vesna-application-db-1:27009"
 
 
 app = Flask(__name__)
@@ -40,49 +40,49 @@ def limit_remote_addr():
 # =============================================================
 # Setup SQL models
 
-class Requests(db.Model):
-    uid         = db.Column(db.Integer, primary_key=True)
-    user_uid    = db.Column(db.Integer)
-    name        = db.Column(db.String(255))
-    requestpath = db.Column(db.String(255))
+class Applications(db.Model):
+    uid             = db.Column(db.Integer, primary_key=True)
+    user_uid        = db.Column(db.Integer)
+    name            = db.Column(db.String(255))
+    applicationpath = db.Column(db.String(255))
     
 class Archive(db.Model):
-    requestid = db.Column(db.Integer, db.ForeignKey('requests.uid'), primary_key=True)
+    applicationid = db.Column(db.Integer, db.ForeignKey('applications.uid'), primary_key=True)
     
 class Approved(db.Model):
-    requestid = db.Column(db.Integer, db.ForeignKey('requests.uid'), primary_key=True)
+    applicationid = db.Column(db.Integer, db.ForeignKey('applications.uid'), primary_key=True)
 
 
 
 # =============================================================
-#   API for working with requests data in DB
+#   API for working with applications data in DB
 # =============================================================
 
 # ============================
-# Add request path
-# POST http://it-vesna-requests-db-service-1:27008/requests
+# Add application path
+# POST http://it-vesna-application-db-service-1:27008/applications
 # JSON request: {
 #     "ID": "user_id",
 #     "Name": "request_name"
 #     "Path": "request_path_on_local"
 # }
 # RETURN: "success"
-@app.route('/requests', methods=['POST'])
-def add_request():
+@app.route('/applications', methods=['POST'])
+def add_application():
     data = request.json
-    requests_body = Requests(user_uid=data["ID"], name=data["Name"], requestpath=data["Path"])
+    requests_body = Applications(user_uid=data["ID"], name=data["Name"], applicationpath=data["Path"])
     db.session.add(requests_body)
     db.session.commit()
     return 'success'
 
 
 # ============================
-# Delete request path
-# DELETE http://it-vesna-requests-db-service-1:27008/requests/<int:user_id>
+# Delete application path
+# DELETE http://it-vesna-application-db-service-1:27008/applications/<int:user_id>
 # RETURN: "success"
-@app.route('/requests/<int:user_id>', methods=['DELETE'])
-def delete_request(user_id):
-    request_body = Requests.query.filter_by(user_uid=user_id).first()
+@app.route('/applications/<int:user_id>', methods=['DELETE'])
+def delete_application(user_id):
+    request_body = Applications.query.filter_by(user_uid=user_id).first()
     if request_body:
         db.session.delete(request_body)
         db.session.commit()
@@ -92,23 +92,23 @@ def delete_request(user_id):
 
 
 # ============================
-# This function return all requests from users from db
-# GET http://it-vesna-requests-db-service-1:27008/requests
-# No JSON request required for GET request
-# RETURN: requests
+# This function return all applications from users from db
+# GET http://it-vesna-application-db-service-1:27008/applications
+# No JSON request required for GET application
+# RETURN: applications
 # [{
 #   'UID': 'User_UID',
 #   'Path': 'Path_to_request_on_local'
 # }, ... ]
-@app.route('/requests', methods=['GET'])
-def get_requests():
-    requests = Requests.query.all()
+@app.route('/applications', methods=['GET'])
+def get_applications():
+    applications = Applications.query.all()
     result = []
-    for request_body in requests:
+    for request_body in applications:
         data = {
             'UID': request_body.user_uid,
             'Name': request_body.name,
-            'Path': request_body.requestpath
+            'Path': request_body.applicationpath
         }
         
         result.append(data)
@@ -117,34 +117,34 @@ def get_requests():
 
 
 # ============================
-# Get request by user_id
-# GET http://it-vesna-requests-db-service-1:27008/requests/user/<int:user_id>
+# Get application by user_id
+# GET http://it-vesna-application-db-service-1:27008/applications/user/<int:user_id>
 # RETURN: "success"
-@app.route('/requests/user/<int:user_id>', methods=['GET'])
-def get_request_by_user_id(user_id):
-    request_body = Requests.query.filter_by(user_uid=user_id).first()
+@app.route('/applications/user/<int:user_id>', methods=['GET'])
+def get_application_by_user_id(user_id):
+    request_body = Applications.query.filter_by(user_uid=user_id).first()
     if request_body:
         return {
             'UID': request_body.user_uid,
             'Name': request_body.name,
-            'Path': request_body.requestpath
+            'Path': request_body.applicationpath
         }
     else:
         return 'not found', 404
 
 
 # ============================
-# Get request by user_id
-# GET http://it-vesna-requests-db-service-1:27008/requests/<int:request_id>
+# Get application by user_id
+# GET http://it-vesna-application-db-service-1:27008/applications/<int:application_id>
 # RETURN: "success"
-@app.route('/requests/<int:request_id>', methods=['GET'])
-def get_request_by_request_id(request_id):
-    request_body = Requests.query.get(request_id)
+@app.route('/applications/<int:application_id>', methods=['GET'])
+def get_application_by_request_id(application_id):
+    request_body = Applications.query.get(application_id)
     if request_body:
         return {
             'UID': request_body.user_uid,
             'Name': request_body.name,
-            'Path': request_body.requestpath
+            'Path': request_body.applicationpath
         }
     else:
         return 'not found', 404
@@ -156,28 +156,28 @@ def get_request_by_request_id(request_id):
 # =============================================================
 
 # ============================
-# Add request to archive
-# POST http://it-vesna-requests-db-service-1:27008/archive
-# JSON request: {
-#     "ID": "request id"
+# Add application to archive
+# POST http://it-vesna-application-db-service-1:27008/archive
+# JSON application: {
+#     "ID": "application id"
 # }
 # RETURN: "success"
 @app.route('/archive', methods=['POST'])
-def add_request2archive():
+def add_application2archive():
     data = request.json
-    archive_body = Archive(requestid=data["ID"])
+    archive_body = Archive(applicationid=data["ID"])
     db.session.add(archive_body)
     db.session.commit()
     return 'success'
 
 
 # ============================
-# Delete request from archive
-# DELETE http://it-vesna-requests-db-service-1:27008/archive/<int:request_id>
+# Delete application from archive
+# DELETE http://it-vesna-application-db-service-1:27008/archive/<int:applicationid>
 # RETURN: "success"
-@app.route('/archive/<int:request_id>', methods=['DELETE'])
-def delete_request_from_archive(request_id):
-    archive_body = Archive.query.get(request_id)
+@app.route('/archive/<int:application_id>', methods=['DELETE'])
+def delete_application_from_archive(application_id):
+    archive_body = Archive.query.get(application_id)
     if archive_body:
         db.session.delete(archive_body)
         db.session.commit()
@@ -188,11 +188,11 @@ def delete_request_from_archive(request_id):
 
 # ============================
 # This function return all archive from users from db
-# GET http://it-vesna-requests-db-service-1:27008/archive
-# No JSON request required for GET request
-# RETURN: requests
+# GET http://it-vesna-application-db-service-1:27008/archive
+# No JSON request required for GET application
+# RETURN: application
 # [{
-#   'UID': 'request_id',
+#   'UID': 'applicationid',
 # }, ... ]
 @app.route('/archive', methods=['GET'])
 def get_arcives():
@@ -200,7 +200,7 @@ def get_arcives():
     result = []
     for archive_body in archives:
         data = {
-            'UID': archive_body.requestid
+            'UID': archive_body.applicationid
         }
         
         result.append(data)
@@ -214,28 +214,28 @@ def get_arcives():
 # =============================================================
 
 # ============================
-# Add request to approved
-# POST http://it-vesna-requests-db-service-1:27008/approved
-# JSON request: {
-#     "ID": "request id"
+# Add application to approved
+# POST http://it-vesna-application-db-service-1:27008/approved
+# JSON application: {
+#     "ID": "application id"
 # }
 # RETURN: "success"
 @app.route('/approved', methods=['POST'])
-def add_request2approved():
+def add_application2approved():
     data = request.json
-    archive_body = Approved(requestid=data["ID"])
+    archive_body = Approved(applicationid=data["ID"])
     db.session.add(archive_body)
     db.session.commit()
     return 'success'
 
 
 # ============================
-# Delete request from approved
-# DELETE http://it-vesna-requests-db-service-1:27008/approved/<int:request_id>
+# Delete application from approved
+# DELETE http://it-vesna-application-db-service-1:27008/approved/<int:application_id>
 # RETURN: "success" / "not success"
-@app.route('/approved/<int:request_id>', methods=['DELETE'])
-def delete_request_from_approved(request_id):
-    archive_body = Approved.query.get(request_id)
+@app.route('/approved/<int:application_id>', methods=['DELETE'])
+def delete_application_from_approved(application_id):
+    archive_body = Approved.query.get(application_id)
     if archive_body:
         db.session.delete(archive_body)
         db.session.commit()
@@ -246,9 +246,9 @@ def delete_request_from_approved(request_id):
 
 # ============================
 # This function return all approved from users from db
-# GET http://it-vesna-requests-db-service-1:27008/approved
-# No JSON request required for GET request
-# RETURN: requests
+# GET http://it-vesna-application-db-service-1:27008/approved
+# No JSON request required for GET application
+# RETURN: applications
 # [{
 #   'UID': 'request_id',
 # }, ... ]
@@ -258,7 +258,7 @@ def get_approved():
     result = []
     for archive_body in archives:
         data = {
-            'UID': archive_body.requestid
+            'UID': archive_body.applicationid
         }
         
         result.append(data)

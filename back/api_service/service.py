@@ -8,6 +8,11 @@ from data_base.users_data_base import db_add_user, db_delete_user, db_get_user_b
 from data_base.pass_data_base import db_change_password, db_get_password
 from data_base.notify_data_base import db_add_notify, db_delete_notify, db_is_notify
 from data_base.moder_data_base import db_add_moderator, db_delete_moderator, db_get_moderator, db_get_moders
+from data_base.posts_data_base import db_add_post, db_delete_post, db_get_posts, db_get_posts_by_category, \
+db_get_posts_by_id, db_pin_post, db_unpin_post
+from data_base.apl_data_base import db_add_application, db_delete_application, db_delete_application_in_approved, \
+db_delete_application_in_archive, db_get_approved, db_get_archives, db_get_application, db_get_applications, \
+db_application2approved, db_application2archive
 
 from mail.mail import ml_send_mail
 from crypto.crypto import crypto_str2hash
@@ -274,19 +279,143 @@ def send_mail():
 # =============================================================
 #   Posts API
 # =============================================================
-# TODO: Complete
+
+# ============================
+# Create new post
+# POST  http://it-vesna-api-service-1:27001/api/posts
+# JSON request: {
+#     "author": "author_UID",
+#     "path": "path_where_post",
+#     "category": "category"
+# }
+# RETURN: success
+@app.route('/api/posts', methods=['POST'])
+def create_post():
+    data = request.json
+    return db_add_post(data['author'], data['path'], data['category'])
+
+# ============================
+# Delete post
+# DELETE  http://it-vesna-api-service-1:27001/api/posts/<int:post_id>
+# RETURN: success / not found
+@app.route('/api/posts/<int:post_id>', methods=['DELETE'])
+def delete_post(post_id):
+    return db_delete_post(post_id)
+
+# ============================
+# Get all posts
+# GET http://it-vesna-api-service-1:27001/api/posts
+# RETURN: 
+# [{
+#    "uid": post_uid,
+#    "author_uid": author_uid,
+#    "path": path_to_post,
+#    "pinned": is_pinned,
+#    "category": post_category
+# }, ... ]
+@app.route('/api/posts', methods=['GET'])
+def get_all_posts():
+    return db_get_posts()
+
+# ============================
+# Get posts by categy
+# GET http://it-vesna-api-service-1:27001/api/posts/<string:category>
+# RETURN: 
+# [{
+#    "uid": post_uid,
+#    "author_uid": author_uid,
+#    "path": path_to_post,
+#    "pinned": is_pinned,
+#    "category": post_category
+# }, ... ]
+@app.route('/api/posts/<string:category>', methods=['GET'])
+def get_posts_by_category(category):
+    return db_get_posts_by_category(category)
+
+# ============================
+# Get post by post id
+# GET http://it-vesna-api-service-1:27001/api/posts/<int:id>
+# RETURN: 
+# {
+#    "uid": post_uid,
+#    "author_uid": author_uid,
+#    "path": path_to_post,
+#    "pinned": is_pinned,
+#    "category": post_category
+# }
+@app.route('/api/posts/<int:id>', methods=['GET'])
+def get_posts_by_id(id):
+    return db_get_posts_by_id(id)
+
+# ============================
+# Pin post
+# POST http://it-vesna-api-service-1:27001/posts/pinned/<int:post_id>
+# RETURN: "success" / "not found"
+@app.route('/api/posts/pin/<int:id>', methods=['POST'])
+def pin_post(id):
+    return db_pin_post(id)
+
+# ============================
+# Unpin post
+# POST http://it-vesna-api-service-1:27001/posts/unpinned/<int:post_id>
+# RETURN: "success" / "not found"
+@app.route('/api/posts/pin/<int:id>', methods=['DELETE'])
+def unpin_post(id):
+    return db_unpin_post(id)
+
 
 
 # =============================================================
-#   Requests API
+#   Applications API
 # =============================================================
-# TODO: Complete
+
+def create_application():
+    data = request.json
+    return db_add_application(data['user_id'], data['name'], data['path'])
+
+def delete_application(user_id):
+    return db_delete_application(user_id)
+
+def get_applications():
+    return db_get_applications()
+
+def get_application_by_id(user_id):
+    return db_get_application(user_id, -1)
+
+def get_application_by_apl_id(application_id):
+    return db_get_application(-1, application_id)
+
+def application2archive(application_id):
+    return db_application2archive(application_id)
+
+def application_from_archive(application_id):
+    return db_delete_application_in_archive(application_id)
+
+def get_archive():
+    return db_get_archives()
+
+def application2approved(application_id):
+    return db_application2approved(application_id)
+
+def application_from_archive(application_id):
+    return db_delete_application_in_approved(application_id)
+
+def get_approved():
+    return db_get_approved()
 
 
 # =============================================================
 #   Nominations API
 # =============================================================
 # TODO: Complete
+
+
+
+# =============================================================
+#   Files API
+# =============================================================
+# TODO: Complete
+
 
 
 # =============================================================
