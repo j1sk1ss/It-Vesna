@@ -1,6 +1,7 @@
 version: '3.3'
-# TODO: Choose another ports. We take to large distance detween services
+
 services:
+
   # Front container (node + npm)
   front:
     image: ghcr.io/j1sk1ss/vesna-front-env:0.1v
@@ -15,25 +16,30 @@ services:
         target: /var/www/it-vesna/body
     command: npm start --prefix body/site-body
 
+
   # Back container (Python + libs)
   pages-service:
-    image: ghcr.io/j1sk1ss/vesna-back-env:0.2v
+    image: ghcr.io/j1sk1ss/vesna-back-env:0.3v
     ports:
       - 27000:5000
-    command: python service.py
+    command: python body/service.py
     depends_on:
       - api-service
     volumes:
       - type: bind
         source: ./back/pages_service
-        target: /var/www/it-vesna/server
+        target: /var/www/it-vesna/server/body
+      - type: bind
+        source: ./back/data
+        target: /var/www/it-vesna/server/data
+
 
   # API container (Python + libs)
   api-service:
-    image: ghcr.io/j1sk1ss/vesna-back-env:0.2v
+    image: ghcr.io/j1sk1ss/vesna-back-env:0.3v
     ports:
       - 27001:5000
-    command: python service.py
+    command: python body/service.py
     depends_on:
       - users-db
       - mail-service
@@ -42,14 +48,18 @@ services:
     volumes:
       - type: bind
         source: ./back/api_service
-        target: /var/www/it-vesna/server
+        target: /var/www/it-vesna/server/body
+      - type: bind
+        source: ./back/data
+        target: /var/www/it-vesna/server/data
+
 
   # API container (Python + libs)
   file-service:
-    image: ghcr.io/j1sk1ss/vesna-back-env:0.2v
+    image: ghcr.io/j1sk1ss/vesna-back-env:0.3v
     ports:
       - 27013:5000
-    command: python service.py
+    command: python body/service.py
     depends_on:
       - users-db
       - mail-service
@@ -58,7 +68,11 @@ services:
     volumes:
       - type: bind
         source: ./back/file_service
-        target: /var/www/it-vesna/server
+        target: /var/www/it-vesna/server/body
+      - type: bind
+        source: ./back/data
+        target: /var/www/it-vesna/server/data
+
 
   # Mail container
   mail-service:
@@ -73,6 +87,7 @@ services:
         source: ./back/mail_service
         target: /var/www/it-vesna/server
 
+
   # Crypto container
   crypto-service:
     image: ghcr.io/j1sk1ss/vesna-back-env:0.2v
@@ -85,6 +100,7 @@ services:
       - type: bind
         source: ./back/crypto_service
         target: /var/www/it-vesna/server
+
 
   # =================
   # USERS MICROSERVICE
@@ -113,6 +129,8 @@ services:
       POSTGRES_DB: it-vesna-users-db
     volumes:
       - ./back/users_service/init.sql:/docker-entrypoint-initdb.d/init.sql
+      - ./back/data/db_backups/users_db:/var/lib/postgresql/data
+
 
   # =================
   # POSTS MICROSERVICE
@@ -141,6 +159,8 @@ services:
       POSTGRES_DB: it-vesna-posts-db
     volumes:
       - ./back/posts_service/init.sql:/docker-entrypoint-initdb.d/init.sql
+      - ./back/data/db_backups/posts_db:/var/lib/postgresql/data
+
 
   # =================
   # REQUESTS MICROSERVICE
@@ -169,6 +189,8 @@ services:
       POSTGRES_DB: it-vesna-requests-db
     volumes:
       - ./back/requests_service/init.sql:/docker-entrypoint-initdb.d/init.sql
+      - ./back/data/db_backups/req_db:/var/lib/postgresql/data
+
 
   # =================
   # NOMINATIONS MICROSERVICE
@@ -197,6 +219,8 @@ services:
       POSTGRES_DB: it-vesna-nom-db
     volumes:
       - ./back/nomination_service/init.sql:/docker-entrypoint-initdb.d/init.sql
+      - ./back/data/db_backups/nom_db:/var/lib/postgresql/data
+
 
   # Data base GUI in web
   adminer:
@@ -206,6 +230,7 @@ services:
       - 27012:8080
     depends_on:
       - users-db
+
 
 networks:
   default:

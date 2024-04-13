@@ -53,7 +53,7 @@ class Posts(db.Model):
 
 # ============================
 # Add post
-# POST http://it-vesna-nom-db-service-1:27006/posts
+# POST http://it-vesna-posts-db-service-1:27006/posts
 # JSON request: {
 #     "author_uid": "uid",
 #     "path": "path_to_post_on_local",
@@ -71,7 +71,7 @@ def add_post():
 
 # ============================
 # Delete post
-# DELETE http://it-vesna-nom-db-service-1:27006/posts/<int:post_id>
+# DELETE http://it-vesna-posts-db-service-1:27006/posts/<int:post_id>
 # RETURN: "success" / "not found"
 @app.route('/posts/<int:post_id>', methods=['DELETE'])
 def delete_post(post_id):
@@ -86,7 +86,7 @@ def delete_post(post_id):
 
 # ============================
 # Get all posts
-# GET http://it-vesna-nom-db-service-1:27006/posts
+# GET http://it-vesna-posts-db-service-1:27006/posts
 # RETURN: 
 # [{
 #    "uid": post_uid,
@@ -110,7 +110,7 @@ def get_posts():
 
 # ============================
 # Get posts by categy
-# GET http://it-vesna-nom-db-service-1:27006/posts/<string:category>
+# GET http://it-vesna-posts-db-service-1:27006/posts/<string:category>
 # RETURN: 
 # [{
 #    "uid": post_uid,
@@ -134,7 +134,7 @@ def get_posts_by_category(category):
 
 # ============================
 # Get posts by id
-# GET http://it-vesna-nom-db-service-1:27006/posts/<int:post_id>
+# GET http://it-vesna-posts-db-service-1:27006/posts/<int:post_id>
 # RETURN: 
 # {
 #    "uid": post_uid,
@@ -158,7 +158,7 @@ def get_post_by_id(post_id):
 
 # ============================
 # Pin post
-# POST http://it-vesna-nom-db-service-1:27006/posts/pinned/<int:post_id>
+# POST http://it-vesna-posts-db-service-1:27006/posts/pinned/<int:post_id>
 # RETURN: "success" / "not found"
 @app.route('/posts/pinned/<int:post_id>', methods=['POST'])
 def pin_post(post_id):
@@ -173,7 +173,7 @@ def pin_post(post_id):
 
 # ============================
 # Unpin post
-# POST http://it-vesna-nom-db-service-1:27006/posts/unpinned/<int:post_id>
+# POST http://it-vesna-posts-db-service-1:27006/posts/unpinned/<int:post_id>
 # RETURN: "success" / "not found"
 @app.route('/posts/unpinned/<int:post_id>', methods=['POST'])
 def unpin_post(post_id):
