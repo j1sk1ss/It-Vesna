@@ -1,17 +1,20 @@
 import requests
 
 
-DB_SERVER = 'http://it-vesna-users-db-service-1:27010'
+SERVER = 'http://it-vesna-users-db-service-1:27010'
 
 
 def add_nomination(name):
-    return 0
+    return requests.post(f'{SERVER}/nominations',
+                         json={
+                             "Name": name
+                         })
 
 def delete_nomination(nomination_id):
-    return 0
+    return requests.delete(f'{SERVER}/nominations/{nomination_id}')
 
 def get_nominations():
-    return 0
+    return requests.get(f'{SERVER}/nominations')
 
 def get_nomination(nomination_id):
-    return 0
+    return requests.get(f'{SERVER}/nominations/{nomination_id}')
