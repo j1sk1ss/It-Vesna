@@ -54,7 +54,8 @@
     border-radius: 5px; /* Закругляем углы кнопки */
     font-size: px; /* Размер шрифта */
     cursor: pointer; /* Устанавливаем курсор в виде указателя */
-    width: 8vw;
+    width: 12vw;
+height: 4vw;
     text-align: center; /* Выравниваем текст по центру */
     line-height: 40px; /* Выравниваем по вертикали */
     box-shadow: 1px 4px 4px rgba(0, 0, 0, 0.25);

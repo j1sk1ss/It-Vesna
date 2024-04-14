@@ -74,28 +74,37 @@ const AdminPanelPage = () => {
                 <div className={`tab ${selectedTab === 'Заявки' ? 'active' : ''}`} onClick={() => handleTabClick('Заявки')}>Заявки</div>
                 <div className={`tab ${selectedTab === 'Модераторы' ? 'active' : ''}`} onClick={() => handleTabClick('Модераторы')}>Модераторы</div>
                 <div className={`tab ${selectedTab === 'Номинации' ? 'active' : ''}`} onClick={() => handleTabClick('Номинации')}>Номинации</div>
-              </div>
-              <div className="adminp-right-tab-container">
+                </div>
+                <div className="adminp-right-tab-container">
                 {selectedTab === 'Заявки' && (
                   <>
                     <div className={`tab ${subTab === 'На рассмотрении' ? 'active' : ''}`} onClick={() => setSubTab('На рассмотрении')}>На рассмотрении</div>
                     <div className={`tab ${subTab === 'Принятые' ? 'active' : ''}`} onClick={() => setSubTab('Принятые')}>Принятые</div>
                     <div className={`tab ${subTab === 'Архив' ? 'active' : ''}`} onClick={() => setSubTab('Архив')}>Архив</div>
                   </>
-                )}
-                
-              </div>
-              <div className="moder-create-container">
-                {selectedTab === 'Модераторы' && (
+                )} 
+                </div>
+                <div className="moder-create-container">
+                  { selectedTab === 'Модераторы' && (
                   <>
                      <div className="adminp-input-container">
-                  <input className='email-holder' type="text" placeholder="Почта" value={moderatorEmail} onChange={(e) => setModeratorEmail(e.target.value)} />
-                  <input className='name-holder' type="text" placeholder="Имя" value={moderatorName} onChange={(e) => setModeratorName(e.target.value)} /> 
-                  <button className="adminp-button-create" onClick={handleCreateModerator}>Создать</button>
-                </div>
+                        <input className='email-holder' type="text" placeholder="Почта" value={moderatorEmail} onChange={(e) => setModeratorEmail(e.target.value)} />
+                        <input className='name-holder' type="text" placeholder="Имя" value={moderatorName} onChange={(e) => setModeratorName(e.target.value)} /> 
+                        <button className="adminp-button-create" onClick={handleCreateModerator}>Создать</button>
+                        </div>
                   </>
                 )}
-                
+                <div className='moder-create-container'>
+                  {selectedTab === 'Номинации' && (
+                    <>
+                <div className="adminp-input-container">
+                  <input className='nom-holder' type="text" placeholder="Новая номинация" value={nominationName} onChange={(e) => setNominationName(e.target.value)} />
+                  <button className="adminp-button-create" onClick={handleAddNomination}>Добавить</button>
+                  </div>
+                  </>
+                 )}
+                </div>
+
               </div>
             </div>
           </div>
@@ -185,20 +194,20 @@ const AdminPanelPage = () => {
           )}
           {selectedTab === 'Номинации' && (
             <div>
-              <div className="adminp-input-container">
-                <input type="text" placeholder="Новая номинация" value={nominationName} onChange={(e) => setNominationName(e.target.value)} />
-                <button className="adminp-button-create" onClick={handleAddNomination}>Добавить</button>
-              </div>
-              <div>
-                {nominations.map((nomination, index) => (
-                  <div key={index}>
-                    <div className="adminp-nomination-container">
-                      <div>{nomination}</div>
-                      <button className="adminp-button-delete" onClick={() => handleDeleteNomination(index)}>Удалить</button>
-                    </div>
+                <div className="RequestWindowPage">
+                  <div className="requests1">
+                      {nominations.map((nomination,index) => (
+                          <div key={index} className="request1">
+                              <div className="request-info">
+                                  <div>{nomination}</div>
+                              </div>
+                              <div className="request-buttons"> 
+                                  <button className="delete-button" onClick={() => handleDeleteNomination(index)}></button>                             
+                              </div>
+                          </div>
+                      ))}
                   </div>
-                ))}
-              </div>
+                </div>
             </div>
           )}
         </div>

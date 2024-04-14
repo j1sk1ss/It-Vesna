@@ -126,14 +126,6 @@ const MainAdminPage = () => {
                 setIsPlaceholderVisible(true); // При потере фокуса показываем плейсхолдер, если текстовое поле пустое
               }
             }}
-            style={{
-              width: '99%',
-              outline: 'none',
-              border: '1px solid #ccc',
-              padding: '10px',
-              fontSize: '18px',
-              resize: 'none',
-            }}
           >
             {isPlaceholderVisible && <div className="placeholder">Что опубликовать?</div>}
           </div>
