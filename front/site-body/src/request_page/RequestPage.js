@@ -4,8 +4,12 @@ import './RequestPage.css';
 const RequestPage = () => {
   return (
     <div>
-      <div className="it-vesna">IT Весна
-      </div>
+            <div className='header-container'>
+            <div className='transparent-bar'>
+            <div className="it-vesn">IT Весна</div>
+            </div>
+            </div>
+    <div className='back-container'>
       <div className="zayavka-container">
         <div className="left-container">
           <ZayavkaLeft />
@@ -15,6 +19,7 @@ const RequestPage = () => {
         </div>
         <button className="submit-button">Подать заявку</button> {/* Кнопка "Подать заявку" */}
       </div>
+    </div>
     </div>
   );
 };
