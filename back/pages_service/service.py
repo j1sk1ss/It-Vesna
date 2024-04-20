@@ -6,7 +6,7 @@ from flask import Flask, request
 from flask_cors import CORS
 
 from login_page.login_page import register, login, restore_pass, send_verify_code, verify_mail
-
+from main_page.main_page import create_new_post, load_posts_by_category, change_post, delete_post_by_id
 
 # ==================
 # Configuring server on starting
@@ -14,6 +14,12 @@ from login_page.login_page import register, login, restore_pass, send_verify_cod
 app = Flask(__name__)
 CORS(app)
 
+
+#region [Login Page]
+
+# =============================================================
+#   Login Page
+# =============================================================
 
 # ============================
 # Register new user
@@ -87,6 +93,73 @@ def start_mail_verify():
 def end_mail_verify():
     data = request.json
     return verify_mail(data['mail'], data['code'])
+
+#endregion
+
+#region [Main Page]
+
+# =============================================================
+#   Main Page
+# =============================================================
+
+# ============================
+# Load all posts from server by category
+# GET  http://it-vesna-pages-service-1:27000/back/posts
+# JSON request: {
+#     "category": "category"
+# }
+# RETURN:
+# [{
+#    "uid": post_uid,
+#    "author_uid": author_uid,
+#    "path": path_to_post,
+#    "pinned": is_pinned,
+#    "category": post_category
+# }, ... ]
+@app.route('/back/posts', methods=['GET'])
+def load_posts():
+    data = request.json
+    return load_posts_by_category(data['category'])
+
+
+# ============================
+# Delete post by post ID
+# DELETE  http://it-vesna-pages-service-1:27000/back/posts/<int:post_id>
+# RETURN: "success" / "not found"
+@app.route('/back/posts/<int:post_id>', methods=['DELETE'])
+def delete_post(post_id):
+    return delete_post_by_id(post_id)
+
+
+# ============================
+# Create and post new post
+# POST  http://it-vesna-pages-service-1:27000/back/posts
+# JSON request: {
+#     "id": "user_id",
+#     "data": "post_data",
+#     "category": "post_category"
+# }
+# RETURN: "success" / "not found"
+@app.route('/back/posts', methods=['POST'])
+def create_post():
+    data = request.json
+    return create_new_post(data['id'], data['data'], data['category'])
+
+
+# ============================
+# Edit and post edited post
+# POST  http://it-vesna-pages-service-1:27000/back/posts/<int:post_id>
+# JSON request: {
+#     "pin": "pin (-1 - nchange / 0 - unpin / 1 - pin)",
+#     "data": "new_data"
+# }
+# RETURN: "success" / "not found"
+@app.route('/back/posts/<int:post_id>', methods=['PUT'])
+def edit_post(post_id):
+    data = request.json
+    return change_post(post_id, data['pin'], data['data'])
+
+#endregion
 
 
 # ==================

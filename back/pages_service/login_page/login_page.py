@@ -5,7 +5,7 @@ import random
 import string
 
 
-API_URL = "http://it-vesna-api-service-1:5000/api"
+API_URL = "http://it-vesna-api-service-1:27001/api"
 
 
 def register(name, surname, father_name, mail, password):
