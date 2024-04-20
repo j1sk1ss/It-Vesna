@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import './RequestPage.css';
 
 const RequestPage = () => {
+ 
   return (
     <div>
             <div className='header-container'>
@@ -56,9 +57,9 @@ const ZayavkaLeft = () => {
       </div>
       <div>
         <select id="nomination" className="input-text" style={{ width: '90%', height: '3.55vw'}}>
-          <option value="nomination1">Номинация 1</option>
-          <option value="nomination2">Номинация 2</option>
-          <option value="nomination3">Номинация 3</option>
+          <option className='opt' value="nomination1">Номинация 1</option>
+          <option className='opt' value="nomination2">Номинация 2</option>
+          <option className='opt' value="nomination3">Номинация 3</option>
         </select>
       </div>
       <div>
@@ -73,12 +74,38 @@ const ZayavkaLeft = () => {
 };
 
   const ZayavkaRight = () => {
+    const [links, setLinks] = useState([]);
+    const [linkName, setLinkName] = useState('');
+    const handleAddLink = () => {
+      if (linkName.trim() !== '') {
+        setLinks([...links, linkName]); 
+        setLinkName(''); 
+      }
+    };
+    const handleDeleteLink = (index) => {
+      const updatedLinks = [...links];
+      updatedLinks.splice(index, 1);
+      setLinks(updatedLinks);
+    };
     return (
         <div>
         <h2> </h2>
-        <textarea className="input-text" placeholder="Описание заявки" style={{ width: '75vw', height: '19vw'}}></textarea>
-        <div>
-          <input className="input-text" type="text" placeholder="Ссылка" style={{ width: '20vw', height: '2vw'}}/>
+        <textarea className="discription-holder" placeholder="Описание заявки" ></textarea>
+        <div className='link-container'>
+          <input className="input-text" type="text" placeholder="Ссылка" value={linkName} onChange={(e) => setLinkName(e.target.value)} style={{ width: '20vw', height: '2vw'}}/>
+          <button className='add-link' onClick={handleAddLink}></button>
+        </div>
+        <div className="links">
+        {links.map((link,index) => (
+                          <div key={index} className="link">
+                              <div className="link-text">
+                                  <div>{link}</div>
+                              </div>
+                              <div className="request-buttons"> 
+                                  <button className="delete-button" onClick={() => handleDeleteLink(index)}></button>                             
+                              </div>
+                          </div>
+                      ))}
         </div>
       </div>
     );
