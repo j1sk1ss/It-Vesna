@@ -18,7 +18,7 @@
     background-color: rgba(255, 255, 255, 0);
     padding: 2vh; /* Адаптивный внутренний отступ */
     z-index: 1;
-    font-family: 'jura', sans-serif;
+    font-family: 'Jura', sans-serif;
     font-size: 4vw; /* Адаптивный размер текста */
     font-weight: bold;
 }

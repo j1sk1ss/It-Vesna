@@ -31,38 +31,54 @@
     font-size: 4vw; /* Адаптивный размер текста */
     font-weight: bold;
 }
+.it-vesn1 {
+    background-color: rgba(255, 255, 255, 0);
+    font-family: 'jura', sans-serif;
+    font-size: 36px;
+    font-weight: bold;
+    padding-bottom: 20px;
+    padding-left:20px;
+    width: 100%; 
+}
 
 /* Контейнеры для вкладок */
 .tabp-container {
-    background-color: rgba(0, 0, 0, 0.075);
-    border-radius: 5px; /* Адаптивное закругление углов */
+    border-radius: 5px;
     margin-left: 0.7vw;
     margin-bottom: 1vw;
     font-size: 16px;
     padding: 8px;
     font-weight: bold;
     width: 97vw;
-    display: flex; /* Размещаем дочерние элементы в одной строке */
+    display: flex;
 }
 
 /* Стили для контейнера группы вкладок слева */
 .adminp-left-tab-container {
+    background-color: rgba(0, 0, 0, 0.075);
     border: 1px solid #ffffff00;
-    border-radius: 2vw; /* Адаптивный радиус границы */
-    margin-right: 1vw; /* Адаптивный внешний отступ */
+    border-radius: 10px;
     display: flex;
-    justify-content: flex-start; /* Выравнивание элементов в начале контейнера (слева) */
-    flex-grow: 1; /* Занимает всё доступное пространство по горизонтали */
+    justify-content: flex-start;
+    flex-grow: 1;
+    padding: 7px;
+    margin-right: 40vw;
 }
 
 /* Стили для контейнера группы вкладок справа */
 .adminp-right-tab-container {
+    background-color: rgba(0, 0, 0, 0.075);
     border: 1px solid #ffffff00;
-    border-radius: 2vw; /* Адаптивный радиус границы */
-    margin-right: 1vw; /* Адаптивный внешний отступ */
+    border-radius: 10px;
+    margin-right: 1vw;
     display: flex;
-    justify-content: flex-end; /* Выравнивание элементов в конце контейнера (справа) */
-    flex-grow: 1; /* Занимает всё доступное пространство по горизонтали */
+    justify-content: center;
+    flex-grow: 1;
+    padding: 10px;
+    flex-direction: row;
+    align-content: center;
+    align-items: center;
+    flex-wrap: nowrap;
 }
 
 /* Стили для вкладок */
@@ -239,6 +255,7 @@ button.adminp-button-create:hover {
 .adminp-input-container {
     background-color: rgba(215, 215, 215, 1);
     border-radius: 12px;
+    display: flex;
 }
 .nom-holder {
     border-radius: 12px 0 0 12px;

@@ -8,6 +8,7 @@ const RequestPage = () => {
             <div className='header-container'>
             <div className='transparent-bar'>
             <div className="it-vesn">IT Весна</div>
+            <div className='it-vesn1'>Создание заявки</div>
             </div>
             </div>
     <div className='back-container'>
@@ -62,12 +63,14 @@ const ZayavkaLeft = () => {
           <option className='opt' value="nomination3">Номинация 3</option>
         </select>
       </div>
+      <div className='main-file'>
+      <div className='file-text' >Ссылка на согласие</div>
       <div className='file-container'>
-        <label htmlFor="file-upload" className="input-text1" style={{ display: fileAttached ? 'none' : 'flex'}}>
+        
+        <label htmlFor="file-upload" className="input-text1" style={{ display: 'flex'}}>
           Прикрепить согласие
         </label>
         <input  type="file" id="file-upload" style={{ display: 'none' }} onChange={handleFileUpload} />
-        {fileAttached && <div>{fileName}</div>}
       <div className='rg-box'
           style={{
             background: fileAttached
@@ -75,6 +78,7 @@ const ZayavkaLeft = () => {
               : 'linear-gradient(45deg, darkred, red)', 
           }}
         />
+        </div>
         </div>
     </div>
   );
