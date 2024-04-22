@@ -23,7 +23,6 @@
   
   
   .submit-button {
-    position: absolute;
     bottom: 20px;
     right: 20px;
     background-color: black;
@@ -33,6 +32,13 @@
     padding: 10px 20px;
     font-size: 16px;
     cursor: pointer;
+    position: fixed;
+  }
+  .rg-box {
+    width: 20px;
+    height: 20px;
+    margin-left: 5px;
+    border-radius: 5px;
   }
   
   .submit-button:hover {
@@ -53,6 +59,28 @@
     background-color: rgb(17, 17, 17, 0.07);
     border: none;
 }
+.file-container {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+}
+.input-text1 {
+  width: 70%;
+  display: flex;
+  height: 1.6vw;
+  padding: 10px;
+  border-radius: 15px;
+  font-family: 'Jura';
+  font-size: 12px;
+  font-weight: 600;
+  line-height: 1.5;
+  text-align: justify;
+  color: black;
+  background-color: rgb(17, 17, 17, 0.07);
+  border: none;
+  align-items: center;
+}
 .opt {
   padding: 10px;
   font-family: 'Jura', sans-serif;
@@ -62,12 +90,12 @@
   color: black;
   background-color: rgba(17, 17, 17, 0.07);
 }
-.discription-holder {
+.descriprion-input {
   min-width: 75vw;
   max-width: 75vw;
   min-height: 20vw;
-  max-height: 20vw;
-  overflow-y: auto;
+  overflow: hidden;
+  height: auto;
   padding: 10px;
   margin-bottom: 10px;
   margin-left: 10px;
@@ -80,7 +108,7 @@
   background-color: rgb(17, 17, 17, 0.07);
   border: none;
 }
-.discription-holder::placeholder {
+.descriprion-input::placeholder {
   color: #B4B4B4; /* Цвет плейсхолдера */
   pointer-events: none; /* Чтобы плейсхолдер не мешал вводу текста */
 }
@@ -101,7 +129,7 @@
   cursor: pointer;
   margin-left: 5px;
   margin-bottom: 11px;
-  background-image: url(http://localhost/static/media/accept.a6293dd….png);
+  background-image: url('accept.png');
 }
 .link-container {
   display: flex;
@@ -109,6 +137,14 @@
   align-items: center;
   justify-content: start;
   margin: 5px;
+}
+.right-container {
+  margin-top: 11px;
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+  width: 90%;
+  box-sizing: border-box;
 }
 
   

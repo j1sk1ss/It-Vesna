@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useRef, useEffect, useState  } from 'react';
 import './RequestPage.css';
 
 const RequestPage = () => {
@@ -62,20 +62,41 @@ const ZayavkaLeft = () => {
           <option className='opt' value="nomination3">Номинация 3</option>
         </select>
       </div>
-      <div>
-        <label htmlFor="file-upload" className="input-text" style={{ display: fileAttached ? 'none' : 'block'}}>
+      <div className='file-container'>
+        <label htmlFor="file-upload" className="input-text1" style={{ display: fileAttached ? 'none' : 'flex'}}>
           Прикрепить согласие
         </label>
         <input  type="file" id="file-upload" style={{ display: 'none' }} onChange={handleFileUpload} />
         {fileAttached && <div>{fileName}</div>}
-      </div>
+      <div className='rg-box'
+          style={{
+            background: fileAttached
+              ? 'linear-gradient(45deg, darkgreen, green)' 
+              : 'linear-gradient(45deg, darkred, red)', 
+          }}
+        />
+        </div>
     </div>
   );
 };
 
   const ZayavkaRight = () => {
     const [links, setLinks] = useState([]);
+    const [postText, setPostText] = useState('');
     const [linkName, setLinkName] = useState('');
+    const [tabHeight, setTabHeight] = useState(0);
+    const [isPlaceholderVisible, setIsPlaceholderVisible] = useState(true);
+     const inputRef = useRef(null); 
+  const hiddenRef = useRef(null);
+  const adjustHeight = () => {
+    if (inputRef.current && hiddenRef.current) {
+      const newHeight = hiddenRef.current.clientHeight;
+      inputRef.current.style.height = `auto`; 
+    }
+  };
+  useEffect(() => {
+    adjustHeight(); // Корректируем высоту при загрузке
+  }, []);
     const handleAddLink = () => {
       if (linkName.trim() !== '') {
         setLinks([...links, linkName]); 
@@ -88,9 +109,25 @@ const ZayavkaLeft = () => {
       setLinks(updatedLinks);
     };
     return (
-        <div>
-        <h2> </h2>
-        <textarea className="discription-holder" placeholder="Описание заявки" ></textarea>
+        <div className='right-container'>
+        <div
+        className="descriprion-input"
+        contentEditable="true"
+        ref={inputRef}
+      
+        onInput={(e) => {
+          setPostText(e.target.innerText);
+          adjustHeight(); // Корректируем высоту при изменении текста
+        }}
+        onFocus={() => setIsPlaceholderVisible(false)}
+        onBlur={() => {
+          if (!postText.trim()) {
+            setIsPlaceholderVisible(true);
+          }
+        }}
+      >
+        {isPlaceholderVisible && <div className="placeholder">Описание</div>}
+      </div>
         <div className='link-container'>
           <input className="input-text" type="text" placeholder="Ссылка" value={linkName} onChange={(e) => setLinkName(e.target.value)} style={{ width: '20vw', height: '2vw'}}/>
           <button className='add-link' onClick={handleAddLink}></button>
@@ -99,7 +136,7 @@ const ZayavkaLeft = () => {
         {links.map((link,index) => (
                           <div key={index} className="link">
                               <div className="link-text">
-                                  <div>{link}</div>
+                                  <div><a href={link} target="_blank" rel="noopener noreferrer">{link}</a></div>
                               </div>
                               <div className="request-buttons"> 
                                   <button className="delete-button" onClick={() => handleDeleteLink(index)}></button>                             

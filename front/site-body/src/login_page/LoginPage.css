@@ -37,7 +37,7 @@ h1 {
   transition: background-color 0.3s ease;
 }
 .submit {
-  width: 40%; /* Адаптивная ширина кнопки */
+  width: 45%; /* Адаптивная ширина кнопки */
   padding: 1vw; /* Адаптивный внутренний отступ кнопки */
   background-color: #000;
   color: #fff;

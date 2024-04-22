@@ -30,7 +30,7 @@ const RegisterPage = () => {
     };
 
     try {
-      const response = await fetch('http://it-vesna-pages-service-1/back/register_user', {
+      const response = await fetch('http://127.0.0.1:27000/back/register_user', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
@@ -40,11 +40,11 @@ const RegisterPage = () => {
 
       if (response.ok) {
         const userData = await response.json(); 
-        const userId = userData.id; 
-        console.log('ID пользователя:', userId);
-        navigate('/admin-panel'); 
-      } else {
+        const userId = userData.ID; 
+        console.log('ID пользователя:', userData);
         navigate('/')
+      } else {
+
         console.error('ОШибка:', response.statusText);
       }
     } catch (error) {

@@ -14,7 +14,7 @@ const ForgotPasswordPage = () => {
         <div className="form-group">
           <input type="email" placeholder="Email" />
         </div>
-        <button type="submit">Восстановить</button>
+        <button className='submit' type="submit">Восстановить</button>
       </form>
       <div className="register-forgot-password">
         <Link to="/">Войти</Link>

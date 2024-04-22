@@ -1,8 +1,8 @@
-import React, { useState, useEffect } from 'react';
+import React, { useRef, useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import './MainAdminPage.css';
 
-const MainAdminPage = () => {
+const MainAdminPage = ({ onPublish }) => {
   const [selectedTab, setSelectedTab] = useState('Главная');
   const [postText, setPostText] = useState('');
   const [posts, setPosts] = useState({ 'Главная': [], 'Участие': [], 'План мероприятий': [], 'Положения конкурса': [], 'Состав жюри': [], 'Технические требования': [] });
@@ -11,6 +11,17 @@ const MainAdminPage = () => {
   const [contextMenuPosition, setContextMenuPosition] = useState({ x: 0, y: 0 });
   const [selectedPostIndex, setSelectedPostIndex] = useState(null);
   const [isPlaceholderVisible, setIsPlaceholderVisible] = useState(true);
+  const inputRef = useRef(null); 
+  const hiddenRef = useRef(null);
+  const adjustHeight = () => {
+    if (inputRef.current && hiddenRef.current) {
+      const newHeight = hiddenRef.current.clientHeight;
+      inputRef.current.style.height = `auto`; 
+    }
+  };
+  useEffect(() => {
+    adjustHeight(); // Корректируем высоту при загрузке
+  }, []);
 
   useEffect(() => {
     const tabElement = document.querySelector(`.tab.${selectedTab}`);
@@ -116,21 +127,36 @@ const MainAdminPage = () => {
           </div>
         </div>
         <div className="post-input-container">
-          <div
-            className="post-input"
-            contentEditable="true"
-            onInput={(e) => setPostText(e.target.innerText)}
-            onFocus={() => setIsPlaceholderVisible(false)} // При фокусировке скрываем плейсхолдер
-            onBlur={() => {
-              if (!postText.trim()) {
-                setIsPlaceholderVisible(true); // При потере фокуса показываем плейсхолдер, если текстовое поле пустое
-              }
-            }}
-          >
-            {isPlaceholderVisible && <div className="placeholder">Что опубликовать?</div>}
-          </div>
-          <button className="publish-button" onClick={handlePublish}>Опубликовать</button>
-        </div>
+      <div
+        className="post-input"
+        contentEditable="true"
+        ref={inputRef}
+      
+        onInput={(e) => {
+          setPostText(e.target.innerText);
+          adjustHeight(); // Корректируем высоту при изменении текста
+        }}
+        onFocus={() => setIsPlaceholderVisible(false)}
+        onBlur={() => {
+          if (!postText.trim()) {
+            setIsPlaceholderVisible(true);
+          }
+        }}
+      >
+        {isPlaceholderVisible && <div className="placeholder">Что опубликовать?</div>}
+      </div>
+      <div
+        className="hidden-height-measurer"
+        ref={hiddenRef} 
+        style={{
+          visibility: 'hidden',
+          whiteSpace: 'pre-wrap',
+        }}
+      >
+        {postText} 
+      </div>
+      <button className="publish-button" onClick={handlePublish}>Опубликовать</button>
+    </div>
         <div className="tab-content" style={{ marginTop: `${tabHeight}px` }}>
           {renderTabContent()}
         </div>
