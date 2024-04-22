@@ -13,13 +13,13 @@ from flask_sqlalchemy import SQLAlchemy
 # Configuring server on starting
 
 ALLOWED_IP = [
-    'it-vesna-api-service-1'
-]  
+    '0.0.0.0'
+]
 
 DB_NAME = "it-vesna-application-db" # TODO: Move to local data. Don't store it here
 USER_NAME = "root"
-DB_PASS = "28072003"
-DB_HOST = "it-vesna-application-db-1:27009"
+DB_PASS = "it_vesna_bd_pass"
+DB_HOST = "it-vesna-application-db-1:5432"
 
 
 app = Flask(__name__)
@@ -34,7 +34,8 @@ db = SQLAlchemy(app)
 @app.before_request
 def limit_remote_addr():
     if request.remote_addr not in ALLOWED_IP:
-        return 'ip not allowed'
+        print('[WARN] Ip address protection disabled')
+        # abort(403)
 
 
 # =============================================================

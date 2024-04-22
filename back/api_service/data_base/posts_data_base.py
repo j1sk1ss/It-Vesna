@@ -1,7 +1,7 @@
 import requests
 
 
-SERVER = 'http://it-vesna-posts-db-service-1:27006'
+SERVER = 'http://it-vesna-posts-db-service-1:5000'
 
 
 def db_add_post(author, path, category):

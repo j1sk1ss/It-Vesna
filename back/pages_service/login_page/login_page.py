@@ -5,7 +5,7 @@ import random
 import string
 
 
-API_URL = "http://it-vesna-api-service-1:27001/api"
+API_URL = "http://it-vesna-api-service-1:5000/api"
 
 
 def register(name, surname, father_name, mail, password):
@@ -20,7 +20,9 @@ def register(name, surname, father_name, mail, password):
         "password": password
     }
 
-    return requests.post(f"{API_URL}/user", json=data, headers={'Content-Type': 'application/json'})
+    requests.post(f"{API_URL}/user", json=data, headers={'Content-Type': 'application/json'})
+
+    return 'registered'
 
 
 def login(mail, password):

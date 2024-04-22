@@ -39,8 +39,8 @@ services:
     ports:
       - 27001:5000
     command: python body/service.py
-    depends_on:
-      - adminer
+    environment:
+    - PYTHONUNBUFFERED=1
     volumes:
       - type: bind
         source: ./back/api_service

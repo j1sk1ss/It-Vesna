@@ -13,6 +13,16 @@ from werkzeug.utils import secure_filename
 
 app = Flask(__name__)
 
+ALLOWED_IP = [
+    'it-vesna-api-service-1'
+]  
+
+@app.before_request
+def limit_remote_addr():
+    if request.remote_addr not in ALLOWED_IP:
+        print('[WARN] Ip address protection disabled')
+        # abort(403)
+
 
 # ==================
 # Save transfered file

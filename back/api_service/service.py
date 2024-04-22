@@ -4,6 +4,8 @@
 # cors - ajax support
 # limiter - limits support (like 1 access per minute)
 
+import time
+
 from data_base.users_data_base import db_add_user, db_delete_user, db_get_user_by_id, db_update_user, db_get_user_by_mail
 from data_base.pass_data_base import db_change_password, db_get_password
 from data_base.notify_data_base import db_add_notify, db_delete_notify, db_is_notify
@@ -19,7 +21,7 @@ from file.file import file_get, file_put
 from mail.mail import ml_send_mail
 from crypto.crypto import crypto_str2hash
 
-from flask import Flask, request, jsonify
+from flask import Flask, request, jsonify, abort
 from flask_cors import CORS
 from flask_limiter import Limiter
 from flask_limiter.util import get_remote_address
@@ -43,13 +45,17 @@ limiter = Limiter(
 )
 
 ALLOWED_IP = [
-    'it-vesna-pages-service-1'
+    'it-vesna-pages-service-1',
+    '127.0.0.1',
+    '0.0.0.0',
+    'localhost'
 ]
 
 @app.before_request
 def limit_remote_addr():
     if request.remote_addr not in ALLOWED_IP:
-        return 'ip not allowed'
+        print('[WARN] Ip address protection disabled')
+        # abort(403)
 
 
 #region [Users]

@@ -1,7 +1,7 @@
 import requests
 
 
-SERVER = 'http://it-vesna-application-db-service-1:27008'
+SERVER = 'http://it-vesna-application-db-service-1:5000'
 
 
 def db_add_application(user_id, name, path):

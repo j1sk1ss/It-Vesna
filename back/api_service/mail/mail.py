@@ -1,7 +1,7 @@
 import requests
 
 
-SERVER = 'http://it-vesna-mail-service-1:27002'
+SERVER = 'http://it-vesna-mail-service-1:5000'
 
 
 def ml_send_mail(destination, header, text, type):

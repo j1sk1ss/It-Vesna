@@ -2,6 +2,9 @@
 # ==================
 # Importing packages
 
+import requests
+import time
+
 from flask import Flask, request
 from flask_cors import CORS
 
@@ -11,8 +14,18 @@ from main_page.main_page import create_new_post, load_posts_by_category, change_
 # ==================
 # Configuring server on starting
 
+ALLOWED_IP = [
+    'it-vesna-api-service-1'
+] 
+
 app = Flask(__name__)
 CORS(app)
+
+@app.before_request
+def limit_remote_addr():
+    if request.remote_addr not in ALLOWED_IP:
+        print('[WARN] Ip address protection disabled')
+        # abort(403)
 
 
 #region [Login Page]
@@ -23,7 +36,7 @@ CORS(app)
 
 # ============================
 # Register new user
-# POST  http://it-vesna-pages-service-1:27000/back/register_user
+# POST  http://127.0.0.1:27000/back/register_user
 # JSON request: {
 #     "surname": "surname",
 #     "name": "name",
@@ -33,13 +46,13 @@ CORS(app)
 # }
 # RETURN: ID of registered user
 @app.route('/back/register_user', methods=['POST'])
-def rester_new_user():
+def register_new_user():
     data = request.json
     return register(data['name'], data['surname'], data['father_name'], data['mail'], data['password'])
 
 # ============================
 # Login user
-# POST  http://it-vesna-pages-service-1:27000/back/login_user
+# POST  http://127.0.0.1:27000/back/login_user
 # JSON request: {
 #     "mail": "mail@example.com",
 #     "password": "password"
@@ -57,7 +70,7 @@ def login_user():
 
 # ============================
 # Restore user password (Delete old password, generate random new, change old to generated, send generaed to user's mail)
-# POST  http://it-vesna-pages-service-1:27000/back/restore_pass
+# POST  http://127.0.0.1:27000/back/restore_pass
 # JSON request: {
 #     "mail": "mail@example.com"
 # }
@@ -70,7 +83,7 @@ def restore_user_pass():
 
 # ============================
 # Send verification code to user's mail
-# POST  http://it-vesna-pages-service-1:27000/back/mail_verify
+# POST  http://127.0.0.1:27000/back/mail_verify
 # JSON request: {
 #     "mail": "mail@example.com"
 # }
@@ -83,13 +96,13 @@ def start_mail_verify():
 
 # ============================
 # Check verification code from user's mail
-# POST  http://it-vesna-pages-service-1:27000/back/code_mail_check
+# POST  http://127.0.0.1:27000/back/code_mail_check
 # JSON request: {
 #     "mail": "mail@example.com",
 #     "code": "code"
 # }
 # RETURN: True or False
-@app.route('/back/code_mail_check', methods=['POST'])
+@app.route('/back/code_mail_check', methods=['GET'])
 def end_mail_verify():
     data = request.json
     return verify_mail(data['mail'], data['code'])
@@ -104,7 +117,7 @@ def end_mail_verify():
 
 # ============================
 # Load all posts from server by category
-# GET  http://it-vesna-pages-service-1:27000/back/posts
+# GET  http://127.0.0.1:27000/back/posts
 # JSON request: {
 #     "category": "category"
 # }
@@ -124,7 +137,7 @@ def load_posts():
 
 # ============================
 # Delete post by post ID
-# DELETE  http://it-vesna-pages-service-1:27000/back/posts/<int:post_id>
+# DELETE  http://127.0.0.1:27000/back/posts/<int:post_id>
 # RETURN: "success" / "not found"
 @app.route('/back/posts/<int:post_id>', methods=['DELETE'])
 def delete_post(post_id):
@@ -133,7 +146,7 @@ def delete_post(post_id):
 
 # ============================
 # Create and post new post
-# POST  http://it-vesna-pages-service-1:27000/back/posts
+# POST  http://127.0.0.1:27000/back/posts
 # JSON request: {
 #     "id": "user_id",
 #     "data": "post_data",
@@ -148,7 +161,7 @@ def create_post():
 
 # ============================
 # Edit and post edited post
-# POST  http://it-vesna-pages-service-1:27000/back/posts/<int:post_id>
+# POST  http://127.0.0.1:27000/back/posts/<int:post_id>
 # JSON request: {
 #     "pin": "pin (-1 - nchange / 0 - unpin / 1 - pin)",
 #     "data": "new_data"

@@ -1,7 +1,7 @@
 import requests
 
 
-SERVER = 'http://it-vesna-file-service-1:27013'
+SERVER = 'http://it-vesna-file-service-1:5000'
 
 
 def file_put(file, path):

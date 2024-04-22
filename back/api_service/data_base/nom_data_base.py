@@ -1,7 +1,7 @@
 import requests
 
 
-SERVER = 'http://it-vesna-users-db-service-1:27010'
+SERVER = 'http://it-vesna-users-db-service-1:5000'
 
 
 def db_add_nomination(name):

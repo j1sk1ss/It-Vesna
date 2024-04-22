@@ -18,7 +18,7 @@ ALLOWED_IP = [
 
 DB_NAME = "it-vesna-nom-db" # TODO: Move to local data. Don't store it here
 USER_NAME = "root"
-DB_PASS = "28072003"
+DB_PASS = "it_vesna_bd_pass"
 DB_HOST = "it-vesna-nom-db-1:27011"
 
 
@@ -34,7 +34,8 @@ db = SQLAlchemy(app)
 @app.before_request
 def limit_remote_addr():
     if request.remote_addr not in ALLOWED_IP:
-        return 'ip not allowed'
+        print('[WARN] Ip address protection disabled')
+        # abort(403)
 
 
 
