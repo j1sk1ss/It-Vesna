@@ -20,9 +20,7 @@ def register(name, surname, father_name, mail, password):
         "password": password
     }
 
-    requests.post(f"{API_URL}/user", json=data, headers={'Content-Type': 'application/json'})
-
-    return 'registered'
+    return requests.post(f"{API_URL}/user", json=data, headers={'Content-Type': 'application/json'}).text
 
 
 def login(mail, password):

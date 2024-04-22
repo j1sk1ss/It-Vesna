@@ -48,7 +48,7 @@ def limit_remote_addr():
 @app.route('/back/register_user', methods=['POST'])
 def register_new_user():
     data = request.json
-    return register(data['name'], data['surname'], data['father_name'], data['mail'], data['password'])
+    return {'ID': register(data['name'], data['surname'], data['father_name'], data['mail'], data['password'])}
 
 # ============================
 # Login user

@@ -12,4 +12,4 @@ def ml_send_mail(destination, header, text, type):
         "type": type
     }
     
-    return requests.post(f'{SERVER}/send_mail', json=send_data, headers={'Content-Type': 'application/json'})
+    return requests.post(f'{SERVER}/send_mail', json=send_data, headers={'Content-Type': 'application/json'}).text
