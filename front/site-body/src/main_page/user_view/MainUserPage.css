@@ -6,7 +6,6 @@
 .user-page .tab-container {
     border-radius: 5px;
     display: flex;
-    justify-content: space-between;
     padding-top: 0px;
     padding-bottom: 10px;
     padding-left: px;
@@ -22,8 +21,8 @@
 .user-page .right-tab-container .tab {
     border-radius: 5px; /* Адаптивное закругление углов */
     border: none; /* Убираем границу */
-    margin-right: 0.5vw; /* Уменьшаем отступ справа */
-    margin-left: 0.5vw; /* Уменьшаем отступ справа */
+    margin-right: 0.2vw; /* Уменьшаем отступ справа */
+    margin-left: 0.2vw; /* Уменьшаем отступ справа */
     width: auto; /* Установим ширину в автоматическую, чтобы текст был в одну строку */
     white-space: nowrap; /* Запретим перенос текста на новую строку */
     padding: 10px;
@@ -32,9 +31,9 @@
 
 .user-page .left-tab-container {
     background-color: rgba(0, 0, 0, 0.075);
-    border-radius: 5px; /* Адаптивное закругление углов */
-    padding: 8px;
-    align-items: center; /* Выравниваем элементы по вертикали */
+    border-radius: 5px;
+    padding: 3px;
+    align-items: center;
 }
 
 .user-page .tab.active {
@@ -65,6 +64,7 @@
     align-content: center;
     flex-wrap: wrap;
     flex-direction: row;
+    margin-left:5vw;
 }
   
   /* Добавляем стили для контейнера кнопки "Подать заявку" */

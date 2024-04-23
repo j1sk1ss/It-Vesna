@@ -59,13 +59,14 @@
 }
 
 .admin-panel-page .left-tab-container .tab{
-    border-radius: 5px; /* Адаптивное закругление углов */
-    border: none; /* Убираем границу */
-    margin-right: 0.5vw; /* Уменьшаем отступ справа */
-    margin-left: 0.5vw; /* Уменьшаем отступ справа */
-    white-space: nowrap; /* Запретим перенос текста на новую строку */
+    border-radius: 5px;
+    border: none;
+    margin-right: 0.2vw;
+    margin-left: 0.2vw;
+    white-space: nowrap;
     padding: 10px;
-    user-select: none; /* Запрещаем выделение текста */
+    -webkit-user-select: none;
+    user-select: none;
 }
 
 .admin-panel-page .tab.active {

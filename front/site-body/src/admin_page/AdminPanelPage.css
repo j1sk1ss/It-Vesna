@@ -61,7 +61,7 @@
     display: flex;
     justify-content: flex-start;
     flex-grow: 1;
-    padding: 7px;
+    padding: 3px;
     margin-right: 40vw;
 }
 
@@ -74,7 +74,7 @@
     display: flex;
     justify-content: center;
     flex-grow: 1;
-    padding: 10px;
+    padding: 3px;
     flex-direction: row;
     align-content: center;
     align-items: center;
@@ -83,13 +83,19 @@
 
 /* Стили для вкладок */
 .tab {
-    border-radius: 5px; /* Адаптивное закругление углов */
-    border: none; /* Убираем границу */
-    margin-right: 0.5vw; /* Уменьшаем отступ справа */
-    margin-left: 0.5vw; /* Уменьшаем отступ справа */
-    white-space: nowrap; /* Запретим перенос текста на новую строку */
-    padding: 10px;
-    user-select: none; /* Запрещаем выделение текста */
+    border-radius: 5px;
+    display: flex;
+    border: none;
+    margin-right: 0.5vw;
+    margin-left: 0.5vw;
+    white-space: nowrap;
+    padding: 4px;
+    -webkit-user-select: none;
+    user-select: none;
+    flex-direction: row;
+    align-content: center;
+    justify-content: center;
+    align-items: center;
 }
 
 /* Стили для активной вкладки */

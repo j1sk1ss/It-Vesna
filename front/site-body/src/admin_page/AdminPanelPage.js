@@ -75,11 +75,11 @@ const AdminPanelPage = () => {
                 <div className={`tab ${selectedTab === 'Модераторы' ? 'active' : ''}`} onClick={() => handleTabClick('Модераторы')}>Модераторы</div>
                 <div className={`tab ${selectedTab === 'Номинации' ? 'active' : ''}`} onClick={() => handleTabClick('Номинации')}>Номинации</div>
                 </div>
-                <div className="adminp-right-tab-container">
+                <div className="adminp-right-tab-container"
                 style={{
                    backgroundColor:
-                   selectedTab === 'Номинации' || selectedTab === 'Модераторы' ? 'rgba(0, 0, 0, 0)' : 'initial',
-                    }}
+                   selectedTab === 'Номинации' || selectedTab === 'Модераторы' ? 'rgba(0, 0, 0, 0)' : 'rgba(0, 0, 0, 0.075)',
+                    }}>
                 {selectedTab === 'Заявки' && (
                   <>
                     <div className={`tab ${subTab === 'На рассмотрении' ? 'active' : ''}`} onClick={() => setSubTab('На рассмотрении')}>На рассмотрении</div>
