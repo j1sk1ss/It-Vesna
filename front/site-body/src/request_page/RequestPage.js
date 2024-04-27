@@ -54,14 +54,14 @@ const ZayavkaLeft = () => {
         <input type="email" className="input-text" placeholder="Почта" />
       </div>
       <div>
-        <input type="text" className="input-text" placeholder="Учреждение" />
-      </div>
-      <div>
         <select id="nomination" className="input-text" style={{ width: '90%', height: '3.55vw'}}>
           <option className='opt' value="nomination1">Номинация 1</option>
           <option className='opt' value="nomination2">Номинация 2</option>
           <option className='opt' value="nomination3">Номинация 3</option>
         </select>
+      </div>
+      <div>
+        <input type="text" className="input-text" placeholder="Учреждение" />
       </div>
       <div className='main-file'>
       <div className='file-text' >Ссылка на согласие</div>
@@ -130,7 +130,7 @@ const ZayavkaLeft = () => {
           }
         }}
       >
-        {isPlaceholderVisible && <div className="placeholder">Описание</div>}
+        {isPlaceholderVisible && <div className="placeholder">Описание...</div>}
       </div>
         <div className='link-container'>
           <input className="input-text" type="text" placeholder="Ссылка" value={linkName} onChange={(e) => setLinkName(e.target.value)} style={{ width: '20vw', height: '2vw'}}/>
@@ -143,7 +143,7 @@ const ZayavkaLeft = () => {
                                   <div><a href={link} target="_blank" rel="noopener noreferrer">{link}</a></div>
                               </div>
                               <div className="request-buttons"> 
-                                  <button className="delete-button" onClick={() => handleDeleteLink(index)}></button>                             
+                                  <button className="delete-button1" onClick={() => handleDeleteLink(index)}></button>                             
                               </div>
                           </div>
                       ))}

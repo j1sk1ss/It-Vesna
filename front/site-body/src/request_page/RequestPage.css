@@ -6,19 +6,24 @@
     font-family: 'jura', sans-serif;
     font-size: 24px;
     font-weight: bold;
-    padding: 20px;
+    padding: 14px;
     width: 100%;
   }
   .back-container {
     height: 100%;
     padding: 20px;
     background-color: rgba(0, 0, 0, 0.15);
-    border-radius: 5px;
+    border-radius: 15px;
     margin: 15px;
 }
   .zayavka-container {
     display: flex; /* Используем flex-контейнер */
-  }
+    display: flex;
+    align-items: baseline;
+    flex-wrap: nowrap;
+    flex-direction: row;
+}
+  
 
   
   
@@ -35,11 +40,13 @@
     position: fixed;
   }
   .rg-box {
-    width: 20px;
-    height: 20px;
-    margin-left: 5px;
+    width: 2.5vw;
+    height: 2.2vw;
     border-radius: 5px;
-  }
+    margin-right: -10px;
+    margin-top: -9px;
+    margin-bottom: -10px;
+}
   
   .submit-button:hover {
     background-color: gray;
@@ -47,39 +54,50 @@
 
   .input-text {
     width: 80%;
+    height: 1.5vw;
     padding: 10px;
     margin-bottom: 10px;
-    margin-left: 10px;
-    border-radius: 15px;
+    margin-left: 5px;
+    border-radius: 10px;
     font-family: 'Jura';
-    font-size: 16px;
+    font-size: 14px;
     font-weight: 600;
     line-height: 1.5;
     color: black;
+    display: flex;
     background-color: rgb(17, 17, 17, 0.07);
     border: none;
+    align-items: center;
+    justify-content: center;
+    align-content: center;
+    flex-direction: row;
 }
 .file-container {
   display: flex;
   flex-direction: row;
   align-items: center;
-  justify-content: center;
+  justify-content: space-around;
+  background-color: rgba(238, 238, 238, 0.5);
+  width: 90%;
+  padding: 4px;
+  height: 1.5vw;
+  margin-bottom: 10px;
+  margin-right: 25px;
+  margin-left: 10px;
+  border-radius: 6px;
+  overflow: hidden;
+  align-content: center;
 }
 .input-text1 {
-  width: 70%;
-  display: flex;
-  height: 1.6vw;
-  padding: 10px;
-  border-radius: 15px;
   font-family: 'Jura';
-  font-size: 12px;
+  font-size: 10px;
   font-weight: 600;
   line-height: 1.5;
   text-align: justify;
   color: black;
-  background-color: rgb(17, 17, 17, 0.07);
   border: none;
-  align-items: center;
+  margin-left: 2px;
+  margin-right: 6px;
 }
 .opt {
   padding: 10px;
@@ -93,7 +111,7 @@
 .descriprion-input {
   min-width: 75vw;
   max-width: 75vw;
-  min-height: 20vw;
+  min-height: 16.8vw;
   overflow: hidden;
   height: auto;
   padding: 10px;
@@ -118,6 +136,7 @@
   min-width: 40vw;
   max-width: 40vw;
   min-height: 1vw;
+  max-height: 2vw;
   border-radius: 31px;
   background-color: rgba(17, 17, 17, 0.07);
   padding: 8px;
@@ -136,7 +155,7 @@
   cursor: pointer;
   margin-left: 5px;
   margin-bottom: 11px;
-  background-image: url('accept.png');
+  background-image: url('add.png');
 }
 .link-container {
   display: flex;
@@ -150,12 +169,14 @@
   display: flex;
   flex-direction: column;
   align-items: start;
-  width: 90%;
+  width: 9%;
   box-sizing: border-box;
+  margin-left: 1.2vw;
 }
 .main-file {
   display: flex;
   flex-direction: column;
+  margin-right: 10px;
 }
 .link-text {
   overflow: hidden;
@@ -163,10 +184,23 @@
 }
 .file-text {
   background-color: rgba(255, 255, 255, 0);
-        font-family: 'jura', sans-serif;
-        padding: 10px;
-        font-weight: bold;
-        width: 100%;
+  font-family: 'jura', sans-serif;
+  padding: 10px;
+  font-size: 14px;
+  font-weight: bold;
+  width: 100%;
+  margin-left: px;
+}
+.delete-button1
+{
+  width: 2.5vw;
+  height: 2.5vw;
+  background-color: rgb(0, 0, 0, 0);
+  background-size: cover;
+  border: none;
+  cursor: pointer;
+  margin-right: 5px;
+  background-image: url('delete.png');
 }
 
   
