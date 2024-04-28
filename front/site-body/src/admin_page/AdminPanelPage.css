@@ -51,6 +51,7 @@
     font-weight: bold;
     width: 97vw;
     display: flex;
+    justify-content: space-between;
 }
 
 /* Стили для контейнера группы вкладок слева */
@@ -59,10 +60,17 @@
     border: 1px solid #ffffff00;
     border-radius: 10px;
     display: flex;
-    justify-content: flex-start;
+    justify-content: center;
     flex-grow: 1;
     padding: 3px;
-    margin-right: 40vw;
+}
+.right-cont {
+    width: 100%;
+    display: grid;
+    justify-content: end;
+}
+.left-cont {
+    display: grid;
 }
 
 /* Стили для контейнера группы вкладок справа */
@@ -79,6 +87,7 @@
     align-content: center;
     align-items: center;
     flex-wrap: nowrap;
+    min-height: 3.2vw;
 }
 
 /* Стили для вкладок */
@@ -100,8 +109,10 @@
 
 /* Стили для активной вкладки */
 .tab.active {
-    background-color: white; /* Выделяем активную вкладку белым цветом */
-    color: black; /* Цвет текста на активной вкладке */
+    background-color: white;
+    color: black;
+    min-height: 2.2vw;
+    max-height: 2.2vw;
     box-shadow: 1px 4px 4px rgba(0, 0, 0, 0.25);
 }
 
@@ -175,8 +186,8 @@
 .delete-button,
 .accept-button,
 .archive-button {
-    width: 4vw; /* Адаптивный размер кнопок */
-    height: 4vw; /* Адаптивный размер кнопок */
+    width: 3vw; /* Адаптивный размер кнопок */
+    height: 3vw; /* Адаптивный размер кнопок */
     background-color: rgb(0, 0, 0, 0); /* Прозрачный фон */
     background-size: cover;
     border: none;

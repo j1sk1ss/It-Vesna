@@ -70,7 +70,7 @@ const RequestDetailPage = ({ handleDeleteRequest }) => {
                     onMouseLeave={() => setIsHovered(false)}
                     >
                     <div className='hovering-buttons'
-                        style={{ transform: isHovered ? 'translateX(35%)' : 'translateX(100%)' }}            >
+                        style={{ transform: isHovered ? 'translateX(15%)' : 'translateX(80%)' }}            >
                         <button
                             className="hovering-button"
                          >

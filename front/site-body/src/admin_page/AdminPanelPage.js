@@ -70,16 +70,20 @@ const AdminPanelPage = () => {
               <div className="it-vesna">IT Весна</div>
             </div>
             <div className="tabp-container">
+              <div className='left-cont'>
               <div className="adminp-left-tab-container">
                 <div className={`tab ${selectedTab === 'Заявки' ? 'active' : ''}`} onClick={() => handleTabClick('Заявки')}>Заявки</div>
                 <div className={`tab ${selectedTab === 'Модераторы' ? 'active' : ''}`} onClick={() => handleTabClick('Модераторы')}>Модераторы</div>
                 <div className={`tab ${selectedTab === 'Номинации' ? 'active' : ''}`} onClick={() => handleTabClick('Номинации')}>Номинации</div>
                 </div>
+                </div>
+                <div className='right-cont'>
                 <div className="adminp-right-tab-container"
                 style={{
                    backgroundColor:
                    selectedTab === 'Номинации' || selectedTab === 'Модераторы' ? 'rgba(0, 0, 0, 0)' : 'rgba(0, 0, 0, 0.075)',
                     }}>
+                      
                 {selectedTab === 'Заявки' && (
                   <>
                     <div className={`tab ${subTab === 'На рассмотрении' ? 'active' : ''}`} onClick={() => setSubTab('На рассмотрении')}>На рассмотрении</div>
@@ -87,6 +91,7 @@ const AdminPanelPage = () => {
                     <div className={`tab ${subTab === 'Архив' ? 'active' : ''}`} onClick={() => setSubTab('Архив')}>Архив</div>
                   </>
                 )} 
+                </div>
                 </div>
                 <div className="moder-create-container">
                   { selectedTab === 'Модераторы' && (

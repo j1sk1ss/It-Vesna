@@ -11,10 +11,10 @@
     padding-left: px;
     margin-left: 0.7vw;
     margin-bottom: 0.5vw;
-    justify-content: start;
     align-items: center;
     font-size: 16px;
     font-weight: bold;
+    justify-content: space-between;
 }
 
 .user-page .left-tab-container .tab,

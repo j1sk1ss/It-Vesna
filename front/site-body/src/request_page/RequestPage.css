@@ -94,6 +94,7 @@
   font-weight: 600;
   line-height: 1.5;
   text-align: justify;
+  cursor: pointer;
   color: black;
   border: none;
   margin-left: 2px;
@@ -147,8 +148,8 @@
   margin-bottom: 5px;
 }
 .add-link {
-  width: 3vw;
-  height: 3vw;
+  width: 2vw;
+  height: 2vw;
   background-color: rgb(0, 0, 0, 0);
   background-size: cover;
   border: none;
@@ -193,8 +194,8 @@
 }
 .delete-button1
 {
-  width: 2.5vw;
-  height: 2.5vw;
+  width: 2vw;
+  height: 2.2vw;
   background-color: rgb(0, 0, 0, 0);
   background-size: cover;
   border: none;
