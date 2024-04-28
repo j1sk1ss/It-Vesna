@@ -35,6 +35,11 @@ h1 {
   border-radius: 8px;
   cursor: pointer;
   transition: background-color 0.3s ease;
+  font-family: 'Jura', sans-serif; /* Подключение шрифта Jura */
+}
+
+.login-button:hover {
+  background-color: #9abbd4; /* Изменение цвета при наведении */
 }
 .submit {
   width: 45%; /* Адаптивная ширина кнопки */
@@ -44,6 +49,7 @@ h1 {
   border-radius: 8px;
   cursor: pointer;
   transition: background-color 0.3s ease;
+  font-family: 'Jura', sans-serif; /* Подключение шрифта Jura */
 }
 .login-button :hover {
   background-color: #9abbd4; /* Изменение цвета при наведении */
