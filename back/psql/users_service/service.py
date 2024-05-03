@@ -65,10 +65,11 @@ class Notificated(db.Model):
     notificationtype = db.Column(db.Integer)
 
 
-
+#region [Users]
 # =============================================================
 #   API for working with data about users from DB
 # =============================================================
+
 
 # ============================
 # This function return all users from db
@@ -197,9 +198,9 @@ def delete_user(user_id):
     db.session.delete(user)
     db.session.commit()
     return 'success'
+#endregion
 
-
-
+#region [Moderators]
 # =============================================================
 #   API for working with data about moderators from DB
 # =============================================================
@@ -268,9 +269,9 @@ def delete_moderator(user_id):
         return 'success'
     else:
         return 'not success', 404
+#endregion
 
-
-
+#region [Notifications]
 # =============================================================
 #   API for getting data about notifications from DB
 # =============================================================
@@ -350,9 +351,9 @@ def delete_notification(user_id):
         return 'success'
     else:
         return 'not success', 404
+#endregion
 
-
-
+#region [Passwords]
 # =============================================================
 #   API for working with passwords data in DB
 # =============================================================
@@ -397,7 +398,7 @@ def get_password(user_id):
         return ret_data
     else:
         return 'not success'
-    
+#endregion
 
 
 # =============================================================

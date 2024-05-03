@@ -3,6 +3,7 @@ from datetime import datetime, timedelta
 import requests
 import random
 import string
+import bcrypt
 
 
 API_URL = "http://it-vesna-api-service-1:5000/api"
@@ -64,7 +65,7 @@ def login(mail, password):
     # ========================
     # Check moderator status
     
-    if save_pass_hash == pass_hash:
+    if bcrypt.checkpw(save_pass_hash.encode('utf-8'), pass_hash.encode('utf-8')):
         moder_response = requests.get(f"{API_URL}/moderator/{user_id}")
         if moder_response.text == "moderator not found":
             return {

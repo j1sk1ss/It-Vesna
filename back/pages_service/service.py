@@ -5,11 +5,13 @@
 import requests
 import time
 
-from flask import Flask, request
+from flask import Flask, request, jsonify
 from flask_cors import CORS
 
 from login_page.login_page import register, login, restore_pass, send_verify_code, verify_mail
 from main_page.main_page import create_new_post, load_posts_by_category, change_post, delete_post_by_id
+from application_page.application_page import create_application
+from admin_page.admin_page import get_moderators, add_moderator, delete_moderator
 
 # ==================
 # Configuring server on starting
@@ -174,6 +176,88 @@ def edit_post(post_id):
 
 #endregion
 
+#region [Application Page]
+
+# ============================
+# Create a new application
+# POST  http://127.0.0.1:27000/back/application
+# JSON request: {
+#     "id": "user_id",
+#     "authors": "authors",
+#     "mail": "mail",
+#     "nomination": "nomination",
+#     "institution": "institution",
+#     "links": "links",
+#     "name": "name",
+#     "description": "description"
+# }
+# FILE: File needed
+# RETURN: application id
+@app.route('/back/application', methods=['POST'])
+def new_application():
+    data = request.json
+    if 'file' not in request.files:
+        return 'No file part'
+
+    file = request.files['file']
+    if file.filename == '':
+        return 'No selected file'
+
+    return create_application(data['id'], 
+                              data['authors'], 
+                              data['mail'], 
+                              data['nomination'], 
+                              data['institution'], 
+                              data['links'], 
+                              data['name'], 
+                              data['description'], 
+                              file)
+
+#endregion
+
+#region [Admin Page]
+
+# ============================
+# Load all moderators
+# GET  http://127.0.0.1:27000/back/moderators
+# RETURN:
+# RETURN: [{
+#     'UID':         user.uid,
+#     'Surname':     user.surname,
+#     'Name':        user.name,
+#     'FathersName': user.fathersname,
+#     'Mail':        user.mail
+# }, ... ]
+@app.route('/back/moderators', methods=['GET'])
+def all_moderators():
+    return jsonify(get_moderators())
+
+# ============================
+# Add new moderator
+# POST  http://127.0.0.1:27000/back/moderators
+# JSON request: {
+#     "mail": "mail",
+#     "name": "name"
+# }
+# RETURN: 'success' / 'failed' / 'not success'
+@app.route('/back/moderators', methods=['POST'])
+def new_moderator():
+    data = request.json
+    return add_moderator(data['mail'], data['name'])
+
+# ============================
+# Add new moderator
+# DELETE  http://127.0.0.1:27000/back/moderators
+# JSON request: {
+#     "id": "id"
+# }
+# RETURN: 'success' / 'failed' / 'not success'
+@app.route('/back/moderators', methods=['DELETE'])
+def del_moderator():
+    data = request.json
+    return delete_moderator(data['id'])
+
+#endregion
 
 # ==================
 # Start server with static ip

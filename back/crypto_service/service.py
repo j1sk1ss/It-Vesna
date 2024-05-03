@@ -40,7 +40,7 @@ def string2hash():
     
     salt = bcrypt.gensalt()
     if data['salt'] != "none":
-        salt = data['salt']
+        salt = data['salt'].encode('utf-8')
     
     hash = bcrypt.hashpw(data['message'].encode('utf-8'), salt=salt)
     

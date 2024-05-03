@@ -101,7 +101,7 @@ services:
       - users-db
     volumes:
       - type: bind
-        source: ./back/users_service
+        source: ./back/psql/users_service
         target: /var/www/it-vesna/server
 
   users-db:
@@ -131,7 +131,7 @@ services:
       - posts-db
     volumes:
       - type: bind
-        source: ./back/posts_service
+        source: ./back/psql/posts_service
         target: /var/www/it-vesna/server
 
   posts-db:
@@ -161,7 +161,7 @@ services:
       - application-db
     volumes:
       - type: bind
-        source: ./back/application_service
+        source: ./back/psql/application_service
         target: /var/www/it-vesna/server
 
   application-db:
@@ -191,7 +191,7 @@ services:
       - nom-db
     volumes:
       - type: bind
-        source: ./back/nomination_service
+        source: ./back/psql/nomination_service
         target: /var/www/it-vesna/server
 
   nom-db:
