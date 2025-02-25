@@ -13,7 +13,11 @@ services:
       - type: bind
         source: ./front
         target: /var/www/it-vesna/body
-    command: npm start --prefix body/site-body
+      - /var/www/it-vesna/body/node_modules  # Исключаем node_modules
+    environment:
+      - CHOKIDAR_USEPOLLING=true  # Позволяет отслеживать изменения
+      - WATCHPACK_POLLING=true  # Аналогично, для Webpack
+    command: npx nodemon --watch body/site-body --ext js,jsx,ts,tsx,css,json --exec "npm start --prefix body/site-body"
 
 
   # Back container (Python + libs)
