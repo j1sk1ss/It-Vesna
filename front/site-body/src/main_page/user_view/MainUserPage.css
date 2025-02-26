@@ -7,15 +7,45 @@
     border-radius: 5px;
     display: flex;
     padding-top: 0px;
-    padding-bottom: 10px;
+    padding-bottom: 15px;
     padding-left: px;
     margin-left: 0.7vw;
     margin-bottom: 0.5vw;
     align-items: center;
     font-size: 16px;
-    font-weight: bold;
     justify-content: space-between;
 }
+
+.logo-container {
+    display: flex;
+    align-items: center; /* Выравниваем элементы по вертикали */
+    gap: 5px; /* Добавляем отступ между логотипом и текстом */
+    position: relative;
+    top: -5px; /* Поднимет текст вверх */
+  }
+
+  .logo-container h1 {
+    transform: translateY(-5px);
+    font-weight: 900;
+    font-family: Montserrat;
+  }
+
+.logo-button {
+    height: 1.5rem; /* Логотип одной высоты с текстом */
+    height: 3rem;
+    width: 3rem; 
+    max-width: 100%;
+    max-height: 100%;
+    margin-left: 5.0rem;
+    margin-bottom: 1.0rem;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    white-space: nowrap;
+    font-weight: 9;
+    font-size: large;
+  }
 
 .user-page .left-tab-container .tab,
 .user-page .right-tab-container .tab {
@@ -32,6 +62,7 @@
 .user-page .left-tab-container {
     background-color: rgba(0, 0, 0, 0.075);
     border-radius: 5px;
+    margin-left: 10.0vw;
     padding: 3px;
     align-items: center;
 }
