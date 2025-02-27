@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Админ-панель</title>
+    <link rel="stylesheet" href="AdminPanelPage.css">
+</head>
+<body>
+    <div class="adminp-panel-page-container">
+        <div class="adminp-panel-page">
+            <div class="header-container">
+                <div class="header-wrapper">
+                    <div class="transparent-bar">
+                        <div class="it-vesna">IT Весна</div>
+                    </div>
+                    <div class="tabp-container">
+                        <div class="left-cont">
+                            <div class="adminp-left-tab-container">
+                                <div class="tab active" onclick="setTab('Заявки')">Заявки</div>
+                                <div class="tab" onclick="setTab('Модераторы')">Модераторы</div>
+                                <div class="tab" onclick="setTab('Номинации')">Номинации</div>
+                            </div>
+                        </div>
+                        <div class="right-cont">
+                            <div class="adminp-right-tab-container">
+                                <div class="tab active" onclick="setSubTab('На рассмотрении')">На рассмотрении</div>
+                                <div class="tab" onclick="setSubTab('Принятые')">Принятые</div>
+                                <div class="tab" onclick="setSubTab('Архив')">Архив</div>
+                            </div>
+                        </div>
+                        <div class="moder-create-container">
+                            <div class="adminp-input-container">
+                                <input class="email-holder" type="text" placeholder="Почта" id="moderatorEmail">
+                                <input class="name-holder" type="text" placeholder="Имя" id="moderatorName">
+                                <button class="adminp-button-create" onclick="handleCreateModerator()">Создать</button>
+                            </div>
+                        </div>
+                        <div class="moder-create-container">
+                            <div class="adminp-input-container">
+                                <input class="nom-holder" type="text" placeholder="Новая номинация" id="nominationName">
+                                <button class="adminp-button-create" onclick="handleAddNomination()">Добавить</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="adminp-tab-content" id="content"></div>
+        </div>
+    </div>
+
+    <script src="AdminPanelPage.js"></script>
+</body>
+</html>

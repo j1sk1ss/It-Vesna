@@ -1,0 +1,322 @@
+
+body {
+    background-image: url('background.png');
+    font-family: Jura;
+    background-size: cover;
+    background-position: center;
+    height: 100vh; 
+    margin: 0;
+    overflow-x: hidden; /* Запретить горизонтальную прокрутку */
+}
+
+.request1 {
+    border-radius: 31px;
+    padding: 15px;
+    margin-bottom: 10px;
+    margin-right: 20px;
+    margin-left: 20px;
+    display: flex;
+    justify-content: space-between;
+    width: 95vw;
+    height: 80px;
+    padding-bottom: 20px;
+    margin-top: 10px;
+    box-shadow: 1px 4px 4px rgba(0, 0, 0, 0.25);
+    background-color: rgba(254, 254, 254, 0.4);
+}
+.request-buttons {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.request-info {
+    display: flex;
+    flex-direction: column;
+    align-self: center;
+    align-items: flex-start;
+    font-family: Jura;
+    font-size: 1.5vw;
+    font-weight: 700;
+}
+.request-buttons button {
+    margin-right: 5px;
+}
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.RequestDetailPage {
+    display: flex;
+    flex-direction: row;
+    justify-content: center; 
+    align-items: center;
+}
+
+.hovering-buttons {
+    background-color: rgba(209, 209, 209, 1);
+    border-radius: 31px;
+    display: flex;
+    align-items: center;
+    transition: transform 0.6s ease;
+    overflow: hidden;
+    height:auto;
+    min-height: 4vw;
+    width:auto;
+    min-width:20vw;
+}
+.hovering-buttons1 {
+    background-color: rgba(209, 209, 209, 1);
+    border-radius: 31px;
+    position: fixed;
+    bottom: 20px;
+    right: 30px;
+    display: flex;
+    align-items: center;
+    transition: transform 0.6s ease;
+    overflow: hidden;
+    height:auto;
+    min-height: 4vw;
+    width:auto;
+    min-width:4vw;
+}
+.hovering-buttons2 {
+    background-color: rgba(209, 209, 209, 1);
+    border-radius: 31px;
+    position: fixed;
+    bottom: 20px;
+    right: 30px;
+    display: flex;
+    align-items: center;
+    transition: transform 0.6s ease;
+    overflow: hidden;
+    height:auto;
+    min-height: 4vw;
+    width:auto;
+    min-width:7vw;
+}
+.hovering-button {
+    background-color: transparent;
+    border: none;
+    color: black;
+    font-size: 20px;
+    cursor: pointer;
+    transition: transform 0.6s ease;
+
+}
+
+.additional-buttons {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    transform: translateX(87%);
+    transition: transform 0.6s ease;
+}
+
+.hovering-button:hover + .additional-buttons {
+    transform: translateX(30%);
+}
+
+.additional-button1 {
+    background-image: url('accept.png');
+    background-color: rgb(0,0,0,0);
+    width: 3vw;
+    height: 3vw;
+    background-size: cover;
+    border: none;
+    cursor: pointer;
+    transition: transform 0.6s ease;
+}
+.additional-button2 {
+    background-image: url('delete.png');
+    background-color: rgb(0,0,0,0);
+    width: 3vw;
+    height: 3vw;
+    background-size: cover;
+    border: none;
+    cursor: pointer;
+    transition: transform 0.6s ease;
+}
+.additional-button3 {
+    background-image: url('archive.png');
+    background-color: rgb(0,0,0,0);
+    width: 3.1vw;
+    height: 3vw;
+    background-size: cover;
+    border: none;
+    cursor: pointer;
+    transition: transform 0.6s ease;
+}
+.invisible-container {
+    position: fixed;
+    bottom: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    right: 0px;
+    width: 20vw;
+    height: 7vw; 
+    cursor: pointer; 
+    z-index: 999; 
+}
+.it-vesn {
+        background-color: rgba(255, 255, 255, 0);
+        font-family: 'jura', sans-serif;
+        font-size: 48px;
+        font-weight: bold;
+        padding: 14px;
+        width: 100%;
+    
+}
+.modal {
+    background-color: rgba(234, 234, 234, 0.55);
+    background-size: cover;
+    background-position: center;
+    display: flex;
+    flex-direction: column;
+    margin: 20px;
+    padding: 20px;
+    border-radius: 5px;
+    max-width: 90%;
+    max-height: 80%;
+}
+.basic-stroke {
+    font-size: 1vw;
+    font-weight: 700;
+    align-items: flex-start;
+    display: flex;
+    flex-direction: row;
+    margin-bottom: 10px;
+}
+
+    .basic-stroke > * {
+        margin-right: 40px;
+    }
+.stroke {
+    margin-bottom: 10px;
+    font-size: 1.5vw;
+    font-weight: 700;
+    padding-left: 15px;
+    justify-content: space-between;
+    align-items: center;
+    display: flex;
+    flex-direction: row;
+    width: 70%;
+    height: auto;
+    min-height: 1vw;
+    border-radius: 31px;
+    background-color: rgba(17, 17, 17, 0.07);
+}
+.stroke-description {
+    padding-top: 5px;
+    padding-bottom: 5px;
+    padding-left: 15px;
+    margin-bottom: 10px;
+    font-size: 1.5vw;
+    font-weight: 400;
+    justify-content: space-between;
+    align-items: start;
+    display: flex;
+    flex-direction: row;
+    width: 95%;
+    height: auto;
+    min-height: 2vw;
+    border-radius: 31px;
+    background-color: rgba(17, 17, 17, 0.07);
+}
+.stroke-nonborder {
+    margin-bottom: 10px;
+    font-size: 1.5vw;
+    font-weight: 700;
+    padding-left:15px;
+    justify-content: space-between;
+    align-items: center;
+    display: flex;
+    flex-direction: row;
+    width: 70%;
+    height: auto;
+    min-height: 2vw;
+}
+.att-ref {
+    margin-bottom: 10px;
+    font-size: 1.5vw;
+    font-weight: 700;
+    align-items: flex-start;
+    display: flex;
+    flex-direction: row;
+    height: auto;
+    min-height: 1vw;
+}
+
+.att-ref > * {
+    margin-right: 25px;
+}
+a {
+    text-decoration: none; 
+    color: black; 
+}
+.action-buttons {
+    align-items: flex-end;
+    display: flex;
+}
+
+.action-buttons-dropdown {
+    position: absolute;
+    right: 0;
+    top: 0;
+    background-color: #f9f9f9;
+    border: 1px solid #ccc;
+    padding: 10px;
+    transition: transform 0.3s ease-in-out;
+    transform: translateX(100%);
+    z-index: 1;
+}
+
+.action-buttons-hovered .action-buttons-dropdown {
+    transform: translateX(0);
+}
+
+.copy-button {
+    background-image: url('copy.png');
+    background-color: rgb(0,0,0,0);
+    opacity: 0.8;
+    width: 1.6vw;
+    margin: 7px;
+    height: 1.7vw;
+    background-size: cover;
+    border: none;
+    cursor: pointer;
+    margin-right: 15px;
+}
+
+@font-face {
+    font-family: 'Jura';
+    src: url('Jura.ttf') format('truetype');
+}
+ul {
+    list-style-type: none;
+    display: flex; 
+    flex-direction: column; 
+    gap: 10px; 
+}
+
+    ul li {
+        font-size: 1.5vw;
+        font-weight: 700;
+        width: 70%;
+        height: auto;
+        min-height: 2vw;
+        border-radius: 31px;
+        background-color: rgba(17, 17, 17, 0.07);
+        padding: 8px;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+    }
+

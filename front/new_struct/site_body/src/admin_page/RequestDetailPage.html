@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Детали заявки</title>
+    <link rel="stylesheet" href="RequestWindowPage.css">
+    <script src="RequestContext.js" defer></script>
+    <script src="RequestDetailPage.js" defer></script>
+</head>
+<body>
+    <div class="MainContainer">
+        <div class="header-container">
+            <div class="transparent-bar">
+                <div class="it-vesn">IT Весна</div>
+            </div>
+        </div>
+        <div class="RequestDetailsPage">
+            <div class="modal" id="requestDetails"></div>
+            <div class="invisible-container" id="hoverContainer">
+                <div class="hovering-buttons" id="hoverButtons">
+                    <button class="hovering-button">⬅</button>
+                    <div class="additional-buttons">
+                        <button id="approveBtn" class="additional-button1"></button>
+                        <button id="deleteBtn" class="additional-button2"></button>
+                        <button id="archiveBtn" class="additional-button3"></button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
