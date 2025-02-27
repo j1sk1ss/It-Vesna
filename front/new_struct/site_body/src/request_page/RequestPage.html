@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Создание заявки</title>
+    <link rel="stylesheet" href="RequestPage.css">
+</head>
+<body>
+    <div class='header-container'>
+        <div class='transparent-bar'>
+            <div class="it-vesn">IT Весна</div>
+            <div class='it-vesn1'>Создание заявки</div>
+        </div>
+    </div>
+    <div class='back-container'>
+        <div class="zayavka-container">
+            <div class="left-container">
+                <div class="left-content">
+                    <input type="text" class="input-text" placeholder="Авторы">
+                    <input type="text" class="input-text" placeholder="Возраст">
+                    <input type="email" class="input-text" placeholder="Почта">
+                    <select id="nomination" class="input-text">
+                        <option value="nomination1">Номинация 1</option>
+                        <option value="nomination2">Номинация 2</option>
+                        <option value="nomination3">Номинация 3</option>
+                    </select>
+                    <input type="text" class="input-text" placeholder="Учреждение">
+                    <div class="main-file">
+                        <div class="file-text">Ссылка на согласие</div>
+                        <div class="file-container">
+                            <label for="file-upload" class="input-text1">Прикрепить согласие</label>
+                            <input type="file" id="file-upload" style="display: none;">
+                            <div class="rg-box"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="right-container">
+                <div class="descriprion-input" contenteditable="true" id="description"></div>
+                <div class="link-container">
+                    <input class="input-text" type="text" placeholder="Ссылка" id="link-input">
+                    <button class="add-link" id="add-link-button"></button>
+                </div>
+                <div class="links" id="links-list"></div>
+            </div>
+            <button class="submit-button">Подать заявку</button>
+        </div>
+    </div>
+    <script src="RequestPage.js"></script>
+</body>
+</html>
