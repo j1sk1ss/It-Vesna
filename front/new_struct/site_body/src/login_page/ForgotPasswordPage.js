@@ -40,7 +40,7 @@ document.addEventListener("DOMContentLoaded", function () {
         }
 
         try {
-            const response = await fetch("http://127.0.0.1:27000/back/confirm_code", {
+            const response = await fetch("back/confirm_code", {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({ code })

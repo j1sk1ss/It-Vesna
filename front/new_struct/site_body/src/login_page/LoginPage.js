@@ -13,7 +13,7 @@ document.addEventListener("DOMContentLoaded", function () {
         };
 
         try {
-            const response = await fetch('login-page', {
+            const response = await fetch('back/login-page', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
