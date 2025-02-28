@@ -21,13 +21,12 @@
                         </a>
                         <div class="left-tab-container" id="tabs"></div>
                         <div class="right-tab-container">
-                            <a href="/request-page" class="request-button">Подать заявку</a>
+                            <a href="{{ url_for('dynamic_route', subpath='main/request_page') }}" class="request-button">Подать заявку</a>
                         </div>
                     </div>
                 </div>
             </div>
             <div class="tab-content" id="tab-content"></div>
-            <a href="/main-admin-page" class="admin-button">Перейти в режим модератора</a>
         </div>
     </div>
 
