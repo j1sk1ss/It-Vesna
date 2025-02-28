@@ -1,48 +1,55 @@
 document.addEventListener("DOMContentLoaded", () => {
-    const fileUpload = document.getElementById("file-upload");
-    const fileBox = document.querySelector(".rg-box");
     const linkInput = document.getElementById("link-input");
     const addLinkButton = document.getElementById("add-link-button");
     const linksList = document.getElementById("links-list");
+    const authorInput = document.getElementById("author-input");
+    const addAuthorButton = document.getElementById("add-author-button");
+    const authorsList = document.getElementById("authors-list");
     const description = document.getElementById("description");
 
-    // Обработка загрузки файла
-    fileUpload.addEventListener("change", (event) => {
-        if (event.target.files.length > 0) {
-            fileBox.style.background = "linear-gradient(45deg, darkgreen, green)";
-        } else {
-            fileBox.style.background = "linear-gradient(45deg, darkred, red)";
-        }
-    });
+    // Функция для добавления элементов в список
+    function addItem(inputElement, listElement, isLink = false) {
+        const value = inputElement.value.trim();
+        if (value) {
+            const item = document.createElement("div");
+            item.className = "item";
 
-    // Добавление ссылки
-    addLinkButton.addEventListener("click", () => {
-        const linkValue = linkInput.value.trim();
-        if (linkValue) {
-            const linkElement = document.createElement("div");
-            linkElement.className = "link";
-            linkElement.innerHTML = `
-                <div class="link-text">
-                    <a href="${linkValue}" target="_blank">${linkValue}</a>
-                </div>
-                <button class="delete-button1">Удалить</button>
-            `;
+            if (isLink) {
+                // Добавляем ссылку, которая будет кликабельной
+                item.innerHTML = `
+                    <span><a href="${value}" target="_blank">${value}</a></span>
+                    <button class="delete-btn">Удалить</button>
+                `;
+            } else {
+                // Добавляем автора как обычный текст
+                item.innerHTML = `
+                    <span>${value}</span>
+                    <button class="delete-btn">Удалить</button>
+                `;
+            }
 
-            linksList.appendChild(linkElement);
-            linkInput.value = "";
+            listElement.appendChild(item);
+            inputElement.value = ""; // Очищаем поле ввода
 
-            linkElement.querySelector(".delete-button1").addEventListener("click", () => {
-                linksList.removeChild(linkElement);
+            // Добавляем обработчик на кнопку удаления
+            item.querySelector(".delete-btn").addEventListener("click", () => {
+                listElement.removeChild(item); // Удаляем элемент
             });
         }
+    }
+
+    // Обработчики событий
+    addLinkButton.addEventListener("click", () => {
+        addItem(linkInput, linksList, true); // Передаем true для ссылок
     });
 
-    // Обработка ввода в описание
+    addAuthorButton.addEventListener("click", () => {
+        addItem(authorInput, authorsList, false); // Передаем false для авторов
+    });
+
+    // Автоматическое расширение поля для описания
     description.addEventListener("input", () => {
-        if (description.textContent.trim()) {
-            description.classList.remove("placeholder");
-        } else {
-            description.classList.add("placeholder");
-        }
+        description.style.height = "auto"; // Сбросить высоту
+        description.style.height = (description.scrollHeight) + "px"; // Установить высоту равной контенту
     });
 });

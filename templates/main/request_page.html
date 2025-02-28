@@ -9,49 +9,60 @@
 </head>
 <body>
     <header>
-        <a href="{{ url_for('dynamic_route', subpath='main/user') }}" class="logo-button">
+        <a href="/main/user" class="logo-button">
             <div class="logo-container"> 
-                <img src="public/logo.png" alt="Логотип" class="logo-button">
-                <h1 class="logo-button" style="margin-top: 10px;">IT Весна</h1>
+                <img src="public/logo.png" alt="Логотип" class="logo">
+                <h1 class="logo-text">IT Весна</h1>
             </div>
-            <nav class="tab-container">
-                <a href="#">Участие</a>
-                <a href="#">План мероприятий</a>
-                <a href="#">Положение конкурса</a>
-                <a href="#">Состав жюри</a>
-                <a href="#">Технические требования</a>
-            </nav>
+        </a>
     </header>
     
     <main>
         <section class="form-container">
-            <h2>Создание заявки</h2>
-            <div class="form-section">
-                <h3>Информация о команде</h3>
-                <input type="text" placeholder="Авторы">
-                <select>
-                    <option>Возрастная группа</option>
-                </select>
-                <input type="email" placeholder="Почта">
-                <select>
-                    <option>Номинация</option>
-                </select>
-                <input type="text" placeholder="Учреждение">
-                <input type="file">
+            <h2 class="form-title">Создание заявки</h2>  <!-- Заголовок "Создание заявки" -->
+            <div class="form-content">
+                <!-- Левая часть: Информация о команде -->
+                <div class="left-section">
+                    <h3>Информация о команде</h3>
+                    <div class="input-group">
+                        <input type="text" id="author-input" placeholder="Добавить автора">
+                        <button class="add-btn" id="add-author-button">+</button>
+                    </div>
+                    <div id="authors-list"></div>
+                    <select id="age-group" class="input-field">
+                        <option>Возрастная группа</option>
+                    </select>
+                    <input type="email" placeholder="Почта" class="input-field">
+                    <select id="nomination" class="input-field">
+                        <option>Номинация</option>
+                    </select>
+                    <input type="text" placeholder="Учреждение" class="input-field">
+                    <div class="input-file-wrapper">
+                        <input type="file" id="file-upload" class="input-field">
+                    </div>
+                    
+                </div>
+    
+                <!-- Правая часть: Информация о проекте -->
+                <div class="right-section">
+                    <h3>Информация о проекте</h3>
+                    <input type="text" placeholder="Название проекта" class="input-field">
+                    <textarea id="description" placeholder="Описание проекта" class="expanding-textarea input-field"></textarea>
+                    <div class="input-group">
+                        <input type="text" id="link-input" placeholder="Добавить ссылку">
+                        <button class="add-btn" id="add-link-button">+</button>
+                    </div>
+                    <div id="links-list"></div>
+                    <button class="submit-btn">Отправить заявку</button>
+                </div>
             </div>
-            <div class="form-section">
-                <h3>Информация о проекте</h3>
-                <input type="text" placeholder="Название проекта">
-                <textarea placeholder="Описание проекта"></textarea>
-                <input type="text" placeholder="Ссылки на сторонние ресурсы">
-            </div>
-            <button class="submit-btn">Отправить заявку</button>
         </section>
     </main>
     
+    
     <footer>
-        <p>&copy; Оренбургский государственный университет, 2024</p>
+        <p>&copy; ОГУ, 2024</p>
     </footer>
-    <script src="RequestPage.js"></script>
+    <script src="main/RequestPage.js"></script>
 </body>
 </html>
