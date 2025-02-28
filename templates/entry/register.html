@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Регистрация | IT Весна</title>
+    <base href="{{ url_for('static', filename='') }}">
+    <link rel="stylesheet" href="entry/entry.css">
+</head>
+<body>
+    <div class="login-container">
+        <form id="register-form" class="login-form">
+            <div class="form-header">
+                <img src="public/logo.png" alt="Логотип" class="logo">
+                <h1>IT Весна</h1>
+            </div>
+            <div class="form-group">
+                <input type="text" id="fullName" name="fullName" placeholder="ФИО" required>
+            </div>
+            <div class="form-group">
+                <input type="email" id="email" name="email" placeholder="Email" required>
+            </div>
+            <div class="form-group">
+                <input type="password" id="password" name="password" placeholder="Пароль" required>
+            </div>
+            <div class="form-group">
+                <input type="password" id="confirmPassword" name="confirmPassword" placeholder="Повторите пароль" required>
+            </div>
+            <button type="submit" class="login-button">Зарегистрироваться</button>
+            <div class="checkbox-group">
+                <input type="checkbox" id="agreed" name="agreed" class="custom-checkbox" required>
+                <label for="agreed">
+                    Я согласен с <span class="privacy-policy-link" onclick="openPrivacyPolicy()">политикой конфиденциальности</span>
+                </label>
+            </div>
+            <div class="form-footer">
+                <a href="{{ url_for('dynamic_route', subpath='entry/login') }}" class="forgot-password">Войти</a>
+                <a href="{{ url_for('dynamic_route', subpath='entry/restore') }}" class="forgot-password">Забыли пароль?</a>
+            </div>
+            <div class="osu-logo">
+                <img src="public/osu.png" alt="Logo">
+            </div>
+        </form>
+    </div>
+
+    <script src="entry/register_page.html"></script>
+</body>
+</html>

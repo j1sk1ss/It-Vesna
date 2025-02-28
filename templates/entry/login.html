@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="ru">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Вход | IT Весна</title>
+        <base href="{{ url_for('static', filename='') }}">
+        <link rel="stylesheet" href="entry/entry.css">
+    </head>
+    <body>
+        <div class="login-container">
+            <form id="login-form" class="login-form">
+                <div class="form-header">
+                    <img src="public/logo.png" alt="Логотип" class="logo">
+                    <h1>IT Весна</h1>
+                </div>
+                <div class="form-group">
+                    <input type="email" id="email" name="email" required placeholder="Email">
+                </div>
+                <div class="form-group">
+                    <input type="password" id="password" name="password" required placeholder="Пароль">
+                </div>
+                <button type="submit" class="login-button">Войти</button>
+                <div class="form-footer">
+                    <a href="{{ url_for('dynamic_route', subpath='entry/restore') }}" class="forgot-password">Забыли пароль?</a>
+                    <a href="{{ url_for('dynamic_route', subpath='entry/register') }}" class="register-link">Нет аккаунта? Регистрация</a>
+                </div>
+                <div class="osu-logo">
+                    <img src="public/osu.png" alt="Logo">
+                </div>
+            </form>
+        </div>
+
+        <script src="entry/login_page.js"></script>
+    </body>
+</html>

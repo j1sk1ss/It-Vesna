@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Админ-панель</title>
+    <base href="{{ url_for('static', filename='') }}">
+    <link rel="stylesheet" href="main/main.css">
+</head>
+<body>
+    <div class="admin-panel-page-container">
+        <div class="admin-panel-page">
+            <div class="header-container">
+                <div class="header-wrapper">
+                    <div class="transparent-bar">
+                        <div class="it-vesna">IT Весна</div>
+                    </div>
+                    <div class="tab-container">
+                        <div class="left-tab-container" id="tab-container"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="post-input-container">
+                <div id="post-input" class="post-input" contenteditable="true"></div>
+                <div id="placeholder" class="placeholder">Что опубликовать?</div>
+                <button class="publish-button" id="publish-button">Опубликовать</button>
+            </div>
+            <div class="tab-content" id="tab-content"></div>
+            <a href="/admin-panel" class="admin-panel-button">Перейти на страницу администратора</a>
+        </div>
+    </div>
+    <script src="main/admin.js"></script>
+</body>
+</html>
