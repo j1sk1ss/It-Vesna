@@ -3,50 +3,55 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Создание заявки</title>
-    <link rel="stylesheet" href="RequestPage.css">
+    <title>IT Весна - Создание заявки</title>
+    <base href="{{ url_for('static', filename='') }}">
+    <link rel="stylesheet" href="main/RequestPage.css">
 </head>
 <body>
-    <div class='header-container'>
-        <div class='transparent-bar'>
-            <div class="it-vesn">IT Весна</div>
-            <div class='it-vesn1'>Создание заявки</div>
-        </div>
-    </div>
-    <div class='back-container'>
-        <div class="zayavka-container">
-            <div class="left-container">
-                <div class="left-content">
-                    <input type="text" class="input-text" placeholder="Авторы">
-                    <input type="text" class="input-text" placeholder="Возраст">
-                    <input type="email" class="input-text" placeholder="Почта">
-                    <select id="nomination" class="input-text">
-                        <option value="nomination1">Номинация 1</option>
-                        <option value="nomination2">Номинация 2</option>
-                        <option value="nomination3">Номинация 3</option>
-                    </select>
-                    <input type="text" class="input-text" placeholder="Учреждение">
-                    <div class="main-file">
-                        <div class="file-text">Ссылка на согласие</div>
-                        <div class="file-container">
-                            <label for="file-upload" class="input-text1">Прикрепить согласие</label>
-                            <input type="file" id="file-upload" style="display: none;">
-                            <div class="rg-box"></div>
-                        </div>
-                    </div>
-                </div>
+    <header>
+        <a href="{{ url_for('dynamic_route', subpath='main/user') }}" class="logo-button">
+            <div class="logo-container"> 
+                <img src="public/logo.png" alt="Логотип" class="logo-button">
+                <h1 class="logo-button" style="margin-top: 10px;">IT Весна</h1>
             </div>
-            <div class="right-container">
-                <div class="descriprion-input" contenteditable="true" id="description"></div>
-                <div class="link-container">
-                    <input class="input-text" type="text" placeholder="Ссылка" id="link-input">
-                    <button class="add-link" id="add-link-button"></button>
-                </div>
-                <div class="links" id="links-list"></div>
+            <nav class="tab-container">
+                <a href="#">Участие</a>
+                <a href="#">План мероприятий</a>
+                <a href="#">Положение конкурса</a>
+                <a href="#">Состав жюри</a>
+                <a href="#">Технические требования</a>
+            </nav>
+    </header>
+    
+    <main>
+        <section class="form-container">
+            <h2>Создание заявки</h2>
+            <div class="form-section">
+                <h3>Информация о команде</h3>
+                <input type="text" placeholder="Авторы">
+                <select>
+                    <option>Возрастная группа</option>
+                </select>
+                <input type="email" placeholder="Почта">
+                <select>
+                    <option>Номинация</option>
+                </select>
+                <input type="text" placeholder="Учреждение">
+                <input type="file">
             </div>
-            <button class="submit-button">Подать заявку</button>
-        </div>
-    </div>
+            <div class="form-section">
+                <h3>Информация о проекте</h3>
+                <input type="text" placeholder="Название проекта">
+                <textarea placeholder="Описание проекта"></textarea>
+                <input type="text" placeholder="Ссылки на сторонние ресурсы">
+            </div>
+            <button class="submit-btn">Отправить заявку</button>
+        </section>
+    </main>
+    
+    <footer>
+        <p>&copy; Оренбургский государственный университет, 2024</p>
+    </footer>
     <script src="RequestPage.js"></script>
 </body>
 </html>

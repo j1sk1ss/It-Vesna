@@ -1,208 +1,76 @@
-/* Подключение шрифта Jura с Google Fonts */
-@import url('https://fonts.googleapis.com/css2?family=Jura&display=swap');
-  
-  .it-vesna {
-    background-color: rgba(255, 255, 255, 0);
-    font-family: 'jura', sans-serif;
-    font-size: 24px;
-    font-weight: bold;
-    padding: 14px;
-    width: 100%;
-  }
-  .back-container {
-    height: 100%;
-    padding: 20px;
-    background-color: rgba(0, 0, 0, 0.15);
-    border-radius: 15px;
-    margin: 15px;
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: #f8f8f8;
 }
-  .zayavka-container {
-    display: flex; /* Используем flex-контейнер */
-    display: flex;
-    align-items: baseline;
-    flex-wrap: nowrap;
-    flex-direction: row;
-}
-  
-
-  
-  
-  .submit-button {
-    bottom: 20px;
-    right: 20px;
-    background-color: black;
-    color: #fff;
-    border: none;
-    border-radius: 5px;
-    padding: 10px 20px;
-    font-size: 16px;
-    cursor: pointer;
-    position: fixed;
-  }
-  .rg-box {
-    width: 2.5vw;
-    height: 2.2vw;
-    border-radius: 5px;
-    margin-right: -10px;
-    margin-top: -9px;
-    margin-bottom: -10px;
-}
-  
-  .submit-button:hover {
-    background-color: gray;
-  }
-
-  .input-text {
-    width: 80%;
-    height: 1.5vw;
-    padding: 10px;
-    margin-bottom: 10px;
-    margin-left: 5px;
-    border-radius: 10px;
-    font-family: 'Jura';
-    font-size: 14px;
-    font-weight: 600;
-    line-height: 1.5;
-    color: black;
-    display: flex;
-    background-color: rgb(17, 17, 17, 0.07);
-    border: none;
-    align-items: center;
-    justify-content: center;
-    align-content: center;
-    flex-direction: row;
-}
-.file-container {
+header {
   display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: space-around;
-  background-color: rgba(238, 238, 238, 0.5);
-  width: 90%;
-  padding: 4px;
-  height: 1.5vw;
-  margin-bottom: 10px;
-  margin-right: 25px;
-  margin-left: 10px;
-  border-radius: 6px;
-  overflow: hidden;
-  align-content: center;
-}
-.input-text1 {
-  font-family: 'Jura';
-  font-size: 10px;
-  font-weight: 600;
-  line-height: 1.5;
-  text-align: justify;
-  cursor: pointer;
-  color: black;
-  border: none;
-  margin-left: 2px;
-  margin-right: 6px;
-}
-.opt {
-  padding: 10px;
-  font-family: 'Jura', sans-serif;
-  font-size: 16px;
-  font-weight: 600;
-  line-height: 1.5;
-  color: black;
-  background-color: rgba(17, 17, 17, 0.07);
-}
-.descriprion-input {
-  min-width: 75vw;
-  max-width: 75vw;
-  min-height: 16.8vw;
-  overflow: hidden;
-  height: auto;
-  padding: 10px;
-  margin-bottom: 10px;
-  margin-left: 10px;
-  border-radius: 15px;
-  font-family: 'Jura';
-  font-size: 16px;
-  font-weight: 600;
-  line-height: 1.5;
-  color: black;
-  background-color: rgb(17, 17, 17, 0.07);
-  border: none;
-}
-.descriprion-input::placeholder {
-  color: #B4B4B4; /* Цвет плейсхолдера */
-  pointer-events: none; /* Чтобы плейсхолдер не мешал вводу текста */
-}
-.link {
-  font-size: 1.5vw;
-  font-weight: 700;
-  min-width: 40vw;
-  max-width: 40vw;
-  min-height: 1vw;
-  max-height: 2vw;
-  border-radius: 31px;
-  background-color: rgba(17, 17, 17, 0.07);
-  padding: 8px;
-  display: flex;
-  flex-direction: row;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 5px;
+  padding: 20px;
+  background-color: white;
+  box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.1);
 }
-.add-link {
-  width: 2vw;
-  height: 2vw;
-  background-color: rgb(0, 0, 0, 0);
-  background-size: cover;
-  border: none;
-  cursor: pointer;
-  margin-left: 5px;
-  margin-bottom: 11px;
-  background-image: url('add.png');
-}
-.link-container {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: start;
-  margin: 5px;
-}
-.right-container {
-  margin-top: 11px;
-  display: flex;
-  flex-direction: column;
-  align-items: start;
-  width: 9%;
-  box-sizing: border-box;
-  margin-left: 1.2vw;
-}
-.main-file {
-  display: flex;
-  flex-direction: column;
-  margin-right: 10px;
-}
-.link-text {
-  overflow: hidden;
-  padding-right: 5px;
-}
-.file-text {
-  background-color: rgba(255, 255, 255, 0);
-  font-family: 'jura', sans-serif;
-  padding: 10px;
-  font-size: 14px;
+.logo {
+  font-size: 24px;
   font-weight: bold;
+  color: #333;
+}
+.logo-container {
+  display: flex;
+  margin-left: calc(10px + 15vw);
+  margin-right: 50px;
+  color: #333;
+}
+.logo-button {
+  margin-right: 0.75rem;
+  height: 50.8667px;
+  text-decoration: none;
+  
+}
+nav a {
+  margin: 0 15px;
+  text-decoration: none;
+  color: #555;
+}
+.form-container {
+  background-color: white;
+  padding: 20px;
+  max-width: 600px;
+  margin: 40px auto;
+  border-radius: 8px;
+  box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.1);
+}
+h2 {
+  text-align: center;
+}
+.form-section {
+  margin-bottom: 20px;
+}
+input, select, textarea {
   width: 100%;
-  margin-left: px;
+  padding: 10px;
+  margin-top: 5px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
 }
-.delete-button1
-{
-  width: 2vw;
-  height: 2.2vw;
-  background-color: rgb(0, 0, 0, 0);
-  background-size: cover;
+.submit-btn {
+  width: 100%;
+  padding: 10px;
+  background-color: #4CAF50;
+  color: white;
   border: none;
+  border-radius: 4px;
   cursor: pointer;
-  margin-right: 5px;
-  background-image: url('delete.png');
 }
-
-  
-  
+.submit-btn:hover {
+  background-color: #45a049;
+}
+footer {
+  text-align: center;
+  padding: 20px;
+  background-color: white;
+  margin-top: 40px;
+  box-shadow: 0px -2px 10px rgba(0, 0, 0, 0.1);
+}
