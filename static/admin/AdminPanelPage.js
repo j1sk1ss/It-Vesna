@@ -12,52 +12,34 @@ const archRequests = [];
 
 function setTab(tab) {
     selectedTab = tab;
-    subTab = 'На рассмотрении';
+    subTab = 'На рассмотрении'; // сбрасываем подзакладку при изменении вкладки
     updateContent();
 
-    const rightTabContainer = document.querySelector('.adminp-right-tab-container');
-    rightTabContainer.style.display = selectedTab === 'Заявки' ? 'flex' : 'none';
+    const subTabs = document.getElementById('subTabs');
+    subTabs.style.display = selectedTab === 'Заявки' ? 'block' : 'none';
 
-    const moderatorInputContainer = document.querySelector('.moder-create-container');
-    moderatorInputContainer.style.display = selectedTab === 'Модераторы' ? 'block' : 'none';
+    document.querySelectorAll('.tab').forEach(tabElement => {
+        tabElement.classList.remove('active');
+    });
 
-    const nominationInputContainer = document.querySelector('.nomination-create-container');
-    nominationInputContainer.style.display = selectedTab === 'Номинации' ? 'block' : 'none';
+    const activeTab = document.querySelector(`.tab[data-tab="${selectedTab}"]`);
+    if (activeTab) {
+        activeTab.classList.add('active');
+    }
 }
 
 function setSubTab(tab) {
     subTab = tab;
     updateContent();
-}
 
-function handleCreateModerator() {
-    const email = document.getElementById('moderatorEmail').value;
-    const name = document.getElementById('moderatorName').value;
-    if (email && name) {
-        moderators.push({ email, name });
-        document.getElementById('moderatorEmail').value = '';
-        document.getElementById('moderatorName').value = '';
-        updateContent();
+    document.querySelectorAll('.sub-tab').forEach(subTabElement => {
+        subTabElement.classList.remove('active');
+    });
+
+    const activeSubTab = document.querySelector(`.sub-tab[data-sub-tab="${subTab}"]`);
+    if (activeSubTab) {
+        activeSubTab.classList.add('active');
     }
-}
-
-function handleDeleteModerator(index) {
-    moderators.splice(index, 1);
-    updateContent();
-}
-
-function handleAddNomination() {
-    const nomination = document.getElementById('nominationName').value.trim();
-    if (nomination) {
-        nominations.push(nomination);
-        document.getElementById('nominationName').value = '';
-        updateContent();
-    }
-}
-
-function handleDeleteNomination(index) {
-    nominations.splice(index, 1);
-    updateContent();
 }
 
 function handleDeleteRequest(id, list) {
@@ -76,46 +58,26 @@ document.addEventListener("visibilitychange", function() {
 
 function updateContent() {
     const content = document.getElementById('content');
-    content.innerHTML = '';
+    content.innerHTML = '';  // Очистить содержимое
 
     if (selectedTab === 'Заявки') {
         let list = subTab === 'На рассмотрении' ? requests : subTab === 'Принятые' ? approveRequests : archRequests;
-        content.innerHTML = list.map(request => `
-            <div class="request1">
-                <div class="request-info">
-                    <div>${request.author}</div>
-                    <div>${request.title}</div>
-                </div>
-                <div class="request-buttons">
-                    <button class="delete-button" onclick="handleDeleteRequest(${request.id}, '${subTab === 'На рассмотрении' ? 'requests' : subTab === 'Принятые' ? 'approveRequests' : 'archRequests'}')">Удалить</button>
-                </div>
-            </div>
-        `).join('');
-    } else if (selectedTab === 'Модераторы') {
-        content.innerHTML = moderators.map((moderator, index) => `
-            <div class="request1">
-                <div class="request-info">
-                    <div>${moderator.name}</div>
-                    <div>${moderator.email}</div>
-                </div>
-                <div class="request-buttons">
-                    <button class="delete-button" onclick="handleDeleteModerator(${index})">Удалить</button>
-                </div>
-            </div>
-        `).join('');
-    } else if (selectedTab === 'Номинации') {
-        content.innerHTML = nominations.map((nomination, index) => `
-            <div class="request1">
-                <div class="request-info">${nomination}</div>
-                <div class="request-buttons">
-                    <button class="delete-button" onclick="handleDeleteNomination(${index})">Удалить</button>
-                </div>
-            </div>
-        `).join('');
+        list.forEach(request => {
+            const div = document.createElement('div');
+            div.classList.add('request');
+            div.innerHTML = `
+                <p>${request.title}</p>
+                <p class="author">Автор: ${request.author}</p>
+                <p class="status">Статус: ${subTab}</p>
+                <button class="delete-button" onclick="handleDeleteRequest(${request.id}, '${subTab === 'На рассмотрении' ? 'requests' : subTab === 'Принятые' ? 'approveRequests' : 'archRequests'}')">Удалить</button>
+            `;
+            content.appendChild(div);
+        });
     }
 }
 
 document.addEventListener('DOMContentLoaded', function() {
-    setTab('Заявки'); // Устанавливаем активный таб "Заявки" при загрузке страницы
+    setTab('Заявки');
+    setSubTab('На рассмотрении');
     updateContent();
 });

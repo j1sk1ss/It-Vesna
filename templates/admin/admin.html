@@ -9,58 +9,37 @@
 </head>
 <body>
     <header>
-        <a href="/main/user" class="logo-button">
-            <div class="logo-container"> 
-                <img src="public/logo.png" alt="Логотип" class="logo">
-                <h1 class="logo-text">IT Весна</h1>
-            </div>
-        </a>
-        <div class="tabp-container">
-            <div class="left-cont">
-                <div class="adminp-left-tab-container">
-                    <div class="tab active" onclick="setTab('Заявки')">Заявки</div>
-                    <div class="tab" onclick="setTab('Модераторы')">Модераторы</div>
-                    <div class="tab" onclick="setTab('Номинации')">Номинации</div>
+        <div class="header-container">
+            <a href="/main/user" class="logo-button">
+                <div class="logo-container">
+                    <img src="public/logo.png" alt="Логотип" class="logo">
+                    <h1 class="logo-text">IT Весна</h1>
                 </div>
-            </div>
+            </a>
+            <nav class="admin-nav">
+                <span class="tab" data-tab="Заявки" onclick="setTab('Заявки')">Заявки</span>
+                <span class="tab" data-tab="Модераторы" onclick="setTab('Модераторы')">Модераторы</span>
+                <span class="tab" data-tab="Номинации" onclick="setTab('Номинации')">Номинации</span>
+            </nav>
         </div>
     </header>
-    
-    <div class="adminp-panel-page-container">
-        <div class="adminp-panel-page">
-            <div class="header-container">
-                <div class="header-wrapper">
-                    <div class="transparent-bar">
-                        
-                    </div>
-                    <div class="tabp-container">
-                        <div class="right-cont">
-                            <div class="adminp-right-tab-container">
-                                <div class="tab active" onclick="setSubTab('На рассмотрении')">На рассмотрении</div>
-                                <div class="tab" onclick="setSubTab('Принятые')">Принятые</div>
-                                <div class="tab" onclick="setSubTab('Архив')">Архив</div>
-                            </div>
-                        </div>
-                        <div class="moder-create-container">
-                            <div class="adminp-input-container">
-                                <input class="email-holder" type="text" placeholder="Почта" id="moderatorEmail">
-                                <input class="name-holder" type="text" placeholder="Имя" id="moderatorName">
-                                <button class="adminp-button-create" onclick="handleCreateModerator()">Создать</button>
-                            </div>
-                        </div>
-                        <div class="nomination-create-container">
-                            <div class="adminp-input-container">
-                                <input class="nom-holder" type="text" placeholder="Новая номинация" id="nominationName">
-                                <button class="adminp-button-create" onclick="handleAddNomination()">Добавить</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="adminp-tab-content" id="content"></div>
-        </div>
-    </div>
 
+    <main class="admin-panel">
+        <div class="tabs" id="subTabs">
+            <span class="sub-tab" data-sub-tab="На рассмотрении" onclick="setSubTab('На рассмотрении')">На рассмотрении</span>
+            <span class="sub-tab" data-sub-tab="Принятые" onclick="setSubTab('Принятые')">Принятые</span>
+            <span class="sub-tab" data-sub-tab="Архив" onclick="setSubTab('Архив')">Архив</span>
+        </div>
+        
+        <div id="content" class="application-list">
+            <!-- Content will be dynamically inserted here -->
+        </div>
+        
+        <footer>
+            © Оренбургский государственный университет, 2024
+        </footer>
+    </main>
+    
     <script src="admin/AdminPanelPage.js"></script>
 </body>
 </html>
