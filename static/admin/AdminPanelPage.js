@@ -14,6 +14,15 @@ function setTab(tab) {
     selectedTab = tab;
     subTab = 'На рассмотрении';
     updateContent();
+
+    const rightTabContainer = document.querySelector('.adminp-right-tab-container');
+    rightTabContainer.style.display = selectedTab === 'Заявки' ? 'flex' : 'none';
+
+    const moderatorInputContainer = document.querySelector('.moder-create-container');
+    moderatorInputContainer.style.display = selectedTab === 'Модераторы' ? 'block' : 'none';
+
+    const nominationInputContainer = document.querySelector('.nomination-create-container');
+    nominationInputContainer.style.display = selectedTab === 'Номинации' ? 'block' : 'none';
 }
 
 function setSubTab(tab) {
@@ -59,6 +68,12 @@ function handleDeleteRequest(id, list) {
     }
 }
 
+document.addEventListener("visibilitychange", function() {
+    const content = document.getElementById('content');
+    content.style.display = document.hidden ? 'none' : 'block';
+    if (!document.hidden) updateContent();
+});
+
 function updateContent() {
     const content = document.getElementById('content');
     content.innerHTML = '';
@@ -72,7 +87,7 @@ function updateContent() {
                     <div>${request.title}</div>
                 </div>
                 <div class="request-buttons">
-                    <button class="delete-button" onclick="handleDeleteRequest(${request.id}, ${subTab === 'На рассмотрении' ? 'requests' : subTab === 'Принятые' ? 'approveRequests' : 'archRequests'})">Удалить</button>
+                    <button class="delete-button" onclick="handleDeleteRequest(${request.id}, '${subTab === 'На рассмотрении' ? 'requests' : subTab === 'Принятые' ? 'approveRequests' : 'archRequests'}')">Удалить</button>
                 </div>
             </div>
         `).join('');
@@ -100,4 +115,7 @@ function updateContent() {
     }
 }
 
-document.addEventListener('DOMContentLoaded', updateContent);
+document.addEventListener('DOMContentLoaded', function() {
+    setTab('Заявки'); // Устанавливаем активный таб "Заявки" при загрузке страницы
+    updateContent();
+});

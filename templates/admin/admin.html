@@ -5,24 +5,35 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Админ-панель</title>
     <base href="{{ url_for('static', filename='') }}">
-    <link rel="stylesheet" href="AdminPanelPage.css">
+    <link rel="stylesheet" href="admin/AdminPanelPage.css">
 </head>
 <body>
+    <header>
+        <a href="/main/user" class="logo-button">
+            <div class="logo-container"> 
+                <img src="public/logo.png" alt="Логотип" class="logo">
+                <h1 class="logo-text">IT Весна</h1>
+            </div>
+        </a>
+        <div class="tabp-container">
+            <div class="left-cont">
+                <div class="adminp-left-tab-container">
+                    <div class="tab active" onclick="setTab('Заявки')">Заявки</div>
+                    <div class="tab" onclick="setTab('Модераторы')">Модераторы</div>
+                    <div class="tab" onclick="setTab('Номинации')">Номинации</div>
+                </div>
+            </div>
+        </div>
+    </header>
+    
     <div class="adminp-panel-page-container">
         <div class="adminp-panel-page">
             <div class="header-container">
                 <div class="header-wrapper">
                     <div class="transparent-bar">
-                        <div class="it-vesna">IT Весна</div>
+                        
                     </div>
                     <div class="tabp-container">
-                        <div class="left-cont">
-                            <div class="adminp-left-tab-container">
-                                <div class="tab active" onclick="setTab('Заявки')">Заявки</div>
-                                <div class="tab" onclick="setTab('Модераторы')">Модераторы</div>
-                                <div class="tab" onclick="setTab('Номинации')">Номинации</div>
-                            </div>
-                        </div>
                         <div class="right-cont">
                             <div class="adminp-right-tab-container">
                                 <div class="tab active" onclick="setSubTab('На рассмотрении')">На рассмотрении</div>
@@ -37,7 +48,7 @@
                                 <button class="adminp-button-create" onclick="handleCreateModerator()">Создать</button>
                             </div>
                         </div>
-                        <div class="moder-create-container">
+                        <div class="nomination-create-container">
                             <div class="adminp-input-container">
                                 <input class="nom-holder" type="text" placeholder="Новая номинация" id="nominationName">
                                 <button class="adminp-button-create" onclick="handleAddNomination()">Добавить</button>
@@ -50,6 +61,6 @@
         </div>
     </div>
 
-    <script src="AdminPanelPage.js"></script>
+    <script src="admin/AdminPanelPage.js"></script>
 </body>
 </html>
