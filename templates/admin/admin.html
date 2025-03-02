@@ -10,7 +10,7 @@
 <body>
     <header>
         <div class="header-container">
-            <div class="logo-button" onclick="window.location.href = '/'">
+            <div class="logo-button" onclick="window.location.href = '/main/user'">
                 <div class="logo-container">
                     <img src="public/logo.png" alt="Логотип" class="logo">
                     <h1 class="logo-text">IT Весна</h1>
@@ -30,16 +30,33 @@
             <span class="sub-tab" data-sub-tab="Принятые" onclick="setSubTab('Принятые')">Принятые</span>
             <span class="sub-tab" data-sub-tab="Архив" onclick="setSubTab('Архив')">Архив</span>
         </div>
-        
+
         <div id="content" class="application-list">
-            <!-- Заявки будут загружаться сюда -->
+            <div id="moderator-tab" style="display: none;">
+                <div class="request moderator-form" style="background-color: transparent; border: none; padding: 0;">
+                    <input type="text" id="moderator-name" class="input-field" placeholder="Имя модератора" />
+                    <input type="email" id="moderator-email" class="input-field" placeholder="Почта модератора" />
+                    <button onclick="addModerator()">Добавить</button>
+                </div>
+                <h3>Активные модераторы:</h3>
+                <ul id="moderators-list"></ul>
+            </div>
+
+            <div id="nomination-tab" style="display: none;">
+                <div class="request moderator-form" style="background-color: transparent; border: none; padding: 0;">
+                    <input type="text" id="nomination-name" class="input-field" placeholder="Название номинации" />
+                    <button onclick="addNomination()">Добавить</button>
+                </div>
+                <h3>Номинации:</h3>
+                <ul id="nominations-list"></ul>
+            </div>
         </div>
-        
+
         <footer>
             © Оренбургский государственный университет, 2025
         </footer>
     </main>
-    
+
     <script src="admin/AdminPanelPage.js"></script>
 </body>
 </html>

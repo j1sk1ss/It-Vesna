@@ -10,6 +10,9 @@ const requests = {
     "Архив": []
 };
 
+const moderators = []; // Список модераторов
+const nominations = []; // Список номинаций
+
 // Устанавливаем вкладку "Заявки" и подвкладку "На рассмотрении" при загрузке
 document.addEventListener('DOMContentLoaded', function() {
     setTab('Заявки');
@@ -71,6 +74,35 @@ function deleteRequest(id) {
     updateContent();
 }
 
+function addModerator() {
+    const email = document.getElementById('moderator-email').value;
+    const name = document.getElementById('moderator-name').value;
+
+    if (email && name) {
+        moderators.push({ email, name });
+        document.getElementById('moderator-email').value = '';
+        document.getElementById('moderator-name').value = '';
+        updateContent();
+    }
+}
+
+function addNomination() {
+    const nominationName = document.getElementById('nomination-name').value;
+
+    if (nominationName) {
+        nominations.push(nominationName);
+        document.getElementById('nomination-name').value = '';
+        updateContent();
+    } else {
+        alert('Пожалуйста, заполните поле с названием номинации.');
+    }
+}
+
+function deleteNomination(index) {
+    nominations.splice(index, 1); // Удаляем номинацию из массива
+    updateContent(); // Обновляем список номинаций
+}
+
 function updateContent() {
     const content = document.getElementById('content');
     content.innerHTML = '';
@@ -110,7 +142,80 @@ function updateContent() {
 
             content.appendChild(div);
         });
+    } else if (selectedTab === 'Модераторы') {
+        // Добавляем форму для ввода данных модератора без фона
+        const moderatorForm = document.createElement('div');
+        moderatorForm.classList.add('request'); // Стиль заявки
+        moderatorForm.classList.add('moderator-form');
+        moderatorForm.style.backgroundColor = 'transparent'; // Убираем фон
+        moderatorForm.innerHTML = `
+            <input type="text" id="moderator-name" class="input-field" placeholder="Имя модератора" />
+            <input type="email" id="moderator-email" class="input-field" placeholder="Почта модератора" />
+            <button onclick="addModerator()">Добавить</button>
+        `;
+        content.appendChild(moderatorForm);
+
+        // Добавляем список активных модераторов
+        const moderatorsList = document.createElement('ul');
+        moderatorsList.id = 'moderators-list';
+
+        if (moderators.length > 0) {
+            moderators.forEach((moderator, index) => {
+                const listItem = document.createElement('li');
+                listItem.textContent = `${moderator.name} (${moderator.email})`;
+
+                const deleteButton = document.createElement('button');
+                deleteButton.textContent = 'Удалить';
+                deleteButton.onclick = () => deleteModerator(index);
+
+                listItem.appendChild(deleteButton);
+                moderatorsList.appendChild(listItem);
+            });
+        } else {
+            moderatorsList.innerHTML = `<p>Нет активных модераторов</p>`;
+        }
+
+        content.appendChild(moderatorsList);
+    } else if (selectedTab === 'Номинации') {
+        // Добавляем форму для ввода новой номинации без фона
+        const nominationForm = document.createElement('div');
+        nominationForm.classList.add('request'); // Стиль заявки
+        nominationForm.classList.add('moderator-form');
+        nominationForm.style.backgroundColor = 'transparent'; // Убираем фон
+        nominationForm.innerHTML = `
+            <input type="text" id="nomination-name" class="input-field" placeholder="Название номинации" />
+            <button onclick="addNomination()">Добавить</button>
+        `;
+        content.appendChild(nominationForm);
+
+        // Добавляем список номинаций с кнопкой удаления
+        const nominationsList = document.createElement('ul');
+        nominationsList.id = 'nominations-list';
+
+        if (nominations.length > 0) {
+            nominations.forEach((nomination, index) => {
+                const listItem = document.createElement('li');
+                listItem.textContent = nomination;
+
+                // Добавляем кнопку для удаления номинации
+                const deleteButton = document.createElement('button');
+                deleteButton.textContent = 'Удалить';
+                deleteButton.onclick = () => deleteNomination(index);
+
+                listItem.appendChild(deleteButton);
+                nominationsList.appendChild(listItem);
+            });
+        } else {
+            nominationsList.innerHTML = `<p>Нет номинаций</p>`;
+        }
+
+        content.appendChild(nominationsList);
     } else {
         content.innerHTML = `<p>Контент для вкладки "${selectedTab}"</p>`;
     }
+}
+
+function deleteModerator(index) {
+    moderators.splice(index, 1); // Удаляем модератора из массива
+    updateContent(); // Обновляем список
 }

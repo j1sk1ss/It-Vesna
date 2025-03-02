@@ -1,4 +1,3 @@
-/* Общие стили */
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600&display=swap');
 
 body {
@@ -42,7 +41,7 @@ header {
 }
 
 .logo-button:focus, .logo-button:hover {
-  opacity: 0.8; /* Слегка изменяем прозрачность при наведении */
+  opacity: 0.8;
 }
 
 .logo-container {
@@ -58,9 +57,9 @@ header {
 }
 
 .logo-text {
-  text-decoration: none; /* Убираем подчеркивание у текста */
-  font-weight: 600; /* Жирный шрифт */
-  margin: 0; /* Убираем margin */
+  text-decoration: none;
+  font-weight: 600;
+  margin: 0;
 }
 
 .admin-nav {
@@ -99,12 +98,11 @@ main {
   margin: 0 auto;
 }
 
-/* Добавляем расстояние между шапкой и подвкладками */
 .tabs {
   display: flex;
   flex-direction: row;
   gap: 30px;
-  margin-top: 30px; /* Добавляем отступ сверху */
+  margin-top: 30px;
 }
 
 #subTabs {
@@ -133,11 +131,10 @@ main {
   margin-top: 20px;
 }
 
-/* Стили для контейнера заявки */
-.request {
+.request, #moderators-list li, #nominations-list li {
   background-color: white;
   padding: 15px;
-  border-radius: 8px;
+  border-radius: 20px;
   box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
   border: 1px solid #e0e0e0;
   transition: transform 0.3s ease, max-height 0.4s ease-in-out;
@@ -146,11 +143,11 @@ main {
   cursor: pointer;
 }
 
-.request.expanded {
+.request.expanded, #moderators-list li.expanded, #nominations-list li.expanded {
   max-height: 600px;
 }
 
-.request:hover {
+.request:hover, #moderators-list li:hover, #nominations-list li:hover {
   transform: scale(1.02);
 }
 
@@ -167,13 +164,12 @@ main {
   margin-top: 10px;
 }
 
-/* Стили для кнопок */
 button {
   background-color: #6DB33F;
   border: none;
   color: white;
   padding: 7px 12px;
-  border-radius: 5px;
+  border-radius: 20px;
   cursor: pointer;
   font-size: 14px;
   transition: background-color 0.3s, transform 0.2s;
@@ -188,7 +184,6 @@ button:active {
   background-color: #4F8E30;
 }
 
-/* Детали заявки */
 .details {
   margin-top: 10px;
   padding: 10px;
@@ -199,7 +194,7 @@ button:active {
   transition: opacity 0.3s ease-in-out, max-height 0.3s ease-in-out;
 }
 
-.request.expanded .details {
+.request.expanded .details, #moderators-list li.expanded .details, #nominations-list li.expanded .details {
   opacity: 1;
   max-height: 400px;
 }
@@ -218,7 +213,6 @@ button:active {
   text-decoration: underline;
 }
 
-/* Футер */
 footer {
   text-align: center;
   padding: 10px;
@@ -230,4 +224,66 @@ footer {
   left: 0;
   z-index: 1000;
   font-size: 14px;
+}
+
+.moderator-form {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  margin-bottom: 20px;
+  border-radius: 20px;
+  padding: 15px;
+  background-color: #f9f9f9;
+}
+
+.moderator-form .input-field {
+  padding: 10px 15px;
+  font-size: 14px;
+  border-radius: 20px;
+  border: 1px solid #ccc;
+  outline: none;
+  flex: 1;
+}
+
+.moderator-form button {
+  padding: 10px 15px;
+  border-radius: 20px;
+  background-color: #6DB33F;
+  border: none;
+  color: white;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+/* Убираем дополнительный паддинг у модераторов и номинаций */
+#moderators-list, #nominations-list {
+  padding: 0;
+}
+
+/* Стили для кнопки удаления на вкладках Номинации и Модераторы */
+#moderators-list li, #nominations-list li {
+  display: flex; /* Используем flex для выравнивания */
+  justify-content: space-between; /* Выравниваем элементы по бокам */
+  align-items: center; /* Центрируем элементы по вертикали */
+}
+
+#moderators-list li button, #nominations-list li button {
+  background-color: #e74c3c;
+  border: none;
+  color: white;
+  padding: 5px 10px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 14px;
+  transition: background-color 0.3s;
+  margin-left: auto; /* Перемещает кнопку вправо */
+}
+
+#moderators-list li button:hover, #nominations-list li button:hover {
+  background-color: #c0392b;
+}
+
+/* Оставляем стили кнопок на вкладке Заявки без изменений */
+.application-list .request button {
+  display: inline-block; /* Показывает кнопку, если она есть */
 }
