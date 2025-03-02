@@ -1,16 +1,18 @@
 async function sendRequest() {
+    const ageGroup = document.querySelector(".custom-select #age-group").textContent;
+    const nomination = document.querySelector(".custom-select #nomination").textContent;
+
     const authors  = Array.from(document.querySelectorAll("#authors-list .item span")).map(span => span.textContent);
     const links    = Array.from(document.querySelectorAll("#links-list .item span a")).map(a => a.textContent);
-    const ageGroup = document.getElementById("age-group").value;
     const email    = document.querySelector("input[type='email']").value;
-    const nomination  = document.getElementById("nomination").value;
     const institution = document.querySelector("input[placeholder='Учреждение']").value;
     const projectName = document.querySelector("input[placeholder='Название проекта']").value;
     const fileInput   = document.getElementById("file-upload");
     const projectDescription = document.getElementById("description").value;
     const consentFileInput   = document.getElementById("file-upload");
-    if (!projectName || !projectDescription || !email || !nomination || !institution || authors.length === 0) {
+    if (!projectName || !projectDescription || !ageGroup || !email || !nomination || !institution || authors.length === 0) {
         alert("Заполните все обязательные поля!");
+        console.log(projectName, projectDescription, email, ageGroup, nomination, institution, authors);
         return;
     }
 
@@ -38,17 +40,15 @@ async function sendRequest() {
     }
 
     try {
-        const response = await fetch("/api/send_request", {
+        const response = await fetch("/api/request", {
             method: "POST",
             body: formData
         });
 
-        const data = await response.json();
-
-        if (data.success) {
+        if (response.ok) {
             alert("Заявка успешно отправлена!");
         } else {
-            alert("Ошибка при отправке заявки: " + data.error);
+            alert("Ошибка при отправке заявки: " + response.error);
         }
     } catch (error) {
         console.error("Ошибка:", error);
@@ -56,8 +56,48 @@ async function sendRequest() {
     }
 }
 
+async function loadOptions() {
+    try {
+        const age_response = await fetch("/api/age_groups");
+        const age_data = await age_response.json();
+        const ageGroupList = document.querySelector(".custom-select .options-list.age-group");
+        age_data.forEach(group => {
+            const li = document.createElement("li");
+            li.textContent = group;
+            ageGroupList.appendChild(li);
+        });
+
+        const nom_response = await fetch("/api/nominations");
+        const nom_data = await nom_response.json();
+        const nominationList = document.querySelector(".custom-select .options-list.nomination");
+        nom_data.forEach(nomination => {
+            const li = document.createElement("li");
+            li.textContent = nomination;
+            nominationList.appendChild(li);
+        });
+        
+        selectorLogic();
+    } catch (error) {
+        console.error("Ошибка при загрузке опций:", error);
+    }
+}
+
+function selectorLogic() {
+    document.querySelectorAll('.options-list li').forEach(function(option) {
+        option.addEventListener('click', function() {
+            var selectedOption = this.textContent;
+            var customSelect = this.closest('.custom-select');
+            customSelect.querySelector('.selected-option').textContent = selectedOption;
+            customSelect.classList.remove('open');
+            setTimeout(function() {
+                customSelect.style.zIndex = '';
+            }, 300);
+        });
+    });
+}
 
 document.addEventListener("DOMContentLoaded", () => {
+    loadOptions();
     const linkInput     = document.getElementById("link-input");
     const addLinkButton = document.getElementById("add-link-button");
     const linksList     = document.getElementById("links-list");
@@ -129,20 +169,8 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     });
     
-    document.querySelectorAll('.options-list li').forEach(function(option) {
-        option.addEventListener('click', function() {
-            var selectedOption = this.textContent;
-            var customSelect = this.closest('.custom-select');
-            customSelect.querySelector('.selected-option').textContent = selectedOption;
-            customSelect.classList.remove('open');
-            setTimeout(function() {
-                customSelect.style.zIndex = '';
-            }, 300);
-        });
-    });
-    
     document.getElementById('file-upload').addEventListener('change', function(event) {
         const fileName = event.target.files[0] ? event.target.files[0].name : 'Прикрепите согласие';
-        document.querySelector('.file-name').textContent = fileName;
+        document.querySelector('.file-label').textContent = fileName;
     });      
 });

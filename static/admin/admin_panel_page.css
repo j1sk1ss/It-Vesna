@@ -137,14 +137,15 @@ main {
   border-radius: 20px;
   box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
   border: 1px solid #e0e0e0;
-  transition: transform 0.3s ease, max-height 0.4s ease-in-out;
+  transition: transform 0.3s ease, max-height 0.4s ease-in-out, padding 0.4s ease;
   overflow: hidden;
   max-height: 80px;
   cursor: pointer;
 }
 
 .request.expanded, #moderators-list li.expanded, #nominations-list li.expanded {
-  max-height: 600px;
+  max-height: 500px;
+  padding: 15px;
 }
 
 .request:hover, #moderators-list li:hover, #nominations-list li:hover {
@@ -156,6 +157,20 @@ main {
   justify-content: space-between;
   align-items: center;
   font-weight: 600;
+}
+
+.icon {
+  cursor: pointer;
+  transition: opacity 0.2s ease, filter 0.2s ease;
+  margin: 0 5px;
+}
+
+.icon:hover {
+  filter: brightness(0) saturate(100%) invert(32%) sepia(93%) saturate(3425%) hue-rotate(70deg) brightness(105%);
+}
+
+.icon-view-open:hover {
+  filter: none;
 }
 
 .buttons {
@@ -255,16 +270,14 @@ footer {
   cursor: pointer;
 }
 
-/* Убираем дополнительный паддинг у модераторов и номинаций */
 #moderators-list, #nominations-list {
   padding: 0;
 }
 
-/* Стили для кнопки удаления на вкладках Номинации и Модераторы */
 #moderators-list li, #nominations-list li {
-  display: flex; /* Используем flex для выравнивания */
-  justify-content: space-between; /* Выравниваем элементы по бокам */
-  align-items: center; /* Центрируем элементы по вертикали */
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
 #moderators-list li button, #nominations-list li button {
@@ -276,14 +289,13 @@ footer {
   cursor: pointer;
   font-size: 14px;
   transition: background-color 0.3s;
-  margin-left: auto; /* Перемещает кнопку вправо */
+  margin-left: auto;
 }
 
 #moderators-list li button:hover, #nominations-list li button:hover {
   background-color: #c0392b;
 }
 
-/* Оставляем стили кнопок на вкладке Заявки без изменений */
 .application-list .request button {
-  display: inline-block; /* Показывает кнопку, если она есть */
+  display: inline-block;
 }
