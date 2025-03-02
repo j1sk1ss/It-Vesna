@@ -131,7 +131,10 @@ main {
   margin-top: 20px;
 }
 
-.request, #moderators-list li, #nominations-list li {
+.request, 
+#moderators-list li, 
+#nominations-list li, 
+#age-group-list li {
   background-color: white;
   padding: 15px;
   border-radius: 20px;
@@ -143,13 +146,61 @@ main {
   cursor: pointer;
 }
 
-.request.expanded, #moderators-list li.expanded, #nominations-list li.expanded {
+.request.expanded, 
+#moderators-list li.expanded, 
+#nominations-list li.expanded, 
+#age-group-list li.expanded {
   max-height: 500px;
   padding: 15px;
 }
 
-.request:hover, #moderators-list li:hover, #nominations-list li:hover {
+.request:hover, 
+#moderators-list li:hover, 
+#nominations-list li:hover, 
+#age-group-list li:hover {
   transform: scale(1.02);
+}
+
+.request.expanded .details, 
+#moderators-list li.expanded .details, 
+#nominations-list li.expanded .details, 
+#age-group-list li.expanded .details {
+  opacity: 1;
+  max-height: 400px;
+}
+
+#moderators-list, 
+#nominations-list, 
+#age-group-list {
+  padding: 0;
+}
+
+#moderators-list li, 
+#nominations-list li, 
+#age-group-list li {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+#moderators-list li button, 
+#nominations-list li button, 
+#age-group-list li button {
+  background-color: #e74c3c;
+  border: none;
+  color: white;
+  padding: 5px 10px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 14px;
+  transition: background-color 0.3s;
+  margin-left: auto;
+}
+
+#moderators-list li button:hover, 
+#nominations-list li button:hover, 
+#age-group-list li button:hover {
+  background-color: #c0392b;
 }
 
 .request-header {
@@ -209,11 +260,6 @@ button:active {
   transition: opacity 0.3s ease-in-out, max-height 0.3s ease-in-out;
 }
 
-.request.expanded .details, #moderators-list li.expanded .details, #nominations-list li.expanded .details {
-  opacity: 1;
-  max-height: 400px;
-}
-
 .details p {
   margin: 5px 0;
   font-size: 14px;
@@ -268,32 +314,6 @@ footer {
   color: white;
   font-size: 14px;
   cursor: pointer;
-}
-
-#moderators-list, #nominations-list {
-  padding: 0;
-}
-
-#moderators-list li, #nominations-list li {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-#moderators-list li button, #nominations-list li button {
-  background-color: #e74c3c;
-  border: none;
-  color: white;
-  padding: 5px 10px;
-  border-radius: 5px;
-  cursor: pointer;
-  font-size: 14px;
-  transition: background-color 0.3s;
-  margin-left: auto;
-}
-
-#moderators-list li button:hover, #nominations-list li button:hover {
-  background-color: #c0392b;
 }
 
 .application-list .request button {
