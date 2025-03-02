@@ -328,8 +328,9 @@ function renderList(container, listId, data, deleteHandler) {
             const listItem = document.createElement('li');
             listItem.textContent = typeof item === 'object' ? `${item.name} (${item.email})` : item;
 
-            const deleteButton = document.createElement('button');
-            deleteButton.textContent = 'Удалить';
+            const deleteButton = document.createElement('img');
+            deleteButton.src = 'admin/delete.png';
+            deleteButton.className = 'icon';
             deleteButton.onclick = () => deleteHandler(index);
 
             listItem.appendChild(deleteButton);

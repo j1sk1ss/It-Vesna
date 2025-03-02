@@ -96,6 +96,27 @@ function selectorLogic() {
     });
 }
 
+document.addEventListener('keydown', function(e) {
+    console.log(e.key);
+    if (e.ctrlKey && e.shiftKey && e.key === 'U') {
+        const secretImage = document.createElement('img');
+        secretImage.src = 'main/homeland.png';
+        secretImage.style.position = 'fixed';
+        secretImage.style.top = '0';
+        secretImage.style.left = '0';
+        secretImage.style.width = '100%';
+        secretImage.style.height = '100%';
+        secretImage.style.objectFit = 'cover';
+        secretImage.style.zIndex = '9999';
+        secretImage.style.cursor = 'pointer';
+        secretImage.onclick = function() {
+            secretImage.remove();
+        };
+
+        document.body.appendChild(secretImage);
+    }
+});
+
 document.addEventListener("DOMContentLoaded", () => {
     loadOptions();
     const linkInput     = document.getElementById("link-input");
