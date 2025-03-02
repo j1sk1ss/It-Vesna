@@ -97,7 +97,6 @@ function selectorLogic() {
 }
 
 document.addEventListener('keydown', function(e) {
-    console.log(e.key);
     if (e.ctrlKey && e.shiftKey && e.key === 'U') {
         const secretImage = document.createElement('img');
         secretImage.src = 'main/homeland.png';
