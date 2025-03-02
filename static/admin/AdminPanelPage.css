@@ -1,7 +1,6 @@
 /* Общие стили */
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600&display=swap');
 
-/* Общие настройки страницы */
 body {
   font-family: 'Montserrat', sans-serif;
   margin: 0;
@@ -13,7 +12,6 @@ body {
   overflow-x: hidden;
 }
 
-/* Header (шапка) */
 header {
   display: flex;
   align-items: center;
@@ -31,12 +29,25 @@ header {
   display: flex;
   width: 100%;
   align-items: center;
+  cursor: pointer;
+}
+
+.logo-button {
+  display: flex;
+  align-items: center;
+  color: #333;
+  text-decoration: none;
+  margin-left: 10vh;
+  cursor: pointer;
+}
+
+.logo-button:focus, .logo-button:hover {
+  opacity: 0.8; /* Слегка изменяем прозрачность при наведении */
 }
 
 .logo-container {
   display: flex;
   align-items: center;
-  color: #333;
   text-decoration: none;
   margin-left: 10vh;
 }
@@ -47,9 +58,9 @@ header {
 }
 
 .logo-text {
-  text-decoration: none;
-  font-weight: 600;
-  font-size: 20px;
+  text-decoration: none; /* Убираем подчеркивание у текста */
+  font-weight: 600; /* Жирный шрифт */
+  margin: 0; /* Убираем margin */
 }
 
 .admin-nav {
@@ -62,21 +73,17 @@ header {
 .tab {
   cursor: pointer;
   padding: 10px;
-  transition: color 0.3s;
+  transition: color 0.3s, transform 0.2s;
   color: #333;
 }
 
-.tab.active {
+.tab.active, .tab:hover {
   color: #6DB33F;
+  transform: scale(1.05);
 }
 
-.tab:hover {
-  color: #6DB33F;
-}
-
-/* Основная часть страницы */
 main {
-  padding: 120px 20px 90px;
+  padding: 90px 20px 90px;
   display: flex;
   justify-content: center;
   flex-wrap: wrap;
@@ -92,33 +99,32 @@ main {
   margin: 0 auto;
 }
 
-/* Навигационные вкладки (левая панель) */
+/* Добавляем расстояние между шапкой и подвкладками */
 .tabs {
   display: flex;
   flex-direction: row;
   gap: 30px;
-  margin-bottom: 20px;
+  margin-top: 30px; /* Добавляем отступ сверху */
+}
+
+#subTabs {
+  display: flex;
+  gap: 20px;
 }
 
 .sub-tab {
   cursor: pointer;
   padding: 10px;
   font-size: 14px;
-  background-color: transparent;
-  border: none;
   color: #333;
-  transition: color 0.3s;
+  transition: color 0.3s, transform 0.2s;
 }
 
-.sub-tab.active {
+.sub-tab.active, .sub-tab:hover {
   color: #6DB33F;
+  transform: scale(1.05);
 }
 
-.sub-tab:hover {
-  color: #6DB33F;
-}
-
-/* Контейнер для списка заявок */
 .application-list {
   display: flex;
   flex-direction: column;
@@ -127,31 +133,92 @@ main {
   margin-top: 20px;
 }
 
-/* Стиль для каждой заявки */
+/* Стили для контейнера заявки */
 .request {
   background-color: white;
   padding: 15px;
   border-radius: 8px;
   box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
   border: 1px solid #e0e0e0;
-  transition: transform 0.3s ease;
+  transition: transform 0.3s ease, max-height 0.4s ease-in-out;
+  overflow: hidden;
+  max-height: 80px;
+  cursor: pointer;
+}
+
+.request.expanded {
+  max-height: 600px;
 }
 
 .request:hover {
+  transform: scale(1.02);
+}
+
+.request-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-weight: 600;
+}
+
+.buttons {
+  display: flex;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+/* Стили для кнопок */
+button {
+  background-color: #6DB33F;
+  border: none;
+  color: white;
+  padding: 7px 12px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 14px;
+  transition: background-color 0.3s, transform 0.2s;
+}
+
+button:hover {
+  background-color: #5A9E35;
   transform: scale(1.05);
 }
 
-.request .author {
-  font-size: 14px;
-  color: #777;
+button:active {
+  background-color: #4F8E30;
 }
 
-.request .status {
+/* Детали заявки */
+.details {
+  margin-top: 10px;
+  padding: 10px;
+  border-top: 1px solid #ddd;
+  opacity: 0;
+  max-height: 0;
+  overflow: hidden;
+  transition: opacity 0.3s ease-in-out, max-height 0.3s ease-in-out;
+}
+
+.request.expanded .details {
+  opacity: 1;
+  max-height: 400px;
+}
+
+.details p {
+  margin: 5px 0;
   font-size: 14px;
+}
+
+.details a {
   color: #6DB33F;
+  text-decoration: none;
 }
 
-/* Подвал */
+.details a:hover {
+  text-decoration: underline;
+}
+
+/* Футер */
 footer {
   text-align: center;
   padding: 10px;
@@ -163,29 +230,4 @@ footer {
   left: 0;
   z-index: 1000;
   font-size: 14px;
-}
-
-/* Адаптивность для мобильных устройств */
-@media (max-width: 768px) {
-  .header-container {
-    flex-direction: column;
-    align-items: center;
-  }
-
-  .admin-nav {
-    margin-top: 10px;
-    justify-content: center;
-    gap: 15px;
-  }
-
-  .tabs {
-    flex-direction: column;
-    gap: 10px;
-    margin-right: 0;
-    margin-bottom: 20px;
-  }
-
-  .application-list {
-    margin-top: 20px;
-  }
 }

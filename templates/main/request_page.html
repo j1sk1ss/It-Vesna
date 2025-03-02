@@ -19,49 +19,49 @@
     
     <main>
         <section class="form-container">
-            <h2 class="form-title">Создание заявки</h2>  <!-- Заголовок "Создание заявки" -->
-            <div class="form-content">
-                <!-- Левая часть: Информация о команде -->
-                <div class="left-section">
-                    <h3>Информация о команде</h3>
-                    <div class="input-group">
-                        <input type="text" id="author-input" placeholder="Добавить автора">     <!--back-->
-                        <button class="add-btn" id="add-author-button">+</button>
+            <h2 class="form-title">Создание заявки</h2>
+            <form id="request-form"> <!-- Добавлен тег form для отправки данных -->
+                <div class="form-content">
+                    <!-- Левая часть: Информация о команде -->
+                    <div class="left-section">
+                        <h3>Информация о команде</h3>
+                        <div class="input-group">
+                            <input type="text" id="author-input" placeholder="Добавить автора"> <!--back-->
+                            <button class="add-btn" id="add-author-button" type="button">+</button> <!-- Убрал type="submit" чтобы избежать нежелательной отправки формы при добавлении -->
+                        </div>
+                        <div id="authors-list"></div>
+                        <select id="age-group" class="input-field">
+                            <option>Возрастная группа</option>
+                        </select>
+                        <input type="email" placeholder="Почта" class="input-field"> <!--back-->
+                        <select id="nomination" class="input-field">
+                            <option>Номинация</option>
+                        </select>
+                        <input type="text" placeholder="Учреждение" class="input-field"> <!--back-->
+                        <div class="input-file-wrapper">
+                            <input type="file" id="file-upload" class="input-field">
+                        </div>
                     </div>
-                    <div id="authors-list"></div>
-                    <select id="age-group" class="input-field">     <!--back-->
-                        <option>Возрастная группа</option>
-                    </select>
-                    <input type="email" placeholder="Почта" class="input-field">        <!--back-->
-                    <select id="nomination" class="input-field">
-                        <option>Номинация</option>
-                    </select>
-                    <input type="text" placeholder="Учреждение" class="input-field">        <!--back-->
-                    <div class="input-file-wrapper">
-                        <input type="file" id="file-upload" class="input-field">
-                    </div>
-                    
-                </div>
     
-                <!-- Правая часть: Информация о проекте -->
-                <div class="right-section">
-                    <h3>Информация о проекте</h3>
-                    <input type="text" placeholder="Название проекта" class="input-field">      <!--back-->
-                    <textarea id="description" placeholder="Описание проекта" class="expanding-textarea input-field"></textarea>
-                    <div class="input-group">
-                        <input type="text" id="link-input" placeholder="Добавить ссылку">       <!--back-->
-                        <button class="add-btn" id="add-link-button">+</button>
+                    <!-- Правая часть: Информация о проекте -->
+                    <div class="right-section">
+                        <h3>Информация о проекте</h3>
+                        <input type="text" placeholder="Название проекта" class="input-field"> <!--back-->
+                        <textarea id="description" placeholder="Описание проекта" class="expanding-textarea input-field"></textarea>
+                        <div class="input-group">
+                            <input type="text" id="link-input" placeholder="Добавить ссылку"> <!--back-->
+                            <button class="add-btn" id="add-link-button" type="button">+</button> <!-- Убрал type="submit" для добавления ссылок -->
+                        </div>
+                        <div id="links-list"></div>
+                        <button class="submit-btn" type="submit">Отправить заявку</button> <!-- Теперь кнопка отправки формы -->
                     </div>
-                    <div id="links-list"></div>
-                    <button class="submit-btn">Отправить заявку</button>        <!--back-->
                 </div>
-            </div>
+            </form>
         </section>
     </main>
     
-    
     <footer>
-        © Оренбургский государственный университет, 2024
+        © Оренбургский государственный университет, 2025
     </footer>
     <script src="main/RequestPage.js"></script>
 </body>

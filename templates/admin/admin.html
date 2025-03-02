@@ -10,12 +10,12 @@
 <body>
     <header>
         <div class="header-container">
-            <a href="/main/user" class="logo-button">
+            <div class="logo-button" onclick="window.location.href = '/'">
                 <div class="logo-container">
                     <img src="public/logo.png" alt="Логотип" class="logo">
                     <h1 class="logo-text">IT Весна</h1>
                 </div>
-            </a>
+            </div>
             <nav class="admin-nav">
                 <span class="tab" data-tab="Заявки" onclick="setTab('Заявки')">Заявки</span>
                 <span class="tab" data-tab="Модераторы" onclick="setTab('Модераторы')">Модераторы</span>
@@ -32,11 +32,11 @@
         </div>
         
         <div id="content" class="application-list">
-            <!-- Content will be dynamically inserted here -->
+            <!-- Заявки будут загружаться сюда -->
         </div>
         
         <footer>
-            © Оренбургский государственный университет, 2024
+            © Оренбургский государственный университет, 2025
         </footer>
     </main>
     
