@@ -1,14 +1,13 @@
 document.addEventListener("DOMContentLoaded", function () {
     const registerForm = document.getElementById("register-form");
-
     registerForm.addEventListener("submit", async function (event) {
         event.preventDefault();
 
         const fullName = document.getElementById("fullName").value.trim();
-        const email = document.getElementById("email").value.trim();
+        const email    = document.getElementById("email").value.trim();
         const password = document.getElementById("password").value.trim();
+        const agreed   = document.getElementById("agreed").checked;
         const confirmPassword = document.getElementById("confirmPassword").value.trim();
-        const agreed = document.getElementById("agreed").checked;
 
         if (!agreed) {
             alert("Вы должны согласиться с политикой конфиденциальности!");
@@ -20,22 +19,19 @@ document.addEventListener("DOMContentLoaded", function () {
             return;
         }
 
-        const requestBody = {
-            fullName,
-            email,
-            password
-        };
-
         try {
-            const response = await fetch("back/register_user", {
+            const response = await fetch("/api/register", {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
-                body: JSON.stringify(requestBody)
-            });
+                body: JSON.stringify({
+                    name: fullName,
+                    email: email,
+                    password: password
+                })
+            });            
 
             if (response.ok) {
-                alert("Регистрация успешна!");
-                window.location.href = "index.html";
+                window.location.assign("/main/user");
             } else {
                 alert("Ошибка регистрации. Попробуйте снова.");
             }

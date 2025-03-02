@@ -6,31 +6,24 @@ document.addEventListener("DOMContentLoaded", function () {
 
         const email = document.getElementById("email").value;
         const password = document.getElementById("password").value;
-
-        const requestBody = {
-            mail: email,
-            password: password
-        };
-
         try {
-            const response = await fetch('back/login-page', {
+            const response = await fetch('/api/login', { // back
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
                 },
-                body: JSON.stringify(requestBody)
+                body: JSON.stringify({
+                    mail: email,
+                    password: password
+                })
             });
 
             if (response.ok) {
                 const userData = await response.json();
-                const userStatus = userData.status;
-                const userRole = userData.role;
-
-                console.log('Статус:', userStatus);
-                console.log('Роль:', userRole);
-
-                // Перенаправляем пользователя на главную страницу
-                window.location.href = "main-user.html";
+                localStorage.setItem("status", userData.status);
+                localStorage.setItem("role", userData.role);
+                localStorage.setItem("key", userData.key);
+                window.location.href = "/main/user";
             } else {
                 console.error('Ошибка:', response.statusText);
                 alert("Ошибка входа. Проверьте логин и пароль.");

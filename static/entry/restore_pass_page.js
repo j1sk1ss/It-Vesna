@@ -13,7 +13,7 @@ document.addEventListener("DOMContentLoaded", function () {
         }
 
         try {
-            const response = await fetch("send_code", {
+            const response = await fetch("/api/send_code", { // back
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({ email })
@@ -40,7 +40,7 @@ document.addEventListener("DOMContentLoaded", function () {
         }
 
         try {
-            const response = await fetch("back/confirm_code", {
+            const response = await fetch("/api/confirm_code", { // back
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({ code })

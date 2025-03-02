@@ -5,56 +5,76 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>IT Весна - Создание заявки</title>
     <base href="{{ url_for('static', filename='') }}">
-    <link rel="stylesheet" href="main/RequestPage.css">
+    <link rel="stylesheet" href="main/request_page.css">
 </head>
 <body>
     <header>
-        <a href="/main/user" class="logo-button">
-            <div class="logo-container"> 
+        <div class="logo-container">
+            <a href="/main/user" class="logo-button">
                 <img src="public/logo.png" alt="Логотип" class="logo">
-                <h1 class="logo-text">IT Весна</h1>
-            </div>
-        </a>
+            </a>
+            <h1 class="logo-text">IT Весна</h1>
+        </div>        
     </header>
     
     <main>
         <section class="form-container">
-            <h2 class="form-title">Создание заявки</h2>
-            <form id="request-form"> <!-- Добавлен тег form для отправки данных -->
-                <div class="form-content">
-                    <!-- Левая часть: Информация о команде -->
-                    <div class="left-section">
-                        <h3>Информация о команде</h3>
-                        <div class="input-group">
-                            <input type="text" id="author-input" placeholder="Добавить автора"> <!--back-->
-                            <button class="add-btn" id="add-author-button" type="button">+</button> <!-- Убрал type="submit" чтобы избежать нежелательной отправки формы при добавлении -->
-                        </div>
-                        <div id="authors-list"></div>
-                        <select id="age-group" class="input-field">
-                            <option>Возрастная группа</option>
-                        </select>
-                        <input type="email" placeholder="Почта" class="input-field"> <!--back-->
-                        <select id="nomination" class="input-field">
-                            <option>Номинация</option>
-                        </select>
-                        <input type="text" placeholder="Учреждение" class="input-field"> <!--back-->
-                        <div class="input-file-wrapper">
-                            <input type="file" id="file-upload" class="input-field">
-                        </div>
+            <h2 class="form-title">Создание заявки</h2>  <!-- Заголовок "Создание заявки" -->
+            <div class="form-content">
+                <!-- Левая часть: Информация о команде -->
+                <div class="left-section">
+                    <h3>Информация о команде</h3>
+                    <div class="input-group">
+                        <input type="text" id="author-input" placeholder="Добавить автора">
+                        <button class="add-btn" id="add-author-button">+</button>
                     </div>
+                    <div id="authors-list"></div>
+
+                    <div class="custom-select">
+                        <div class="select-box">
+                          <span class="selected-option" id="age-group">Возрастная группа</span>
+                          <span class="arrow">&#9660;</span>
+                        </div>
+                        <ul class="options-list">
+                          <li>Возрастная группа 1</li>
+                          <li>Возрастная группа 2</li>
+                          <li>Возрастная группа 3</li>
+                        </ul>
+                    </div>
+                      
+                    <input type="email" placeholder="Почта" class="input-field">
+
+                    <div class="custom-select">
+                        <div class="select-box">
+                          <span class="selected-option" id="nomination">Номинация</span>
+                          <span class="arrow">&#9660;</span>
+                        </div>
+                        <ul class="options-list">
+                          <li>Номинация 1</li>
+                          <li>Номинация 2</li>
+                          <li>Номинация 3</li>
+                        </ul>
+                    </div>
+
+                    <input type="text" placeholder="Учреждение" class="input-field">
+                    <div class="input-file-wrapper">
+                        <input type="file" id="file-upload" class="file-input">
+                        <label for="file-upload" class="file-label">Прикрепите согласие</label>
+                    </div>
+                                      
+                </div>
     
-                    <!-- Правая часть: Информация о проекте -->
-                    <div class="right-section">
-                        <h3>Информация о проекте</h3>
-                        <input type="text" placeholder="Название проекта" class="input-field"> <!--back-->
-                        <textarea id="description" placeholder="Описание проекта" class="expanding-textarea input-field"></textarea>
-                        <div class="input-group">
-                            <input type="text" id="link-input" placeholder="Добавить ссылку"> <!--back-->
-                            <button class="add-btn" id="add-link-button" type="button">+</button> <!-- Убрал type="submit" для добавления ссылок -->
-                        </div>
-                        <div id="links-list"></div>
-                        <button class="submit-btn" type="submit">Отправить заявку</button> <!-- Теперь кнопка отправки формы -->
+                <!-- Правая часть: Информация о проекте -->
+                <div class="right-section">
+                    <h3>Информация о проекте</h3>
+                    <input type="text" placeholder="Название проекта" class="input-field">
+                    <textarea id="description" placeholder="Описание проекта" class="expanding-textarea input-field"></textarea>
+                    <div class="input-group">
+                        <input type="text" id="link-input" placeholder="Добавить ссылку">
+                        <button class="add-btn" id="add-link-button">+</button>
                     </div>
+                    <div id="links-list"></div>
+                    <button class="submit-btn"  onclick="sendRequest()">Отправить заявку</button>
                 </div>
             </form>
         </section>
@@ -62,7 +82,8 @@
     
     <footer>
         © Оренбургский государственный университет, 2025
+        © Оренбургский государственный университет, 2025
     </footer>
-    <script src="main/RequestPage.js"></script>
+    <script src="main/request_page.js"></script>
 </body>
 </html>
