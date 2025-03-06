@@ -11,25 +11,22 @@
     <div class="user-page-container">
         <div class="user-page">
             <div class="header-container">
-                <div class="header-wrapper">          
-                    <div class="tab-container">
-                        <a href="{{ url_for('dynamic_route', subpath='main/user') }}" class="logo-button">
-                            <div class="logo-container"> 
-                                <img src="public/logo.png" alt="Логотип" class="logo-button">
-                                <h1>IT Весна</h1>
-                            </div>
-                        </a>
-                        <div class="left-tab-container" id="tabs"></div>
-                        <div class="right-tab-container">
-                            <a href="{{ url_for('dynamic_route', subpath='main/request_page') }}" class="request-button">Подать заявку</a>
-                        </div>
+                <div class="logo-button" onclick="window.location.href = '/main/user'">
+                    <div class="logo-container">
+                        <img src="public/logo.png" alt="Логотип" class="logo">
+                        <h1 class="logo-text">IT Весна</h1>
                     </div>
                 </div>
+                <div class="tab-container">
+                    <div class="left-tab-container" id="tabs"></div>
+                </div>
+            </div>
+            <div class="right-tab-container">
+                <a href="{{ url_for('dynamic_route', subpath='main/request_page') }}" class="request-button">Подать заявку на участие!</a>
             </div>
             <div class="tab-content" id="tab-content"></div>
         </div>
     </div>
-
     <script src="main/user.js"></script>
 </body>
 </html>
