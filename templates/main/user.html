@@ -4,29 +4,43 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>IT Весна</title>
+    <!-- Ensure base href is correct for the static files -->
     <base href="{{ url_for('static', filename='') }}">
-    <link rel="stylesheet" href="main/main.css">
+    <link rel="stylesheet" href="main/main.css"> <!-- Correct path to your CSS file -->
 </head>
 <body>
     <div class="user-page-container">
         <div class="user-page">
-            <div class="header-container">
-                <div class="logo-button" onclick="window.location.href = '/main/user'">
-                    <div class="logo-container">
-                        <img src="public/logo.png" alt="Логотип" class="logo">
-                        <h1 class="logo-text">IT Весна</h1>
+            <header>
+                <div class="header-container">
+                    <div class="logo-button" onclick="window.location.href = '/main/user'">
+                        <div class="logo-container">
+                            <img src="public/logo.png" alt="Логотип IT Весна" class="logo">
+                            <h1 class="logo-text">IT Весна</h1>
+                        </div>
+                    </div>
+                    <div class="tab-container">
+                        <div class="left-tab-container" id="tabs"></div>
+                    </div>
+                    <!-- Контейнер с кнопкой для подачи заявки -->
+                    <div class="admin-panel-button-container">
+                        <a href="/main/request_page" class="admin-panel-button">Подать заявку</a>
                     </div>
                 </div>
-                <div class="tab-container">
-                    <div class="left-tab-container" id="tabs"></div>
-                </div>
-            </div>
+            </header>
+
             <div class="right-tab-container">
-                <a href="{{ url_for('dynamic_route', subpath='main/request_page') }}" class="request-button">Подать заявку на участие!</a>
+                <!-- Здесь не будет кнопки для подачи заявки, только вкладки -->
             </div>
+
             <div class="tab-content" id="tab-content"></div>
         </div>
     </div>
-    <script src="main/user.js"></script>
+
+    <footer>
+        © Оренбургский государственный университет, 2025
+    </footer>
+
+    <script src="main/user.js"></script> <!-- Correct path to your JS file -->
 </body>
 </html>

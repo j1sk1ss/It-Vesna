@@ -1,14 +1,11 @@
 document.addEventListener("DOMContentLoaded", function () {
-    const tabs = ["Главная", "Участие", "План мероприятий", "Положения конкурса", "Состав жюри", "Технические требования"];
-    const tabContainer = document.getElementById("tab-container");
     const postInput = document.getElementById("post-input");
     const placeholder = document.getElementById("placeholder");
     const publishButton = document.getElementById("publish-button");
-    const tabContent = document.getElementById("tab-content");
+    const tabContentContainer = document.getElementById("tab-content-container");
 
-    let selectedTab = "Главная";
-    let posts = {
-        "Главная": [],
+    let selectedTab = "Участие";  // Стартовая вкладка
+    const posts = {
         "Участие": [],
         "План мероприятий": [],
         "Положения конкурса": [],
@@ -16,101 +13,138 @@ document.addEventListener("DOMContentLoaded", function () {
         "Технические требования": []
     };
 
+    let editingPostIndex = null;  // Индекс редактируемого поста
+
+    // Рендеринг вкладок
     function renderTabs() {
-        tabContainer.innerHTML = "";
-        tabs.forEach(tabName => {
-            const tab = document.createElement("div");
-            tab.className = `tab ${selectedTab === tabName ? "active" : ""}`;
-            tab.textContent = tabName;
-            tab.onclick = () => {
-                selectedTab = tabName;
+        const tabs = ["Участие", "План мероприятий", "Положения конкурса", "Состав жюри", "Технические требования"];
+        const tabContainer = document.getElementById("tab-container");
+        tabContainer.innerHTML = "";  // Очистить вкладки
+        tabs.forEach(tab => {
+            const tabElement = document.createElement("span");
+            tabElement.classList.add("tab");
+            if (tab === selectedTab) {
+                tabElement.classList.add("active");
+            }
+            tabElement.textContent = tab;
+            tabElement.addEventListener("click", function () {
+                selectedTab = tab;
                 renderTabs();
                 renderPosts();
-            };
-            tabContainer.appendChild(tab);
+            });
+            tabContainer.appendChild(tabElement);
         });
     }
 
+    // Рендеринг постов
     function renderPosts() {
+        const currentPosts = posts[selectedTab];
+        const tabContent = document.getElementById("tab-content-container");
+
+        // Очищаем текущий контент вкладки перед рендерингом новых постов
         tabContent.innerHTML = "";
-        posts[selectedTab].forEach((post, index) => {
-            const postElement = document.createElement("div");
-            postElement.className = `post ${post.pinned ? "pinned" : ""}`;
 
-            postElement.innerHTML = `
-                <div class="post-info">
-                    <div class="post-meta">
-                        <div class="author">${post.author}</div>
-                        <div class="date">${post.date}</div>
-                        ${post.pinned ? '<div class="pinned-label">Закреплено</div>' : ""}
+        if (currentPosts.length === 0) {
+            tabContent.innerHTML = "<p>Нет постов для отображения.</p>";
+        } else {
+            currentPosts.forEach((post, index) => {
+                // Обертка для каждого поста
+                const postContainer = document.createElement("div");
+                postContainer.classList.add("post-container");
+
+                // Внутренний контейнер поста
+                const postContentContainer = document.createElement("div");
+                postContentContainer.classList.add("post");
+                postContentContainer.innerHTML = `
+                    <div class="post-header">
+                        <span class="post-date">${new Date(post.timestamp).toLocaleString()}</span>
+                        <div class="post-buttons">
+                            <button class="post-pin-button" data-index="${index}">Закрепить</button>
+                            <button class="post-edit-button" data-index="${index}">Редактировать</button>
+                            <button class="post-delete-button" data-index="${index}">Удалить</button>
+                        </div>
                     </div>
-                    <img src="/more.png" class="more-button" data-index="${index}">
-                </div>
-                <div class="post-text">${post.text}</div>
-            `;
+                    <div class="post-body">${post.content}</div>
+                `;
 
-            postElement.querySelector(".more-button").addEventListener("click", (event) => {
-                showActions(event, index);
+                // Добавляем пост в контейнер
+                postContainer.appendChild(postContentContainer);
+                tabContent.appendChild(postContainer);
             });
 
-            tabContent.appendChild(postElement);
-        });
-    }
+            // Добавляем обработчики для кнопок
+            const pinButtons = document.querySelectorAll(".post-pin-button");
+            const editButtons = document.querySelectorAll(".post-edit-button");
+            const deleteButtons = document.querySelectorAll(".post-delete-button");
 
-    function handlePublish() {
-        const text = postInput.innerText.trim();
-        if (text !== "") {
-            posts[selectedTab].unshift({
-                text,
-                author: "Модератор",
-                date: new Date().toLocaleDateString(),
-                pinned: false
+            pinButtons.forEach(button => {
+                button.addEventListener("click", function () {
+                    const index = button.getAttribute("data-index");
+                    // Переносим пост в начало списка
+                    const pinnedPost = posts[selectedTab].splice(index, 1)[0];
+                    posts[selectedTab].unshift(pinnedPost);
+                    renderPosts();
+                });
             });
-            postInput.innerText = "";
-            placeholder.style.display = "block";
-            renderPosts();
+
+            editButtons.forEach(button => {
+                button.addEventListener("click", function () {
+                    const index = button.getAttribute("data-index");
+                    // Заполняем поле ввода содержимым поста для редактирования
+                    postInput.innerHTML = posts[selectedTab][index].content;
+                    placeholder.style.display = "none"; // Прячем placeholder
+                    editingPostIndex = index; // Сохраняем индекс редактируемого поста
+                    // Удаляем пост из списка, чтобы его заменить
+                    posts[selectedTab].splice(index, 1);
+                    renderPosts();
+                });
+            });
+
+            deleteButtons.forEach(button => {
+                button.addEventListener("click", function () {
+                    const index = button.getAttribute("data-index");
+                    posts[selectedTab].splice(index, 1);
+                    renderPosts();
+                });
+            });
         }
     }
 
-    function showActions(event, index) {
-        const menu = document.createElement("div");
-        menu.className = "actions-popup";
-        menu.style.top = `${event.clientY}px`;
-        menu.style.left = `${event.clientX}px`;
+    // Функция для публикации нового или отредактированного поста
+    publishButton.addEventListener("click", function () {
+        const content = postInput.innerHTML.trim();
+        if (content !== "" && content !== placeholder.textContent) {
+            const newPost = {
+                content: content,
+                timestamp: Date.now()
+            };
 
-        menu.innerHTML = `
-            <button onclick="deletePost(${index})">Удалить</button>
-            <button onclick="pinPost(${index})">Закрепить</button>
-            <button onclick="editPost(${index})">Редактировать</button>
-        `;
+            if (editingPostIndex !== null) {
+                // Если редактируется пост, обновляем его на старой позиции
+                posts[selectedTab][editingPostIndex] = newPost;
+                editingPostIndex = null; // Сбрасываем индекс редактируемого поста
+            } else {
+                // Если новый пост, добавляем его в начало списка
+                posts[selectedTab].unshift(newPost);
+            }
 
-        document.body.appendChild(menu);
-        document.addEventListener("click", () => menu.remove(), { once: true });
-    }
-
-    window.deletePost = function (index) {
-        posts[selectedTab].splice(index, 1);
-        renderPosts();
-    };
-
-    window.pinPost = function (index) {
-        const pinnedPost = posts[selectedTab].splice(index, 1)[0];
-        posts[selectedTab].unshift({ ...pinnedPost, pinned: true });
-        renderPosts();
-    };
-
-    window.editPost = function (index) {
-        postInput.innerText = posts[selectedTab][index].text;
-        posts[selectedTab].splice(index, 1);
-        placeholder.style.display = "none";
-        renderPosts();
-    };
-
-    postInput.addEventListener("input", () => {
-        placeholder.style.display = postInput.innerText.trim() ? "none" : "block";
+            // Очищаем поле ввода и показываем placeholder
+            postInput.innerHTML = "";
+            placeholder.style.display = "block";  // Показать placeholder
+            renderPosts();
+        }
     });
 
-    publishButton.addEventListener("click", handlePublish);
+    // Проверка пустоты поля ввода
+    postInput.addEventListener("input", function () {
+        if (postInput.innerHTML.trim() === "") {
+            placeholder.style.display = "block";
+        } else {
+            placeholder.style.display = "none";
+        }
+    });
+
+    // Инициализация страницы
     renderTabs();
     renderPosts();
 });

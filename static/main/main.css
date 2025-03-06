@@ -1,223 +1,271 @@
-@import url('https://fonts.googleapis.com/css2?family=Jura&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600&display=swap');
 
-.user-page,
-.admin-panel-page {
-    align-items: flex-start;
-    width: 100%; 
-    height: 100%; 
-    font-family: 'Jura', sans-serif;
-    display: flex;
-    flex-direction: column;
+body {
+  font-family: 'Montserrat', sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: #f8f8f8;
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  overflow-x: hidden;
 }
 
-.transparent-bar {
-    background-color: rgba(255, 255, 255, 0);
-    padding: 2vh; /* Адаптивный внутренний отступ */
-    z-index: 1;
-    font-family: 'Jura', sans-serif;
-    font-size: 4vw; /* Адаптивный размер текста */
-    font-weight: bold;
-}
-
-.logo-button {
-    display: flex;
-    align-items: center;
-    color: #333;
-    text-decoration: none;
-    margin-left: 10vh;
-    cursor: pointer;
-  }
-  
-  .logo-button:focus, .logo-button:hover {
-    opacity: 0.8;
-  }
-  
-  .logo-container {
-    display: flex;
-    align-items: center;
-    text-decoration: none;
-    margin-left: 10vh;
-  }
-  
-  .logo {
-    height: 50px;
-    margin-right: 10px;
-  }
-  
-  .logo-text {
-    text-decoration: none;
-    font-weight: 600;
-    margin: 0;
-  }
-
-.user-page-container,
 .admin-panel-page-container {
-    padding: 0px; /* Удаляем внутренние отступы */
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  flex: 1;
+  padding-top: 4vh;
+  padding-bottom: 5vh;
+  width: 100%;
+}
+
+.admin-panel-page {
+  width: 100%;
+  max-width: 1200px;
+  padding: 20px;
+}
+
+header {
+  display: flex;
+  align-items: center;
+  padding: 20px;
+  background-color: white;
+  box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.1);
+  width: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 1000;
+  justify-content: space-between;
 }
 
 .header-container {
-    background-color: rgb(255, 255, 255);
-    width: 100%;
-    box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.1);
-    display: flex;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-left: 10vh;
 }
 
-.header-container .it-vesna {
-    font-size: 64px; /* Увеличиваем размер шрифта до 64 пикселей */
+.logo-button {
+  display: flex;
+  align-items: center;
+  color: #333;
+  text-decoration: none;
+  cursor: pointer;
+  margin-left: 10vh;
 }
 
-.user-page .tab-container,
-.admin-panel-page .tab-container {
-    border-radius: 5px; /* Адаптивное закругление углов */
-    margin-left: 0.7vw;
-    margin-bottom: 1vw;
-    font-size: 16px;
-    padding: 8px;
-    font-weight: bold;
-    width: 97vw;
+.logo-button:focus, .logo-button:hover {
+  opacity: 0.8;
 }
 
-.left-tab-container,
-.right-tab-container {
-    display: flex;
-    border: 1px solid #ffffff00;
-    border-radius: 2vw; /* Адаптивный радиус границы */
-    margin-right: 1vw; /* Адаптивный внешний отступ */
+.logo-container {
+  display: flex;
+  align-items: center;
+  text-decoration: none;
 }
 
-.user-page .left-tab-container .tab,
-.admin-panel-page .left-tab-container .tab {
-    border-radius: 5px;
-    border: none;
-    margin-right: 0.2vw;
-    margin-left: 0.2vw;
-    white-space: nowrap;
-    padding: 10px;
-    -webkit-user-select: none;
-    user-select: none;
+.logo {
+  height: 50px;
+  margin-right: 10px;
 }
 
-.user-page .tab.active,
-.admin-panel-page .tab.active {
+.logo-text {
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 32px;
+  margin: 0;
+}
 
+.tab-container {
+  display: flex;
+  justify-content: flex-end;
+  flex-grow: 1;
+}
+
+.left-tab-container {
+  display: flex;
+  gap: 30px;
+  font-size: 16px;
+}
+
+.tab {
+  cursor: pointer;
+  padding: 10px;
+  transition: color 0.3s, transform 0.2s;
+  color: #333;
+}
+
+.tab.active, .tab:hover {
+  color: #6DB33F;
+  transform: scale(1.05);
+}
+
+/* Кнопка перехода на страницу администратора внутри шапки */
+.admin-panel-button {
+  display: inline-block;
+  text-decoration: none;
+  color: white;
+  background-color: #6DB33F;
+  padding: 10px 20px;
+  border-radius: 20px;
+  text-align: center;
+  margin-left: 30px;
+}
+
+.admin-panel-button:hover {
+  background-color: #5A9E35;
 }
 
 .post-input-container {
-    display: flex; /* Располагаем элементы внутри контейнера в колонку */
-    
-    align-items: center; /* Располагаем элементы по центру горизонтальной оси */
-    width: 90%; /* Растягиваем контейнер на всю доступную ширину */
-    box-sizing: border-box; /* Учитываем внутренние отступы в общей ширине */
-    border-radius: 31px; /* Закругляем углы поля ввода */
-    margin-left: 5vw;
-    padding-bottom: 0px;
-    overflow: hidden; /* Обрезаем содержимое, выходящее за границы контейнера */
-    box-shadow: 1px 4px 4px rgba(0, 0, 0, 0.25);
+  padding-top: 80px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 15px;
+  width: 100%;
+  max-width: 1240px;
+  margin: 0 auto;
+  position: relative;
+  margin-bottom: 20px;
 }
 
-.post-input {
-    border-radius: 31px; /* Закругляем углы поля ввода */
-    border: 1px solid rgba(0, 0, 0, 0.034); /* Добавляем рамку */
-    font-size: 18px; /* Размер шрифта */
-    color: #333; /* Цвет текста */
-    background-color: rgba(0, 0, 0, 0.068); /* Цвет фона */
-    width: 96%;
-    margin-left: 7px;
-    margin-top: 10px;
-    margin-bottom: 10px;
-    margin-right: 10px;
-    padding: 10px;
-    overflow: hidden;
-    height: auto;
+#post-input {
+  width: 100%;
+  max-width: 1240px;
+  min-height: 50px;
+  padding: 15px;
+  border-radius: 10px;
+  border: 1px solid #ccc;
+  font-size: 14px;
+  background-color: white;  /* Белый фон для поля ввода */
+  outline: none;
+  box-sizing: border-box;
+  position: relative;
 }
 
-.post-input::placeholder {
+.placeholder {
+  position: absolute;
+  top: 50%;
+  left: 15px;
+  color: #999;
+  font-size: 14px;
+  pointer-events: none;
+  transform: translateY(-50%);
+  transition: opacity 0.2s;
+}
 
-  }
+#post-input:empty + .placeholder {
+  display: block;
+}
 
-/* Стили для кнопки "Опубликовать" */
+#post-input:not(:empty) + .placeholder {
+  display: none;
+}
+
 .publish-button {
-    
+  background-color: #6DB33F;
+  border: none;
+  color: white;
+  padding: 10px 20px;
+  border-radius: 20px;
+  cursor: pointer;
+  font-size: 14px;
+  transition: background-color 0.3s, transform 0.2s;
 }
 
 .publish-button:hover {
-    
+  background-color: #5A9E35;
+  transform: scale(1.05);
 }
 
+.publish-button:active {
+  background-color: #4F8E30;
+}
+
+footer {
+  text-align: center;
+  padding: 10px;
+  background-color: white;
+  box-shadow: 0px -2px 10px rgba(0, 0, 0, 0.1);
+  width: 100%;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  z-index: 1000;
+  font-size: 14px;
+}
+
+/* Контейнер для поста */
 .post {
+    background-color: white; /* Белый фон для поста */
+    border-radius: 10px;      /* Скругленные углы */
+    padding: 20px;            /* Отступы внутри поста */
+    margin-bottom: 20px;      /* Отступ снизу для разделения постов */
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* Легкая тень для выделения */
+    transition: transform 0.3s, box-shadow 0.3s; /* Плавное изменение при наведении */
+}
+
+.post:hover {
+    transform: translateY(-5px);  /* Подъем поста при наведении */
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2); /* Увеличенная тень */
+}
+
+/* Заголовок поста */
+.post-header {
     display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    background-color: #f0f0f07a;
-    border-radius: 15px;
-    padding: 1vh 2vw;
-    margin-bottom: 2vh;
-    overflow-wrap: break-word;
-    font-size: 1.8vw;
-    margin-left: 5vw;
-    margin-top: 1vw;
-    font-weight: normal;
-    width: 86%;
-    word-wrap: break-word;
-    word-break: break-word;
-    box-shadow: 1px 4px 4px rgba(0, 0, 0, 0.25);
+    justify-content: space-between; /* Распределение элементов по краям */
+    margin-bottom: 10px;             /* Отступ снизу */
 }
 
-.post-info {
+.post-date {
+    font-size: 12px;  /* Размер шрифта для даты */
+    color: #999;      /* Цвет для текста даты */
+}
+
+.post-buttons {
     display: flex;
-    justify-content: space-between;
-    width: 100%;
+    gap: 10px;  /* Отступы между кнопками */
 }
 
-.post-meta {
-    display: flex;
-    flex-direction: column;
+.post-buttons button {
+    background-color: #6DB33F; /* Основной зеленый фон */
+    color: white;              /* Белый цвет текста */
+    border: none;              /* Без границы */
+    padding: 10px 20px;        /* Отступы внутри кнопки */
+    border-radius: 20px;       /* Скругленные углы */
+    cursor: pointer;          /* Указатель при наведении */
+    font-size: 14px;           /* Размер шрифта */
+    transition: background-color 0.3s, transform 0.2s; /* Плавные переходы */
 }
 
-.author {
-    font-weight: bold;
+/* Эффект на кнопке при наведении */
+.post-buttons button:hover {
+    background-color: #5A9E35; /* Темнее на hover */
+    transform: scale(1.05);     /* Легкое увеличение кнопки */
 }
 
-.date {
-    color: #666;
+/* Эффект на кнопке при клике */
+.post-buttons button:active {
+    background-color: #4F8E30; /* Еще темнее при нажатии */
 }
 
-.pinned-label {
-    color: #666;
+/* Кнопка закрепления */
+.post-pin-button {
+    background-color: #f9c74f;  /* Желтый фон для кнопки закрепления */
+    color: white;                /* Белый текст */
 }
 
-.post.pinned .pinned-label {
-    margin-right: 10px;
+.post-pin-button:hover {
+    background-color: #f8b400; /* Более темный желтый на hover */
 }
 
-
-.post-info {
-    display: flex; /* Отображаем элементы в строку */
-    justify-content: space-between; /* Распределяем пространство между элементами */
-    width: 100%; /* Ширина контейнера */
-}
-
-
-/* Стили для списка действий */
-.actions-popup {
-    position: absolute; /* Позиционируем список абсолютно */
-    background-color: white; /* Цвет фона */
-    border: 1px solid #ccc; /* Граница */
-    border-radius: 5px; /* Закругляем углы */
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Тень */
-    padding: 5px; /* Внутренние отступы */
-    z-index: 10; /* Порядок слоев */
-    display: flex; /* Отображаем элементы в строку */
-    flex-direction: column; /* Располагаем элементы в столбец */
-}
-
-.actions-popup button {
-    background-color: transparent; /* Прозрачный фон кнопки */
-    border: none; /* Убираем границу */
-    padding: 5px 10px; /* Внутренние отступы */
-    cursor: pointer; /* Устанавливаем курсор в виде указателя */
-}
-
-.actions-popup button:hover {
-    background-color: #f0f0f0; /* Изменяем цвет фона при наведении */
+/* Тело поста */
+.post-body {
+    font-size: 14px;           /* Размер шрифта */
+    color: #333;               /* Цвет текста */
+    line-height: 1.6;          /* Межстрочный интервал */
+    white-space: pre-line;     /* Перенос текста по строкам */
 }

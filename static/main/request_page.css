@@ -22,14 +22,34 @@ header {
   top: 0;
   left: 0;
   z-index: 1000;
+  justify-content: space-between;
+}
+
+.header-container {
+  display: flex;
+  align-items: center;
+  gap: 10px; /* Adds space between logo and other items */
+  margin-left: 10vh; /* Adjust left margin to center the content */
+  width: 100%;
+}
+
+.logo-button {
+  display: flex;
+  align-items: center;
+  color: #333;
+  text-decoration: none;
+  cursor: pointer;
+  margin-left: 10vh; /* Adjusted for consistent spacing */
+}
+
+.logo-button:focus, .logo-button:hover {
+  opacity: 0.8; /* Hover effect for the logo button */
 }
 
 .logo-container {
   display: flex;
   align-items: center;
-  color: #333;
   text-decoration: none;
-  margin-left: 10vh;
 }
 
 .logo {
@@ -40,7 +60,8 @@ header {
 .logo-text {
   text-decoration: none;
   font-weight: 600;
-  font-size: 20px;
+  font-size: 32px;
+  margin: 0;
 }
 
 main {
@@ -82,7 +103,6 @@ h3 {
   flex-direction: column;
   width: 100%;
   max-width: 500px;
-  
 }
 
 .input-group {

@@ -10,27 +10,51 @@
 <body>
     <div class="admin-panel-page-container">
         <div class="admin-panel-page">
-            <div class="header-container">
-                    <div class="logo-button" onclick="window.location.href = '/main/user'">
+            <header>
+                <div class="header-container">
+                    <div class="logo-button" onclick="window.location.href = '/main/admin'">
                         <div class="logo-container">
                             <img src="public/logo.png" alt="Логотип" class="logo">
                             <h1 class="logo-text">IT Весна</h1>
                         </div>
                     </div>
                     <div class="tab-container">
-                        <div class="left-tab-container" id="tab-container"></div>
+                        <div class="left-tab-container" id="tab-container">
+                            <span class="tab" data-tab="Участие" onclick="setTab('Участие')">Участие</span>
+                            <span class="tab" data-tab="План мероприятий" onclick="setTab('План мероприятий')">План мероприятий</span>
+                            <span class="tab" data-tab="Положения конкурса" onclick="setTab('Положения конкурса')">Положения конкурса</span>
+                            <span class="tab" data-tab="Состав жюри" onclick="setTab('Состав жюри')">Состав жюри</span>
+                            <span class="tab" data-tab="Технические требования" onclick="setTab('Технические требования')">Технические требования</span>
+                        </div>
+                        <a href="/admin/admin" class="admin-panel-button">Перейти на страницу администратора</a>
                     </div>
-            </div>
-        </div>
+                </div>
+            </header>
+            
+            <!-- Форма для публикации поста -->
             <div class="post-input-container">
-                <div id="post-input" class="post-input" contenteditable="true"></div>
-                <div id="placeholder" class="placeholder"></div>
+                <div id="post-input" class="post-input" contenteditable="true">
+                    <div id="placeholder" class="placeholder">Напишите свой текст...</div>
+                </div>
                 <button class="publish-button" id="publish-button">Опубликовать</button>
             </div>
-            <div class="tab-content" id="tab-content"></div>
-            <a href="/admin/admin" class="admin-panel-button">Перейти на страницу администратора</a>
+
+            <!-- Контейнер для вкладок и постов -->
+            <div id="tab-content-container">
+                <div id="Участие" class="tab-content"></div>
+                <div id="План мероприятий" class="tab-content"></div>
+                <div id="Положения конкурса" class="tab-content"></div>
+                <div id="Состав жюри" class="tab-content"></div>
+                <div id="Технические требования" class="tab-content"></div>
+            </div>
+
         </div>
     </div>
+    
+    <footer>
+        © Оренбургский государственный университет, 2025
+    </footer>
+
     <script src="main/admin.js"></script>
 </body>
 </html>
