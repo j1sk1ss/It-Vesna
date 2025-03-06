@@ -103,7 +103,7 @@ header {
   transform: scale(1.05);
 }
 
-/* Кнопка перехода на страницу администратора внутри шапки */
+/* Кнопка перехода на страницу администратора */
 .admin-panel-button {
   display: inline-block;
   text-decoration: none;
@@ -140,29 +140,10 @@ header {
   border-radius: 10px;
   border: 1px solid #ccc;
   font-size: 14px;
-  background-color: white;  /* Белый фон для поля ввода */
+  background-color: white;
   outline: none;
   box-sizing: border-box;
   position: relative;
-}
-
-.placeholder {
-  position: absolute;
-  top: 50%;
-  left: 15px;
-  color: #999;
-  font-size: 14px;
-  pointer-events: none;
-  transform: translateY(-50%);
-  transition: opacity 0.2s;
-}
-
-#post-input:empty + .placeholder {
-  display: block;
-}
-
-#post-input:not(:empty) + .placeholder {
-  display: none;
 }
 
 .publish-button {
@@ -198,74 +179,65 @@ footer {
   font-size: 14px;
 }
 
-/* Контейнер для поста */
+/* Стили для постов */
 .post {
-    background-color: white; /* Белый фон для поста */
-    border-radius: 10px;      /* Скругленные углы */
-    padding: 20px;            /* Отступы внутри поста */
-    margin-bottom: 20px;      /* Отступ снизу для разделения постов */
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* Легкая тень для выделения */
-    transition: transform 0.3s, box-shadow 0.3s; /* Плавное изменение при наведении */
+  background-color: white;
+  border-radius: 10px;
+  padding: 20px;
+  margin-bottom: 20px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s, box-shadow 0.3s;
 }
 
 .post:hover {
-    transform: translateY(-5px);  /* Подъем поста при наведении */
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2); /* Увеличенная тень */
+  transform: translateY(-5px);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
 }
 
-/* Заголовок поста */
 .post-header {
-    display: flex;
-    justify-content: space-between; /* Распределение элементов по краям */
-    margin-bottom: 10px;             /* Отступ снизу */
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 10px;
 }
 
 .post-date {
-    font-size: 12px;  /* Размер шрифта для даты */
-    color: #999;      /* Цвет для текста даты */
+  font-size: 12px;
+  color: #999;
 }
 
 .post-buttons {
-    display: flex;
-    gap: 10px;  /* Отступы между кнопками */
+  display: flex;
+  gap: 10px;
 }
 
-.post-buttons button {
-    background-color: #6DB33F; /* Основной зеленый фон */
-    color: white;              /* Белый цвет текста */
-    border: none;              /* Без границы */
-    padding: 10px 20px;        /* Отступы внутри кнопки */
-    border-radius: 20px;       /* Скругленные углы */
-    cursor: pointer;          /* Указатель при наведении */
-    font-size: 14px;           /* Размер шрифта */
-    transition: background-color 0.3s, transform 0.2s; /* Плавные переходы */
+/* Стили для кнопок с иконками */
+.post-buttons img {
+  cursor: pointer;
+  transition: transform 0.2s, opacity 0.3s, filter 0.3s;
 }
 
-/* Эффект на кнопке при наведении */
-.post-buttons button:hover {
-    background-color: #5A9E35; /* Темнее на hover */
-    transform: scale(1.05);     /* Легкое увеличение кнопки */
+/* Кнопка "Закрепить" (pin) */
+.post-buttons .post-pin-button {
+  width: 10px;
+  height: 16px;
 }
 
-/* Эффект на кнопке при клике */
-.post-buttons button:active {
-    background-color: #4F8E30; /* Еще темнее при нажатии */
+/* Кнопка "Редактировать" (edit) */
+.post-buttons .post-edit-button {
+  width: 16px;
+  height: 16px;
 }
 
-/* Кнопка закрепления */
-.post-pin-button {
-    background-color: #f9c74f;  /* Желтый фон для кнопки закрепления */
-    color: white;                /* Белый текст */
+/* Кнопка "Удалить" (delete) */
+.post-buttons .post-delete-button {
+  width: 12px;
+  height: 16px;
 }
 
-.post-pin-button:hover {
-    background-color: #f8b400; /* Более темный желтый на hover */
+/* При наведении они становятся зелёными */
+.post-buttons img:hover {
+  transform: scale(1.1);
+  opacity: 0.8;
+  filter: brightness(0) saturate(100%) invert(59%) sepia(22%) saturate(790%) hue-rotate(53deg) brightness(90%) contrast(95%);
 }
 
-/* Тело поста */
-.post-body {
-    font-size: 14px;           /* Размер шрифта */
-    color: #333;               /* Цвет текста */
-    line-height: 1.6;          /* Межстрочный интервал */
-    white-space: pre-line;     /* Перенос текста по строкам */
-}

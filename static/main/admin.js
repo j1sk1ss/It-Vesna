@@ -54,18 +54,23 @@ document.addEventListener("DOMContentLoaded", function () {
 
                 // Внутренний контейнер поста
                 const postContentContainer = document.createElement("div");
-                postContentContainer.classList.add("post");
-                postContentContainer.innerHTML = `
-                    <div class="post-header">
-                        <span class="post-date">${new Date(post.timestamp).toLocaleString()}</span>
-                        <div class="post-buttons">
-                            <button class="post-pin-button" data-index="${index}">Закрепить</button>
-                            <button class="post-edit-button" data-index="${index}">Редактировать</button>
-                            <button class="post-delete-button" data-index="${index}">Удалить</button>
+                    postContentContainer.classList.add("post");
+                    postContentContainer.innerHTML = `
+                        <div class="post-header">
+                           <span class="post-date">${new Date(post.timestamp).toLocaleString()}</span>
+                            <div class="post-buttons">
+                                <img class="post-pin-button" data-index="${index}" src="/static/public/pin.png" alt="Закрепить">
+                                <img class="post-edit-button" data-index="${index}" src="/static/public/edit.png" alt="Редактировать">
+                                <img class="post-delete-button" data-index="${index}" src="/static/public/delete.png" alt="Удалить">
+                            </div>
                         </div>
-                    </div>
-                    <div class="post-body">${post.content}</div>
-                `;
+                        <div class="post-body">${post.content}</div>
+                    `;
+
+                // Добавляем обработчики событий
+                postContentContainer.querySelector(".post-pin-button").addEventListener("click", () => pinPost(index));
+                postContentContainer.querySelector(".post-edit-button").addEventListener("click", () => editPost(index));
+                postContentContainer.querySelector(".post-delete-button").addEventListener("click", () => deletePost(index));
 
                 // Добавляем пост в контейнер
                 postContainer.appendChild(postContentContainer);
