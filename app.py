@@ -1,9 +1,11 @@
 import os
+
 from datetime import datetime
+from werkzeug.utils import secure_filename
 
 from flask_cors import CORS
-from flask import Flask, render_template, abort, request
 from flask_sqlalchemy import SQLAlchemy
+from flask import Flask, jsonify, render_template, abort, request
 
 
 def _find_templates() -> dict:
@@ -14,6 +16,7 @@ def _find_templates() -> dict:
                 rel_path = os.path.relpath(os.path.join(root, file), app.template_folder)
                 route = "/" + rel_path.replace("\\", "/").replace(".html", "")
                 routes[route] = rel_path.replace("\\", "/")
+
     return routes
 
 UPLOAD_FOLDER = 'static/uploads'
@@ -121,6 +124,31 @@ class AgeGroup(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(100), nullable=False, unique=True)
 
+
+class Post(db.Model):
+    __tablename__ = 'posts'
+
+    id = db.Column(db.Integer, primary_key=True)
+    author = db.Column(db.String(100), nullable=False, unique=True)
+    category = db.Column(db.String(100), nullable=False, unique=True)
+    created_at = db.Column(db.DateTime, default=datetime.utcnow)
+    content_path = db.Column(db.String(255), nullable=False)
+    pin = db.Column(db.Integer, nullable=False)
+
+    def to_dict(self):
+        return {
+            "id": self.id,
+            "author": self.author,
+            "category": self.category,
+            "created_at": self.created_at.isoformat(),
+            "content_path": self.content_path,
+            "pin": self.pin
+        }
+
+# endregion
+
+
+# region [CRUDS]
 
 def create_age_group(name: str) -> AgeGroup:
     new_age_group = AgeGroup(name=name)
@@ -351,7 +379,9 @@ def update_request(
 
 
 def delete_request(request_id: int) -> Request:
-    request_item = Request.query.get_or_404(request_id)
+    request_item: Request = Request.query.get_or_404(request_id)
+    os.remove(request_item.description_path)
+    os.remove(request_item.consent_path)
     db.session.delete(request_item)
     db.session.commit()
     return request_item
@@ -397,6 +427,56 @@ def delete_user(user_id: int) -> User:
     db.session.delete(user)
     db.session.commit()
     return user
+
+
+def create_post(author: str, category: str, content_path: str) -> Post:
+    new_post = Post(author=author, category=category, content_path=content_path, pin=0)
+    db.session.add(new_post)
+    db.session.commit()
+    return new_post
+
+
+def get_posts() -> list[Post]:
+    return Post.query.all()
+
+
+def get_post(post_id: int) -> Post:
+    return Post.query.get_or_404(id=post_id)
+
+
+def get_posts_by_category(category: str) -> list[Post]:
+    return Post.query.filter_by(category=category).all()
+
+
+def update_post(
+    post_id: int, 
+    author: str = None, 
+    category: str = None, 
+    content_path: str = None,
+    pin: int = 0
+) -> bool:
+    post: Post = Post.query.get_or_404(id=post_id)
+    if author:
+        post.author = author
+
+    if category:
+        post.category = category
+
+    if content_path:
+        post.content_path = content_path
+
+    post.pin = pin
+    db.session.commit()
+    return True
+
+
+def delete_post(post_id: int) -> bool:
+    post: Post = Post.query.get_or_404(post_id)
+    os.remove(post.content_path)
+    db.session.delete(post)
+    db.session.commit()
+    return True
+
 
 # endregion
 
@@ -635,14 +715,18 @@ def _add_nomination() -> tuple:
     return "Added", 200
 
 
-@app.route("/api/nomination", methods=["DELETE"]) # DB
+@app.route("/api/nomination", methods=["DELETE"])
 def _delete_nomination() -> tuple:
     data: dict | None = request.json
     if not data:
         return "No data", 500
 
     name: str = data.get("name", "")
-    return "Added", 200
+    nomination = get_nomination_by_name(nomination_name=name)
+    if nomination:
+        delete_nomination(nomination_id=nomination.id)
+
+    return "Deleted", 200
 
 
 @app.route("/api/age_groups", methods=["GET"])
@@ -661,14 +745,58 @@ def _add_age_group() -> tuple:
     return "Added", 200
 
 
-@app.route("/api/age_group", methods=["DELETE"]) # DB
+@app.route("/api/age_group", methods=["DELETE"])
 def _delete_age_group() -> tuple:
     data: dict | None = request.json
     if not data:
         return "No data", 500
 
     name: str = data.get("name", "")
-    return "Added", 200
+    age_group = get_age_group_by_name(age_group_name=name)
+    if age_group:
+        delete_age_group(age_group_id=age_group.id)
+
+    return "Deleted", 200
+
+
+@app.route("/api/posts", methods=["POST"])
+def _create_post() -> tuple:
+    if 'content' not in request.files:
+        return "No content file", 400
+
+    file = request.files['content']
+    author = request.form.get("author")
+    category = request.form.get("category")
+    if not author or not category:
+        return "Missing author or category", 400
+
+    category_folder = os.path.join(app.config['UPLOAD_FOLDER'], category)
+    os.makedirs(category_folder, exist_ok=True)
+
+    filename = f"{secure_filename(author)}_{int(datetime.utcnow().timestamp())}.txt"
+    file_path = os.path.join(category_folder, filename)
+    file.save(file_path)
+
+    new_post = create_post(author=author, category=category, content_path=file_path)
+    return {"id": new_post.id, "message": "Added"}, 200
+
+
+@app.route("/api/posts", methods=["GET"])
+def _get_posts() -> tuple:
+    data: dict | None = request.args
+    if not data:
+        return "No data", 500
+    
+    posts = get_posts_by_category(category=data.get("category"))
+    posts_data = [post.to_dict() for post in posts]
+    return jsonify(posts_data), 200
+
+
+@app.route("/api/posts/<int:post_id>", methods=["DELETE"])
+def _delete_post(post_id: int) -> tuple:
+    delete_post(post_id=post_id)
+    return "Deleted", 200
+
 
 # endregion
 

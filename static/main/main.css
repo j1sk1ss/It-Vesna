@@ -39,13 +39,15 @@ header {
   left: 0;
   z-index: 1000;
   justify-content: space-between;
+  align-items: center;
+  justify-content: center;
 }
 
 .header-container {
   display: flex;
   align-items: center;
+  justify-content: center;
   gap: 10px;
-  margin-left: 10vh;
 }
 
 .logo-button {
@@ -54,7 +56,6 @@ header {
   color: #333;
   text-decoration: none;
   cursor: pointer;
-  margin-left: 10vh;
 }
 
 .logo-button:focus, .logo-button:hover {
@@ -79,10 +80,19 @@ header {
   margin: 0;
 }
 
+.enter-admin {
+  display: flex;
+  align-items: center;
+}
+
 .tab-container {
   display: flex;
   justify-content: flex-end;
+  flex-direction: row;
   flex-grow: 1;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
 }
 
 .left-tab-container {
@@ -103,8 +113,13 @@ header {
   transform: scale(1.05);
 }
 
-/* Кнопка перехода на страницу администратора */
-.admin-panel-button {
+.create-request {
+  text-align: center;
+}
+
+.admin-button,
+.create-request-button {
+  width: 60%;
   display: inline-block;
   text-decoration: none;
   color: white;
@@ -114,7 +129,12 @@ header {
   text-align: center;
 }
 
-.admin-panel-button:hover {
+.create-request-button {
+  margin-top: 130px;
+}
+
+.admin-button:hover,
+.create-request-button:hover {
   background-color: #5A9E35;
 }
 
@@ -146,23 +166,24 @@ header {
 }
 
 .publish-button {
-  background-color: #6DB33F;
+  color: rgba(128,128,128,1);
+  font-family: Montserrat;
+  font-weight: Bold;
+  font-size: 16px;
+  opacity: 1;
+  text-align: left;
+  background: none;
   border: none;
-  color: white;
-  padding: 10px 20px;
-  border-radius: 20px;
   cursor: pointer;
-  font-size: 14px;
+  margin: 1;
+  padding: 3px 20px;
+  border-radius: 20px;
   transition: background-color 0.3s, transform 0.2s;
 }
 
-.publish-button:hover {
-  background-color: #5A9E35;
-  transform: scale(1.05);
-}
-
-.publish-button:active {
-  background-color: #4F8E30;
+.post-input .publish-button {
+  position: absolute;
+  right: 10px;
 }
 
 footer {
@@ -178,7 +199,6 @@ footer {
   font-size: 14px;
 }
 
-/* Стили для постов */
 .post {
   background-color: white;
   border-radius: 10px;
@@ -209,34 +229,28 @@ footer {
   gap: 10px;
 }
 
-/* Стили для кнопок с иконками */
 .post-buttons img {
   cursor: pointer;
   transition: transform 0.2s, opacity 0.3s, filter 0.3s;
 }
 
-/* Кнопка "Закрепить" (pin) */
 .post-buttons .post-pin-button {
   width: 10px;
   height: 16px;
 }
 
-/* Кнопка "Редактировать" (edit) */
 .post-buttons .post-edit-button {
   width: 16px;
   height: 16px;
 }
 
-/* Кнопка "Удалить" (delete) */
 .post-buttons .post-delete-button {
   width: 12px;
   height: 16px;
 }
 
-/* При наведении они становятся зелёными */
 .post-buttons img:hover {
   transform: scale(1.1);
   opacity: 0.8;
   filter: brightness(0) saturate(100%) invert(59%) sepia(22%) saturate(790%) hue-rotate(53deg) brightness(90%) contrast(95%);
 }
-

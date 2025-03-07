@@ -7,31 +7,27 @@ document.addEventListener("DOMContentLoaded", function () {
         'Технические требования': []
     };
 
-    let selectedTab = "Участие";  // Стартовая вкладка
-
+    let selectedTab = "Участие";
     const tabsContainer = document.getElementById("tabs");
     const tabContent = document.getElementById("tab-content");
 
-    // Рендеринг вкладок
     function renderTabs() {
-        tabsContainer.innerHTML = "";  // Очистить вкладки
+        tabsContainer.innerHTML = "";
         Object.keys(posts).forEach(tabName => {
             const tabElement = document.createElement("div");
-            tabElement.className = `tab ${selectedTab === tabName ? "active" : ""}`;  // Применяем активный класс
+            tabElement.className = `tab ${selectedTab === tabName ? "active" : ""}`;
             tabElement.textContent = tabName;
-            tabElement.onclick = () => selectTab(tabName);  // Обработчик клика по вкладке
+            tabElement.onclick = () => selectTab(tabName);
             tabsContainer.appendChild(tabElement);
         });
     }
 
-    // Обработчик выбора вкладки
     function selectTab(tabName) {
         selectedTab = tabName;
-        renderTabs();  // Обновить активную вкладку
-        updateTabContent();  // Обновить контент для выбранной вкладки
+        renderTabs();
+        updateTabContent();
     }
 
-    // Обновление контента вкладки
     function updateTabContent() {
         let message = '';
         
@@ -58,6 +54,6 @@ document.addEventListener("DOMContentLoaded", function () {
         tabContent.innerHTML = `<h2>${selectedTab}</h2><p>${message}</p>`;
     }
 
-    renderTabs();  // Инициализируем вкладки
-    updateTabContent();  // Инициализируем контент
+    renderTabs();
+    updateTabContent();
 });

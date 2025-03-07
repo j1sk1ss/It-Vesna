@@ -4,9 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>IT Весна</title>
-    <!-- Ensure base href is correct for the static files -->
     <base href="{{ url_for('static', filename='') }}">
-    <link rel="stylesheet" href="main/main.css"> <!-- Correct path to your CSS file -->
+    <link rel="stylesheet" href="main/main.css">
 </head>
 <body>
     <div class="user-page-container">
@@ -22,15 +21,14 @@
                     <div class="tab-container">
                         <div class="left-tab-container" id="tabs"></div>
                     </div>
-                    <!-- Контейнер с кнопкой для подачи заявки -->
-                    <div class="admin-panel-button-container">
-                        <a href="/main/request_page" class="admin-panel-button">Подать заявку</a>
-                    </div>
                 </div>
             </header>
+            
+            <div class="create-request">
+                <a href="/main/request_page" class="create-request-button">Подать заявку</a>
+            </div>
 
             <div class="right-tab-container">
-                <!-- Здесь не будет кнопки для подачи заявки, только вкладки -->
             </div>
 
             <div class="tab-content" id="tab-content"></div>
@@ -41,6 +39,6 @@
         © Оренбургский государственный университет, 2025
     </footer>
 
-    <script src="main/user.js"></script> <!-- Correct path to your JS file -->
+    <script src="main/user.js"></script>
 </body>
 </html>

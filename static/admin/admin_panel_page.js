@@ -140,7 +140,7 @@ function moveRequest(id, targetCategory) {
         }
     });
 
-    updateContent();
+    setTab(selectedTab);
 }
 
 function deleteRequest(id) {
@@ -167,7 +167,7 @@ function deleteRequest(id) {
         }
     });
 
-    updateContent();
+    setTab(selectedTab);
 }
 
 function addModerator() {
@@ -194,7 +194,7 @@ function addModerator() {
 
         document.getElementById('moderator-email').value = '';
         document.getElementById('moderator-name').value = '';
-        updateContent();
+        setTab(selectedTab);
     }
 }
 
@@ -215,7 +215,7 @@ function deleteModerator(index) {
         console.error('Ошибка при удалении модератора:', error);
     });
 
-    updateContent();
+    setTab(selectedTab);
 }
 
 function addNomination() {
@@ -237,7 +237,7 @@ function addNomination() {
         });
 
         document.getElementById('nomination-name').value = '';
-        updateContent();
+        setTab(selectedTab);
     } else {
         alert('Пожалуйста, заполните поле с названием номинации.');
     }
@@ -260,7 +260,7 @@ function deleteNomination(index) {
         console.error('Ошибка при удалении номинации:', error);
     });
 
-    updateContent();
+    setTab(selectedTab);
 }
 
 function addAgeGroup() {
@@ -282,7 +282,7 @@ function addAgeGroup() {
         });
 
         document.getElementById('age-group-name').value = '';
-        updateContent();
+        setTab(selectedTab);
     } else {
         alert('Пожалуйста, заполните поле с названием номинации.');
     }
@@ -305,7 +305,7 @@ function deleteAgeGroup(index) {
         console.error('Ошибка при удалении номинации:', error);
     });
 
-    updateContent();
+    setTab(selectedTab);
 }
 
 function updateContent() {

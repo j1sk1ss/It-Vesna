@@ -26,20 +26,20 @@
                             <span class="tab" data-tab="Состав жюри" onclick="setTab('Состав жюри')">Состав жюри</span>
                             <span class="tab" data-tab="Технические требования" onclick="setTab('Технические требования')">Технические требования</span>
                         </div>
-                        <a href="/admin/admin" class="admin-panel-button">Администратор</a>
+                    </div>
+                    <div class="enter-admin">
+                        <a href="/admin/admin" class="admin-button">Панель</a>
                     </div>
                 </div>
             </header>
             
-            <!-- Форма для публикации поста -->
             <div class="post-input-container">
                 <div id="post-input" class="post-input" contenteditable="true">
+                    <button class="publish-button" id="publish-button">></button>
                     <div id="placeholder" class="placeholder">Напишите свой текст...</div>
                 </div>
-                <button class="publish-button" id="publish-button">Опубликовать</button>
             </div>
 
-            <!-- Контейнер для вкладок и постов -->
             <div id="tab-content-container">
                 <div id="Участие" class="tab-content"></div>
                 <div id="План мероприятий" class="tab-content"></div>

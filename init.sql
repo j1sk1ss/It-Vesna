@@ -56,6 +56,16 @@ CREATE TABLE requests (
 );
 
 
+CREATE TABLE posts (
+    id SERIAL PRIMARY KEY,
+    author VARCHAR(100) NOT NULL,
+    category VARCHAR(100) NOT NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    content_path VARCHAR(255) NOT NULL,
+    pin INTEGER NOT NULL
+);
+
+
 CREATE INDEX idx_users_name ON users (name);
 CREATE INDEX idx_moderators_name ON moderators (name);
 CREATE INDEX idx_nominations_name ON nominations (name);

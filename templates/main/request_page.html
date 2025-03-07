@@ -14,15 +14,13 @@
                 <img src="public/logo.png" alt="Логотип" class="logo">
                 <h1 class="logo-text">IT Весна</h1>
             </a>
-            <!-- Если нужны другие кнопки/ссылки, их можно добавить сюда -->
         </div>        
     </header>
     
     <main>
         <section class="form-container">
-            <h2 class="form-title">Создание заявки</h2>  <!-- Заголовок "Создание заявки" -->
+            <h2 class="form-title">Создание заявки</h2>
             <div class="form-content">
-                <!-- Левая часть: Информация о команде -->
                 <div class="left-section">
                     <h3>Информация о команде</h3>
                     <div class="input-group">
@@ -57,11 +55,8 @@
                         <input type="file" id="file-upload" class="file-input">
                         <label for="file-upload" class="file-label">Прикрепите согласие</label>
                     </div>
-                                      
-
                 </div>
     
-                <!-- Правая часть: Информация о проекте -->
                 <div class="right-section">
                     <h3>Информация о проекте</h3>
                     <input type="text" placeholder="Название проекта" class="input-field">
@@ -71,7 +66,7 @@
                         <button class="add-btn" id="add-link-button">+</button>
                     </div>
                     <div id="links-list"></div>
-                    <button class="submit-btn"  onclick="sendRequest()">Отправить заявку</button>
+                    <button class="submit-btn" onclick="sendRequest()">Отправить заявку</button>
                 </div>
             </form>
         </section>
