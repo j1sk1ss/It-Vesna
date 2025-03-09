@@ -20,11 +20,7 @@
                     </div>
                     <div class="tab-container">
                         <div class="left-tab-container" id="tab-container">
-                            <span class="tab" data-tab="Участие" onclick="setTab('Участие')">Участие</span>
-                            <span class="tab" data-tab="План мероприятий" onclick="setTab('План мероприятий')">План мероприятий</span>
-                            <span class="tab" data-tab="Положения конкурса" onclick="setTab('Положения конкурса')">Положения конкурса</span>
-                            <span class="tab" data-tab="Состав жюри" onclick="setTab('Состав жюри')">Состав жюри</span>
-                            <span class="tab" data-tab="Технические требования" onclick="setTab('Технические требования')">Технические требования</span>
+                            <!-- Вкладки будут генерироваться здесь динамически -->
                         </div>
                     </div>
                     <div class="enter-admin">
@@ -32,25 +28,40 @@
                     </div>
                 </div>
             </header>
-            
+
+            <!-- Контейнер для ввода и кнопки "Опубликовать" -->
             <div class="post-input-container">
                 <div id="post-input" class="post-input" contenteditable="true">
-                    <button class="publish-button" id="publish-button">></button>
                     <div id="placeholder" class="placeholder">Напишите свой текст...</div>
                 </div>
+                <button class="publish-button" id="publish-button">Опубликовать</button>
             </div>
-
-            <div id="tab-content-container">
-                <div id="Участие" class="tab-content"></div>
-                <div id="План мероприятий" class="tab-content"></div>
-                <div id="Положения конкурса" class="tab-content"></div>
-                <div id="Состав жюри" class="tab-content"></div>
-                <div id="Технические требования" class="tab-content"></div>
-            </div>
+            
+            <!-- Контейнер для постов -->
+            <ul id="tab-content-container">
+                <!-- Посты для каждой вкладки будут отображаться здесь -->
+                <li class="post-item">
+                    <div class="post-header">
+                        <div class="post-header-left">
+                            <!-- Здесь будет отображаться автор -->
+                        </div>
+                        <div class="post-header-right">
+                            <!-- Здесь будет отображаться дата -->
+                        </div>
+                    </div>
+                    <div class="post-content">
+                        <!-- Содержание поста -->
+                    </div>
+                    <div class="post-actions">
+                        <button class="like-btn">Лайк</button>
+                        <button class="comment-btn">Комментарий</button>
+                    </div>
+                </li>
+            </ul>
 
         </div>
     </div>
-    
+
     <footer>
         © Оренбургский государственный университет, 2025
     </footer>

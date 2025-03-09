@@ -11,6 +11,7 @@ document.addEventListener("DOMContentLoaded", function () {
     const tabsContainer = document.getElementById("tabs");
     const tabContent = document.getElementById("tab-content");
 
+    // Функция для рендеринга вкладок
     function renderTabs() {
         tabsContainer.innerHTML = "";
         Object.keys(posts).forEach(tabName => {
@@ -22,38 +23,57 @@ document.addEventListener("DOMContentLoaded", function () {
         });
     }
 
+    // Функция для выбора вкладки
     function selectTab(tabName) {
         selectedTab = tabName;
         renderTabs();
         updateTabContent();
     }
 
+    // Функция для обновления контента вкладки
     function updateTabContent() {
         let message = '';
-        
-        switch(selectedTab) {
-            case 'Участие':
-                message = 'Это страница "Участие". Здесь будет информация о том, как принять участие.';
-                break;
-            case 'План мероприятий':
-                message = 'Это страница "План мероприятий". Здесь будет отображаться план мероприятий.';
-                break;
-            case 'Положения конкурса':
-                message = 'Это страница "Положения конкурса". Здесь будет информация о правилах конкурса.';
-                break;
-            case 'Состав жюри':
-                message = 'Это страница "Состав жюри". Здесь будет информация о составе жюри.';
-                break;
-            case 'Технические требования':
-                message = 'Это страница "Технические требования". Здесь будет информация о технических требованиях.';
-                break;
-            default:
-                message = 'Выберите вкладку.';
+        const postsList = posts[selectedTab];
+
+        // Если посты есть, показываем их
+        if (postsList.length > 0) {
+            message = '<ul>';
+            postsList.forEach(post => {
+                message += `<li>${post.title}: ${post.content}</li>`;
+            });
+            message += '</ul>';
+        } else {
+            message = 'Здесь нет постов.';
         }
 
-        tabContent.innerHTML = `<h2>${selectedTab}</h2><p>${message}</p>`;
+        tabContent.innerHTML = `<h2>${selectedTab}</h2><div>${message}</div>`;
     }
 
+    // Функция для загрузки постов с сервера
+    async function fetchPosts() {
+        try {
+            const response = await fetch('/api/getPosts'); // Замените на реальный путь к вашему API
+            if (response.ok) {
+                const data = await response.json();
+
+                // Обработка полученных данных
+                Object.keys(posts).forEach(tabName => {
+                    if (data[tabName]) {
+                        posts[tabName] = data[tabName];
+                    }
+                });
+
+                // Обновляем контент для текущей вкладки
+                updateTabContent();
+            } else {
+                console.error('Ошибка при загрузке данных');
+            }
+        } catch (error) {
+            console.error('Ошибка запроса:', error);
+        }
+    }
+
+    // Инициализация
     renderTabs();
-    updateTabContent();
+    fetchPosts(); // Загружаем посты с сервера
 });

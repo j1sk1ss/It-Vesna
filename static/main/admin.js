@@ -1,128 +1,105 @@
-let selectedTab = "Участие";
-const posts = {
-    "Участие": [],
-    "План мероприятий": [],
-    "Положения конкурса": [],
-    "Состав жюри": [],
-    "Технические требования": []
-};
+let selectedTab = "Участие"; // Default tab
+
+// Тестовая функция для имитации получения постов
+async function getPosts(category) {
+    return [
+        {
+            id: 1,
+            title: "Тестовый пост 1",
+            content: "Это содержание поста.",
+            category: category || "Общее",
+            author: "Иван Иванов",
+            date: "2025-03-09T10:00:00"
+        },
+        {
+            id: 2,
+            title: "Тестовый пост 2",
+            content: "Это содержание второго поста.",
+            category: category || "Общее",
+            author: "Анна Петрова",
+            date: "2025-03-10T11:00:00"
+        }
+    ];
+}
 
 
 async function pinPost(id) {
-    try {
-        const response = await fetch(`/api/posts/${id}/pin`, {
-            method: 'POST',
-        });
-        if (!response.ok) {
-            throw new Error('Ошибка при закреплении поста');
-        }
-        return await response.json();
-    } catch (error) {
-        console.error('Ошибка:', error);
-    }
-}
-
-async function getPosts(category) {
-    try {
-        const response = await fetch(`/api/posts?category=${category}`);
-        if (!response.ok) {
-            throw new Error('Ошибка при получении постов');
-        }
-        return await response.json();
-    } catch (error) {
-        console.error('Ошибка:', error);
-    }
+    // Симуляция закрепления поста
+    console.log(`Пост с id ${id} закреплен.`);
 }
 
 async function deletePost(id) {
-    try {
-        const response = await fetch(`/api/posts/${id}`, {
-            method: 'DELETE',
-        });
-        if (!response.ok) {
-            throw new Error('Ошибка при удалении поста');
-        }
-        return await response.json();
-    } catch (error) {
-        console.error('Ошибка:', error);
-    }
+    // Симуляция удаления поста
+    console.log(`Пост с id ${id} удален.`);
 }
 
 async function addPost(author, category, content) {
-    try {
-        const formData = new FormData();
-        const file = new Blob([content], { type: "text/plain" });
-        formData.append("author", author);
-        formData.append("category", category);
-        formData.append("content", file, "content.txt");
-
-        const response = await fetch('/api/posts', {
-            method: 'POST',
-            body: formData,
-        });
-
-        if (!response.ok) {
-            throw new Error('Ошибка при добавлении поста');
-        }
-
-        return await response.json();
-    } catch (error) {
-        console.error('Ошибка:', error);
-    }
+    // Симуляция добавления поста
+    console.log(`Добавлен новый пост от ${author} в категорию ${category}`);
 }
 
+// Функция для рендеринга постов
 async function renderPosts() {
     const currentPosts = await getPosts(selectedTab);
     const tabContent = document.getElementById("tab-content-container");
 
-    tabContent.innerHTML = "";
-    if (currentPosts.length !== 0) {
+    tabContent.innerHTML = ""; // Очищаем контейнер постов
+
+    if (currentPosts.length === 0) {
+        tabContent.innerHTML = "<p>No posts available</p>"; // Show message if no posts
+    } else {
         currentPosts.forEach((post) => {
-            const postContainer = document.createElement("div");
-            postContainer.classList.add("post-container");
+            const postElement = document.createElement("li");
+            postElement.classList.add("post-container");
 
             const postContentContainer = document.createElement("div");
             postContentContainer.classList.add("post");
-            fetch(`http://127.0.0.1:5000/${post.content_path}`) // TODO: Костыль. Исправить
-            .then(response => response.text())
-            .then(text => {
-                postContentContainer.innerHTML = `
-                <div class="post-header">
-                    <span class="post-date">${new Date(post.created_at).toLocaleString()}</span>
-                    <div class="post-buttons">
-                        <img class="post-pin-button" data-index="${post.id}" src="/static/public/pin.png" alt="Закрепить">
-                        <img class="post-edit-button" data-index="${post.id}" src="/static/public/edit.png" alt="Редактировать">
-                        <img class="post-delete-button" data-index="${post.id}" src="/static/public/delete.png" alt="Удалить">
-                    </div>
+
+            const formattedDate = new Date(post.date).toLocaleDateString("ru-RU", {
+                year: "numeric", month: "2-digit", day: "2-digit"
+            }) + ", " + new Date(post.date).toLocaleTimeString("ru-RU");
+
+            postContentContainer.innerHTML = `
+            <div class="post-header">
+                <div class="post-header-left">
+                    <span class="post-author">Автор: ${post.author}</span>
+                    <span class="post-date">${formattedDate}</span>
                 </div>
-                <div class="post-body">${text}</div>
-                `;
+                <div class="post-header-right">
+                    <img class="post-pin-button" data-index="${post.id}" src="/static/public/pin.png" alt="Закрепить">
+                    <img class="post-edit-button" data-index="${post.id}" src="/static/public/edit.png" alt="Редактировать">
+                    <img class="post-delete-button" data-index="${post.id}" src="/static/public/delete.png" alt="Удалить">
+                </div>
+            </div>
+            <div class="post-body">${post.content}</div>
+        `;
+        
 
-                postContentContainer.querySelector(".post-pin-button").addEventListener("click", async () => {
-                    await pinPost(post.id); 
-                    await renderPosts();
-                });
-
-                postContentContainer.querySelector(".post-edit-button").addEventListener("click", async () => {
-                    await editPost(post.id); 
-                    await renderPosts();
-                });
-
-                postContentContainer.querySelector(".post-delete-button").addEventListener("click", async () => {
-                    await deletePost(post.id); 
-                    await renderPosts();
-                });
-
-                postContainer.appendChild(postContentContainer);
-                tabContent.appendChild(postContainer);
-            })
-            .catch(() => {
-                
+            // Обработчики событий для кнопок
+            postContentContainer.querySelector(".post-pin-button").addEventListener("click", async () => {
+                await pinPost(post.id);
+                await renderPosts(); // Обновить посты после закрепления
             });
+
+            postContentContainer.querySelector(".post-edit-button").addEventListener("click", async () => {
+                console.log("Редактирование поста с id", post.id);
+                await renderPosts(); // Обновить посты после редактирования
+            });
+
+            postContentContainer.querySelector(".post-delete-button").addEventListener("click", async () => {
+                await deletePost(post.id);
+                await renderPosts(); // Обновить посты после удаления
+            });
+
+            postElement.appendChild(postContentContainer);  // Добавить пост в список
+            tabContent.appendChild(postElement);  // Добавить элемент в контейнер постов
         });
     }
 }
 
+
+
+// Рендеринг вкладок динамически
 document.addEventListener("DOMContentLoaded", async function () {
     const postInput = document.getElementById("post-input");
     const placeholder = document.getElementById("placeholder");
@@ -131,7 +108,8 @@ document.addEventListener("DOMContentLoaded", async function () {
     async function renderTabs() {
         const tabs = ["Участие", "План мероприятий", "Положения конкурса", "Состав жюри", "Технические требования"];
         const tabContainer = document.getElementById("tab-container");
-        tabContainer.innerHTML = "";
+        tabContainer.innerHTML = ""; // Очистить существующие вкладки
+
         tabs.forEach(tab => {
             const tabElement = document.createElement("span");
             tabElement.classList.add("tab");
@@ -146,18 +124,20 @@ document.addEventListener("DOMContentLoaded", async function () {
                 await renderPosts();
             });
 
-            tabContainer.appendChild(tabElement);
+            tabContainer.appendChild(tabElement); // Добавить вкладку в контейнер
         });
     }
 
+    // Обработчик клика по кнопке публикации
     publishButton.addEventListener("click", async function () {
         const content = postInput.innerHTML.trim();
         if (content !== "" && content !== placeholder.textContent) {
-            await addPost("test", selectedTab, content); // TODO: Прокинуть имя
+            await addPost("test", selectedTab, content); // Добавление поста с тестовыми данными
             await renderPosts();
         }
     });
 
+    // Показать/скрыть плейсхолдер в зависимости от содержимого поля
     postInput.addEventListener("input", function () {
         if (postInput.innerHTML.trim() === "") {
             placeholder.style.display = "block";
@@ -166,6 +146,6 @@ document.addEventListener("DOMContentLoaded", async function () {
         }
     });
 
-    renderTabs();
-    await renderPosts();
+    renderTabs(); // Отображаем вкладки при загрузке страницы
+    await renderPosts(); // Отображаем посты по умолчанию
 });
