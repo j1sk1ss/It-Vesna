@@ -11,22 +11,30 @@ document.addEventListener("DOMContentLoaded", function () {
     const tabsContainer = document.getElementById("tabs");
     const tabContent = document.getElementById("tab-content");
 
-    // Функция для рендеринга вкладок
     function renderTabs() {
-        tabsContainer.innerHTML = "";
-        Object.keys(posts).forEach(tabName => {
-            const tabElement = document.createElement("div");
-            tabElement.className = `tab ${selectedTab === tabName ? "active" : ""}`;
-            tabElement.textContent = tabName;
-            tabElement.onclick = () => selectTab(tabName);
-            tabsContainer.appendChild(tabElement);
+        const tabs = Object.keys(posts);
+        const tabContainer = document.getElementById("tab-container");
+        tabContainer.innerHTML = "";
+        tabs.forEach(tab => {
+            const tabElement = document.createElement("span");
+            tabElement.classList.add("tab");
+            if (tab === selectedTab) {
+                tabElement.classList.add("active");
+            }
+            tabElement.textContent = tab;
+            tabElement.addEventListener("click", function () {
+                selectedTab = tab;
+                renderTabs();
+                renderPosts();
+            });
+            tabContainer.appendChild(tabElement);
         });
     }
 
     // Функция для выбора вкладки
     function selectTab(tabName) {
         selectedTab = tabName;
-        renderTabs();
+        renderTabs();  // Обновляем вкладки, чтобы выделить активную
         updateTabContent();
     }
 

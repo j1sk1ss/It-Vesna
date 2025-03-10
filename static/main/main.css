@@ -11,7 +11,22 @@ body {
   overflow-x: hidden;
 }
 
-/* --- Шапка --- */
+.admin-panel-page-container {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  flex: 1;
+  padding-top: 4vh;
+  padding-bottom: 5vh;
+  width: 100%;
+}
+
+.admin-panel-page {
+  width: 100%;
+  max-width: 1200px;
+  padding: 20px;
+}
+
 header {
   display: flex;
   align-items: center;
@@ -31,7 +46,6 @@ header {
   align-items: center;
   gap: 10px;
   margin-left: 10vh;
-  width: 100%;
 }
 
 .logo-button {
@@ -65,12 +79,10 @@ header {
   margin: 0;
 }
 
-/* --- Вкладки --- */
 .tab-container {
   display: flex;
-  justify-content: center;
-  white-space: nowrap;
-  overflow: hidden;
+  justify-content: flex-end;
+  flex-grow: 1;
 }
 
 .left-tab-container {
@@ -91,316 +103,133 @@ header {
   transform: scale(1.05);
 }
 
-.admin-button {
+/* Кнопка перехода на страницу администратора */
+.admin-panel-button {
+  display: inline-block;
+  text-decoration: none;
   color: white;
   background-color: #6DB33F;
   padding: 10px 20px;
   border-radius: 20px;
+  text-align: center;
+  margin-left: 30px;
+}
+
+.admin-panel-button:hover {
+  background-color: #5A9E35;
+}
+
+/* Поле ввода */
+#post-input {
+  flex-grow: 1; /* Позволяет полю ввода занимать доступное пространство */
+  width: auto; /* Разрешает изменение ширины */
+  min-height: 50px;
+  padding: 15px;
+  border-radius: 10px;
+  border: 1px solid #ccc;
+  font-size: 14px;
+  background-color: white;
+  outline: none;
+  box-sizing: border-box;
+}
+
+.post-input-container {
+  padding-top: 80px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 15px;
+  width: 100%;
+  max-width: 1240px;
+  margin: 0 auto;
+  position: relative;
+  margin-bottom: 20px;
+}
+
+.post-input-container {
+  padding-top: 80px;
+  display: flex;
+  flex-direction: row; /* Изменено с column на row */
+  align-items: center;
+  gap: 15px;
+  width: 100%;
+  max-width: 1240px;
+  margin: 0 auto;
+  position: relative;
+  margin-bottom: 20px;
+}
+
+.publish-button {
+  background-color: #6DB33F;
+  border: none;
+  color: white;
+  padding: 10px 20px;
+  border-radius: 20px;
+  cursor: pointer;
   font-size: 14px;
   transition: background-color 0.3s, transform 0.2s;
 }
 
-.admin-button:hover {
+.publish-button:hover {
   background-color: #5A9E35;
   transform: scale(1.05);
 }
 
-.admin-button:active {
+.publish-button:active {
   background-color: #4F8E30;
 }
 
-/* --- Основной контент --- */
-main {
-  flex-grow: 1;
-  padding: 120px 20px 90px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  box-sizing: border-box;
-  height: calc(100vh - 90px);
-}
-
-/* Для поля ввода текста */
-#post-input {
-    border: 1px solid #e9e9e9;        /* Граница поля */
-    font-size: 14px;                  /* Размер шрифта */
-    box-sizing: border-box;           /* Учитывать паддинги и границы в общей ширине */
-    overflow-y: auto;                 /* Автоматическая прокрутка по вертикали */
-    margin-top: 12vh; /* Добавляем отступ сверху */
-    margin: 0 auto;
-    width: 100%;
-    max-width: 1240px;
-    background-color: white;
-    padding: 20px;
-    border-radius: 20px;
-    box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.1);
-    display: flex;
-    flex-direction: column;
-    margin: 0 auto;
-    margin-top: 12vh; /* Добавляем отступ сверху */
-    margin-right: 10px;
-
-}
-
-/* --- Поля ввода --- */
-.input-group {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  width: 100%;
-  margin-bottom: 15px;
-}
-
-.input-group input {
-  flex-grow: 1;
-  border: 1px solid #e9e9e9;
-  border-radius: 20px;
-  font-size: 14px;
-  height: 42px;
-  padding: 0 10px;
-  background-color: #fff;
-}
-
-/* --- Текстовое поле для ввода поста --- */
-.expanding-textarea {
-  min-height: 145px;
-  resize: none;
-  overflow-y: auto;
-  width: 100%;
-  padding: 12px;
-  border: 1px solid #e9e9e9;
-  border-radius: 20px;
-  font-size: 14px;
-  margin-bottom: 15px;
-}
-
-/* --- Кнопка "Опубликовать" --- */
-.submit-btn {
-  width: 100%;
-  padding: 12px;
-  background-color: #4CAF50;
-  color: white;
-  border: none;
-  border-radius: 20px;
-  cursor: pointer;
-  font-size: 16px;
-  transition: background-color 0.3s, transform 0.2s;
-}
-
-.submit-btn:hover {
-  background-color: #45a049;
-  transform: scale(1.05);
-}
-
-.submit-btn:active {
-  background-color: #3e9142;
-}
-
-/* --- Футер --- */
 footer {
   text-align: center;
   padding: 10px;
   background-color: white;
-  box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
+  box-shadow: 0px -2px 10px rgba(0, 0, 0, 0.1);
+  width: 100%;
   position: fixed;
   bottom: 0;
-  width: 100%;
+  left: 0;
   z-index: 1000;
   font-size: 14px;
 }
 
-/* --- Адаптивность --- */
-@media (max-width: 768px) {
-  .left-tab-container {
-    gap: 15px;
-    font-size: 14px;
-  }
-
-  main {
-    padding: 140px 10px 100px;
-  }
-
-  .post-input-container {
-    max-width: 100%;
-    padding: 15px;
-    margin-top: 100px;
-  }
-}
-
-/* --- Контейнер для опубликованных постов --- */
-#tab-content-container {
-  display: flex;
-  flex-direction: column;
-  align-items: center; /* Центрируем посты по горизонтали */
-  gap: 15px;
-  width: 100%;
-  padding: 0 20px; /* Добавим немного отступа по бокам */
-  box-sizing: border-box;
-  margin-top: 20px; /* Отступ сверху */
-  list-style-type: none; /* Убираем точки у списка */
-}
-
-/* --- Элемент опубликованного поста --- */
-#tab-content-container li {
-  width: 100%;
-  max-width: 1240px; /* То же максимальное значение ширины, что и у контейнера ввода */
+/* Стили для постов */
+.post {
   background-color: white;
+  border-radius: 10px;
   padding: 20px;
-  border-radius: 20px;
-  box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.1);
-  font-size: 14px;
-  color: #333;
-  box-sizing: border-box;
-}
-
-/* --- Элемент опубликованного поста --- */
-.post-item {
-  list-style: none;
-  background-color: white;
-  padding: 20px;
-  margin: 15px 0;
-  border-radius: 20px;
+  margin-bottom: 20px;
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-  font-size: 14px;
-  position: relative; /* Добавим относительное позиционирование для контейнера */
+  transition: transform 0.3s, box-shadow 0.3s;
 }
 
-.post-item .post-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center; /* Выравнивание элементов по центру */
-  width: 100%;
-}
-
-.post-item .post-header-left {
-  display: flex;
-  gap: 10px;
-  align-items: center; /* Выравниваем элементы в одной строке */
-}
-
-.post-item .post-header-right {
-  display: flex;
-  align-items: center; /* Выравниваем элементы в одной строке */
-  gap: 10px;
-  margin-left: auto; /* Прижимает к правому краю */
-}
-
-.post-item .post-header-left img {
-  cursor: pointer;
-  width: 20px; /* Размер кнопок */
-  height: 20px;
-}
-
-/* --- Кнопки в левой верхней части поста --- */
-.post-item .post-header-left {
-  position: absolute; /* Фиксируем кнопки в левом верхнем углу */
-  top: 10px;
-  left: 20px;
-  display: flex;
-  gap: 10px;
-}
-
-.post-item .post-header-left {
-  flex-grow: 1;
-}
-
-.post-item .post-author {
-  font-weight: 600;
-}
-
-.post-item .post-date {
-  color: #999;
-  font-size: 12px;
-  margin-right: 15px; /* Ensure space between date and buttons */
-}
-
-.post-item .post-content {
-  margin-top: 10px;
-  font-size: 14px;
-  line-height: 1.5;
-}
-
-.post-item .post-actions {
-  display: flex;
-  gap: 15px;
-  font-size: 12px;
-}
-
-.post-item .post-actions .like-btn,
-.post-item .post-actions .comment-btn {
-  background-color: #e9e9e9;
-  color: #333;
-  border: none;
-  border-radius: 20px;
-  padding: 6px 12px;
-  cursor: pointer;
-  transition: background-color 0.3s, transform 0.2s;
-}
-
-.post-item .post-actions .like-btn:hover,
-.post-item .post-actions .comment-btn:hover {
-  background-color: #f0f0f0;
-  transform: scale(1.05);
-}
-
-.post-item .post-actions .like-btn:active,
-.post-item .post-actions .comment-btn:active {
-  background-color: #d0d0d0;
-}
-
-/* --- Адаптивность для постов --- */
-@media (max-width: 768px) {
-  .post-item {
-    padding: 15px;
-  }
-
-  .post-item .post-header {
-    font-size: 14px;
-  }
-
-  .post-item .post-content {
-    font-size: 13px;
-  }
-
-  .post-item .post-actions {
-    font-size: 10px;
-  }
+.post:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
 }
 
 .post-header {
   display: flex;
-  justify-content: space-between; /* Разделяет блок на две части */
-  align-items: center; /* Выравнивание по вертикали */
+  justify-content: space-between;
   margin-bottom: 10px;
 }
 
-.post-body {
-  word-wrap: break-word; /* Разбивает слова, если они не помещаются */
-  overflow-wrap: break-word; /* То же самое, что и word-wrap, но современное */
-  white-space: normal; /* Разрешает перенос строк */
+.post-date {
+  font-size: 12px;
+  color: #999;
 }
 
-.post-header-left {
+.post-buttons {
   display: flex;
-  gap: 10px; /* Добавляет пространство между автором и датой */
-  align-items: center; /* Выравнивание по вертикали */
+  gap: 10px;
 }
 
-.post-author, .post-date {
-  margin: 0;
-  font-size: 14px; /* Можете настроить размер шрифта */
+/* Стили для кнопок с иконками */
+.post-buttons img {
+  cursor: pointer;
+  transition: transform 0.2s, opacity 0.3s, filter 0.3s;
 }
 
-.post-header-right {
-  display: flex;
-  gap: 10px; /* Отступы между кнопками */
-  align-items: center;
-}
-
-/* Иконки с фиксированным размером */
+/* Кнопка "Закрепить" (pin) */
 .post-buttons .post-pin-button {
   width: 10px;
   height: 16px;
@@ -418,48 +247,9 @@ footer {
   height: 16px;
 }
 
-/* Иконки с фиксированным размером */
-.post-buttons img {
-  cursor: pointer;
-  transition: transform 0.2s, opacity 0.3s, filter 0.3s; /* Плавный переход */
-}
-
 /* При наведении они становятся зелёными */
 .post-buttons img:hover {
-  transform: scale(1.1); /* Увеличиваем иконку */
-  opacity: 0.8; /* Сделаем иконку немного ярче */
-  filter: brightness(0) saturate(100%) invert(59%) sepia(22%) saturate(790%) hue-rotate(53deg) brightness(90%) contrast(95%); /* Зеленый цвет при наведении */
-}
-
-/* --- Контейнер для кнопки "Опубликовать" --- */
-.post-input-container {
-  display: flex;
-  justify-content: center;  /* Центрируем по горизонтали */
-  align-items: center;      /* Центрируем по вертикали */
-  margin-top: 12vh;         /* Отступ сверху */
-  margin: 0 auto;
-  width: 100%;
-  max-width: 1240px;
-}
-
-/* --- Кнопка "Опубликовать" --- */
-.publish-button {
-  color: white;
-  background-color: #6DB33F; /* Тот же цвет фона, что и у кнопки "Панель" */
-  padding: 10px 20px;
-  border-radius: 20px;
-  font-size: 14px;
-  transition: background-color 0.3s, transform 0.2s;
-  cursor: pointer;
-  border: none; /* Убираем границу */
-  margin-top: 12vh;
-}
-
-.publish-button:hover {
-  background-color: #5A9E35; /* Цвет при наведении, тоже как у "Панель" */
-  transform: scale(1.05);
-}
-
-.publish-button:active {
-  background-color: #4F8E30; /* Цвет при нажатии, аналогично кнопке "Панель" */
+  transform: scale(1.1);
+  opacity: 0.8;
+  filter: brightness(0) saturate(100%) invert(59%) sepia(22%) saturate(790%) hue-rotate(53deg) brightness(90%) contrast(95%);
 }
