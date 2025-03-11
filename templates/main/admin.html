@@ -26,16 +26,14 @@
                             <span class="tab" data-tab="Состав жюри" onclick="setTab('Состав жюри')">Состав жюри</span>
                             <span class="tab" data-tab="Технические требования" onclick="setTab('Технические требования')">Технические требования</span>
                         </div>
-                        <a href="/admin/admin" class="admin-panel-button">Панель</a>
+                        <a href="/admin/admin" class="admin-panel-button">Администратор</a>
                     </div>
                 </div>
             </header>
             
             <!-- Форма для публикации поста -->
             <div class="post-input-container">
-                <div id="post-input" class="post-input" contenteditable="true">
-                    <div id="placeholder" class="placeholder">Напишите свой текст...</div>
-                </div>
+                <input id="post-input" class="post-input truncate" type="search" autocomplete="off" spellcheck="false" role="combobox" aria-controls="matches" aria-expanded="false" placeholder="Напишите свой текст...">
                 <button class="publish-button" id="publish-button">Опубликовать</button>
             </div>
 

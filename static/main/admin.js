@@ -1,6 +1,5 @@
 document.addEventListener("DOMContentLoaded", function () {
     const postInput = document.getElementById("post-input");
-    const placeholder = document.getElementById("placeholder");
     const publishButton = document.getElementById("publish-button");
     const tabContentContainer = document.getElementById("tab-content-container");
 
@@ -38,11 +37,10 @@ document.addEventListener("DOMContentLoaded", function () {
 
     function renderPosts() {
         const currentPosts = posts[selectedTab];
-        const tabContent = document.getElementById("tab-content-container");
-        tabContent.innerHTML = "";
+        tabContentContainer.innerHTML = "";
 
         if (currentPosts.length === 0) {
-            tabContent.innerHTML = "<p>Нет постов для отображения.</p>";
+            tabContentContainer.innerHTML = "<p>Нет постов для отображения.</p>";
         } else {
             currentPosts.forEach((post, index) => {
                 const postContainer = document.createElement("div");
@@ -55,7 +53,7 @@ document.addEventListener("DOMContentLoaded", function () {
                         <span class="post-admin"><strong>${post.admin}</strong></span>
                         <span class="post-date">${new Date(post.timestamp).toLocaleString()}</span>
                         <div class="post-buttons">
-                            <img class="post-pin-button" data-index="${index}" src="/static/public/pin.png" alt="Закрепить">
+                            <img class="post-pin-button ${post.pinned ? "pinned" : ""}" data-index="${index}" src="/static/public/pin.png" alt="Закрепить">
                             <img class="post-edit-button" data-index="${index}" src="/static/public/edit.png" alt="Редактировать">
                             <img class="post-delete-button" data-index="${index}" src="/static/public/delete.png" alt="Удалить">
                         </div>
@@ -64,7 +62,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 `;
 
                 postContainer.appendChild(postContentContainer);
-                tabContent.appendChild(postContainer);
+                tabContentContainer.appendChild(postContainer);
             });
             addEventListeners();
         }
@@ -73,9 +71,22 @@ document.addEventListener("DOMContentLoaded", function () {
     function addEventListeners() {
         document.querySelectorAll(".post-pin-button").forEach(button => {
             button.addEventListener("click", function () {
-                const index = this.getAttribute("data-index");
-                posts[selectedTab][index].pinned = !posts[selectedTab][index].pinned;
-                posts[selectedTab].sort((a, b) => (b.pinned === true) - (a.pinned === true));
+                const index = parseInt(this.getAttribute("data-index"), 10);
+                const post = posts[selectedTab][index];
+
+                post.pinned = !post.pinned;
+
+                if (post.pinned) {
+                    // Убираем пост из текущего места
+                    posts[selectedTab].splice(index, 1);
+                    // Вставляем в самое начало списка закрепленных
+                    posts[selectedTab].unshift(post);
+                } else {
+                    // Отмена закрепления — перемещаем пост в конец списка
+                    posts[selectedTab].splice(index, 1);
+                    posts[selectedTab].push(post);
+                }
+
                 renderPosts();
             });
         });
@@ -83,8 +94,7 @@ document.addEventListener("DOMContentLoaded", function () {
         document.querySelectorAll(".post-edit-button").forEach(button => {
             button.addEventListener("click", function () {
                 const index = this.getAttribute("data-index");
-                postInput.innerHTML = posts[selectedTab][index].content;
-                placeholder.style.display = "none";
+                postInput.value = posts[selectedTab][index].content;
                 editingPostIndex = index;
             });
         });
@@ -103,16 +113,16 @@ document.addEventListener("DOMContentLoaded", function () {
     function highlightPinnedPosts() {
         document.querySelectorAll(".post-pin-button").forEach((button, index) => {
             if (posts[selectedTab][index].pinned) {
-                button.style.filter = "brightness(0) saturate(100%) invert(59%) sepia(22%) saturate(790%) hue-rotate(53deg) brightness(90%) contrast(95%)";
+                button.classList.add("pinned");
             } else {
-                button.style.filter = "none";
+                button.classList.remove("pinned");
             }
         });
     }
 
     publishButton.addEventListener("click", function () {
-        const content = postInput.innerHTML.trim();
-        if (content !== "" && content !== placeholder.textContent) {
+        const content = postInput.value.trim();
+        if (content !== "") {
             const newPost = {
                 content: content,
                 timestamp: Date.now(),
@@ -127,14 +137,9 @@ document.addEventListener("DOMContentLoaded", function () {
                 posts[selectedTab].unshift(newPost);
             }
 
-            postInput.innerHTML = "";
-            placeholder.style.display = "block";
+            postInput.value = "";
             renderPosts();
         }
-    });
-
-    postInput.addEventListener("input", function () {
-        placeholder.style.display = postInput.innerHTML.trim() === "" ? "block" : "none";
     });
 
     renderTabs();

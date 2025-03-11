@@ -87,7 +87,6 @@ header {
 
 .left-tab-container {
   display: flex;
-  gap: 30px;
   font-size: 16px;
 }
 
@@ -251,5 +250,17 @@ footer {
 .post-buttons img:hover {
   transform: scale(1.1);
   opacity: 0.8;
+  filter: brightness(0) saturate(100%) invert(59%) sepia(22%) saturate(790%) hue-rotate(53deg) brightness(90%) contrast(95%);
+}
+
+/* При наведении кнопки меняют цвет на зелёный */
+.post-buttons img:hover {
+  transform: scale(1.1);
+  opacity: 0.8;
+  filter: brightness(0) saturate(100%) invert(59%) sepia(22%) saturate(790%) hue-rotate(53deg) brightness(90%) contrast(95%);
+}
+
+/* Закрепленный пост: иконка остаётся зелёной */
+.post-buttons .post-pin-button.pinned {
   filter: brightness(0) saturate(100%) invert(59%) sepia(22%) saturate(790%) hue-rotate(53deg) brightness(90%) contrast(95%);
 }
