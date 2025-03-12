@@ -9,7 +9,7 @@ from flask import jsonify, render_template, abort, request
 from models import *
 
     
-TEMPLATES = find_templates('/Users/nikolaj/Documents/Repositories/It-Vesna/templates')
+TEMPLATES = find_templates('templates')
 UPLOAD_FOLDER = 'statis/uploads'
 
 
