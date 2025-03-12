@@ -15,6 +15,17 @@ document.addEventListener("DOMContentLoaded", function () {
     let editingPostIndex = null;
     const adminName = "Администратор";
 
+    const textarea = document.getElementById('post-input');
+
+    // Обработка ввода текста для динамической высоты
+    textarea.addEventListener('input', function () {
+        // Сбрасываем высоту, чтобы правильно рассчитывать новый размер
+        textarea.style.height = 'auto';
+        
+        // Устанавливаем новую высоту в зависимости от содержимого
+        textarea.style.height = textarea.scrollHeight + 'px';
+    });
+
     function renderTabs() {
         const tabs = Object.keys(posts);
         const tabContainer = document.getElementById("tab-container");
@@ -48,19 +59,22 @@ document.addEventListener("DOMContentLoaded", function () {
 
                 const postContentContainer = document.createElement("div");
                 postContentContainer.classList.add("post");
-                postContentContainer.innerHTML = `
-                    <div class="post-header">
-                        <span class="post-admin"><strong>${post.admin}</strong></span>
-                        <span class="post-date">${new Date(post.timestamp).toLocaleString()}</span>
-                        <div class="post-buttons">
-                            <img class="post-pin-button ${post.pinned ? "pinned" : ""}" data-index="${index}" src="/static/public/pin.png" alt="Закрепить">
-                            <img class="post-edit-button" data-index="${index}" src="/static/public/edit.png" alt="Редактировать">
-                            <img class="post-delete-button" data-index="${index}" src="/static/public/delete.png" alt="Удалить">
-                        </div>
-                    </div>
-                    <div class="post-body">${post.content}</div>
-                `;
 
+                // Заменяем символы новой строки на <br> для правильного отображения
+                const formattedContent = post.content.replace(/\n/g, '<br>');
+
+                postContentContainer.innerHTML = `
+                <div class="post-header">
+                    <span class="post-admin"><strong>${post.admin}</strong></span>
+                    <div class="post-buttons">
+                        <img class="post-pin-button ${post.pinned ? "pinned" : ""}" data-index="${index}" src="/static/public/pin.png" alt="Закрепить">
+                        <img class="post-edit-button" data-index="${index}" src="/static/public/edit.png" alt="Редактировать">
+                        <img class="post-delete-button" data-index="${index}" src="/static/public/delete.png" alt="Удалить">
+                    </div>
+                </div>
+                <div class="post-body">${formattedContent}</div>
+                <div class="post-date">${new Date(post.timestamp).toLocaleString()}</div>
+            `;
                 postContainer.appendChild(postContentContainer);
                 tabContentContainer.appendChild(postContainer);
             });
@@ -94,8 +108,13 @@ document.addEventListener("DOMContentLoaded", function () {
         document.querySelectorAll(".post-edit-button").forEach(button => {
             button.addEventListener("click", function () {
                 const index = this.getAttribute("data-index");
-                postInput.value = posts[selectedTab][index].content;
+                const post = posts[selectedTab][index];
+                postInput.value = post.content;
                 editingPostIndex = index;
+
+                // После того как текст помещен в textarea, автоматически подгоняем высоту
+                postInput.style.height = 'auto';  // Сбрасываем высоту
+                postInput.style.height = postInput.scrollHeight + 'px';  // Устанавливаем нужную высоту
             });
         });
 
@@ -138,6 +157,7 @@ document.addEventListener("DOMContentLoaded", function () {
             }
 
             postInput.value = "";
+            postInput.style.height = '37px'; // Сброс высоты textarea после публикации
             renderPosts();
         }
     });

@@ -115,67 +115,65 @@ header {
 }
 
 .admin-panel-button:hover {
-  background-color: #5A9E35;
+  background-color: #6DB33F;
 }
 
 /* Поле ввода */
 #post-input {
-  flex-grow: 1; /* Позволяет полю ввода занимать доступное пространство */
-  width: auto; /* Разрешает изменение ширины */
-  min-height: 50px;
-  padding: 15px;
-  border-radius: 10px;
-  border: 1px solid #ccc;
-  font-size: 14px;
+  font-size: 14px; /* Базовый размер шрифта */
+  line-height: 1.2; /* Уменьшаем межстрочный интервал */
+  border: none; /* Без рамки */
+  outline: none; /* Убираем фокусный контур */
+  box-sizing: border-box; /* Учитываем padding и border при расчете ширины */
+  resize: none; /* Отключает ручное изменение размера */
+  width: 100%; /* Ширина на 100% */
+  max-width: 1240px; /* Максимальная ширина */
+  overflow-y: hidden; /* Убирает вертикальную прокрутку */
+  white-space: pre-wrap; /* Поддерживает перенос слов */
+  word-wrap: break-word; /* Поддерживает перенос слов */
+}
+
+/* Контейнер ввода */
+.post-input-container {
+  border: 1px solid gray;
   background-color: white;
-  outline: none;
-  box-sizing: border-box;
-}
-
-.post-input-container {
-  padding-top: 80px;
+  min-height: 20px;
+  border-radius: 20px;
+  margin-top: 80px;
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   align-items: center;
   gap: 15px;
-  width: 100%;
   max-width: 1240px;
-  margin: 0 auto;
   position: relative;
   margin-bottom: 20px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  padding: 10px;
 }
 
-.post-input-container {
-  padding-top: 80px;
-  display: flex;
-  flex-direction: row; /* Изменено с column на row */
-  align-items: center;
-  gap: 15px;
-  width: 100%;
-  max-width: 1240px;
-  margin: 0 auto;
-  position: relative;
-  margin-bottom: 20px;
-}
-
+/* Кнопка "Опубликовать" */
 .publish-button {
-  background-color: #6DB33F;
+  background-color: #ffffff00;
   border: none;
-  color: white;
-  padding: 10px 20px;
+  color: gray;
   border-radius: 20px;
   cursor: pointer;
   font-size: 14px;
   transition: background-color 0.3s, transform 0.2s;
+  position: absolute;
+  bottom: 19px;
+  right: 10px;
+}
+
+/* Стили для плейсхолдера */
+#post-input::placeholder {
+  color: #888; /* Цвет плейсхолдера */
+  text-align: left; /* Горизонтальное выравнивание плейсхолдера */
+  line-height: 34px; /* Центрируем плейсхолдер по вертикали */
 }
 
 .publish-button:hover {
-  background-color: #5A9E35;
   transform: scale(1.05);
-}
-
-.publish-button:active {
-  background-color: #4F8E30;
 }
 
 footer {
@@ -201,6 +199,12 @@ footer {
   transition: transform 0.3s, box-shadow 0.3s;
 }
 
+.post-body {
+  white-space: pre-wrap;  /* Сохраняет пробелы и переносы строк */
+  word-wrap: break-word;  /* Разбивает длинные слова на части, если они не помещаются */
+  overflow-wrap: break-word; /* Поддержка старых браузеров */
+}
+
 .post:hover {
   transform: translateY(-5px);
   box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
@@ -215,6 +219,8 @@ footer {
 .post-date {
   font-size: 12px;
   color: #999;
+  text-align: right;
+  white-space: nowrap; /* Чтобы дата не переносилась */
 }
 
 .post-buttons {
