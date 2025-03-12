@@ -333,7 +333,7 @@ h3 {
 .submit-btn {
   width: 100%;
   padding: 12px;
-  background-color: #4CAF50;
+  background-color: #6DB33F;
   color: white;
   border: none;
   border-radius: 20px;
@@ -342,7 +342,7 @@ h3 {
 }
 
 .submit-btn:hover {
-  background-color: #45a049;
+  background-color: #6DB33F;
 }
 
 footer {

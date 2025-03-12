@@ -120,17 +120,19 @@ header {
 
 /* Поле ввода */
 #post-input {
-  font-size: 14px; /* Базовый размер шрифта */
-  line-height: 1.2; /* Уменьшаем межстрочный интервал */
-  border: none; /* Без рамки */
-  outline: none; /* Убираем фокусный контур */
-  box-sizing: border-box; /* Учитываем padding и border при расчете ширины */
+  font-size: 14px;
+  height: 64px; /* Высота поля ввода */
+  line-height: 34px; /* Центрируем текст по вертикали */
+  padding: 15px;
+  border-radius: 20px;
+  border: none;
+  outline: none;
+  box-sizing: border-box;
   resize: none; /* Отключает ручное изменение размера */
   width: 100%; /* Ширина на 100% */
   max-width: 1240px; /* Максимальная ширина */
   overflow-y: hidden; /* Убирает вертикальную прокрутку */
-  white-space: pre-wrap; /* Поддерживает перенос слов */
-  word-wrap: break-word; /* Поддерживает перенос слов */
+  line-height: 1.2; /* Уменьшаем межстрочный интервал */
 }
 
 /* Контейнер ввода */
@@ -160,9 +162,18 @@ header {
   cursor: pointer;
   font-size: 14px;
   transition: background-color 0.3s, transform 0.2s;
-  position: absolute;
-  bottom: 19px;
-  right: 10px;
+  white-space: nowrap; /* Текст на кнопке не будет переноситься */
+  padding: 10px 20px; /* Пространство вокруг текста на кнопке */
+}
+
+/* Контейнер для кнопки "Опубликовать" */
+.publish-button-container {
+  display: flex;
+  justify-content: flex-end;  /* Кнопка выравнивается по правому краю */
+  align-items: flex-end;      /* Кнопка выравнивается по нижнему краю */
+  margin-top: 10px;
+  margin-bottom: 20px;  /* Пространство снизу, чтобы кнопка не была прямо у края */
+  position: relative;  /* Позволяет расположить кнопку по отношению к контейнеру */
 }
 
 /* Стили для плейсхолдера */

@@ -157,7 +157,7 @@ document.addEventListener("DOMContentLoaded", function () {
             }
 
             postInput.value = "";
-            postInput.style.height = '37px'; // Сброс высоты textarea после публикации
+            postInput.style.height = '64px'; // Сброс высоты textarea после публикации
             renderPosts();
         }
     });
