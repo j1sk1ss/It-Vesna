@@ -161,7 +161,7 @@ document.addEventListener("DOMContentLoaded", async function () {
     publishButton.addEventListener("click", async function () {
         const content = postInput.value.trim();
         if (content !== "") {
-            await addPost("test", selectedTab, content); // TODO: Прокинуть имя
+            await addPost(localStorage.getItem("name"), selectedTab, content);
             await renderPosts();
         }
     });

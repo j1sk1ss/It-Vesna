@@ -7,7 +7,7 @@ document.addEventListener("DOMContentLoaded", function () {
         const email = document.getElementById("email").value;
         const password = document.getElementById("password").value;
         try {
-            const response = await fetch('/api/login', { // back
+            const response = await fetch('/api/login', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
@@ -20,6 +20,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
             if (response.ok) {
                 const userData = await response.json();
+                localStorage.setItem("name", userData.name);
                 localStorage.setItem("status", userData.status);
                 localStorage.setItem("role", userData.role);
                 if (userData.role === "admin") {

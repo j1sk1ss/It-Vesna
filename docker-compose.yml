@@ -26,6 +26,7 @@ services:
       FLASK_APP: wsgi.py
       FLASK_ENV: production
       DATABASE_URL: postgresql://root:root@db:5432/vesna
+      PYTHONUNBUFFERED: "1"
     ports:
       - "5000:5000"
     networks:
@@ -33,6 +34,7 @@ services:
     restart: always
     volumes:
       - ./static/uploads:/app/static/uploads
+      - ./static/posts:/app/static/posts
 
   adminer:
     image: adminer

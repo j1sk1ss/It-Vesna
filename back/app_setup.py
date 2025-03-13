@@ -8,16 +8,15 @@ db: SQLAlchemy = SQLAlchemy()
 
 def create_app() -> Flask:
     """Construct the core application."""
-    app: Flask = Flask(__name__, template_folder="templates", static_folder="static")
+    app: Flask = Flask(__name__, template_folder="/app/templates", static_folder="/app/static")
     app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://root:root@db:5432/vesna'
     app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
     CORS(app)
     
-    # Initialize Database Plugin
     db.init_app(app)
     with app.app_context():
-        import routes  # Import routes
+        import back.routes_setup 
         return app
     
     

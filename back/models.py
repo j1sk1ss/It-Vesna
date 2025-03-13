@@ -1,5 +1,5 @@
 import os
-from app import db
+from back.app_setup import db
 from datetime import datetime
 
 
@@ -109,7 +109,7 @@ class Post(db.Model):
             "author": self.author,
             "category": self.category,
             "created_at": self.created_at.isoformat(),
-            "content_path": f'/{self.content_path}',
+            "content_path": self.content_path,
             "pin": self.pin
         }
 

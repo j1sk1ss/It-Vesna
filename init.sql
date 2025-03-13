@@ -70,3 +70,31 @@ CREATE INDEX idx_users_name ON users (name);
 CREATE INDEX idx_moderators_name ON moderators (name);
 CREATE INDEX idx_nominations_name ON nominations (name);
 CREATE INDEX idx_age_groups_name ON age_groups (name);
+
+
+INSERT INTO users (name, email, password)
+VALUES ('Moderator', 'moderator@gmail.com', 'hashed_password')
+ON CONFLICT (email) DO NOTHING 
+RETURNING id;
+
+WITH inserted_user AS (
+    SELECT id FROM users WHERE email = 'moderator@gmail.com'
+)
+
+INSERT INTO moderators (name, email)
+SELECT 'Moderator', 'moderator@gmail.com'
+FROM inserted_user
+ON CONFLICT (email) DO NOTHING 
+RETURNING id;
+
+WITH inserted_moderator AS (
+    SELECT id FROM moderators WHERE email = 'moderator@gmail.com'
+),
+inserted_user AS (
+    SELECT id FROM users WHERE email = 'moderator@gmail.com'
+)
+
+INSERT INTO user_moderator (user_id, moderator_id)
+SELECT inserted_user.id, inserted_moderator.id
+FROM inserted_user, inserted_moderator
+ON CONFLICT (user_id, moderator_id) DO NOTHING;

@@ -94,7 +94,7 @@ main {
   align-items: flex-start;
   justify-content: center;
   width: 80%;
-  max-width: 1200px;
+  max-width: 10000px;
   margin: 0 auto;
 }
 
@@ -150,7 +150,7 @@ main {
 #moderators-list li.expanded, 
 #nominations-list li.expanded, 
 #age-group-list li.expanded {
-  max-height: 500px;
+  max-height: 10000px;
   padding: 15px;
 }
 
@@ -166,7 +166,17 @@ main {
 #nominations-list li.expanded .details, 
 #age-group-list li.expanded .details {
   opacity: 1;
-  max-height: 400px;
+  max-height: 10000px;
+  max-width: 10000px;
+  white-space: normal;
+  word-wrap: break-word;
+  overflow-wrap: anywhere;
+}
+
+.description {
+  white-space: pre-line;
+  word-wrap: break-word;
+  overflow-wrap: anywhere;
 }
 
 #moderators-list, 

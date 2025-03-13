@@ -21,14 +21,14 @@ function setTab(tab) {
                 "Authorization": localStorage.getItem("key")
             }
         })
-            .then(response => response.json())
-            .then(data => {
-                requests = data;
-                updateContent();
-            })
-            .catch(error => {
-                console.error('Ошибка при загрузке данных:', error);
-            });
+        .then(response => response.json())
+        .then(data => {
+            requests = data;
+            updateContent();
+        })
+        .catch(error => {
+            console.error('Ошибка при загрузке данных:', error);
+        });
     }
     else if (tab === 'Модераторы') {
         fetch('/api/moderators', {
@@ -36,14 +36,14 @@ function setTab(tab) {
                 "Authorization": localStorage.getItem("key")
             }
         })
-            .then(response => response.json())
-            .then(data => {
-                moderators = data;
-                updateContent();
-            })
-            .catch(error => {
-                console.error('Ошибка при загрузке данных:', error);
-            });
+        .then(response => response.json())
+        .then(data => {
+            moderators = data;
+            updateContent();
+        })
+        .catch(error => {
+            console.error('Ошибка при загрузке данных:', error);
+        });
     }
     else if (tab === 'Номинации') {
         fetch('/api/nominations', {
@@ -51,14 +51,14 @@ function setTab(tab) {
                 "Authorization": localStorage.getItem("key")
             }
         })
-            .then(response => response.json())
-            .then(data => {
-                nominations = data;
-                updateContent();
-            })
-            .catch(error => {
-                console.error('Ошибка при загрузке данных:', error);
-            });
+        .then(response => response.json())
+        .then(data => {
+            nominations = data;
+            updateContent();
+        })
+        .catch(error => {
+            console.error('Ошибка при загрузке данных:', error);
+        });
     }
     else if (tab === 'Возраста') {
         fetch('/api/age_groups', {
@@ -66,14 +66,14 @@ function setTab(tab) {
                 "Authorization": localStorage.getItem("key")
             }
         })
-            .then(response => response.json())
-            .then(data => {
-                age_groups = data;
-                updateContent();
-            })
-            .catch(error => {
-                console.error('Ошибка при загрузке данных:', error);
-            });
+        .then(response => response.json())
+        .then(data => {
+            age_groups = data;
+            updateContent();
+        })
+        .catch(error => {
+            console.error('Ошибка при загрузке данных:', error);
+        });
     }
 
     document.querySelectorAll('.tab').forEach(tabElement => tabElement.classList.remove('active'));
@@ -108,7 +108,7 @@ function toggleExpand(id, el) {
                 fetch(request.description)
                 .then(response => response.text())
                 .then(text => {
-                    document.getElementById(`desc-${request.id}`).textContent = text;
+                    document.getElementById(`desc-${request.id}`).innerText = text;
                 })
                 .catch(() => {
                     document.getElementById(`desc-${request.id}`).textContent = 'Ошибка загрузки';
@@ -117,7 +117,7 @@ function toggleExpand(id, el) {
                 details.style.display = 'block';
                 setTimeout(() => {
                     details.style.opacity = '1';
-                    details.style.maxHeight = '500px';
+                    details.style.maxHeight = '10000px';
                 }, 10);
                 element.classList.add('expanded');
                 el.src = 'admin/view_open.png';
@@ -147,17 +147,14 @@ function moveRequest(id, targetCategory) {
                     category: targetCategory,
                 }),
             })
-            .then(response => response.json())
             .then(data => {
-                console.log('Запрос успешно перемещён:', data);
+                setTab(selectedTab);
             })
             .catch(error => {
                 console.error('Ошибка при перемещении запроса:', error);
             });
         }
     });
-
-    setTab(selectedTab);
 }
 
 function deleteRequest(id) {
@@ -175,17 +172,14 @@ function deleteRequest(id) {
                     id: request.id,
                 }),
             })
-            .then(response => response.json())
             .then(data => {
-                console.log('Запрос успешно удалён:', data);
+                setTab(selectedTab);
             })
             .catch(error => {
                 console.error('Ошибка при удалении запроса:', error);
             });
         }
     });
-
-    setTab(selectedTab);
 }
 
 function addModerator() {
@@ -203,9 +197,8 @@ function addModerator() {
                 name: name
             }),
         })
-        .then(response => response.json())
         .then(data => {
-            console.log('Модератор добавлен:', data);
+            setTab(selectedTab);
         })
         .catch(error => {
             console.error('Ошибка при добавлении модератора:', error);
@@ -213,7 +206,6 @@ function addModerator() {
 
         document.getElementById('moderator-email').value = '';
         document.getElementById('moderator-name').value = '';
-        setTab(selectedTab);
     }
 }
 
@@ -227,15 +219,12 @@ function deleteModerator(index) {
         },
         body: JSON.stringify({ email: moderator.email }),
     })
-    .then(response => response.json())
     .then(data => {
-        console.log('Модератор удалён:', data);
+        setTab(selectedTab);
     })
     .catch(error => {
         console.error('Ошибка при удалении модератора:', error);
     });
-
-    setTab(selectedTab);
 }
 
 function addNomination() {
@@ -249,16 +238,14 @@ function addNomination() {
             },
             body: JSON.stringify({ name: nominationName }),
         })
-        .then(response => response.json())
         .then(data => {
-            console.log('Номинация добавлена:', data);
+            setTab(selectedTab);
         })
         .catch(error => {
             console.error('Ошибка при добавлении номинации:', error);
         });
 
         document.getElementById('nomination-name').value = '';
-        setTab(selectedTab);
     } else {
         alert('Пожалуйста, заполните поле с названием номинации.');
     }
@@ -274,15 +261,12 @@ function deleteNomination(index) {
         },
         body: JSON.stringify({ name: nominationName }),
     })
-    .then(response => response.json())
     .then(data => {
-        console.log('Номинация удалена:', data);
+        setTab(selectedTab);
     })
     .catch(error => {
         console.error('Ошибка при удалении номинации:', error);
     });
-
-    setTab(selectedTab);
 }
 
 function addAgeGroup() {
@@ -296,16 +280,14 @@ function addAgeGroup() {
             },
             body: JSON.stringify({ name: ageGroupName }),
         })
-        .then(response => response.json())
         .then(data => {
-            console.log('Номинация добавлена:', data);
+            setTab(selectedTab);
         })
         .catch(error => {
             console.error('Ошибка при добавлении номинации:', error);
         });
 
         document.getElementById('age-group-name').value = '';
-        setTab(selectedTab);
     } else {
         alert('Пожалуйста, заполните поле с названием номинации.');
     }
@@ -321,15 +303,12 @@ function deleteAgeGroup(index) {
         },
         body: JSON.stringify({ name: ageGroupName }),
     })
-    .then(response => response.json())
     .then(data => {
-        console.log('Номинация удалена:', data);
+        setTab(selectedTab);
     })
     .catch(error => {
         console.error('Ошибка при удалении номинации:', error);
     });
-
-    setTab(selectedTab);
 }
 
 function updateContent() {
