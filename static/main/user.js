@@ -1,5 +1,17 @@
+async function getPosts(category) {
+    try {
+        const response = await fetch(`/api/posts?category=${category}`);
+        if (!response.ok) {
+            throw new Error('Ошибка при получении постов');
+        }
+        return await response.json();
+    } catch (error) {
+        console.error('Ошибка:', error);
+    }
+}
+
 document.addEventListener("DOMContentLoaded", function () {
-    const posts = {
+    let posts = {
         'Участие': [],
         'План мероприятий': [],
         'Положения конкурса': [],
@@ -60,22 +72,14 @@ document.addEventListener("DOMContentLoaded", function () {
     // Функция для загрузки постов с сервера
     async function fetchPosts() {
         try {
-            const response = await fetch('/api/getPosts'); // Замените на реальный путь к вашему API
-            if (response.ok) {
-                const data = await response.json();
-
-                // Обработка полученных данных
-                Object.keys(posts).forEach(tabName => {
-                    if (data[tabName]) {
-                        posts[tabName] = data[tabName];
-                    }
-                });
-
-                // Обновляем контент для текущей вкладки
-                updateTabContent();
-            } else {
-                console.error('Ошибка при загрузке данных');
-            }
+            posts = {
+                'Участие': getPosts("Участие"),
+                'План мероприятий': getPosts("План мероприятий"),
+                'Положения конкурса': getPosts("Положения конкурса"),
+                'Состав жюри': getPosts("Состав жюри"),
+                'Технические требования': getPosts("Технические требования")
+            };
+            updateTabContent();
         } catch (error) {
             console.error('Ошибка запроса:', error);
         }
