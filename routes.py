@@ -10,7 +10,8 @@ from models import *
 
     
 TEMPLATES = find_templates('templates')
-UPLOAD_FOLDER = 'statis/uploads'
+UPLOAD_FOLDER = 'static/uploads'
+os.makedirs(UPLOAD_FOLDER, exist_ok=True)
 
 
 # region [Routes]
@@ -172,7 +173,7 @@ def _create_request() -> tuple:
 
     create_request(
         author_id=author.id, author_names=authors, institution=institution, email=email, nomination_id=nomination.id, 
-        age_group_id=age_group.id, title=project_name, description_path=description_path, consent_path=consent_file_path, 
+        age_group_id=age_group.id, title=project_name, description_path=f"/{description_path}", consent_path=f"/{consent_file_path}", 
         category="На рассмотрении", external_links=links
     )
 

@@ -348,8 +348,8 @@ def update_request(
 
 def delete_request(request_id: int) -> Request:
     request_item: Request = Request.query.get_or_404(request_id)
-    os.remove(request_item.description_path)
-    os.remove(request_item.consent_path)
+    os.remove(request_item.description_path[1:])
+    os.remove(request_item.consent_path[1:])
     db.session.delete(request_item)
     db.session.commit()
     return request_item

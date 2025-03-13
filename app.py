@@ -9,7 +9,7 @@ db: SQLAlchemy = SQLAlchemy()
 def create_app() -> Flask:
     """Construct the core application."""
     app: Flask = Flask(__name__, template_folder="templates", static_folder="static")
-    app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://root:root@localhost:5001/vesna'
+    app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://root:root@db:5432/vesna'
     app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
     CORS(app)

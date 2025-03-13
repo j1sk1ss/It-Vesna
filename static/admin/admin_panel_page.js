@@ -332,10 +332,10 @@ function updateContent() {
 }
 
 function renderRequests(container) {
-    const div = document.createElement('div');
     if (!requests[subTab]) return;
-
+    
     requests[subTab].forEach(request => {
+        const div = document.createElement('div');
         div.classList.add('request');
         if (request.expanded) div.classList.add('expanded');
         div.id = `request-${request.id}`;

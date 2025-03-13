@@ -17,6 +17,23 @@ services:
       - mynetwork
     restart: always
 
+  flask_app:
+    build: .
+    container_name: flask_app
+    depends_on:
+      - db
+    environment:
+      FLASK_APP: wsgi.py
+      FLASK_ENV: production
+      DATABASE_URL: postgresql://root:root@db:5432/vesna
+    ports:
+      - "5000:5000"
+    networks:
+      - mynetwork
+    restart: always
+    volumes:
+      - ./static/uploads:/app/static/uploads
+
 volumes:
   postgres_data:
 
