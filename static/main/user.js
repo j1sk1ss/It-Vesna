@@ -1,3 +1,12 @@
+let selectedTab = "Участие";
+let posts = {
+    "Участие": [],
+    "План мероприятий": [],
+    "Положения конкурса": [],
+    "Состав жюри": [],
+    "Технические требования": []
+};
+
 async function getPosts(category) {
     try {
         const response = await fetch(`/api/posts?category=${category}`);
@@ -10,23 +19,47 @@ async function getPosts(category) {
     }
 }
 
+function selectTab(tabName) {
+    selectedTab = tabName;
+    renderPosts();
+}
+
+async function renderPosts() {
+    const currentPosts = await getPosts(selectedTab);
+    const tabContent = document.getElementById("tab-content-container");
+
+    tabContent.innerHTML = "";
+    if (currentPosts.length !== 0) {
+        currentPosts.forEach((post) => {
+            const postContainer = document.createElement("div");
+            postContainer.classList.add("post-container");
+
+            const postContentContainer = document.createElement("div");
+            postContentContainer.classList.add("post");
+            fetch(post.content_path)
+            .then(response => response.text())
+            .then(text => {
+                postContentContainer.innerHTML = `
+                <div class="post-header">
+                    <span class="post-date">${new Date(post.created_at).toLocaleString()}</span>
+                </div>
+                <div class="post-body">${text}</div>
+                `;
+
+                postContainer.appendChild(postContentContainer);
+                tabContent.appendChild(postContainer);
+            })
+            .catch(() => {
+                
+            });
+        });
+    }
+}
+
 document.addEventListener("DOMContentLoaded", function () {
-    let posts = {
-        'Участие': [],
-        'План мероприятий': [],
-        'Положения конкурса': [],
-        'Состав жюри': [],
-        'Технические требования': []
-    };
-
-    let selectedTab = "Участие";
-    const tabsContainer = document.getElementById("tabs");
     const tabContent = document.getElementById("tab-content");
-
     function renderTabs() {
         const tabs = Object.keys(posts);
-        const tabContainer = document.getElementById("tab-container");
-        tabContainer.innerHTML = "";
         tabs.forEach(tab => {
             const tabElement = document.createElement("span");
             tabElement.classList.add("tab");
@@ -39,34 +72,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 renderTabs();
                 renderPosts();
             });
-            tabContainer.appendChild(tabElement);
         });
-    }
-
-    // Функция для выбора вкладки
-    function selectTab(tabName) {
-        selectedTab = tabName;
-        renderTabs();  // Обновляем вкладки, чтобы выделить активную
-        updateTabContent();
-    }
-
-    // Функция для обновления контента вкладки
-    function updateTabContent() {
-        let message = '';
-        const postsList = posts[selectedTab];
-
-        // Если посты есть, показываем их
-        if (postsList.length > 0) {
-            message = '<ul>';
-            postsList.forEach(post => {
-                message += `<li>${post.title}: ${post.content}</li>`;
-            });
-            message += '</ul>';
-        } else {
-            message = 'Здесь нет постов.';
-        }
-
-        tabContent.innerHTML = `<h2>${selectedTab}</h2><div>${message}</div>`;
     }
 
     // Функция для загрузки постов с сервера
@@ -79,13 +85,11 @@ document.addEventListener("DOMContentLoaded", function () {
                 'Состав жюри': getPosts("Состав жюри"),
                 'Технические требования': getPosts("Технические требования")
             };
-            updateTabContent();
         } catch (error) {
             console.error('Ошибка запроса:', error);
         }
     }
 
-    // Инициализация
     renderTabs();
-    fetchPosts(); // Загружаем посты с сервера
+    fetchPosts();
 });

@@ -21,6 +21,17 @@ body {
   width: 100%;
 }
 
+.user-panel-page-container {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  flex: 1;
+  padding-top: 14vh;
+  padding-bottom: 5vh;
+  width: 100%;
+}
+
+.user-panel-page,
 .admin-panel-page {
   width: 100%;
   max-width: 1200px;
@@ -103,6 +114,7 @@ header {
 }
 
 /* Кнопка перехода на страницу администратора */
+.user-panel-button,
 .admin-panel-button {
   display: inline-block;
   text-decoration: none;
@@ -114,6 +126,7 @@ header {
   margin-left: 30px;
 }
 
+.user-panel-button:hover,
 .admin-panel-button:hover {
   background-color: #6DB33F;
 }

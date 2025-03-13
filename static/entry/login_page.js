@@ -13,7 +13,7 @@ document.addEventListener("DOMContentLoaded", function () {
                     'Content-Type': 'application/json'
                 },
                 body: JSON.stringify({
-                    mail: email,
+                    email: email,
                     password: password
                 })
             });
@@ -22,8 +22,13 @@ document.addEventListener("DOMContentLoaded", function () {
                 const userData = await response.json();
                 localStorage.setItem("status", userData.status);
                 localStorage.setItem("role", userData.role);
-                localStorage.setItem("key", userData.key);
-                window.location.href = "/main/user";
+                if (userData.role === "admin") {
+                    localStorage.setItem("key", userData.key);
+                    window.location.href = "/main/admin";
+                }
+                else {
+                    window.location.href = "/main/admin";
+                }
             } else {
                 console.error('Ошибка:', response.statusText);
                 alert("Ошибка входа. Проверьте логин и пароль.");

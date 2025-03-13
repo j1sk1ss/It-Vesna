@@ -16,7 +16,11 @@ function setTab(tab) {
     selectedTab = tab;
     if (tab === 'Заявки') {
         setSubTab('На рассмотрении');
-        fetch('/api/requests')
+        fetch('/api/requests', {
+            headers: {
+                "Authorization": localStorage.getItem("key")
+            }
+        })
             .then(response => response.json())
             .then(data => {
                 requests = data;
@@ -27,7 +31,11 @@ function setTab(tab) {
             });
     }
     else if (tab === 'Модераторы') {
-        fetch('/api/moderators')
+        fetch('/api/moderators', {
+            headers: {
+                "Authorization": localStorage.getItem("key")
+            }
+        })
             .then(response => response.json())
             .then(data => {
                 moderators = data;
@@ -38,7 +46,11 @@ function setTab(tab) {
             });
     }
     else if (tab === 'Номинации') {
-        fetch('/api/nominations')
+        fetch('/api/nominations', {
+            headers: {
+                "Authorization": localStorage.getItem("key")
+            }
+        })
             .then(response => response.json())
             .then(data => {
                 nominations = data;
@@ -49,7 +61,11 @@ function setTab(tab) {
             });
     }
     else if (tab === 'Возраста') {
-        fetch('/api/age_groups')
+        fetch('/api/age_groups', {
+            headers: {
+                "Authorization": localStorage.getItem("key")
+            }
+        })
             .then(response => response.json())
             .then(data => {
                 age_groups = data;
@@ -124,6 +140,7 @@ function moveRequest(id, targetCategory) {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
+                    "Authorization": localStorage.getItem("key")
                 },
                 body: JSON.stringify({
                     id: request.id,
@@ -152,6 +169,7 @@ function deleteRequest(id) {
                 method: 'DELETE',
                 headers: {
                     'Content-Type': 'application/json',
+                    "Authorization": localStorage.getItem("key")
                 },
                 body: JSON.stringify({
                     id: request.id,
@@ -178,6 +196,7 @@ function addModerator() {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
+                "Authorization": localStorage.getItem("key")
             },
             body: JSON.stringify({
                 email: email,
@@ -204,6 +223,7 @@ function deleteModerator(index) {
         method: 'DELETE',
         headers: {
             'Content-Type': 'application/json',
+            "Authorization": localStorage.getItem("key")
         },
         body: JSON.stringify({ email: moderator.email }),
     })
@@ -225,6 +245,7 @@ function addNomination() {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
+                "Authorization": localStorage.getItem("key")
             },
             body: JSON.stringify({ name: nominationName }),
         })
@@ -249,6 +270,7 @@ function deleteNomination(index) {
         method: 'DELETE',
         headers: {
             'Content-Type': 'application/json',
+            "Authorization": localStorage.getItem("key")
         },
         body: JSON.stringify({ name: nominationName }),
     })
@@ -270,6 +292,7 @@ function addAgeGroup() {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
+                "Authorization": localStorage.getItem("key")
             },
             body: JSON.stringify({ name: ageGroupName }),
         })
@@ -294,6 +317,7 @@ function deleteAgeGroup(index) {
         method: 'DELETE',
         headers: {
             'Content-Type': 'application/json',
+            "Authorization": localStorage.getItem("key")
         },
         body: JSON.stringify({ name: ageGroupName }),
     })

@@ -1,8 +1,10 @@
+from functools import wraps
 import os
 
 from flask import current_app as app
 from datetime import datetime
 from werkzeug.utils import secure_filename
+from auth import generate_access_key, verify_access_key
 from common.misc import find_templates
 from flask import jsonify, render_template, abort, request
 
@@ -12,6 +14,17 @@ from models import *
 TEMPLATES = find_templates('templates')
 UPLOAD_FOLDER = 'static/uploads'
 os.makedirs(UPLOAD_FOLDER, exist_ok=True)
+
+
+def require_authorization(f):
+    def wrapper(*args, **kwargs):
+        auth_key = request.headers.get("Authorization")
+        if not verify_access_key(auth_key):
+            return jsonify({"error": "Unauthorized"}), 403
+        
+        return f(*args, **kwargs)
+    wrapper.__name__ = f.__name__
+    return wrapper
 
 
 # region [Routes]
@@ -60,13 +73,12 @@ def _login() -> tuple:
                 return {
                     "status": "status",
                     "role": "admin",
-                    "key": "generated"
+                    "key": generate_access_key(email, password)
                 }, 200
             else:
                 return {
                     "status": "status",
-                    "role": "user",
-                    "key": "generated"
+                    "role": "user"
                 }, 200
         else:
             return "Pass wrong", 400
@@ -95,6 +107,7 @@ def _confirm_restore_code() -> dict:
 
 
 @app.route("/api/requests", methods=["GET"])
+@require_authorization
 def _get_requests() -> tuple:
     category = request.args.get('category', None)
     requests = get_all_requests()
@@ -123,6 +136,7 @@ def _get_requests() -> tuple:
 
 
 @app.route("/api/request", methods=["DELETE"])
+@require_authorization
 def _delete_request() -> tuple:
     data: dict | None = request.json
     if not data:
@@ -181,6 +195,7 @@ def _create_request() -> tuple:
 
 
 @app.route("/api/request/set_category", methods=["POST"])
+@require_authorization
 def _request_set_category() -> tuple:
     data: dict | None = request.json
     if not data:
@@ -194,11 +209,13 @@ def _request_set_category() -> tuple:
 
 
 @app.route("/api/moderators", methods=["GET"])
+@require_authorization
 def _get_moderators() -> tuple:
     return [{"name": moderator.name, "email": moderator.email} for moderator in get_all_moderators()], 200
 
 
 @app.route("/api/moderator", methods=["POST"])
+@require_authorization
 def _add_moderator() -> tuple:
     data: dict | None = request.json
     if not data:
@@ -217,6 +234,7 @@ def _add_moderator() -> tuple:
 
 
 @app.route("/api/moderator", methods=["DELETE"])
+@require_authorization
 def _delete_moderator() -> tuple:
     data: dict | None = request.json
     if not data:
@@ -239,6 +257,7 @@ def _get_nominations() -> tuple:
 
 
 @app.route("/api/nomination", methods=["POST"])
+@require_authorization
 def _add_nomination() -> tuple:
     data: dict | None = request.json
     if not data:
@@ -250,6 +269,7 @@ def _add_nomination() -> tuple:
 
 
 @app.route("/api/nomination", methods=["DELETE"])
+@require_authorization
 def _delete_nomination() -> tuple:
     data: dict | None = request.json
     if not data:
@@ -269,6 +289,7 @@ def _get_age_groups() -> tuple:
 
 
 @app.route("/api/age_group", methods=["POST"])
+@require_authorization
 def _add_age_group() -> tuple:
     data: dict | None = request.json
     if not data:
@@ -280,6 +301,7 @@ def _add_age_group() -> tuple:
 
 
 @app.route("/api/age_group", methods=["DELETE"])
+@require_authorization
 def _delete_age_group() -> tuple:
     data: dict | None = request.json
     if not data:
@@ -294,6 +316,7 @@ def _delete_age_group() -> tuple:
 
 
 @app.route("/api/posts", methods=["POST"])
+@require_authorization
 def _create_post() -> tuple:
     if 'content' not in request.files:
         return "No content file", 400
@@ -327,6 +350,7 @@ def _get_posts() -> tuple:
 
 
 @app.route("/api/posts/<int:post_id>", methods=["DELETE"])
+@require_authorization
 def _delete_post(post_id: int) -> tuple:
     delete_post(post_id=post_id)
     return "Deleted", 200

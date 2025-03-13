@@ -178,7 +178,7 @@ def get_moderators_by_user(user_id: int) -> list[Moderator]:
     if not user_moderators:
         raise ValueError("Связи с пользователем не найдены.")
     
-    moderators = [moderator.moderator for moderator in user_moderators]
+    moderators = [moderator for moderator in user_moderators]
     return moderators
 
 

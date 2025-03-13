@@ -12,6 +12,9 @@ async function pinPost(id) {
     try {
         const response = await fetch(`/api/posts/${id}/pin`, {
             method: 'POST',
+            headers: {
+                "Authorization": localStorage.getItem("key")
+            }
         });
         if (!response.ok) {
             throw new Error('Ошибка при закреплении поста');
@@ -38,6 +41,9 @@ async function deletePost(id) {
     try {
         const response = await fetch(`/api/posts/${id}`, {
             method: 'DELETE',
+            headers: {
+                "Authorization": localStorage.getItem("key")
+            }
         });
         if (!response.ok) {
             throw new Error('Ошибка при удалении поста');
@@ -59,6 +65,9 @@ async function addPost(author, category, content) {
         const response = await fetch('/api/posts', {
             method: 'POST',
             body: formData,
+            headers: {
+                "Authorization": localStorage.getItem("key")
+            }
         });
 
         if (!response.ok) {
@@ -83,7 +92,7 @@ async function renderPosts() {
 
             const postContentContainer = document.createElement("div");
             postContentContainer.classList.add("post");
-            fetch(post.content_path) // TODO: Костыль. Исправить
+            fetch(post.content_path)
             .then(response => response.text())
             .then(text => {
                 postContentContainer.innerHTML = `
