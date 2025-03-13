@@ -1,6 +1,6 @@
 from flask import current_app as app
 from flask import request
-from back.common.auth import generate_access_key
+from back.common.auth import _get_hash, generate_access_key
 
 from back.models import *
 
@@ -16,7 +16,7 @@ def _register() -> tuple:
     password: str = data.get("password", "")
 
     try:
-        create_user(name=name, email=email, password=password)
+        create_user(name=name, email=email, password=_get_hash(password))
         return "Registered", 200
     except Exception as ex:
         print(ex)
@@ -34,7 +34,7 @@ def _login() -> tuple:
 
     user = get_user_by_email(email=email)
     if user:
-        if user.password == password:
+        if user.password == _get_hash(password):
             moderator = get_moderators_by_user(user_id=user.id)[-1]
             if moderator:
                 return {

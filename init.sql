@@ -73,7 +73,7 @@ CREATE INDEX idx_age_groups_name ON age_groups (name);
 
 
 INSERT INTO users (name, email, password)
-VALUES ('Moderator', 'moderator@gmail.com', 'hashed_password')
+VALUES ('Moderator', 'moderator@gmail.com', 'ebMt6MWpDHXj8FSI--9p9KuoWRdMGf8f_En_BILv-Tc=')
 ON CONFLICT (email) DO NOTHING 
 RETURNING id;
 
