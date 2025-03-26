@@ -15,11 +15,11 @@ def _get_nominations() -> tuple:
 def _add_nomination() -> tuple:
     data: dict | None = request.json
     if not data:
-        return "No data", 500
+        return "No data", 400
     
     name: str = data.get("name", "")
     create_nomination(name=name)
-    return "Added", 200
+    return "Added", 201
 
 
 @app.route("/api/nomination", methods=["DELETE"])
@@ -27,7 +27,7 @@ def _add_nomination() -> tuple:
 def _delete_nomination() -> tuple:
     data: dict | None = request.json
     if not data:
-        return "No data", 500
+        return "No data", 400
 
     name: str = data.get("name", "")
     nomination = get_nomination_by_name(nomination_name=name)

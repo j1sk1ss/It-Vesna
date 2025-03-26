@@ -15,11 +15,11 @@ def _get_age_groups() -> tuple:
 def _add_age_group() -> tuple:
     data: dict | None = request.json
     if not data:
-        return "No data", 500
+        return "No data", 400
     
     name: str = data.get("name", "")
     create_age_group(name=name)
-    return "Added", 200
+    return "Added", 201
 
 
 @app.route("/api/age_group", methods=["DELETE"])
@@ -27,7 +27,7 @@ def _add_age_group() -> tuple:
 def _delete_age_group() -> tuple:
     data: dict | None = request.json
     if not data:
-        return "No data", 500
+        return "No data", 400
 
     name: str = data.get("name", "")
     age_group = get_age_group_by_name(age_group_name=name)

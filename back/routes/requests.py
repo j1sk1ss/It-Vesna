@@ -37,7 +37,7 @@ def _get_requests() -> tuple:
 def _delete_request() -> tuple:
     data: dict | None = request.json
     if not data:
-        return "No data", 500
+        return "No data", 400
     
     req_id: int = data.get("id", -1)
     delete_request(request_id=req_id)
@@ -96,7 +96,7 @@ def _create_request() -> tuple:
 def _request_set_category() -> tuple:
     data: dict | None = request.json
     if not data:
-        return "No data", 500
+        return "No data", 400
     
     req_id: int = data.get("id", -1)
     category: str = data.get("category", "")

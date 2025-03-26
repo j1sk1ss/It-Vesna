@@ -26,14 +26,14 @@ def _create_post() -> tuple:
     file.save(file_path)
 
     new_post = create_post(author=author, category=category, content_path=file_path)
-    return {"id": new_post.id, "message": "Added"}, 200
+    return {"id": new_post.id, "message": "Added"}, 201
 
 
 @app.route("/api/posts", methods=["GET"])
 def _get_posts() -> tuple:
     data: dict | None = request.args
     if not data:
-        return "No data", 500
+        return "No data", 400
     
     posts = get_posts_by_category(category=data.get("category"))
     posts_data = [post.to_dict() for post in posts]

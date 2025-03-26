@@ -9,7 +9,7 @@ from back.models import *
 def _register() -> tuple:
     data: dict | None = request.json
     if not data:
-        return "No data", 500
+        return "No data", 400
     
     name: str = data.get("name", "")
     email: str = data.get("email", "")
@@ -17,17 +17,17 @@ def _register() -> tuple:
 
     try:
         create_user(name=name, email=email, password=_get_hash(password))
-        return "Registered", 200
+        return "Registered", 201
     except Exception as ex:
         print(ex)
-        return "Error", 500
+        return "Error", 500     # Уточнить исключение
 
 
 @app.route("/api/login", methods=["POST"])
 def _login() -> tuple:
     data: dict | None = request.json
     if not data:
-        return "No data", 500
+        return "No data", 400
     
     email: str = data.get("email", "")
     password: str = data.get("password", "")
@@ -49,16 +49,16 @@ def _login() -> tuple:
                     "role": "user"
                 }, 200
         else:
-            return "Pass wrong", 400
+            return "Pass wrong", 401
     else:
-        return "Email wrong", 400
+        return "Email wrong", 401
 
 
 @app.route("/api/send_code", methods=["POST"])
 def _send_restore_code() -> dict:
     data: dict | None = request.json
     if not data:
-        return "No data", 500
+        return "No data", 400
     
     email: str = data.get("email", "")
     return "Code sent", 200
@@ -68,7 +68,7 @@ def _send_restore_code() -> dict:
 def _confirm_restore_code() -> dict:
     data: dict | None = request.json
     if not data:
-        return "No data", 500
+        return "No data", 400
     
     code: str = data.get("code", "")
     return "Code confirm", 200

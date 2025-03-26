@@ -16,7 +16,7 @@ def _get_moderators() -> tuple:
 def _add_moderator() -> tuple:
     data: dict | None = request.json
     if not data:
-        return "No data", 500
+        return "No data", 400
     
     name: str = data.get("name", "")
     email: str = data.get("email", "")
@@ -25,7 +25,7 @@ def _add_moderator() -> tuple:
     moderator = create_moderator(name=name, email=email)
     if moderator and user:
         create_user_moderator(user_id=user.id, moderator_id=moderator.id)
-        return "Added", 200
+        return "Added", 201
     
     return "Wrong data", 400
 
@@ -35,7 +35,7 @@ def _add_moderator() -> tuple:
 def _delete_moderator() -> tuple:
     data: dict | None = request.json
     if not data:
-        return "No data", 500
+        return "No data", 400
 
     email: str = data.get("email", "")
     user = get_user_by_email(email=email)
