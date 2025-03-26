@@ -168,7 +168,7 @@ def create_user_moderator(user_id: int, moderator_id: int) -> UserModerator:
 def get_user_moderator(user_id: int, moderator_id: int) -> UserModerator:
     user_moderator = UserModerator.query.filter_by(user_id=user_id, moderator_id=moderator_id).first()
     if user_moderator is None:
-        raise ValueError("Связь между пользователем и модератором не найдена.")
+        return None
     
     return user_moderator
 
@@ -176,7 +176,7 @@ def get_user_moderator(user_id: int, moderator_id: int) -> UserModerator:
 def get_moderators_by_user(user_id: int) -> list[Moderator]:
     user_moderators = UserModerator.query.filter_by(user_id=user_id).all()
     if not user_moderators:
-        raise ValueError("Связи с пользователем не найдены.")
+        return [None]
     
     moderators = [moderator for moderator in user_moderators]
     return moderators
@@ -185,7 +185,7 @@ def get_moderators_by_user(user_id: int) -> list[Moderator]:
 def delete_user_moderator(user_id: int, moderator_id: int) -> UserModerator:
     user_moderator = UserModerator.query.filter_by(user_id=user_id, moderator_id=moderator_id).first()
     if user_moderator is None:
-        raise ValueError("Связь между пользователем и модератором не найдена.")
+        return None
     
     db.session.delete(user_moderator)
     db.session.commit()
