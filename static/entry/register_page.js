@@ -19,6 +19,18 @@ document.addEventListener("DOMContentLoaded", function () {
             return;
         }
 
+        const codeGroup = document.getElementById("codeGroup");
+        const confirmationCodeInput = document.getElementById("confirmationCode");
+
+        if (codeGroup && codeGroup.style.display === "none") {
+            codeGroup.style.display = "block";
+
+            // (опционально) отправка кода на почту
+            // await fetch("/api/send-code", { ... });
+
+            return;
+        }
+
         try {
             const response = await fetch("/api/register", {
                 method: "POST",
